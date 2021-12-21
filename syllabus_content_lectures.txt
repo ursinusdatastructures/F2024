@@ -1,0 +1,193 @@
+SECTION
+Intro To Python, Abstract Data Types, And Empirical Complexity
+In this unit we will warm up to algorithms and data structures by learning the basics of Python, which is a language whose syntax is only a short step away from pseuodocode one might write to describe algorithms and data structures.  In the process of learning python syntax, we will introduce the notion of an <b>Abstract Data Type (ADT)</b>, which is akin to an <a href = "https://docs.oracle.com/javase/tutorial/java/concepts/interface.html">interface</a> in Java or a <a href = "https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/">header file</a> in C++.  In other words, an ADT is an <a href = "https://en.wikipedia.org/wiki/API">API</a> for a data structure, which makes it usable to an algorithm.  But the implementation of the data structure is left unspecified.  In this unit, we will actually jump to the end of the book to look at our first ADT, the <b>Disjoint Set ADT</b>, and we will examine an efficient implementation known as <b>Union Find</b>.  The unit will culuminate in an application of disjoint sets to finding individual cells in images of plant cells.
+
+LECTURE
+Course Sneak Preview / Meet & Mingle
+
+<ul><li><a href = "../ClassExercises/Week1/rushhour/">Rush Hour Icebreaker</a> (app by <a href = "https://github.com/valerielu">Valerie Lu</a>)</li></ul>
+LECTURE
+Python/numpy basics
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul>
+LECTURE
+Python Classes And Objects, Abstract Data Types
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul>
+LECTURE
+Disjoint Sets And Union Find
+
+<ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
+LECTURE
+Unit Tests And TimeIt
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li></ul>
+SECTION
+Searching And Analytical Complexity Analysis
+We have a bunch of objects, and we want to find them quickly.  Operations: Find, Add/Remove First, Add/Remove Last, Add/Remove Middle
+
+LECTURE
+Big-O, Little-o, Big-Theta
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li><li><a href = "../ClassExercises/Week3/Week3_BigO">Class Exercises</a></li></ul>
+LECTURE
+Linked Lists / Doubly-linked lists
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6.3, 7, 8</li></ul>
+LECTURE
+The list ADT and Data Structure
+
+
+LECTURE
+Sorted List Data Structure And Binary Search
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
+LECTURE
+Hash Tables Algorithm
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+LECTURE
+Hash Tables Analysis / Applications
+
+
+SECTION
+Recursion And Dynamic Programming
+
+
+LECTURE
+Recursive function review, evaluating recursive functions
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul>
+LECTURE
+Memoization, Recursive Drawing
+
+
+LECTURE
+Stacks, Queues, And Towers of Hanoi
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6</li></ul>
+LECTURE
+Proofs by Induction, Dynamic Programming, String Edit Distance
+
+<ul><li><a href = "../ClassExercises/Week6/BigTheta.html">Big Theta Practice</a></li></ul>
+LECTURE
+Optimal Solution Backtracking, Change Making
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
+LECTURE
+Seam Carving
+
+<ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul>
+LECTURE
+Seam Carving Q&A
+
+
+LECTURE
+Dynamic Time Warping
+
+<ul><li><a href = "http://www.ctralie.com/Research/linmdtw/">Linear memory dynamic time warping repository</a></li></ul>
+LECTURE
+Longest Common Subsequence, Knapsack Problem
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
+SECTION
+Sorting, Selection, And Shuffling
+
+
+LECTURE
+Insertion Sort, Bubble Sort, Kendall Tau Distance
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
+LECTURE
+Merge Sort
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul>
+LECTURE
+Quick Sort, Stability of Sorts
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.2</li><li><a href = "https://dlang.org/blog/2020/05/14/lomutos-comeback/">Lomuto's Comeback</a></li></ul>
+LECTURE
+Parallel Algorithms And Bitonic Sort
+
+
+LECTURE
+Radix Sort: Breaking the O(NlogN) barrier
+
+
+LECTURE
+Fisher-Yates Shuffling
+
+
+LECTURE
+<a href = "https://sites.google.com/view/cerintaylor/home">Erin Taylor Q&A</a>, Linear Time Selection
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul>
+SECTION
+Tree Data Structures And Algorithms
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 16</li></ul>
+LECTURE
+Binary Trees: Preorder, Inorder, Postorder / Drawing Binary Trees
+
+
+LECTURE
+Binary search trees: Search/Addition/Removal
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17</li></ul>
+LECTURE
+Tree Rotations
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
+LECTURE
+Balanced Binary Search Trees
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
+LECTURE
+Q&A Session, Tree Rotations Review
+
+
+LECTURE
+Huffman Trees / Huffman Encoding
+
+
+LECTURE
+Priority Queues / Binary Heaps
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
+LECTURE
+Tries
+
+
+SECTION
+Graph Data Structures And Algorithms
+
+
+LECTURE
+Graph Data Structures, Minimum Spanning Trees
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 20</li></ul>
+LECTURE
+Complexity of Minimium Spanning Trees, Automatic Mazes
+
+<ul><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul>
+LECTURE
+Breadth-First Search, Depth-First Search, Euclidean Traveling Salesperson
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
+LECTURE
+Dijkstra's Algorithm, Prim's Algorithm
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul>
+LECTURE
+Complexity of Dijkstra's Algorithm, Fibonacci Heaps
+
+
+LECTURE
+Floyd-Warshall, Bellman-Ford
+
+
+LECTURE
+Directed Acyclic Graphs / Topological Sort
+
+
+

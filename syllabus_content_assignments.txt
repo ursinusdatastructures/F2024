@@ -1,0 +1,105 @@
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Pre-Class Module 0</a> Due
+
+2021-01-20
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</code> Due Before Class
+
+2021-01-22
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a> Due Before class
+
+2021-01-25
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a> Due Before class
+
+2021-01-27
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a> Due before class
+
+2021-02-01
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a> Due before class
+
+2021-02-03
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a> Due Before Class
+
+2021-02-05
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a> Due Before Class
+
+2021-02-08
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a> Due Before Class
+
+2021-02-10
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a> due before class
+
+2021-02-19
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a> due before class
+
+2021-02-22
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a> Due
+
+2021-02-26
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a> Due before class
+
+2021-03-01
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a> Due before class
+
+2021-03-10
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a> Due Before Class
+
+2021-03-15
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a> Due Before Class
+
+2021-03-19
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a> due before class
+
+2021-03-24
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a> due before class
+
+2021-03-26
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a> due before class
+
+2021-04-02
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module : Huffman Trees</a> due
+
+2021-04-16
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a> due before class
+
+2021-04-19
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a> due before class
+
+2021-04-26
+<a href = "../Assignments/HW1_PlantCellSegmentation">Assignment 1: Plant Cell Segmentation</a> out
+
+2021-01-29
+Assignment 1: Plant Cell Segmentation Due
+
+2021-02-09
+<a href = "../Assignments/HW2_Autocomplete">Assignment 2: Complexity Proofs / Autocomplete</a> Out
+
+2021-02-14
+Assignment 2 Due
+
+2021-02-25
+<a href = "../Assignments/HW3_DTW_AudioAlignment">Assignment 3: Audio Alignment</a> Out
+
+2021-03-05
+Assignment 3: Audio Alignment Due
+
+2021-03-22
+<HR><a href = "../Assignments/HW4_FairElections">Assignment 4: Fair Elections of Superheros</a> 0ut
+
+2021-03-26
+Assignment 4 Due
+
+2021-04-06
+<a href = "../Assignments/HW5_PhylogeneticTrees">Assignment 5: Phylogenetic Trees</a> Out
+
+2021-04-13
+Assignment 5 Due
+
+2021-04-28
+<a href = "https://ursinus-cs371-s2021.github.io/Modules/HW6/Exercise0">Assignment 6: Rush Hour</a> Out
+
+2021-05-03
+Final Project Proposals Due
+
+2021-03-29
+Final Project Check-In
+
+2021-04-23
