@@ -151,7 +151,7 @@
 									<p>
 										<a href = "http://www.ctralie.com">Christopher J. Tralie</a>
 									</p>
-									<img src = "ctralie_headshot.jpg">
+									<img src = "ctralie_headshot.png" width=300>
 									
 									<p>
 										I grew up right around the corner in the Montgomery County and attended <a href = "https://www.udsd.org/schools/udhs/">Upper Dublin High school</a> (class of 2007).  I then did my undergraduate degree in <a href = "https://ee.princeton.edu/">Electrical Engineering</a> at Princeton University and my master's and Ph.D. degrees in <a href = "https://ece.duke.edu/">Electrical And Computer Engineering</a> at Duke University (heavily studying math and CS along the way).  I finally started my dream job at Ursinus College in Fall of 2019!  You can read more about my interests on my <a href = "http://www.ctralie.com/">professional web site</a>.  Looking forward to getting to know everyone as we work through this course together!
@@ -363,13 +363,34 @@
 											<h3><a name = "programming">Programming Assignments</a></h3>
                                             
                                             <p>
-                                                The bulk of the grade in the course will be earned by completing 6 medium scale programming assignments, one for each unit.  Each assignment is worth 10% of your final grade.  Be sure to start them early, since debug time can often be unpredictable!  Refer to the <a href = "#collaboration">collaboration and sharing rules</a> for these assignments.
+                                                The bulk of the grade in the course will be earned by completing 6 medium scale programming assignments, one for each unit, which will build on the data structures you create in the labs.  Be sure to start them early, since debug time can often be unpredictable!  Refer to the <a href = "#collaboration">collaboration and sharing rules</a> for these assignments.
 											</p>
 
-											<h4>A word on patience and <a name = "debugging">debugging</a></h3>
+											<h3><a name = "debugging">Debugging Principles</a></h3>
 											<p>
-												If you're taking this course, then you've certainly had experience with <a href = "https://en.wikipedia.org/wiki/Debugging">debugging</a>, but it is a skill you will still need to work on, so you should expect to hit some roadblocks.  In fact, it is time consuming and difficult even for very experienced programmers.  So do not be hard on yourself if your programs don't work the first time around (they rarely do, even if you've been programming for decades!).  But be sure you leave yourself adequate time to work on the assignments, because the amount of time it takes to resolve issues can be unpredictable.
+												If you're taking this course, then you've certainly had experience with <a href = "https://en.wikipedia.org/wiki/Debugging">debugging</a>, but it is a skill you will still need to work on, so you should expect to hit some roadblocks.  In fact, it is time consuming and difficult even for very experienced programmers.  So do not be hard on yourself if your programs don't work the first time around (they rarely do, even if you've been programming for decades!).
 											</p>
+
+											<p>
+												I have had nearly 20 years of programming experience at this point, and I have learned the hard way what works and what doesn't.  Here are my main debugging principles in a nutshell
+											</p>
+											<ul>
+												<li>
+													Leave yourself <b>adequate time</b> to work on the assignments, because the amount of time it takes to resolve issues can be unpredictable.
+												</li>
+												<li>
+													Write <b>small bits of code and test them right away.</b>  Don't write a wall of code and test it, only to find out that something doesn't work.  By contrast, if you write bits at a time, you will know right away what code you wrote caused things to be wrong.
+												</li>
+												<li>
+													Apply the <b>scientific method</b>: have in mind hypothesis for what might be wrong, design a quick experiment to test your hypothesis, draw conclusions, and repeat.
+												</li>
+												<li>
+													<b>Fail quickly</b>.  If you're working on a larger scale program that processes a lot of data, do not wait for several minutes for data to load every time you make a small change.  Instead, come up with the minimum, simplest experiment you possibly can which will tell you whether your code is correct or not.
+												</li>
+												<li>
+													<b>Know when to walk away.</b>  We often get stuck in loops wanting to resolve things, but then our logical thinking goes out the window and we start randomly trying different things.  Even if you're up against the clock, it is often good to take a little break and come back again a little bit later.
+												</li>
+											</ul>
 	
 											
 											
@@ -400,7 +421,7 @@
 
 <!-- Begin Schedule -->
 <tr><td colspan = "5"><h2><b>Intro To Python, Abstract Data Types, And Empirical Complexity</b></h2><p>In this unit we will warm up to algorithms and data structures by learning the basics of Python, which is a language whose syntax is only a short step away from pseuodocode one might write to describe algorithms and data structures.  In the process of learning python syntax, we will introduce the notion of an <b>Abstract Data Type (ADT)</b>, which is akin to an <a href = "https://docs.oracle.com/javase/tutorial/java/concepts/interface.html">interface</a> in Java or a <a href = "https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/">header file</a> in C++.  In other words, an ADT is an <a href = "https://en.wikipedia.org/wiki/API">API</a> for a data structure, which makes it usable to an algorithm.  But the implementation of the data structure is left unspecified.  In this unit, we will actually jump to the end of the book to look at our first ADT, the <b>Disjoint Set ADT</b>, and we will examine an efficient implementation known as <b>Union Find</b>.  The unit will culuminate in an application of disjoint sets to finding individual cells in images of plant cells.</p></td></tr>
-<tr><td>1</td><td>Wed 1/19/2022</td><td>Course Sneak Preview / Meet & Mingle</td><td><ul><li><a href = "../ClassExercises/Week1/rushhour/">Rush Hour Icebreaker</a> (app by <a href = "https://github.com/valerielu">Valerie Lu</a>)</li></ul></td><td></td></tr>
+<tr><td>1</td><td>Wed 1/19/2022</td><td>Course Sneak Preview / Meet & Mingle</td><td></td><td></td></tr>
 <tr><td>2</td><td>Fri 1/21/2022</td><td>Python/numpy basics</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul></td><td></td></tr>
 <tr><td>3</td><td>Mon 1/24/2022</td><td>Python Classes And Objects, Abstract Data Types</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul></td><td></td></tr>
 <tr><td>4</td><td>Wed 1/26/2022</td><td>Disjoint Sets And Union Find</td><td><ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul></td><td></td></tr>
@@ -432,7 +453,7 @@
 <tr><td>24</td><td>Mon 3/21/2022</td><td>Parallel Algorithms And Bitonic Sort</td><td></td><td></td></tr>
 <tr><td>25</td><td>Wed 3/23/2022</td><td>Radix Sort: Breaking the O(NlogN) barrier</td><td></td><td></td></tr>
 <tr><td>26</td><td>Fri 3/25/2022</td><td>Fisher-Yates Shuffling</td><td></td><td></td></tr>
-<tr><td>27</td><td>Mon 3/28/2022</td><td><a href = "https://sites.google.com/view/cerintaylor/home">Erin Taylor Q&A</a>, Linear Time Selection</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul></td><td></td></tr>
+<tr><td>27</td><td>Mon 3/28/2022</td><td>Linear Time Selection</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>Tree Data Structures And Algorithms</b></h2><p></p></td></tr>
 <tr><td>28</td><td>Wed 3/30/2022</td><td>Binary Trees: Preorder, Inorder, Postorder / Drawing Binary Trees</td><td></td><td></td></tr>
 <tr><td>29</td><td>Fri 4/1/2022</td><td>Binary search trees: Search/Addition/Removal</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17</li></ul></td><td></td></tr>
@@ -925,7 +946,12 @@
 											<ul> 
 												<li><a href = "index.html#overview">Overview</a></li>
 												<li><a href = "index.html#logistics">Technology Logistics</a></li>
-												<li><a href = "index.html#deliverables">Deliverables</a></li>
+												<li><a href = "index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
 												<li><a href = "index.html#grading">Grading</a></li>
 												<li><a href = "index.html#environment">Classroom Environment</a></li>
 												<li><a href = "index.html#participation">Participation</a></li>
