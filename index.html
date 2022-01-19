@@ -443,58 +443,56 @@
 		
 
 <!-- Begin Schedule -->
-<tr><td colspan = "5"><h2><b>Intro To Python, Abstract Data Types, And Empirical Complexity</b></h2><p>In this unit we will warm up to algorithms and data structures by learning the basics of Python, which is a language whose syntax is only a short step away from pseuodocode one might write to describe algorithms and data structures.  In the process of learning python syntax, we will introduce the notion of an <b>Abstract Data Type (ADT)</b>, which is akin to an <a href = "https://docs.oracle.com/javase/tutorial/java/concepts/interface.html">interface</a> in Java or a <a href = "https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/">header file</a> in C++.  In other words, an ADT is an <a href = "https://en.wikipedia.org/wiki/API">API</a> for a data structure, which makes it usable to an algorithm.  But the implementation of the data structure is left unspecified.  In this unit, we will actually jump to the end of the book to look at our first ADT, the <b>Disjoint Set ADT</b>, and we will examine an efficient implementation known as <b>Union Find</b>.  The unit will culuminate in an application of disjoint sets to finding individual cells in images of plant cells.</p></td></tr>
-<tr><td>1</td><td>Wed 1/19/2022</td><td>Course Sneak Preview / Meet & Mingle</td><td></td><td></td></tr>
-<tr><td>2</td><td>Fri 1/21/2022</td><td>Python/numpy basics</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul></td><td></td></tr>
-<tr><td>3</td><td>Mon 1/24/2022</td><td>Python Classes And Objects, Abstract Data Types</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul></td><td></td></tr>
-<tr><td>4</td><td>Wed 1/26/2022</td><td>Disjoint Sets And Union Find</td><td><ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul></td><td></td></tr>
-<tr><td>5</td><td>Fri 1/28/2022</td><td>Unit Tests And TimeIt</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li></ul></td><td></td></tr>
-<tr><td colspan = "5"><h2><b>Searching And Analytical Complexity Analysis</b></h2><p>We have a bunch of objects, and we want to find them quickly.  Operations: Find, Add/Remove First, Add/Remove Last, Add/Remove Middle</p></td></tr>
+<tr><td colspan = "5"><h2><b>Intro To Python, Abstract Data Types, And Complexity</b></h2><p></p></td></tr>
+<tr><td>1</td><td>Wed 1/19/2022</td><td>The ADT Concept, Hash Tables Algorithm / Applications</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul></td><td></td></tr>
+<tr><td>2</td><td>Fri 1/21/2022</td><td>Python/numpy basics, Continue Hash Tables</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul></td><td></td></tr>
+<tr><td>3</td><td>Mon 1/24/2022</td><td>Sorted List Data Structure And Binary Search</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul></td><td></td></tr>
+<tr><td>4</td><td>Wed 1/26/2022</td><td>Unit Tests And TimeIt</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li></ul></td><td></td></tr>
+<tr><td>5</td><td>Fri 1/28/2022</td><td>Python Classes And Objects, Abstract Data Types</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul></td><td></td></tr>
 <tr><td>6</td><td>Mon 1/31/2022</td><td>Big-O, Little-o, Big-Theta</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li><li><a href = "../ClassExercises/Week3/Week3_BigO">Class Exercises</a></li></ul></td><td></td></tr>
 <tr><td>7</td><td>Wed 2/2/2022</td><td>Linked Lists / Doubly-linked lists</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6.3, 7, 8</li></ul></td><td></td></tr>
-<tr><td>8</td><td>Fri 2/4/2022</td><td>The list ADT and Data Structure</td><td></td><td></td></tr>
-<tr><td>9</td><td>Mon 2/7/2022</td><td>Sorted List Data Structure And Binary Search</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul></td><td></td></tr>
-<tr><td>10</td><td>Wed 2/9/2022</td><td>Hash Tables Algorithm</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul></td><td></td></tr>
-<tr><td>11</td><td>Fri 2/11/2022</td><td>Hash Tables Analysis / Applications</td><td></td><td></td></tr>
+<tr><td>8</td><td>Fri 2/4/2022</td><td>Disjoint Sets And Union Find</td><td><ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul></td><td></td></tr>
+<tr><td>9</td><td>Mon 2/7/2022</td><td>Hash Table Formal Analysis</td><td></td><td></td></tr>
+<tr><td>10</td><td>Wed 2/9/2022</td><td>The list ADT and Data Structure</td><td></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>Recursion And Dynamic Programming</b></h2><p></p></td></tr>
-<tr><td>12</td><td>Mon 2/14/2022</td><td>Recursive function review, evaluating recursive functions</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul></td><td></td></tr>
-<tr><td>13</td><td>Wed 2/16/2022</td><td>Memoization, Recursive Drawing</td><td></td><td></td></tr>
-<tr><td>14</td><td>Fri 2/18/2022</td><td>Stacks, Queues, And Towers of Hanoi</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6</li></ul></td><td></td></tr>
-<tr><td>15</td><td>Mon 2/21/2022</td><td>Proofs by Induction, Dynamic Programming, String Edit Distance</td><td><ul><li><a href = "../ClassExercises/Week6/BigTheta.html">Big Theta Practice</a></li></ul></td><td></td></tr>
-<tr><td>16</td><td>Wed 2/23/2022</td><td>Optimal Solution Backtracking, Change Making</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul></td><td></td></tr>
-<tr><td>17</td><td>Fri 2/25/2022</td><td>Seam Carving</td><td><ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul></td><td></td></tr>
-<tr><td>18</td><td>Mon 2/28/2022</td><td>Seam Carving Q&A</td><td></td><td></td></tr>
-<tr><td>19</td><td>Wed 3/2/2022</td><td>Dynamic Time Warping</td><td><ul><li><a href = "http://www.ctralie.com/Research/linmdtw/">Linear memory dynamic time warping repository</a></li></ul></td><td></td></tr>
-<tr><td>20</td><td>Fri 3/4/2022</td><td>Longest Common Subsequence, Knapsack Problem</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul></td><td></td></tr>
+<tr><td>11</td><td>Fri 2/11/2022</td><td>Recursive function review, evaluating recursive functions</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul></td><td></td></tr>
+<tr><td>12</td><td>Mon 2/14/2022</td><td>Memoization, Recursive Drawing</td><td></td><td></td></tr>
+<tr><td>13</td><td>Wed 2/16/2022</td><td>Stacks, Queues, And Towers of Hanoi</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6</li></ul></td><td></td></tr>
+<tr><td>14</td><td>Fri 2/18/2022</td><td>Proofs by Induction, Dynamic Programming, String Edit Distance</td><td><ul><li><a href = "../ClassExercises/Week6/BigTheta.html">Big Theta Practice</a></li></ul></td><td></td></tr>
+<tr><td>15</td><td>Mon 2/21/2022</td><td>Optimal Solution Backtracking, Change Making</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul></td><td></td></tr>
+<tr><td>16</td><td>Wed 2/23/2022</td><td>Seam Carving</td><td><ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul></td><td></td></tr>
+<tr><td>17</td><td>Fri 2/25/2022</td><td>Seam Carving Q&A</td><td></td><td></td></tr>
+<tr><td>18</td><td>Mon 2/28/2022</td><td>Dynamic Time Warping</td><td><ul><li><a href = "http://www.ctralie.com/Research/linmdtw/">Linear memory dynamic time warping repository</a></li></ul></td><td></td></tr>
+<tr><td>19</td><td>Wed 3/2/2022</td><td>Longest Common Subsequence, Knapsack Problem</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>Sorting, Selection, And Shuffling</b></h2><p></p></td></tr>
+<tr><td>20</td><td>Fri 3/4/2022</td><td>Insertion Sort, Bubble Sort, Kendall Tau Distance</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul></td><td></td></tr>
 <tr><td>--</td><td>Mon 3/7/2022</td><td>Spring Break</td><td></td><td>No CS 371 Class.  Enjoy the break!</td></tr>
 <tr><td>--</td><td>Wed 3/9/2022</td><td>Spring Break</td><td></td><td>No CS 371 Class.  Enjoy the break!</td></tr>
 <tr><td>--</td><td>Fri 3/11/2022</td><td>Spring Break</td><td></td><td>No CS 371 Class.  Enjoy the break!</td></tr>
-<tr><td>21</td><td>Mon 3/14/2022</td><td>Insertion Sort, Bubble Sort, Kendall Tau Distance</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul></td><td></td></tr>
-<tr><td>22</td><td>Wed 3/16/2022</td><td>Merge Sort</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul></td><td></td></tr>
-<tr><td>23</td><td>Fri 3/18/2022</td><td>Quick Sort, Stability of Sorts</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.2</li><li><a href = "https://dlang.org/blog/2020/05/14/lomutos-comeback/">Lomuto's Comeback</a></li></ul></td><td></td></tr>
-<tr><td>24</td><td>Mon 3/21/2022</td><td>Parallel Algorithms And Bitonic Sort</td><td></td><td></td></tr>
-<tr><td>25</td><td>Wed 3/23/2022</td><td>Radix Sort: Breaking the O(NlogN) barrier</td><td></td><td></td></tr>
-<tr><td>26</td><td>Fri 3/25/2022</td><td>Fisher-Yates Shuffling</td><td></td><td></td></tr>
-<tr><td>27</td><td>Mon 3/28/2022</td><td>Linear Time Selection</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul></td><td></td></tr>
+<tr><td>21</td><td>Mon 3/14/2022</td><td>Merge Sort</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul></td><td></td></tr>
+<tr><td>22</td><td>Wed 3/16/2022</td><td>Quick Sort, Stability of Sorts</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.2</li><li><a href = "https://dlang.org/blog/2020/05/14/lomutos-comeback/">Lomuto's Comeback</a></li></ul></td><td></td></tr>
+<tr><td>23</td><td>Fri 3/18/2022</td><td>Parallel Algorithms And Bitonic Sort</td><td></td><td></td></tr>
+<tr><td>24</td><td>Mon 3/21/2022</td><td>Radix Sort: Breaking the O(NlogN) barrier</td><td></td><td></td></tr>
+<tr><td>25</td><td>Wed 3/23/2022</td><td>Fisher-Yates Shuffling</td><td></td><td></td></tr>
+<tr><td>26</td><td>Fri 3/25/2022</td><td>Linear Time Selection</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>Tree Data Structures And Algorithms</b></h2><p></p></td></tr>
-<tr><td>28</td><td>Wed 3/30/2022</td><td>Binary Trees: Preorder, Inorder, Postorder / Drawing Binary Trees</td><td></td><td></td></tr>
-<tr><td>29</td><td>Fri 4/1/2022</td><td>Binary search trees: Search/Addition/Removal</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17</li></ul></td><td></td></tr>
-<tr><td>30</td><td>Mon 4/4/2022</td><td>Tree Rotations</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul></td><td></td></tr>
-<tr><td>31</td><td>Wed 4/6/2022</td><td>Balanced Binary Search Trees</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul></td><td></td></tr>
-<tr><td>32</td><td>Fri 4/8/2022</td><td>Q&A Session, Tree Rotations Review</td><td></td><td></td></tr>
-<tr><td>33</td><td>Mon 4/11/2022</td><td>Huffman Trees / Huffman Encoding</td><td></td><td></td></tr>
-<tr><td>34</td><td>Wed 4/13/2022</td><td>Priority Queues / Binary Heaps</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul></td><td></td></tr>
-<tr><td>35</td><td>Fri 4/15/2022</td><td>Tries</td><td></td><td></td></tr>
+<tr><td>27</td><td>Mon 3/28/2022</td><td>Binary Trees: Preorder, Inorder, Postorder / Drawing Binary Trees</td><td></td><td></td></tr>
+<tr><td>28</td><td>Wed 3/30/2022</td><td>Binary search trees: Search/Addition/Removal</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17</li></ul></td><td></td></tr>
+<tr><td>29</td><td>Fri 4/1/2022</td><td>Tree Rotations</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul></td><td></td></tr>
+<tr><td>30</td><td>Mon 4/4/2022</td><td>Balanced Binary Search Trees</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul></td><td></td></tr>
+<tr><td>31</td><td>Wed 4/6/2022</td><td>Q&A Session, Tree Rotations Review</td><td></td><td></td></tr>
+<tr><td>32</td><td>Fri 4/8/2022</td><td>Huffman Trees / Huffman Encoding</td><td></td><td></td></tr>
+<tr><td>33</td><td>Mon 4/11/2022</td><td>Priority Queues / Binary Heaps</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul></td><td></td></tr>
+<tr><td>34</td><td>Wed 4/13/2022</td><td>Tries</td><td></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>Graph Data Structures And Algorithms</b></h2><p></p></td></tr>
-<tr><td>36</td><td>Mon 4/18/2022</td><td>Graph Data Structures, Minimum Spanning Trees</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 20</li></ul></td><td></td></tr>
-<tr><td>37</td><td>Wed 4/20/2022</td><td>Complexity of Minimium Spanning Trees, Automatic Mazes</td><td><ul><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul></td><td></td></tr>
-<tr><td>38</td><td>Fri 4/22/2022</td><td>Breadth-First Search, Depth-First Search, Euclidean Traveling Salesperson</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul></td><td></td></tr>
-<tr><td>39</td><td>Mon 4/25/2022</td><td>Dijkstra's Algorithm, Prim's Algorithm</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul></td><td></td></tr>
-<tr><td>40</td><td>Wed 4/27/2022</td><td>Complexity of Dijkstra's Algorithm, Fibonacci Heaps</td><td></td><td></td></tr>
-<tr><td>41</td><td>Fri 4/29/2022</td><td>Graph Cuts</td><td></td><td></td></tr>
-<tr><td>42</td><td>Mon 5/2/2022</td><td>Floyd-Warshall, Bellman-Ford</td><td></td><td></td></tr>
-<tr><td>43</td><td>Wed 5/4/2022</td><td>Directed Acyclic Graphs / Topological Sort</td><td></td><td></td></tr>
+<tr><td>35</td><td>Fri 4/15/2022</td><td>Graph Data Structures, Minimum Spanning Trees</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 20</li></ul></td><td></td></tr>
+<tr><td>36</td><td>Mon 4/18/2022</td><td>Complexity of Minimium Spanning Trees, Automatic Mazes</td><td><ul><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul></td><td></td></tr>
+<tr><td>37</td><td>Wed 4/20/2022</td><td>Breadth-First Search, Depth-First Search, Euclidean Traveling Salesperson</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul></td><td></td></tr>
+<tr><td>38</td><td>Fri 4/22/2022</td><td>Dijkstra's Algorithm, Prim's Algorithm</td><td><ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul></td><td></td></tr>
+<tr><td>39</td><td>Mon 4/25/2022</td><td>Complexity of Dijkstra's Algorithm, Fibonacci Heaps</td><td></td><td></td></tr>
+<tr><td>40</td><td>Wed 4/27/2022</td><td>Graph Cuts</td><td></td><td></td></tr>
+<tr><td>41</td><td>Fri 4/29/2022</td><td>Floyd-Warshall, Bellman-Ford</td><td></td><td></td></tr>
+<tr><td>42</td><td>Mon 5/2/2022</td><td>Directed Acyclic Graphs / Topological Sort</td><td></td><td></td></tr>
 <!-- End Schedule -->
 
 				</table>

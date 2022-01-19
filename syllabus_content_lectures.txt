@@ -1,31 +1,27 @@
 SECTION
-Intro To Python, Abstract Data Types, And Empirical Complexity
-In this unit we will warm up to algorithms and data structures by learning the basics of Python, which is a language whose syntax is only a short step away from pseuodocode one might write to describe algorithms and data structures.  In the process of learning python syntax, we will introduce the notion of an <b>Abstract Data Type (ADT)</b>, which is akin to an <a href = "https://docs.oracle.com/javase/tutorial/java/concepts/interface.html">interface</a> in Java or a <a href = "https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/">header file</a> in C++.  In other words, an ADT is an <a href = "https://en.wikipedia.org/wiki/API">API</a> for a data structure, which makes it usable to an algorithm.  But the implementation of the data structure is left unspecified.  In this unit, we will actually jump to the end of the book to look at our first ADT, the <b>Disjoint Set ADT</b>, and we will examine an efficient implementation known as <b>Union Find</b>.  The unit will culuminate in an application of disjoint sets to finding individual cells in images of plant cells.
-
-LECTURE
-Course Sneak Preview / Meet & Mingle
+Intro To Python, Abstract Data Types, And Complexity
 
 
 LECTURE
-Python/numpy basics
+The ADT Concept, Hash Tables Algorithm / Applications
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+LECTURE
+Python/numpy basics, Continue Hash Tables
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul>
 LECTURE
-Python Classes And Objects, Abstract Data Types
+Sorted List Data Structure And Binary Search
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul>
-LECTURE
-Disjoint Sets And Union Find
-
-<ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
 Unit Tests And TimeIt
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li></ul>
-SECTION
-Searching And Analytical Complexity Analysis
-We have a bunch of objects, and we want to find them quickly.  Operations: Find, Add/Remove First, Add/Remove Last, Add/Remove Middle
+LECTURE
+Python Classes And Objects, Abstract Data Types
 
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul>
 LECTURE
 Big-O, Little-o, Big-Theta
 
@@ -35,19 +31,15 @@ Linked Lists / Doubly-linked lists
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6.3, 7, 8</li></ul>
 LECTURE
+Disjoint Sets And Union Find
+
+<ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
+LECTURE
+Hash Table Formal Analysis
+
+
+LECTURE
 The list ADT and Data Structure
-
-
-LECTURE
-Sorted List Data Structure And Binary Search
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
-LECTURE
-Hash Tables Algorithm
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
-LECTURE
-Hash Tables Analysis / Applications
 
 
 SECTION

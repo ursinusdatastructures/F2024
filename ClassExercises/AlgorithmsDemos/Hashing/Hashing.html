@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hashing Demo</title>
+    <script src="../jslibs/d3.min.js"></script>
+    <script src="../jslibs/d3-canvas-transition.js"></script>
+    <script src="../jslibs/d3-quant.js"></script>
+    <style>
+      #panel {
+          background-color: rgba(245,245,245,0.9);
+          padding: 5px;
+          position: absolute;
+          display: block;
+      }
+    </style>
+</head>
+<body>
+  <div id="buttons">
+    <button onclick="loadPeople()">Load People</button>
+    <button onclick="computeHashes()">Compute Hashes</button><BR>
+
+<table width = 1000>
+  <tr>
+    <td>
+      <h2>Hash Function</h2>
+        <textarea id = "hashFnCode">
+function getHash(person) {
+  return person.Month;
+}
+        </textarea>
+    </td>
+    <td>
+      <h2>Person Information</h2>
+      <table>
+        <tr><td>Name</td><td><p id = "cname">Hi</p></td></tr>
+        <tr><td>Birthday</td><td><p id = "bday"></p></td></tr>
+        <tr><td colspan=2><p id = "pimg"></p></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<BR><BR><BR>
+  </div>
+  <svg id="hashbins" width = 1000 height = 1000></svg>
+<script src="./Hashing.js"></script>
+</body>
+
