@@ -5,7 +5,7 @@ Intro To Python, Abstract Data Types, And Complexity
 LECTURE
 The ADT Concept, Hash Tables Algorithm / Applications
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+<ul><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 LECTURE
 Python/numpy basics, Continue Hash Tables
 
