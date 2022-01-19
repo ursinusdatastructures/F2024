@@ -11,6 +11,8 @@ binheight_fac = 3.0;
 var people = [];
 var bins;
 var hashFnCode = document.getElementById("hashFnCode");
+let maxBinsText = document.getElementById("maxBins");
+maxBinsText.value = "-1";
 var cname = document.getElementById("cname");
 var bday = document.getElementById("bday");
 var pimg = document.getElementById("pimg");
@@ -56,8 +58,12 @@ function computeHashes() {
     // Step 1: Compute all hashes and figure out range
     var minHash, maxHash;
     hashValues = {};
+    let maxBins = parseInt(maxBinsText.value);
     for (var i = 0; i < people.length; i++) {
         var h = getHash(people[i]);
+        if (maxBins > -1) {
+            h = h%maxBins;
+        }
         people[i].hashValue = h;
         if (i == 0) {
             minHash = h;
