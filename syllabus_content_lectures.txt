@@ -3,15 +3,15 @@ Intro To Python, Abstract Data Types, And Complexity
 
 
 LECTURE
-The ADT Concept, Hash Tables Algorithm / Applications
+Course Intro, Python/numpy basics, Needle In A Haystack
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li><li><a href = "https://docs.google.com/presentation/d/1UxB8sVMV_IB1wjrfv464HVEigam2amYhaOlunMfHg_0/edit?usp=sharing">Slides from Today</a></ul>
+LECTURE
+Hash Tables Algorithm / Applications
 
 <ul><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 LECTURE
-Python/numpy basics, Continue Hash Tables
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul>
-LECTURE
-Sorted List Data Structure And Binary Search
+The ADT Concept, Sorted List Data Structure And Binary Search
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
