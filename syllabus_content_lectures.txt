@@ -7,21 +7,21 @@ Course Intro, Python/numpy basics, Needle In A Haystack
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li><li><a href = "https://docs.google.com/presentation/d/1UxB8sVMV_IB1wjrfv464HVEigam2amYhaOlunMfHg_0/edit?usp=sharing">Slides from Today</a></ul>
 LECTURE
-Hash Tables Algorithm / Applications
+Continue Needle In A Haystack: The ADT Concept, Sorted List Data Structure And Binary Search
 
-<ul><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+<ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
 LECTURE
-The ADT Concept, Sorted List Data Structure And Binary Search
+Python Classes And Objects, Hash Tables Intro
+
+<ul><li><a href = "ClassExercises/Week2_Needle">Notes on Set ADT And Hash Tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+LECTURE
+Lab 1: Binary Search
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
 Unit Tests And TimeIt
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li></ul>
-LECTURE
-Python Classes And Objects, Abstract Data Types
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li></ul>
 LECTURE
 Big-O, Little-o, Big-Theta
 
