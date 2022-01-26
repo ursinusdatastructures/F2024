@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Lab 1: Binary Search</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+										
+										<h3>
+											Learning Objectives
+										</h3>
+										<ul>
+											<li>Figure out what python development environment works for you</li>
+											<li>Translate an algorithm into code</li>
+											<li>Debug edge cases in an algorithm</li>
+										</ul>
+
+										<h3>Overview</h3>
+
+										<p>
+											We discussed in the <a href = "../../ClassExercises/Week2_Needle/">needle in a haystack problem</a> how using a <b>sorted array</b> can help us to find things more quickly.  It's easiest to see how this works with an example.  Let's suppose we generate an array with 50 random numbers between 0 and 99.  In this lab, we'll actually allow for repeat numbers.  Here's some code below that uses a random seed (so you'll get the same results if you try it)
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											import numpy as np
+											np.random.seed(0)
+											arr = sorted(np.random.randint(0, 100, 70))
+
+										</script>  
+
+										<p>
+											Now let's say we want to check to see if the number 40 is in there.  We could just loop through every element in <code>arr</code>, but we can do something more efficient by asking some yes/no questions that help us split the range we have left to search continually in half.  
+										</p>
+
+										<p>
+											First, we start with the full range, considering everything between indices <code>low = 0</code> and <code>high = 49</code>, inclusive.  Let's start by checking the one in the middle:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											print(arr[24])
+										</script>  
+
+										<p>
+											In this case, we see it's 35, which is less than the number we're looking for.  Since the array is sorted, we can rule out everything including and below index 24 now.  So we'll change our range to be <code>low=25, high=49</code>.  Now let's check halfway in between these  
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											print(arr[37])
+										</script>  
+
+										<p>
+											We see that <code>arr[37]=49</code>, which is greater than our number, so we can rule out everything at index 37 and to the right of it, changing our range to be <code>low=25, high=36</code>
+										</p>
+
+										<p>
+											We keep doing this until low and high meet, and if we find our number at that index, it's in the array.
+										</p>
+
+										
+										<p>
+											Below is a live demo to help you if you're a more visual person.
+										</p>
+
+										<iframe src = "https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" width=800 height=500></iframe>
+
+
+										<h3>Your Task</h3>
+										<p>
+											Your task is to fill in a method called <code>binarysearch</code>, which takes in an array of numbers and a target number that is being searched.  You can implement this either iteratively or recursively.  Below is how you might start this off iteratively
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											def binarysearch(arr, target, low=0, high=-1):
+											"""
+											arr: list
+												A sorted array of numbers
+											target: float
+												A target number
+											
+											Returns
+											-------
+											Index of one of the occurrences of target if it exists in
+											the array, or -1 otherwise
+											"""
+											...
+										</script> 
+
+										<p>
+											Below is how you might start this off recursively (note the extra two parameters with "default values" starting off with the full range)
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											def binarysearch(arr, target, low=0, high=-1):
+											"""
+											arr: list
+												A sorted array of numbers
+											target: float
+												A target number
+											low: int
+												Low index of range to check
+											high:
+												High index of range to check
+											
+											Returns
+											-------
+											Index of one of the occurrences of target if it exists in
+											the array, or -1 otherwise
+											"""
+											if high == -1:
+												high = len(arr)-1 # Start off all the way to the right
+											...
+										</script>  
+
+										<p>
+											To test to make sure this is working properly, loop through the entire range of possible numbers in your list and print out three things:
+											<ol>
+												<li>The number</li>
+												<li>The result of <code>binarysearch</code> on that number</li>
+												<li>If the result is not -1, print out the array value at that index and check to make sure it's correct</li>
+											</ol>
+										</p>
+
+										<p>
+											For example, if you're looking at the array in the overview, which is 
+										</p>
+
+										<p>
+											<code>[0, 0, 1, 4, 5, 9, 9, 9, 12, 14, 17, 19, 19, 20, 21, 23, 25, 28, 29, 31, 31, 32, 32, 34, 35, 36, 36, 37, 38, 39, 39, 41, 42, 44, 46, 47, 47, 49, 53, 55, 57, 57, 58, 58, 64, 64, 65, 65, 65, 67, 67, 69, 70, 72, 74, 75, 77, 79, 79, 80, 81, 82, 83, 87, 87, 88, 88, 88, 88, 99]
+											</code>
+										</p>
+
+										<p>
+											You should print something like the following (though your indices may be slightly different for certain examples since there are repeats)
+										</p>
+
+										<pre>
+											<code>
+0 0 0
+1 2 1
+2 -1 
+3 -1 
+4 3 4
+5 4 5
+6 -1 
+7 -1 
+8 -1 
+9 5 9
+10 -1 
+11 -1 
+12 8 12
+13 -1 
+14 9 14
+15 -1 
+16 -1 
+17 10 17
+18 -1 
+19 11 19
+20 13 20
+21 14 21
+22 -1 
+23 15 23
+24 -1 
+25 16 25
+26 -1 
+27 -1 
+28 17 28
+29 18 29
+30 -1 
+31 19 31
+32 21 32
+33 -1 
+34 23 34
+35 24 35
+36 25 36
+37 27 37
+38 28 38
+39 29 39
+40 -1 
+41 31 41
+42 32 42
+43 -1 
+44 33 44
+45 -1 
+46 34 46
+47 35 47
+48 -1 
+49 37 49
+50 -1 
+51 -1 
+52 -1 
+53 38 53
+54 -1 
+55 39 55
+56 -1 
+57 40 57
+58 42 58
+59 -1 
+60 -1 
+61 -1 
+62 -1 
+63 -1 
+64 44 64
+65 46 65
+66 -1 
+67 49 67
+68 -1 
+69 51 69
+70 52 70
+71 -1 
+72 53 72
+73 -1 
+74 54 74
+75 55 75
+76 -1 
+77 56 77
+78 -1 
+79 57 79
+80 59 80
+81 60 81
+82 61 82
+83 62 83
+84 -1 
+85 -1 
+86 -1 
+87 63 87
+88 65 88
+89 -1 
+90 -1 
+91 -1 
+92 -1 
+93 -1 
+94 -1 
+95 -1 
+96 -1 
+97 -1 
+98 -1 
+99 69 99
+											</code>
+										</pre>
+
+
+										<h3>Tips</h3>
+										<p>
+											You should be <b>very</b> careful about what you change your low/high search range to based on how you choose your midpoint.  Depending on how you implement binary search, there can be some serious pitfalls with infinite loops if you're not consistent with how you chose to round up or to round down if the midpoint is a decimal number.  Here's how you'd round down if you wanted to do that
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											mid = (low+high)//2
+										</script>  
+
+										<p>
+											and here's how you'd round up
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											mid = int(np.ceil((low+high)/2))
+										</script> 
+
+										
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>

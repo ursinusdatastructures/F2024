@@ -1,0 +1,3 @@
+[submodule "Assignments/HW1_Autocomplete/HW1_Autocomplete_SpellCheck"]
+	path = Assignments/HW1_Autocomplete/HW1_Autocomplete_SpellCheck
+	url = https://github.com/ursinus-cs371-s2022/HW1_Autocomplete_SpellCheck.git
