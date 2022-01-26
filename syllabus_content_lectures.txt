@@ -7,7 +7,7 @@ Course Intro, Python/numpy basics, Needle In A Haystack
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li><li><a href = "https://docs.google.com/presentation/d/1UxB8sVMV_IB1wjrfv464HVEigam2amYhaOlunMfHg_0/edit?usp=sharing">Slides from Today</a></ul>
 LECTURE
-Continue Needle In A Haystack: The ADT Concept, Sorted List Data Structure And Binary Search
+Continue Needle In A Haystack: The ADT Concept, Sorted List Data Structure And Linked Lists
 
 <ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
 LECTURE
@@ -15,7 +15,7 @@ Python Classes And Objects, Hash Tables Intro
 
 <ul><li><a href = "ClassExercises/Week2_Needle">Notes on Set ADT And Hash Tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 LECTURE
-Lab 1: Binary Search
+<a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><!--<li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li>!--></ul>
 LECTURE
@@ -27,19 +27,19 @@ Big-O, Little-o, Big-Theta
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li><li><a href = "../ClassExercises/Week3/Week3_BigO">Class Exercises</a></li></ul>
 LECTURE
-Linked Lists / Doubly-linked lists
+Continue asymptotics, begin Hash Tables Theory/ Formal Analysis
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6.3, 7, 8</li></ul>
+
+LECTURE
+Hash Tables Theory/ Formal Analysis
+
+
 LECTURE
 Disjoint Sets And Union Find
 
 <ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
 LECTURE
-Hash Table Formal Analysis
-
-
-LECTURE
-The list ADT and Data Structure
+The list ADT and Data Structure, Amortized Analysis
 
 
 SECTION

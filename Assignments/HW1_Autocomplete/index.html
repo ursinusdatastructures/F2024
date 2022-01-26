@@ -7,7 +7,7 @@
 <html>
 <!-- Header !-->
 	<head>
-		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2021</title>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -34,7 +34,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2021</strong></a>
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
 								</header>
 <!-- End Header !-->
 
@@ -49,14 +49,13 @@
 									<div id="page-content">
 										<ul>
 											<li>
-												<a href = "#background">Part 1: Autocomplete: Background</a>
+												<a href = "#autocompletebg">Part 1: Autocomplete: Background</a>
 											</li>
-											<li><a href = "#programming">Part 1: Autocomplete Programming Tasks</a>
-												<ul>
-													<li><a href = "#indexof">Part 1: First And Last Index (15 Points)</a></li>
-													<li><a href = "#autocompletelist">Part 1: Autocomplete List (5 Points)</a></li>
-													<li><a href = "#performance">Part 3: Empirical Performance (5 Points)</a></li>
-												</ul>
+											<li>
+												<a href = "#autocomplete">Part 1: Autocomplete Programming Tasks (30 Points)</a>
+											</li>
+											<li>
+												<a href = "#spellcheck">Part 2: Spellcheck Programming Tasks</a>
 											</li>
 										</ul>
 
@@ -105,12 +104,11 @@
 											fin = open("words.txt", encoding="utf8")
 											for line in fin.readlines():
 												word, importance = line.split()
-												word = word.lower()
 												importance = int(importance)
 										</script>  
 
 
-										<h2><a name = "background">Part 1: Autocomplete: Background</a></h2>
+										<h2><a name = "autocompletebg">Part 1: Autocomplete: Background</a></h2>
 
 										<p>
 											Most of the interfaces we use in modern computing contain huge databases of text that can be used to predict what we're trying to type from just a few characters, as shown below:
@@ -140,7 +138,7 @@
 										</p>
 
                                         
-										<h2><a name = "programming">Part 1: Autocomplete Programming Tasks (30 Points)</a></h2>
+										<h2><a name = "autocomplete">Part 1: Autocomplete Programming Tasks (30 Points)</a></h2>
 
 										<p>
 											<b>NOTE: </b> This part of the assignment was heavily inspired by <a href = "https://www.cs.princeton.edu/courses/archive/spring20/cos226/assignments/autocomplete/specification.php">Princeton COS 226</a>
@@ -151,7 +149,7 @@
 										</p>
 
 										<p>
-											You should then create a method called <code>all_matches</code> takes in a prefix as a parameter and returns all matching words <b>sorted in descending order of importance</b>.  <b>The total time complexity of this method should be <u>O(log(N) + m log(m))</u></b>, where <b>N</b> is the total number of words in the database, and <b>m</b> is the number of words starting with your prefix.  In other words, you should use binary search twice: once to find the word containing your prefix that comes first in alphabetical order, and once to find the word containing your prefix which comes last.  Then, you should sort the chunk of words in between them in descending order of importance (this step takes <b>O(m log m)</b> time, which we will discuss later in the course).  
+											You should then create a method called <code>all_matches</code> takes in a prefix as a parameter and returns all matching terms <b>sorted in descending order of importance</b>.  <b>The total time complexity of this method should be <u>O(log(N) + m log(m))</u></b>, where <b>N</b> is the total number of words in the database, and <b>m</b> is the number of words starting with your prefix.  In other words, you should use binary search twice: once to find the word containing your prefix that comes first in alphabetical order, and once to find the word containing your prefix which comes last.  Then, you should sort the chunk of words in between them in descending order of importance (this step takes <b>O(m log m)</b> time, which we will discuss later in the course).  
 										</p>
 
 										<p>
@@ -257,6 +255,18 @@
 										</p>
 
 
+										<h2><a name = "spellcheck">Part 2: Spellcheck Programming Tasks</a></h2>
+
+										<p>
+											You will be creating a hash table structure to do spell check
+										</p>
+
+										<p>
+											More info soon...
+										</p>
+
+
+
                                     
                                 </div>
 						</div>
@@ -288,7 +298,12 @@
 											<ul> 
 												<li><a href = "../../index.html#overview">Overview</a></li>
 												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
-												<li><a href = "../../index.html#deliverables">Deliverables</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
 												<li><a href = "../../index.html#grading">Grading</a></li>
 												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
 												<li><a href = "../../index.html#participation">Participation</a></li>
@@ -297,20 +312,30 @@
 											</ul>
 										</li>
 										<li><a href = "../../Software/index.html">Software</a></li>
-										<li><a href = "../../Schedule/index.html">Schedule</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
                                         <li>
 											<span class="opener">Assignments</span>
 											<ul>
-												<li><a href = "../../Assignments/HW1_PlantCellSegmentation">HW1: Union Find And Plant Cell Segmentation</a></li>
-												<li><a href = "../../Assignments/HW2_Autocomplete">HW2: Complexity Proofs And Autocomplete</a></li>
-												<li><a href = "../../Assignments/HW3_DTW_AudioAlignment">HW3: Audio Alignment with Dynamic Time Warping</a></li>
-												<li><a href = "../../Assignments/HW4_FairElections">HW4: Fair Elections of Superheros</a></li>
-												<li><a href = "../../Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/HW6/Exercise0">HW6: The Rush Hour Game</a></li>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
 											</ul>
 										</li>
                                         <li>
-											<span class="opener">Pre-Class Modules</span>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
 											<ul>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
@@ -336,29 +361,6 @@
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
 											</ul>
 										</li>
-                                        <li>
-											<span class="opener">Class Exercises</span>
-											<ul>
-												<li><a href = "../../ClassExercises/Week1/rushhour/">Week 1: Rush Hour Icebreaker</a></li>
-												<li><a href = "../../ClassExercises/Week2/Week2_UnionFind/">Week 2: Union Find</a></li>
-												<li><a href = "../../ClassExercises/Week3/Week3_BigO/">Week 3: Big O Practice</a></li>
-												<li><a href = "../../ClassExercises/Week3/Week3_LinkedLists/">Week 3: Linked Lists</a></li>
-												<li><a href = "../../ClassExercises/Week3/Week3_DoublyLinkedLists/">Week 3: Doubly-Linked Lists</a></li>
-												<li><a href = "../../ClassExercises/Week4/Week4_HashingExperiments/">Week 4: Hashing Experiments</a></li>
-												<li><a href = "../../ClassExercises/Week4/Week4_MovieReviews/">Week 4: Movie Reviews</a></li>
-												<li><a href = "../../ClassExercises/Week5/Week5_RecursiveEvaluation/">Week 5: Recursive Evaluation</a></li>
-												<li><a href = "../../ClassExercises/Week5/Week5_RecursiveDrawing/">Week 5: Recursive Drawing</a></li>
-												<li><a href = "../../ClassExercises/Week5/Week5_TowersOfHanoi/">Week 5: Towers of Hanoi</a></li>
-												<li><a href = "../../ClassExercises/Week6/Week6_EditBacktracing">Week 6: Edit Distance Backtracing</a></li>
-												<li><a href = "../../ClassExercises/Week6/Week6_SeamCarving">Week 6: Seam Carving</a></li>
-												<li><a href = "../../ClassExercises/Week8/Week8_LCS">Week 8: Longest Common Subsequence</a></li>
-												<li><a href = "../../ClassExercises/Week8/Week8_Sorting">Week 8: Sorting</a></li>
-												<li><a href = "../../ClassExercises/Week9/Week9_RecursiveSorts">Week 9: Recursive Sorts</a></li>
-												<li><a href = "../../ClassExercises/Week9/Week9_RadixSort">Week 9: Radix Sort</a></li>
-												<li><a href = "../../ClassExercises/Week10/Week10_TreeDrawing">Week 10: Tree Drawing</a></li>
-												<li><a href = "../../ClassExercises/Week11/Week11_BSTComplexity">Week 11: Tree Balancing via Rotations</a></li>
-											</ul>
-										</li>
 										<li>
 											<span class="opener">Final Assessment</span>
 											<ul>
@@ -368,13 +370,6 @@
 										</li>
 									</ul>
 								</nav>
-
-							<!-- Section -->
-								<section>
-									<div class="mini-posts">
-										Announcements							
-                                    </div>
-								</section>
 
 
 							<!-- Footer -->
