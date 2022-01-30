@@ -14343,7 +14343,9 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Hash-codes">Hash codes<a class="anchor-link" href="#Hash-codes">&#182;</a></h2><p>In order to extend what we did above to objects, we need to define a consistent way of turning our objects into numbers.  This is known as a <em>hash code</em>.  A hash code should be <em>deterministic</em>; that is, it shouldn't change.  For example, a hash code for a person could be the day of the year that they were born.  You can examine such hash codes live for Harry Potter characters at <a href = "../AlgorithmsDemos/Hashing/Hashing.html">this link</a>.</p>
+<h2 id="Hash-codes">Hash codes<a class="anchor-link" href="#Hash-codes">&#182;</a></h2><p>In order to extend what we did above to objects, we need to define a consistent way of turning our objects into numbers.  This is known as a <em>hash code</em>.  A hash code should be <em>deterministic</em>; that is, it shouldn't change.  For example, a hash code for a person could be the month of the year that they were born.  Below is an example of what a hash table would look like for Harry Potter characters based on this hash function (using the birthdays of the actors who played them in the movies).  Notice how the linked lists are setup in each bin</p>
+<p><img src = "HarryPotter.svg"></p>
+<p>You can examine such hash codes live for Harry Potter characters at <a href = "../AlgorithmsDemos/Hashing/Hashing.html">this link</a>.</p>
 <p>We started to discuss some of theoretical properties of hash functions, starting with the <em>pigeonhole principle</em>.  In this context, if we have more objects than we do bins, then we are guaranteed to have a collision.  We will explore more theory as the class moves forward.</p>
 
 </div>

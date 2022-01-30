@@ -13,3 +13,6 @@ Lab 1 Due
 Homework 1 Due
 
 2022-02-07
+<a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Big-O Self Study Module</a> Due Before Class
+
+2022-01-31

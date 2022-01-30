@@ -61,7 +61,7 @@
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											The purpose of this assignment is to give you practice implementing efficient algorithms in python in the service of two ubiquitous real world applications: autocompletion of spell check.  Crucially, you will ensure that your algorithms meet a particularly efficiency standard, as per the theme of our course.
+											The purpose of this assignment is to give you practice implementing efficient algorithms in python in the service of two ubiquitous real world applications: autocompletion of text and spell check.  Crucially, you will ensure that your algorithms meet a particularly efficiency standard, as per the theme of our course.
 										
 										</p>
 										
@@ -71,6 +71,7 @@
                                             <ul>
 												<li>Implement comparators to sort items in a custom way.</li>
 												<li>Use binary search to efficiently find a range of items in an ordered list.</li>
+												<li>Implement hash tables using object oriented paradigms</li>
                                             </ul>
                                         </p>
 
@@ -87,13 +88,13 @@
 												A brief description of your code and how to run it
 											</li>
 											<li>
-												Any other concerns that you have. For instance, if you have a bug that you were unable to solve but you made progress, write that here. The more you articulate the problem the more partial credit you will receive (fine to leave this blank)
+												Any other concerns that you have. For instance, if you have a bug that you were unable to solve but you made progress, write about it. The more you articulate the problem the more partial credit you will receive (fine to leave this blank)
 											</li>
 										</ol>
 
-										<h2><a name = "starter">Data / Stater Code</a></h2>
+										<h2><a name = "starter">Data / Starter Code</a></h2>
 										<p>
-											<a href = "https://github.com/ursinus-cs371-s2022/HW1_Autocomplete_SpellCheck/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  Actually, the starter code is quite minimal.  The bulk of what's important for you is the two data files <a href = "HW1_Autocomplete_SpellCheck/words.txt">words.txt</a> and <a href = "HW1_Autocomplete_SpellCheck/cities.txt">cities.txt</a>.  <code>words.txt</code> contains the 1/3 million most frequently used English words based off of the <a href = "https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html">google trillion word corpus</a>, where "importance" is measured by the number of times that word was used across a large collection of scraped documents on the internet.  For example, "ursinus" is used 178,097 times, while "ursula" is used 976,724, so ursula would show up first for a prefix of "urs."  Similarly, "cities.txt" has all of the cities in the world, where the "importance" of a particular city is measured by its population.
+											<a href = "https://github.com/ursinus-cs371-s2022/HW1_Autocomplete_SpellCheck/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  Actually, the starter code is quite minimal.  The bulk of what's important for you is the two data files <a href = "HW1_Autocomplete_SpellCheck/words.txt">words.txt</a> and <a href = "HW1_Autocomplete_SpellCheck/cities.txt">cities.txt</a>.  <code>words.txt</code> contains the 1/3 million most frequently used English words based off of the <a href = "https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html">google trillion word corpus</a>, where "importance" is measured by the number of times that word was used across a large collection of scraped documents on the internet.  For example, "ursinus" is used 178,097 times, while "ursula" is used 976,724, so ursula would show up first for a prefix of "urs."  Similarly, "cities.txt" has all of the cities in the world, where the "importance" of a particular city is measured by its population (food for thought: is this the best choice for ranking cities?).
 										</p>
 
 										<p>
@@ -200,7 +201,7 @@
 												(7 Points) Setup your class and your constructor to load in, store, and pre-sort prefixes in alphabetical order.  Be sure to setup your code to retain importance information to be used later.
 											</li>
 											<li>
-												(15 Points) Binary search is properly implemented for finding the first and last indices of a prefix.  5 of these points are for ensuring that binary search runs in <b>log(N)</b> time and that no steps deviate from this.
+												(15 Points) Binary search is properly implemented for finding the first and last indices of a prefix.  5 of these points are for ensuring that binary search runs in <b>O(log(N))</b> time and that no steps deviate from this.  For instance, you should not reverse the entire list of words, nor should you re-sort the entire list when you do an individual prefix query.
 											</li>
 											<li>
 												(8 Points) Implement the <code>all_matches</code> method to put everything together, as per the specification
@@ -251,21 +252,83 @@
 										
 
 										<p>
-											NOTE: In the list of 333,333 words, <b>ceil(log<SUB>2</SUB>(N)+1) = 20</b>.  There is a strong analogy with the <a href = "https://en.wikipedia.org/wiki/20Q">20 questions game</a>, where someone asks 20 yes or no questions and is able to narrow down pretty much any noun from that.
+											<b>Fun Fact</b>: In the list of 333,333 words, <b>ceil(log<SUB>2</SUB>(N)+1) = 20</b>.  There is a strong analogy with the <a href = "https://en.wikipedia.org/wiki/20Q">20 questions game</a>, where someone asks 20 yes or no questions and is able to narrow down pretty much any noun from that.
 										</p>
 
 
 										<h2><a name = "spellcheck">Part 2: Spellcheck Programming Tasks</a></h2>
 
 										<p>
-											In this section, you will create a hash table structure and use it to do spell check.
+											In this section, you will create a hash table class and use it to do spell check by quickly checking to see if typed words are actually in our list of 1/3 of a million words.
 										</p>
+
+										<h3>Step 1: HashTable Class</h3>
+										<p>
+											First, you should create a <code>HashTable</code> class with the following methods, as per a set ADT:
+										</p>
+										<ul>
+											<li>
+												<code>find(obj)</code>: Return <code>True</code> if <code>obj</code> is in the hash table, or <code>False</code> otherwise
+											</li>
+											<li>
+												<code>add(obj)</code>: Add <code>obj</code> to the hash table
+											</li>
+											<li>
+												<code>remove(obj)</code>: Remove <code>obj</code> from the hash table if it exists in the table, or do nothing if it's not there.
+											</li>
+										</ul>
 
 										<p>
-											More info soon...
+											Your hash table constructor should take a parameter <code>n_bins</code> as a parameter for determining how many bins should be used.
+										</p>
+
+										<h3>Step 2: Hash Codes</h3>
+
+										<p>
+											In order for an object to be compatible with this data structure, it must be <b>hashable</b>; that is, it must implement a method <code>hash_code</code> that returns a number for this particular object that's used to place it in the appropriate bin.  We'll use "duck typing," so that as long as an object has this method, it doesn't matter what class it's come from, and we can use it in our <code>HashTable</code> class.  As an example, I've provided the file <code>harrypotter.py</code> which defines a <code>Wizard</code> class with the hash code based on the wizard's birthday:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											def hash_code(self):
+												return self.day*12 + self.month
+										</script>
+
+										<p>
+											So, if you were to run the following code:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											wizards = get_all_wizards()
+											table = HashTable(20) # You could of course change the number of bins to be something different from 20
+											for w in wizards:
+												table.add(w)
+											dean = Wizard("Dean Thomas", 12, 2, 1988)
+											barack = Wizard("Barack Obama", 8, 4, 1961)
+											print("Dean Thomas is a wizard: ", table.find(dean))
+											print("Removing dean twice over...")
+											table.remove(dean)
+											table.remove(dean)
+											print("Dean Thomas is a wizard: ", table.find(dean))
+											print("Barack Obama is a wizard: ", table.find(barack))
+										</script>
+
+										<p>
+											It should print
 										</p>
 
 
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											Dean Thomas is a wizard:  True
+											Removing dean twice over...
+											Dean Thomas is a wizard:  False
+											Barack Obama is a wizard:  False
+										</script>
+
+										<p>
+											In order to use this for spell check, we will need to devise a hash code for strings.  We'll use Java's default hash code formula, which is 
+										</p>
+
+										
 
                                     
                                 </div>
