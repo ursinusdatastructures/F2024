@@ -41,84 +41,88 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Week 3: Big O Practice</h1>
+										<h1>Asymptotics: Examples / Tricks of The Trade</h1>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
 									
 
-									<h2>Background</h2>
-									<p>
-										Today we're going to practice big-O with a mix of abstract examples and with concrete examples of algorithms.  Finally, time permitting, we will look at the <b>queue ADT</b> and think about the time complexity of different implementations.
-									</p>
-									<h3>Exercise 1</h3>
-									<p>
-										Devise an algorithm whose best polynomial bound for time complexity is <b>O(N<SUP>3</SUP>)</b>.  This algorithm doesn't have to do anything useful, but you should at least come up with pseudocode.  If you're interested after you complete the other exercises, you can implement this, time it, and try to see if what you plot is a cubic
-									</p>
-
-									<HR>
-									<h3>Exercise 2</h3>
-									<p>
-										Consider the function
-
-										\[ f(N) = N^2 \log_2 N + N^3 \]
-
-										Prove that the function is O(N<SUP>3</SUP>).  That is, find a constant <b>c</b> and a number <b>n<SUB>0</SUB></b> so that
-
-										\[ f(N) \leq c N^3, N \geq n_0 \]
-									</p>
-
-									<HR>
-										<h3>Exercise 3</h3>
+										<h2>Build Your Own Definition (BYOD)</h2>
 										<p>
-											Let's say we have a timing function 
-	
-											\[ T(N) = a \log_2(N^2) \]
+											Start with a function <b>f(N)</b> and a function <b>g(N)</b>.  
 										</p>
 
-										Prove that <b>T(N)</b> is <b>O(log(N))</b>.  As a hint, recall that 
-
-										\[ \log_a(x^b) = b \log_a(x) \]
-
-									<HR>
-									<h3>Exercise 4</h3>
-									<p>
-										We stated that there are algorithms for sorting with timing functions 
-										
-										\[ T(N) = aN\log_2(N) \]
-
-										for some constant <b>a</b><SUP><a href = "#footnote1">*</a></SUP>.  Assuming that python's built-in <code>sorted</code> method for lists takes this amount of time, devise an algorithm where it is impossible to come up with a better time complexity bound than <b>O(N^2 log(N))</b>
-										
-										
-										
-										<h4><a name = "footnote1">Footnote*</a></h4>
-										Note that the base 2 isn't necessary, because we could apply a change of base formula
-										
-										\[ \log_2(x) = \log_b(x) / \log_b(2) \]
-
-										and fold in the coefficient (1/log<sub>b</sub>(2)) into the constant <b>a</b>, but it's clearer to understand what the algorithm is doing if we leave the base 2 in there, as we will see later
-									
-									</code>
-									</p>
-
-									<HR>
-									<h3>Exercise 5</h3>
-									<p>
-										This will most likely be a module exercise, but if groups get to it, let's consider an ADT of a <b>queue</b>.  There are two operations in this ADT: <code>enqueue(x)</code> and <code>dequeue()</code>.  We can think about this like a line that people stand in to get service.  <code>enqueue(x)</code> puts the item <code>x</code> at the back of the line.  <code>dequeue()</code> takes out and returns the person at the front of the line.  Come up with a data structure that realizes this ADT, and derive tight upper bounds for the time complexity of <code>enqueue</code> and <code>dequeue</code> in your implementation.  
-									</p>
+										<p>
+											If there exists a constant <b>M</b> and
+										</p>
 									
 
 									
-									<!--<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-										import random
-										random.seed(371)
-										# This will choose a random number between 0 and 999 
-										# Since we have seeded, it will always be 318 on the 
-										# first call
-										random.randint(0, 1000)
-									]]></script> !-->
+										<select id="constant" name = "constant">
+											<option disabled selected value> -- select an option -- </option>
+											<option value = "exists">there exists a constant <b>c > 0</b> so that</option>
+											<option value = "forevery">for every constant <b>c > 0</b></option>
+										</select>
 
+										<p></p>
+
+
+										<select id="inequality" name = "inequality">
+											<option disabled selected value> -- select an option -- </option>
+											<option value = "less">f(N) &leq; g(N)</option>
+											<option value = "greater">f(N) &geq; g(N)</option>
+										</select>
+										<p></p>
+
+										<p>
+											for all <b>N &geq; M</b>, then <b>f(N)</b> is
+										</p>
+
+										<p id="result">
+
+										</p>
+
+										<script>
+											let resultArea = document.getElementById("result");
+											let constant = document.getElementById("constant");
+											let inequality = document.getElementById("inequality");
+
+											function updateType() {
+												console.log("constant.value = " + constant.value + ", " + "inequality.value = " + inequality.value);
+												if (constant.value == "exists") {
+													if (inequality.value == "less") {
+														result.innerHTML = "<h2>&Omega;(g(N))</h2>This is pronounced \"big Omega of f(N)\".  We can think of this like saying that <b>f(N)</b> is <b>greater than or equal to</b> <b>g(N)</b>, up to constants";
+													}
+													else if (inequality.value == "greater") {
+														result.innerHTML = "<h2>O(g(N))</h2>This is pronounced \"big O of f(N)\".  We can think of this like saying that <b>f(N)</b> is <b>less than or equal to</b> <b>g(N)</b>, up to constants";
+													}
+												}
+												else if (constant.value == "forevery") {
+													if (inequality.value == "less") {
+														result.innerHTML = "<h2>&omega;(g(N))</h2>This is pronounced \"little omega of f(N)\".  We can think of this like saying that <b>f(N)</b> is <b>strictly greater than</b> <b>g(N)</b>, up to constants";
+													}
+													else if (inequality.value == "greater") {
+														result.innerHTML = "<h2>o(g(N))</h2>This is pronounced \"little o of f(N)\".  We can think of this like saying that <b>f(N)</b> is <b>strictly less than</b> <b>g(N)</b>, up to constants";
+													}
+												}
+											}
+											updateType();
+
+											constant.addEventListener('change', function(e){
+												updateType();
+											});
+											inequality.addEventListener('change', function(e){
+												updateType();
+											});
+										</script>
+
+										<HR>
+											<h2>Tricks of The Trade</h2>
+									
+
+									
+									
                                     </div>
 						</div>
 					</div>
