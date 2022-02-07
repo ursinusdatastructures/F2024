@@ -17,25 +17,29 @@ Python Classes And Objects, Hash Tables Intro
 LECTURE
 <a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a>
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><!--<li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li>!--></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
 Continue Binary Search, Linked List Implementation, Unit Tests And TimeIt
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li></ul>
 LECTURE
-Big-O, Little-o, Big-Theta
+Begin Asymptotics: Big-O
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li></ul>
 LECTURE
-Continue asymptotics, begin Hash Tables Theory/ Formal Analysis
+Continue asymptotics: Little o, Big Gamma, Little Gamma
 
 
 LECTURE
-Hash Tables Theory/ Formal Analysis
+Finish Asymptotics Intro, Complexity Hierarchies
 
 
 LECTURE
-Disjoint Sets And Union Find
+Testing, Disjoint Sets And Union Find
+
+<ul><li><a href = "Week4_DiscoveringUnionFind">Class Exercise: Discovering Union Find</a></li></ul>
+LECTURE
+Lab 2: The Union Find Algorithm
 
 <ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
 LECTURE

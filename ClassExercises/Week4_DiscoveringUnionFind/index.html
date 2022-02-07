@@ -41,30 +41,98 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>A Computer Science Definition of The Log</h2>
-										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+										<h1>Week 4: Discovering Disjoint Sets</h1>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
-										
-										<iframe src="Log.html" width=100% height=2600></iframe>
-										
+									<h2>Getting Started</h2>
+									<p>
+										<a href = "https://github.com/ursinus-cs371-s2022/Week4_UnionFind">Click here</a> to get the starter code for today.
+									</p>
 
-                                    
-                                </div>
+									<h2>Background</h2>
+									<p>
+										There is a very important <b>abstract data</b> type in algorithms known as the <b>Disjoint Sets</b> data type.  You can think of it as starting off with a whole bunch of object-containing bubbles (sets) that merge together over time and never break apart.  After so many bubbles have merged, we can ask the question: are two objects in the same bubble?    
+									</p>
+
+									<p>
+										To keep things simple, all of the objects will simply be integers numbered from 0 up to some total number of bubbles minus 1.  In our abstract data type, there are two operations we can do to integers:
+										<ul>
+											<li><code>union(i, j)</code>: Merge the bubbles (sets) containing <code>i</code> and <code>j</code>.</li>
+											<li><code>find(i, j)</code>: At this point in the disjoint set, are <code>i</code> and <code>j</code> part of the same set?</li>
+										</ul>
+									</p>
+
+									<h3>Example</h3>
+									<p>
+									Below is an example of a run of <code>union</code> and <code>find</code> on 10 numbers, which each individually start out in their own bubble/set
+									</p>
+									<p>
+										<img src = "UnionFind.svg">
+									</p>
+									
+
+									<h3>Exercise 1: Designing A Data Structure</h3>
+									<p>
+										A <b>data structure</b> is an <b>implementation</b> of an abstract data type.  In C++ terms, the abstract data type is like a header file, and the data structure is the cpp file.  The end user does not need to know the implementation details in order to use methods in the header file, but the person designing the code should come up with an <b>efficient</b> implementation so that the end user has a good experience.
+									</p>
+
+									<p>
+										In this first exercise, you should discuss with your group how to design a data structure to accomplish this task.  You can do this just using lists, but you may also want to use a <code>set</code>.  <b>You should not write any code at this stage</b>.  Questions to ask yourself as you go:
+										<ul>
+											<li>What local variables should I create in the object, and what are their roles?</li>
+											<li>What algorithms should I implement that work with the variables I've defined?</li>
+											<li>How do I know my algorithms are correct?</li>
+										</ul>
+										You should write a few examples out by hand to make sure this works like you think it does (and perhaps verify with the above example).  I will check in with all of the groups after a few minutes to see what people come up with.
+									</p>
+
+									<h3>Exercise 2: Implementing and testing the data structure</h3>
+									<p>
+										Now that you have a data structure in mind, it's time to implement it by turning your above ideas into code.  So you should take a moment to do that as a group.  Even if you think it works, however, you need to test it.  I have provided a unit test for the above example in <code>test.py</code>, so if you first run
+									</p>
+
+									<p>
+										<code>!python -m pytest test.py</code>
+									</p>
+
+									<p>
+										In the spyder terminal, you should see all tests pass, and that's a good sign.  However, you should make a different test of your own by filling in <code>test_my()</code>.  Any time you want to test to make sure something is <code>True</code>, put a boolean expression in an <code>assert</code> statement.  If that expression evaluates to <code>False</code>, then it will crash the code, and that test will fail.
+									</p>
+
+									<h3>Exercise 3: Corner Case Testing</h3>
+									<p>
+										An important part of data structure implementation is to ensure that your code works not just on "ordinary" inputs, but on all possible inputs.  Think about what strange inputs could occur.  Then design a corner case test for each one of them.  In order for python's unit tester to run it, make sure you create a method that starts with the word <code>test</code>
+									</p>
+
+									<h3>Exercise 4: Stress Testing</h3>
+									<p>
+										Another way to test the robustness of a data structure implementation is to put a very large number of items in it and to make sure the operations still work as expected.  Think about how you could create a very large random test.  How many items will you have in your disjoint set, and how will you systematically (but randomly) merge them together and check to see what has been merged?  Below is a code snippet that may help.  If we fail the test, we want to be able to repeat it, so it's important to actually use "pseudorandomness" instead of randomness.  So we use a <b>seed</b>
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										import random
+										random.seed(371)
+										# This will choose a random number between 0 and 999 
+										# Since we have seeded, it will always be 318 on the 
+										# first call
+										random.randint(0, 1000)
+									]]></script> 
+
+                                    </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -184,3 +252,4 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
+</html>

@@ -7,3 +7,6 @@
 [submodule "ClassExercises/Week3_Hash/Week3_HashingExperiments"]
 	path = ClassExercises/Week3_Hash/Week3_HashingExperiments
 	url = https://github.com/ursinus-cs371-s2022/Week3_HashingExperiments.git
+[submodule "ClassExercises/Week4_DiscoveringUnionFind/Week4_UnionFind"]
+	path = ClassExercises/Week4_DiscoveringUnionFind/Week4_UnionFind
+	url = https://github.com/ursinus-cs371-s2022/Week4_UnionFind.git
