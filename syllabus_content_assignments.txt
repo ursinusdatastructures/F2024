@@ -12,7 +12,10 @@ Lab 1 Due
 2022-01-25
 Homework 1 Due
 
-2022-02-07
+2022-02-09
 <a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Big-O Self Study Module</a> Due Before Class
 
 2022-01-31
+<HR><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
+
+2022-02-09
