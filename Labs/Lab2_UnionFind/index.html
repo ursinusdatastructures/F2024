@@ -41,98 +41,110 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Week 4: Discovering Disjoint Set Data Structures</h1>
-										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+                                        <h2>Lab 2: Union Find (4 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+                                        <h3>Due Monday 2/14/2022</h3>
 									</header>
 
 									<div id="page-content">
-									<h2>Getting Started</h2>
-									<p>
-										<a href = "https://github.com/ursinus-cs371-s2022/Week4_UnionFind">Click here</a> to get the starter code for today.
-									</p>
+										
 
-									<h2>Background</h2>
-									<p>
-										There is a very important <b>abstract data</b> type in algorithms known as the <b>Disjoint Sets</b> data type.  You can think of it as starting off with a whole bunch of object-containing bubbles (sets) that merge together over time and never break apart.  After so many bubbles have merged, we can ask the question: are two objects in the same bubble?    
-									</p>
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											In this lab you will implement an efficient data structure for the <a href = "../../ClassExercises/Week4_DiscoveringUnionFind/">disjoint set data structure</a> known as <b>union find</b>.  You will implement and test several accelerations to union find that make the "amortized cost" (average cost) of an operation near constant time(!)
+										
+										</p>
+										
 
-									<p>
-										To keep things simple, all of the objects will simply be integers numbered from 0 up to some total number of bubbles minus 1.  In our abstract data type, there are two operations we can do to integers:
-										<ul>
-											<li><code>union(i, j)</code>: Merge the bubbles (sets) containing <code>i</code> and <code>j</code>.</li>
-											<li><code>find(i, j)</code>: At this point in the disjoint set, are <code>i</code> and <code>j</code> part of the same set?</li>
-										</ul>
-									</p>
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Convert a problem into a format required by an abstract data type
+												</li>
+												<li>Implement union find with size-based merging and path compression in python</li>
+												<li>
+													Experimentally measure the time it takes for code to execute as input size scales
+												</li>
+                                            </ul>
+                                        </p>
 
-									<h3>Example</h3>
-									<p>
-									Below is an example of a run of <code>union</code> and <code>find</code> on 10 numbers, which each individually start out in their own bubble/set
-									</p>
-									<p>
-										<img src = "UnionFind.svg">
-									</p>
-									
+										<h3><a name = "submit">What To Submit</a></h3>
 
-									<h3>Exercise 1: Designing A Data Structure</h3>
-									<p>
-										A <b>data structure</b> is an <b>implementation</b> of an abstract data type.  In C++ terms, the abstract data type is like a header file, and the data structure is the cpp file.  The end user does not need to know the implementation details in order to use methods in the header file, but the person designing the code should come up with an <b>efficient</b> implementation so that the end user has a good experience.
-									</p>
+										<p>                                       
+                                            When you are finished, submit your <code>unionfind.py</code> to canvas, as well as your <a href = "#operations">operation count plot</a>.
+										</p>
 
-									<p>
-										In this first exercise, you should discuss with your group how to design a data structure to accomplish this task.  You can do this just using lists, but you may also want to use a <code>set</code>.  <b>You should not write any code at this stage</b>.  Questions to ask yourself as you go:
-										<ul>
-											<li>What local variables should I create in the object, and what are their roles?</li>
-											<li>What algorithms should I implement that work with the variables I've defined?</li>
-											<li>How do I know my algorithms are correct?</li>
-										</ul>
-										You should write a few examples out by hand to make sure this works like you think it does (and perhaps verify with the above example).  I will check in with all of the groups after a few minutes to see what people come up with.
-									</p>
+										<h3><a name = "background">Background</a></h3>
 
-									<h3>Exercise 2: Implementing and testing the data structure</h3>
-									<p>
-										Now that you have a data structure in mind, it's time to implement it by turning your above ideas into code.  So you should take a moment to do that as a group.  Even if you think it works, however, you need to test it.  I have provided a unit test for the above example in <code>test.py</code>, so if you first run
-									</p>
+										<p>
 
-									<p>
-										<code>!python -m pytest test.py</code>
-									</p>
+											Review the pseudocode and example picture below of the basic union find algorithm.  If needed, <a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video3">click here</a> to rewatch the video I made that explains this
+										</p>
+										<img src = "https://ursinus-cs371-s2022.github.io/Modules/images/Module3/UnionFind.svg" width=700>
 
-									<p>
-										In the spyder terminal, you should see all tests pass, and that's a good sign.  However, you should make a different test of your own by filling in <code>test_my()</code>.  Any time you want to test to make sure something is <code>True</code>, put a boolean expression in an <code>assert</code> statement.  If that expression evaluates to <code>False</code>, then it will crash the code, and that test will fail.
-									</p>
+										<h3><a name = "basic">Basic Union Find Implementation (2 Points)</a></h3>
 
-									<h3>Exercise 3: Corner Case Testing</h3>
-									<p>
-										An important part of data structure implementation is to ensure that your code works not just on "ordinary" inputs, but on all possible inputs.  Think about what strange inputs could occur.  Then design a corner case test for each one of them.  In order for python's unit tester to run it, make sure you create a method that starts with the word <code>test</code>
-									</p>
+										<p>
+											Following the pseudocode in the above picture, create a class called <code>DisjointSet</code> with methods for <code>root</code>, <code>find</code>, and <code>union</code>.  For simplicity in this lab, you can assume that you start off with individual bubbles for the numbers <b>0, 1, ..., N-1</b>, and you can pass <code>N</code> as a parameter to the constructor, just as in the <a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Exercise1">naive implementation</a> you explored in the module.
+										</p>
 
-									<h3>Exercise 4: Stress Testing</h3>
-									<p>
-										Another way to test the robustness of a data structure implementation is to put a very large number of items in it and to make sure the operations still work as expected.  Think about how you could create a very large random test.  How many items will you have in your disjoint set, and how will you systematically (but randomly) merge them together and check to see what has been merged?  Below is a code snippet that may help.  If we fail the test, we want to be able to repeat it, so it's important to actually use "pseudorandomness" instead of randomness.  So we use a <b>seed</b>
-									</p>
+										<p>
+											Create some simple tests to convince yourself that this is working before you proceed to the next section.
+										</p>
 
-									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-										import random
-										random.seed(371)
-										# This will choose a random number between 0 and 999 
-										# Since we have seeded, it will always be 318 on the 
-										# first call
-										random.randint(0, 1000)
-									]]></script> 
 
-                                    </div>
+
+										<h3><a name = "pathcompression">Path Compression (1 Point)</a></h3>
+										<p>
+											One way that we can make union find much faster is if we do something called <b>path compression</b>.
+										</p>
+
+										<p>
+											Modify your <code>root</code>
+										</p>
+
+
+										<h3><a name = "sizebased">Size-Based Merging (1 Point)</a></h3>
+										<p>
+											Modify your union find code so that it implements both <b>path compression</b> and <b>size-based merging</b>
+										</p>
+
+										
+
+										<h3><a name = "operations">Operations Scaling Plots (1 Point)</a></h3>
+										<p>
+											Now we will get a sense for the efficiency of the tree-based union find compared to one of our original ideas empirically by testing it out and timing it on inputs of varying size.  Since, as we discussed in class, certain operations may take a long time but may save us time in future operations, we are interested in the <b>amortized cost</b>, or the average cost of unions and finds over many operations.  Furthermore, whenever we're thinking about the performance of algorithms, we want to know how the algorithms <b>scale</b> in performance as the input size scales up.  What you should do to test this is to fill in the method <code>time_test</code> in <code>cells.py</code> to test the <code>get_cell_labels</code> method on inputs of increasing size for both <code>UFFast</code> and the more naive <code>IDsSet</code>.  To time the run of an algorithm, you can type
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											tic = time.time()
+											## Some code... (you can use the same threshold as before)
+											elapsed = time.time()-tic
+										]]></script> 
+										
+										<p>
+											This is not reliable for a single test, however, because other things may be going on in the background of your computer randomly that make it take longer on some runs.  So you should run each test at least ten times for a fixed number of pixels and compute the average time, divided by the number of pixels.  Then, the code will plot the results.  Please include this plot in your submission.
+										</p>
+
+
+
+
+                                    
+                                </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -254,4 +266,3 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
-</html>

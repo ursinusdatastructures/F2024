@@ -4,7 +4,7 @@
 <a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due
 
 2022-01-24
-Lab 1 Due
+<a href = "Labs/Lab1_BinarySearch">Lab 1</a> Due
 
 2022-01-28
 <a href = "Assignments/HW1_Autocomplete">Homework 1: Autocomplete And Spellcheck</a> Out
@@ -19,3 +19,6 @@ Homework 1 Due
 <HR><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2022-02-09
+<a href = "Labs/Lab2_UnionFind">Lab 2</a> Due
+
+2022-02-14
