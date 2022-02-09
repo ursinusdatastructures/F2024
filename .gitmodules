@@ -10,3 +10,6 @@
 [submodule "ClassExercises/Week4_DiscoveringUnionFind/Week4_UnionFind"]
 	path = ClassExercises/Week4_DiscoveringUnionFind/Week4_UnionFind
 	url = https://github.com/ursinus-cs371-s2022/Week4_UnionFind.git
+[submodule "Labs/Lab2_UnionFind/Lab2_UnionFind"]
+	path = Labs/Lab2_UnionFind/Lab2_UnionFind
+	url = https://github.com/ursinus-cs371-s2022/Lab2_UnionFind.git

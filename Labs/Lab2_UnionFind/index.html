@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Lab 2: Union Find (4 Points)</h2>
+                                        <h2>Lab 2: Union Find (8 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
                                         <h3>Due Monday 2/14/2022</h3>
 									</header>
@@ -51,8 +51,11 @@
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											In this lab you will implement an efficient data structure for the <a href = "../../ClassExercises/Week4_DiscoveringUnionFind/">disjoint set data structure</a> known as <b>union find</b>.  You will implement and test several accelerations to union find that make the "amortized cost" (average cost) of an operation near constant time(!)
-										
+											In this lab you will implement an efficient data structure for the <a href = "../../ClassExercises/Week4_DiscoveringUnionFind/">disjoint set data structure</a> known as <b>union find</b>.  You will implement and test several accelerations to union find that make the "amortized cost" (average cost) of an operation <b>near constant time</b>(!)
+										</p>
+
+										<p>
+											<a href = "https://github.com/ursinus-cs371-s2022/Lab2_UnionFind/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab, which provides a reference implementation of the <a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">slow disjoint set data structure</a>, as well as code to compare this to your implementations in this lab in the file <code>test.py</code>
 										</p>
 										
 
@@ -64,7 +67,7 @@
 												</li>
 												<li>Implement union find with size-based merging and path compression in python</li>
 												<li>
-													Experimentally measure the time it takes for code to execute as input size scales
+													Experimentally measure and plot the amortized cost of operations as the input size scales
 												</li>
                                             </ul>
                                         </p>
@@ -72,7 +75,7 @@
 										<h3><a name = "submit">What To Submit</a></h3>
 
 										<p>                                       
-                                            When you are finished, submit your <code>unionfind.py</code> to canvas, as well as your <a href = "#operations">operation count plot</a>.
+                                            When you are finished, submit your files <code>unionfind.py</code> and <code>unionfindopt.py</code> to canvas, as well as your <a href = "#operations">amortized cost plot</a>.
 										</p>
 
 										<h3><a name = "background">Background</a></h3>
@@ -86,7 +89,7 @@
 										<h3><a name = "basic">Basic Union Find Implementation (2 Points)</a></h3>
 
 										<p>
-											Following the pseudocode in the above picture, create a class called <code>DisjointSet</code> with methods for <code>root</code>, <code>find</code>, and <code>union</code>.  For simplicity in this lab, you can assume that you start off with individual bubbles for the numbers <b>0, 1, ..., N-1</b>, and you can pass <code>N</code> as a parameter to the constructor, just as in the <a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Exercise1">naive implementation</a> you explored in the module.
+											<b>Your Task: </b> Following the pseudocode in the above picture, create a file called <code>unionfind.py</code> which contains a class called <code>UnionFind</code> with methods for <code>root</code>, <code>find</code>, and <code>union</code>.  For simplicity in this lab, you can assume that you start off with individual bubbles for the numbers <b>0, 1, ..., N-1</b>, and you can pass <code>N</code> as a parameter to the constructor, just as in the <a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Exercise1">naive implementation</a> you explored in the module.
 										</p>
 
 										<p>
@@ -95,36 +98,204 @@
 
 
 
-										<h3><a name = "pathcompression">Path Compression (1 Point)</a></h3>
+										<h3><a name = "pathcompression">Path Compression (2 Points)</a></h3>
 										<p>
-											One way that we can make union find much faster is if we do something called <b>path compression</b>.
+											One way that we can make union find much faster is if we do something called <b>path compression</b>.  At a high level, we want to try to avoid very long branches in our forest, because this will make it slower to find the root.  So what we can do is some bookkeeping to make future calls of <b>root</b> are more efficient.  It's easiest to see this with an example.  Suppose we start with the forest below:
 										</p>
 
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "PathCompressionStart.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>4</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+										
+
 										<p>
-											Modify your <code>root</code>
+											Then, let's suppose we called <code>root(9)</code>.  All of the highlighted nodes (9, 6, 1, 7) below will be visited on the path on the way to 9's root:
+										</p>
+
+										<img src = "PathCompressionHighlight.svg">
+
+										<p>
+											This is a long path relative to the number of elements here, but we can cut it down for future iterations by backing up and creating a shortcut from all of the highlighted nodes to the root that was found.  The image below shows this, with parent pointers bolded to indicate what was changed
+										</p>
+
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "PathCompressionEnd.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td><b>0</b></td><td>0</td><td>3</td><td>4</td><td>9</td><td><b>0</b></td><td>0</td><td>1</td><td><b>0</b></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<p>Notice how much shorter the tree is now!  This is one of the ways we get towards near constant time performance on future queries</p>
+										<p>
+											<b>Your Task: </b> Create a copy of your file <code>unionfind.py</code> called <code>unionfindopt.py</code>.  In this new file, modify your <code>root</code> method to implement path compression, and make sure your union find still works properly
 										</p>
 
 
-										<h3><a name = "sizebased">Size-Based Merging (1 Point)</a></h3>
+										<h3><a name = "sizebased">Size-Based Merging (2 Points)</a></h3>
+
 										<p>
-											Modify your union find code so that it implements both <b>path compression</b> and <b>size-based merging</b>
+											There is one more optimization we can do to speed up union find.  Let's suppose we have the following forest below.  In addition to storing the parent references, we'll store how many nodes are under each node in a list called <code>weights</code>.  Actually, we only need to remember the weights of the roots for what we're about to do, so I'll omit all of the other weights
 										</p>
+
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "SizeBasedStart.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+														<tr>
+															<td>weights</td><td>8</td><td></td><td></td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
 
 										
 
-										<h3><a name = "operations">Operations Scaling Plots (1 Point)</a></h3>
 										<p>
-											Now we will get a sense for the efficiency of the tree-based union find compared to one of our original ideas empirically by testing it out and timing it on inputs of varying size.  Since, as we discussed in class, certain operations may take a long time but may save us time in future operations, we are interested in the <b>amortized cost</b>, or the average cost of unions and finds over many operations.  Furthermore, whenever we're thinking about the performance of algorithms, we want to know how the algorithms <b>scale</b> in performance as the input size scales up.  What you should do to test this is to fill in the method <code>time_test</code> in <code>cells.py</code> to test the <code>get_cell_labels</code> method on inputs of increasing size for both <code>UFFast</code> and the more naive <code>IDsSet</code>.  To time the run of an algorithm, you can type
+											Now let's suppose we call <code>union(4, 1)</code>.  This will merge the roots <b>0</b> and <b>3</b>.  One possibility would be make 0's parent be 3, as shown below:
 										</p>
 
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											tic = time.time()
-											## Some code... (you can use the same threshold as before)
-											elapsed = time.time()-tic
-										]]></script> 
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "SizeBased1.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+														<tr>
+															<td>weights</td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<p>
+											The other option is to make 3's parent be 0, as shown below:
+										</p>		
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "SizeBased2.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+														<tr>
+															<td>weights</td><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<p>
+											This is definitely the better option!  The reason is that it only increases the distance of two nodes to the root: 3 and 4.  By contrast, making 0 the parent of 3 increases the distance of nodes 0, 1, 2, 5, 6, 7, 8, 9 all by 1.
+										</p>
+										
+
+
+										<p>
+											<b>Your task: </b> Modify your <code>union</code> method in <code>unionfindopt.py</code> so that it implements weight-based merging, in addition to path compression.  That is, keep track of the weights of root nodes, and make the parent the one with the larger size.
+										</p>
+
+										<p>
+											<b>Note that the weights of these roots will be unchanged by path compression</b>, so we can combine this trick with path compression.
+										</p>
+
+
+
+										
+
+										<h3><a name = "operations">Amortized Cost Plots (2 Points)</a></h3>
+										<p>
+											Now we will get a sense for the efficiency of the tree-based union find compared to one of our original ideas empirically by testing it out and timing it on inputs of varying size.  Path compression may take a long time on some calls to <code>root</code>, but we're banking on it saving us time in future operations.  Hence, we are interested not in the cost of an individual operation, but in the <b>amortized cost</b>, or the average cost of unions and finds over many operations.  Furthermore, whenever we're thinking about the performance of algorithms, we want to know how the algorithms <b>scale</b> in performance as the input size scales up.  
+										</p>
 										
 										<p>
-											This is not reliable for a single test, however, because other things may be going on in the background of your computer randomly that make it take longer on some runs.  So you should run each test at least ten times for a fixed number of pixels and compute the average time, divided by the number of pixels.  Then, the code will plot the results.  Please include this plot in your submission.
+											<b>Your task:</b> Modify both of your union find classes to have two local variables:
+											<ul>
+												<li>
+													<code>_operations</code>: A running count of how many times a parent arrow was followed in <code>root</code> and how many times a parent was reassigned in <code>union</code>
+												</li>
+												<li>
+													<code>_calls</code>: The total number of calls made to union and find.
+												</li>
+											</ul>
+										</p>
+
+										<p>
+											I've done a similar thing in <code>djsetslow.py</code>.  Then, at the end of many operations, the amortized cost can be computed as <code>_operations/_calls</code>.
+										</p>
+
+										<p>
+											Assuming you've done all of this properly, I've created a program in <code>test.py</code> to call your code and the slow disjoint set code on many random tests of different sizes, and to plot the results.  The program will also let you know if your find operations don't agree with those in <code>djsetslow.py</code>, which you can consider a reference answer.  
+										</p>
+										
+
+										<h3>For the bored...</h3>
+										<p>
+											Testing only once per input size is not reliable, because the operations chosen are random, and we may have gotten lucky or unlucky.  To fix this, you should run multiple different random tests for a single input size and average their results.  This will smooth things out a bit
 										</p>
 
 
