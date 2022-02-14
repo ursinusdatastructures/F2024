@@ -83,7 +83,7 @@ Knapsack Problem
 
 
 LECTURE
-Intermezzo: Union Find Formal Analysis
+Intermezzo: Union Find Formal Analysis 
 
 
 SECTION
