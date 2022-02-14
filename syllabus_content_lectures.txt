@@ -46,46 +46,46 @@ LECTURE
 The list ADT and Data Structure, Amortized Analysis
 
 
+LECTURE
+Finish list amortized analysis, hashing theory, python dictionaries
+
+
 SECTION
 Recursion And Dynamic Programming
 
 
 LECTURE
-Recursive function review, evaluating recursive functions
+Memoization, Lab 3: Towers of Hanoi
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul>
 LECTURE
-Memoization, Recursive Drawing
+Dynamic Programming, String Edit Distance / Backtracking
 
 
 LECTURE
-Stacks, Queues, And Towers of Hanoi
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 6</li></ul>
-LECTURE
-Proofs by Induction, Dynamic Programming, String Edit Distance
-
-<ul><li><a href = "../ClassExercises/Week6/BigTheta.html">Big Theta Practice</a></li></ul>
-LECTURE
-Optimal Solution Backtracking, Change Making
+Change Making, Begin Dynamic Time Warping
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
+LECTURE
+Lab 4: Dynamic Time Warping
+
+
 LECTURE
 Seam Carving
 
 <ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul>
 LECTURE
-Seam Carving Q&A
-
-
-LECTURE
-Dynamic Time Warping
-
-<ul><li><a href = "http://www.ctralie.com/Research/linmdtw/">Linear memory dynamic time warping repository</a></li></ul>
-LECTURE
-Longest Common Subsequence, Knapsack Problem
+Longest Common Subsequence
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
+LECTURE
+Knapsack Problem
+
+
+LECTURE
+Intermezzo: Union Find Formal Analysis
+
+
 SECTION
 Sorting, Selection, And Shuffling
 

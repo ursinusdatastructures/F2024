@@ -1,0 +1,562 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 2: Union Find And Plant Cell Segmentation (36 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+										<ul>
+											<li>
+												<a href = "#overview">Overview/Logistics</a>
+												<ul>
+													<li><a href = "#learning">Learning Objectives</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href = "#background">Background</a>
+												<ul>
+													<li><a href = "#watershed">Watershed Algorithms</a></li>
+													<li><a href = "#twodarray">2D Arrays in Python / Numpy</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href = "#programming">Programming Tasks</a>
+												<ul>
+													<li><a href = "#celllabels">Get Cell Labels</a> (18 Points)</li>
+													<li><a href = "#cellcenters">Get Cell Centers</a> (18 Points)</li>
+													<li><a href = "#interested">For those interested...</a></li>
+												</ul>
+											</li>
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											The purpose of this assignment is to give you practice implementing data structures and manipulating variables in python in the service of a cool application.  You will also begin to develop an experimental sense of the relative efficiency of data structures in practice.
+										
+										</p>
+										
+										<p>
+											<a href = "https://github.com/Ursinus-CS371-S2021/HW1_PlantCellSegmentation/archive/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload a zip file to canvas with your modified <code>cells.py</code> and all other files needed to run your code (e.g. <code>unionfind.py</code>).
+                                        </p>
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Translate a real world problem into a format required by an abstract data type
+												</li>
+												<li>
+													Work with lists and 2D arrays in python
+												</li>
+												<li>
+													Use union find for efficient segmentation in images
+												</li>
+                                            </ul>
+                                        </p>
+
+										<h2><a name = "background">Background</a></h2>
+
+										<h3><a name = "watershed">Watershed Algorithms</a></h3>
+										<p>
+											Image processing is an applied area of algorithms at the intersection of math and computer science that is broadly applicable across engineering, medicine, science, and art.  One example scientific application is the automatic labeling and understanding of cell tissue, such as the image below, taken from the creative commons source at <a href = "https://www.flickr.com/photos/146824358@N03/35486476174">this link</a> 
+										</p>
+
+										<img src = "HW2_PlantCellSegmentation/Cells.jpg">
+
+										<p>
+											Let's say we wanted to figure out the locations of the cells as a preprocessing step to other analysis, such as figuring out the density of cells in a region or analyzing their shape.  Finding such locations is known as <a href = "https://en.wikipedia.org/wiki/Image_segmentation">image segmentation</a>.  To accomplish this, we could label the regions or draw their boundaries by hand, but this would be extremely tedious, especially if we have to process thousands of images of cells for an analysis.  So it is of interest to automate segmentation with computer algorithms.  To do this, we turn to a class of segmentation algorithms known as <a href = "https://en.wikipedia.org/wiki/Watershed_(image_processing)">watershed methods</a>, and we will explore a simple version in this assignment.
+										</p>
+
+										<p>
+											Watershed methods earn their name because we can think of them like a physical process where rain falls on a image, and water pools in features of interest, which are cells in this case.  For a more direct analogy with how we've discussed union find so far, one can also think of these techniques as forming bubbles that merge together to fill up these regions.  
+										</p>
+										<p>
+											Watershed methods operate on <b>grayscale versions</b> of images; that is, each pixel is a real number where dark pixels are smaller numbers and light pixels are larger numbers.  To keep things simple, we make 0 the darkest possible grayscale value and 1 the brightest possible grayscale value, as shown in the image below, which is the grayscale version of the cells we started with:
+										</p>
+										<img src = "Cells_Grayscale.png">
+										<p>
+											When we look at this image, we notice that pixels on the inside of cells are brighter than the boundaries between cells.  We can exploit this observation to design a watershed algorithm based on <a href = "../../ClassExercises/Week2/Week2_UnionFind/">union find</a>.  Each pixel starts off as its own "bubble."  If a pixel <code>i</code> is greater than some threshold and one of its neighboring pixels <code>j</code> is also greater than this threshold, then the bubbles containing <code>i</code> and <code>j</code> should merge.  The bubbles will get larger and larger when we do this for all such neighboring pixels, but the bubbles will not connect across cell boundaries, so eventually, they conform to the shape of the cells.
+										</p>
+
+										<h3><a name = "twodarray">2D Arrays in Python / Numpy</a></h3>
+										<p>
+											A 2D array is a natural data structure for a grayscale image, since the images have both rows an columns.  2D arrays in python work just as they do in Java or C++, but they're even easier to initialize, particularly in numpy.  For example, to create a 2D numpy array with 100 rows and 50 columns, one would type
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											X = np.zeros((100, 50))
+										]]></script> 
+
+										and to access an element at row 31, column 10, one would type
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											X[31][10]
+										]]></script> 
+
+										<p>
+											And actually, since this is a numpy array, there's another syntax you can use:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											X[31, 10]
+										]]></script> 
+
+
+                                        
+										<h2><a name = "programming">Programming Tasks</a></h2>
+										<p>
+											You will use your optimized disjoint set ADT from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a> to implement the watershed algorithm for the cells image above, and you will then use the components to mark the centers of each cell.  You will accomplish this in two tasks:
+										</p>
+
+										<h3><a name = "celllabels">Get Cell Labels (18 Points)</a></h3>
+										<p>
+											In this section, you will implement the basic version of the watershed algorithm using the disjoint set ADT by creating a method <code>get_cell_labels</code> in <code>cells.py</code>.  The method should take in two parameters
+											<ul>
+												<li>
+													A grayscale image of cells as a 2D array
+												</li>
+												<li>
+													A threshold, which is a float between 0 and 1.  If two pixels are neighboring pixels whose grayscale value is both above this threshold, they should be unioned together.
+												</li>
+											</ul> 
+											Your method should return a 2D numpy array containing the labels of each cell; that is, an image where each pixel that's in the same cell has the same number.  The actual numbers don't matter, as long as they are unique for a cell and the same within that cell.
+										</p>
+
+										<p>
+											To accomplish this, use your efficient union find implementation from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a> to merge neighboring pixels together that are under the threshold.  Then, set the label of each pixel to be its root in union find.
+										</p>
+
+										<p>
+											The image below shows an example of running the following code in the <code>__main__</code> in <code>cells.py</code> (or in a jupyter cell that imports <code>cells.py</code>), and you should see something like this once you've finished your <code>get_cell_labels</code> method:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											thresh = 0.8
+											I = load_cells_grayscale("Cells.jpg")
+											labels = get_cell_labels(I, thresh)
+											# permute_labels shuffles around the labels to make it 
+											# easier to view the cells against their background
+											plt.imshow(permute_labels(labels))
+											plt.show()
+										]]></script> 
+
+										<img src = "Cells_Labels.png">
+											
+										
+										<p>
+
+										</p>
+
+										<h4><a name = "celllabelshint">Hint</a></h4>
+										<p>
+											If you're totally stuck on where to get started, have a look at the hint below
+										</p>
+
+
+										<button type="button" onclick="showCellLabelsHint()">Show Cell Labels Hint</button> 
+										<button type="button" onclick="hideCellLabelsHint()">Hide Cell Labels Hint</button> 
+
+										<p></p>
+
+										<div id="CellLabelsHinttext" style="background-color: blanchedalmond; padding: 20px;">
+	
+
+											<p>
+												One of the challenges here is to transform the problem in a way that it can be used as input to our disjoint set ADT.  As we have defined it, the disjoint set ADT takes whole numbers in a range from 0 up to some number, but we actually have pixels here.  So for an image with <b>M</b> rows and <b>N</b> columns, you'll have to come up with a way of converting a pixel location <b>(y, x)</b> uniquely into a whole number between <b>0</b> and <b>M*N-1</b>, and then back again. 
+											</p>
+											
+											<p>
+												For example, let's say that we had an image that had M = 6 rows and N = 5 columns.  Let's refer to the row index as <b>y</b> and the column index as <b>x</b>.  Then we might choose to number each pixel as follows:
+											</p>
+	
+											<table style="width:400px">
+												<tr>
+													<td></td>
+													<td>x = 0</td>
+													<td>x = 1</td>
+													<td>x = 2</td>
+													<td>x = 3</td>
+													<td>x = 4</td>
+												</tr>
+												<tr>
+													<td>y = 0</td>
+													<td>0</td>
+													<td>1</td>
+													<td>2</td>
+													<td>3</td>
+													<td>4</td>
+												</tr>
+												<tr>
+													<td>y = 1</td>
+													<td>5</td>
+													<td>6</td>
+													<td>7</td>
+													<td>8</td>
+													<td>9</td>
+												</tr>
+												<tr>
+													<td>y = 2</td>
+													<td>10</td>
+													<td>11</td>
+													<td>12</td>
+													<td>13</td>
+													<td>14</td>
+												</tr>
+												<tr>
+													<td>y = 3</td>
+													<td>15</td>
+													<td>16</td>
+													<td>17</td>
+													<td>18</td>
+													<td>19</td>
+												</tr>
+												<tr>
+													<td>y = 4</td>
+													<td>20</td>
+													<td>21</td>
+													<td>22</td>
+													<td>23</td>
+													<td>24</td>
+												</tr>
+												<tr>
+													<td>y = 5</td>
+													<td>25</td>
+													<td>26</td>
+													<td>27</td>
+													<td>28</td>
+													<td>29</td>
+												</tr>
+											</table>
+	
+											<p>
+												Then, let's say that we discover that pixel at location (y=1, x=2) and its neighboring pixel at (y=2, x=2) both have a brightness value over the threshold; that is
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													I[1, 2] > thresh and I[2, 2] > thresh]]></script>
+												
+												Then we would union 7 and 12 in our disjoint set ADT
+											</p>
+	
+											<p>
+												Then, after we do this for all pairs of neighboring pixels that are above a threshold, we can use the <code>root</code> method to get the label of each pixel.
+											</p>
+											
+	
+										</div>
+	
+										<script>
+											let CellLabelsHint = document.getElementById("CellLabelsHinttext");
+											function showCellLabelsHint() {
+												CellLabelsHint.style.display="block";
+											}
+											function hideCellLabelsHint() {
+												CellLabelsHint.style.display = "none";
+											}
+											hideCellLabelsHint();
+										</script>
+	
+										<p></p>
+
+										<h3><a name = "cellcenters">Get Cell Centers (18 Points)</a></h3>
+										<p>
+											Now that you have all pixels belonging to each cell in one component, you will compute the center of each cell by averaging the pixel coordinates of all of the pixels that belong to that cell.
+										</p>
+										<p>
+											To implement this, create a method called <code>get_cluster_centers</code>, which takes in an image of labels generated from your code in the last section, and which returns an array of <code>[i, j]</code> locations of the centers of each cell, where <code>i</code> is the average row and <code>j</code> is the average column.  You should only return centers which have <b>more than one pixel</b> in them.  Furthermore, your code should run in <b>O(MN)</b> time, where <b>M</b> and <b>N</b> are the number of rows and columns, respectively, in the image.
+										</p>
+
+										<p>
+											If this works properly and you execute the code below in your main (or in a jupyter cell):
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											thresh = 0.8
+											I = load_cells_grayscale("Cells.jpg")
+											labels = get_cell_labels(I, thresh)
+											cells_original = skimage.io.imread("Cells.jpg")
+											X = get_cluster_centers(labels)
+											X = np.array(X)
+											plt.imshow(cells_original)
+											plt.scatter(X[:, 1], X[:, 0], c='C2')
+											plt.show()
+										]]></script> 
+
+										<p>
+											Then you should get a picture that looks like this:
+										</p>
+										<img src = "Cells_Marked.png">
+
+										<h4><a name = "cellavghint">Hint</a></h4>
+										<p>
+											If you're totally stuck on where to get started, have a look at the hint below
+										</p>
+
+
+										<button type="button" onclick="showCellAvgHint()">Show Cell Averaging Hint</button> 
+										<button type="button" onclick="hideCellAvgHint()">Hide Cell Averaging Hint</button> 
+
+										<p></p>
+
+										<div id="CellAvgHinttext" style="background-color: blanchedalmond; padding: 20px;">
+
+										<p>
+											One possible way to do this is to have an algorithm like this
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											for each label:
+												for each pixel:
+													if this pixel is labeled label, include it
+													in this labels' average]]></script> 
+										<p>
+											The problem with this is, there are <b>M x N</b> pixels <b>and</b> <b>M x N</b> labels.  This means that these loops together will go through <b>(M<SUP>2</SUP>N<SUP>2</SUP>)</b> iterations.  In our example where <b>M = N = 400</b>, this is 25.6 <b>billion</b> iterations!  This is way to slow to be practical, as it is a "quartic" algorithm (O(N<SUP>4</SUP>) when M and N are about the same).  
+										</p>
+										<p>
+											Instead, we should try to come up with an algorithm that only has to loop through some constant factor of <b>M*N</b>.  The problem with the <code>labels</code> data is it really isn't in the right format to do this, so we need to copy it over to another format that holds the same information, but where it is more convenient to efficiently compute averages for each label.
+										</p>
+										
+
+										<p>
+											Let's look at an example of what this might look like.  Let's say that we generated the following labels image:
+										</p>
+
+										<img src = "labelsMarked.svg">
+
+										<p>
+											Then we might create a list indexed by the label.  In this example, there are 7 rows and 12 columns, so the label indices would go from 0, 1, 2, ..., 7*12-1 = 83.  We could create a list with 84 elements, each indexed by the label number.  Each element would itself be a list of all of the coordinates of the pixels belonging to that label.  For the above example, that would look like this:
+										</p>
+
+										<table>
+											<tr><td>Label</td><td>Pixels List</td></tr>
+											<tr><td>0</td><td>[[0, 0]]</td></tr>
+											<tr><td>1</td><td>[[0, 1]]</td></tr>
+											<tr><td colspan=2>...</td></tr>
+											<tr><td>14</td><td>[[1, 2], [1, 3], [2, 2], [2, 3], [3, 2], [3, 3], [4, 2]]</td></tr>
+											<tr><td>15</td><td>[]</td></tr>
+											<tr><td>16</td><td>[[1, 4]]</td></tr>
+											<tr><td>17</td><td>[[1, 5]]</td></tr>
+											<tr><td colspan=2>...</td></tr>
+											<tr><td>43</td><td>[[1, 9], [1, 10], [2, 8], [2, 9], [2, 10], [3, 7], [3, 8], [3, 9], [3, 10], [4, 7], [4, 8], [4, 9], [5, 8]]</td></tr>
+											<tr><td>44</td><td>[]</td></tr>
+											<tr><td>45</td><td>[]</td></tr>
+											<tr><td>46</td><td>[]</td></tr>
+											<tr><td>47</td><td>[[3, 11]]</td></tr>
+											<tr><td colspan=2>...</td></tr>
+											<tr><td>82</td><td>[[6, 10]]</td></tr>
+											<tr><td>83</td><td>[[6, 11]]</td></tr>
+											</table>
+
+										<p>
+											Note that most of the list labels have 0 or 1 pixel location belonging to them, but label 14 and label 43 each have more than 1 pixel, so we treat those as cells and average the coordinates that are there.
+										</p>
+
+										<p>
+											Actually, a better data structure than a list for this task is a <a href = "https://www.w3schools.com/python/python_dictionaries.asp">python dictionary</a> (Sheehy 2.4.4), since many of the labels will be completely empty
+										</p>
+
+										</div>
+
+										<script>
+											let CellAvgHint = document.getElementById("CellAvgHinttext");
+											function showCellAvgHint() {
+												CellAvgHint.style.display="block";
+											}
+											function hideCellAvgHint() {
+												CellAvgHint.style.display = "none";
+											}
+											hideCellAvgHint();
+										</script>
+
+
+
+										<h3><a name = "interested">For those interested...</a></h3>
+										<p>
+											If you've finished the above and you're itching for more, here are a few ideas you can explore (none of them are required!):
+											<ul>
+												<li>We ended up drawing the center of each cell, but as we mused about in the background, sometimes we want to know more about the shape of the cell.  Modify the code so that it draws the boundaries of cells instead of just their center.  The boundary should be expressed as a sequence of pixels in counter-clockwise order</li>
+												<li>
+													We had manually set a threshold of 0.8 in this assignment, but is there a way you can think of to autotune the threshold to get good cell segmentations?
+												</li>
+												<li>
+													Are there images other than the cells image we looked at here that would work well with this algorithm?  Try them out and share your results!
+												</li>
+											</ul>
+										</p>
+
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
