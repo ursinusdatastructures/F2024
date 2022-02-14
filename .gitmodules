@@ -16,3 +16,6 @@
 [submodule "ClassExercises/Week4_ArrayList/Week4_ArrayList"]
 	path = ClassExercises/Week4_ArrayList/Week4_ArrayList
 	url = https://github.com/ursinus-cs174-s2022/Week4_ArrayList.git
+[submodule "Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation"]
+	path = Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation
+	url = https://github.com/ursinus-cs371-s2022/HW2_PlantCellSegmentation.git
