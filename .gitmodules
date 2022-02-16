@@ -19,3 +19,6 @@
 [submodule "Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation"]
 	path = Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation
 	url = https://github.com/ursinus-cs371-s2022/HW2_PlantCellSegmentation.git
+[submodule "Labs/Lab3_Towers/Lab3_TowersOfHanoi"]
+	path = Labs/Lab3_Towers/Lab3_TowersOfHanoi
+	url = https://github.com/ursinus-cs371-s2022/Lab3_TowersOfHanoi.git
