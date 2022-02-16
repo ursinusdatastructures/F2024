@@ -47,7 +47,7 @@ The list ADT and Data Structure, Amortized Analysis
 
 
 LECTURE
-Finish list amortized analysis, hashing theory, python dictionaries
+Hashing Theory
 
 
 SECTION
@@ -55,7 +55,7 @@ Recursion And Dynamic Programming
 
 
 LECTURE
-Memoization, Lab 3: Towers of Hanoi
+Memoization, <a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul>
 LECTURE
