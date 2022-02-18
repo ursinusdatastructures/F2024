@@ -22,3 +22,6 @@
 [submodule "Labs/Lab3_Towers/Lab3_TowersOfHanoi"]
 	path = Labs/Lab3_Towers/Lab3_TowersOfHanoi
 	url = https://github.com/ursinus-cs371-s2022/Lab3_TowersOfHanoi.git
+[submodule "ClassExercises/Week5_EditBacktracing/Week5_EditBacktracing"]
+	path = ClassExercises/Week5_EditBacktracing/Week5_EditBacktracing
+	url = https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing.git

@@ -61,7 +61,7 @@ Memoization, <a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a>
 LECTURE
 Dynamic Programming, String Edit Distance / Backtracking
 
-
+<ul><li><a href = "ClassExercises/Week5_EditBacktracing">Class exercise on edit distance backtracing</a></li></ul>
 LECTURE
 Change Making, Begin Dynamic Time Warping
 
