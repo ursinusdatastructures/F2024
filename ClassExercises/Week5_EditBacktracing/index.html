@@ -41,83 +41,107 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Week 3: Big O Practice</h1>
+										<h2>Week 5: Edit Distance Backtracing</h2>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
 									
 
-									<h2>Background</h2>
-									<p>
-										Today we're going to practice big-O with a mix of abstract examples and with concrete examples of algorithms.  Finally, time permitting, we will look at the <b>queue ADT</b> and think about the time complexity of different implementations.
-									</p>
-									<h3>Exercise 1</h3>
-									<p>
-										Devise an algorithm whose best polynomial bound for time complexity is <b>O(N<SUP>3</SUP>)</b>.  This algorithm doesn't have to do anything useful, but you should at least come up with pseudocode.  If you're interested after you complete the other exercises, you can implement this, time it, and try to see if what you plot is a cubic
-									</p>
-
-									<HR>
-									<h3>Exercise 2</h3>
-									<p>
-										Consider the function
-
-										\[ f(N) = N^2 \log_2 N + N^3 \]
-
-										Prove that the function is O(N<SUP>3</SUP>).  That is, find a constant <b>c</b> and a number <b>n<SUB>0</SUB></b> so that
-
-										\[ f(N) \leq c N^3, N \geq n_0 \]
-									</p>
-
-									<HR>
-										<h3>Exercise 3</h3>
+                                        <h2>Overview / Logistics</h2>
 										<p>
-											Let's say we have a timing function 
-	
-											\[ T(N) = a \log_2(N^2) \]
+											We talked about an iterative dynamic programming solution for the string edit distance in <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video2">the last module</a>.  The method we came up with was able to compute the optimal distance by filling in a table of costs of matching all pairs of substrings, and we were able to lookup the cost as the lower right element in this table, which corresponded to the cost between full strings.  The table below shows an example for "school" versus "fools," where the optimal cost is 4
 										</p>
 
-										Prove that <b>T(N)</b> is <b>O(log(N))</b>.  As a hint, recall that 
+										<p>
+											<img src = "school_fools.svg">
+										</p>
 
-										\[ \log_a(x^b) = b \log_a(x) \]
+										<p>
+											What this does not tell us is what operations were needed to get this answer.  For this, we need another data structure to store what the optimal actions were at each step.  The image below shows arrows drawing decisions that were optimal for every substring
+										</p>
 
-									<HR>
-									<h3>Exercise 4</h3>
-									<p>
-										We stated that there are algorithms for sorting with timing functions 
-										
-										\[ T(N) = aN\log_2(N) \]
+										<p>
+											<img src = "school_fools_arrows.svg">
+										</p>
 
-										for some constant <b>a</b><SUP><a href = "#footnote1">*</a></SUP>.  Assuming that python's built-in <code>sorted</code> method for lists takes this amount of time, devise an algorithm where it is impossible to come up with a better time complexity bound than <b>O(N^2 log(N))</b>
-										
-										
-										
-										<h4><a name = "footnote1">Footnote*</a></h4>
-										Note that the base 2 isn't necessary, because we could apply a change of base formula
-										
-										\[ \log_2(x) = \log_b(x) / \log_b(2) \]
+										<p>
+											To extract an optimal way to match, you must <b>backtrace</b> from the lower right element; that is, start at the lower right element and follow arrows until you get to [0, 0].  The red arrows show all of the decisions that are along a path that starts from [M, N] and ends up at [0, 0].  For example, one such path is 
+										</p>
 
-										and fold in the coefficient (1/log<sub>b</sub>(2)) into the constant <b>a</b>, but it's clearer to understand what the algorithm is doing if we leave the base 2 in there, as we will see later
-									
-									</code>
-									</p>
+										<code>
+											[[6, 5], [6, 4], [5, 3], [4, 2], [3, 1], [2, 1], [1, 1], [0, 0]]
+										</code>
 
-									<HR>
-									<h3>Exercise 5</h3>
-									<p>
-										This will most likely be a module exercise, but if groups get to it, let's consider an ADT of a <b>queue</b>.  There are two operations in this ADT: <code>enqueue(x)</code> and <code>dequeue()</code>.  We can think about this like a line that people stand in to get service.  <code>enqueue(x)</code> puts the item <code>x</code> at the back of the line.  <code>dequeue()</code> takes out and returns the person at the front of the line.  Come up with a data structure that realizes this ADT, and derive tight upper bounds for the time complexity of <code>enqueue</code> and <code>dequeue</code> in your implementation.  
-									</p>
-									
+										<p>
+											The image below shows this path circled in blue 
+										</p>
 
-									
-									<!--<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-										import random
-										random.seed(371)
-										# This will choose a random number between 0 and 999 
-										# Since we have seeded, it will always be 318 on the 
-										# first call
-										random.randint(0, 1000)
-									]]></script> !-->
+										<p>
+											<img src = "school_fools_path1.svg">
+										</p>
+
+										<p>
+											If we walk this path in the backwards direction from how we discovered it, we can translate this to the following operations to transform "school" into "fools":
+											<pre>
+Swap in an f for the s
+Delete c
+Delete h
+Match o and o
+Match o and o
+Match l and l
+Add s
+												
+											</pre>
+										</p>
+
+										<p>
+											This sequence has a total cost of 4 (1 swap, 2 deletes, and 1 add).  But this is not the only path we could find!  Consider the following path:
+										</p>
+
+										<code>
+											[[6, 5], [6, 4], [5, 3], [4, 2], [3, 1], [2, 0], [1, 0], [0, 0]]
+										</code>
+
+										<p>
+											This is shown below
+										</p>
+
+										<img src = "school_fools_path2.svg">
+
+										<p>
+											This would translate into the following sequence
+										</p>
+
+										<pre>
+Delete s
+Delete c
+Swap in an f for the h
+Match o and o
+Match o and o
+Match l and l
+Add s					
+										</pre>
+
+										<p>
+											Interestingly, this also has a cost of 4, but it's a different way of getting that answer! (2 deletes, 1 swap, one add).  And there is actually one more way (see if you can find it)
+										</p>
+
+										<h2>Programming Tasks</h2>
+										<p>
+											<a href = "https://raw.githubusercontent.com/ursinus-cs371-s2022/Week5_EditBacktracing/main/edit.py">Click here</a> to download the starter code.
+										</p>
+
+										<h3>Task 1: Backtrace breaking ties</h3>
+										<p>
+											Your first task is to backtrace by breaking ties in the optimal moves.  The code already does this for you by choosing the left arrow if all else is equal, followed by the up arrow, followed by the diagonal arrow.  The table <code>moves</code> stores a 1 if the left arrow (cost1) was the optimal at that cell, a 2 if the the up arrow (cost2) was optimal at that cell, and a 3 if the diagonal arrow (cost3) was optimal at that cell.  You should create a loop to follow these arrows back from [M, N] to [0, 0]
+										</p>
+
+										<h3>Task 2: Backtracing all paths</h3>
+										<p>
+											If there are ties, it might also be interesting to know <b>all possible paths</b> from the lower right to the upper left of the table.  So we don't just want to break ties, but to store all of the arrows.  Write code to extract all paths this way.  The easiest way to do this is using recursion.  Every time you branch off, you need to make a new list.
+										</p>
+
 
                                     </div>
 						</div>
