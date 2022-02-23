@@ -63,27 +63,27 @@ Dynamic Programming, String Edit Distance / Backtracking
 
 <ul><li><a href = "ClassExercises/Week5_EditBacktracing">Class exercise on edit distance backtracing</a></li></ul>
 LECTURE
+Recursively Backtracing Tied Optimal Solutions with Stacks
+
+<ul><li><a href = "https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing/blob/recursivebacktracing/edit.py">Code from class</a></li></ul>
+LECTURE
 Change Making, Begin Dynamic Time Warping
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li><li><a href = "ClassExercises/DTWNotes">Dynamic Time Warping Notes</a></li></ul>
 LECTURE
 Lab 4: Dynamic Time Warping
 
 
 LECTURE
-Seam Carving
-
-<ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul>
-LECTURE
 Longest Common Subsequence
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
 LECTURE
-Knapsack Problem
+Seam Carving
 
-
+<ul><li><a href = "../ClassExercises/Week6/Week6_SeamCarving">Seam Carving Class Exercise</a></li><li><a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Original Seam Carving Paper</a> by Avidan and Shamir</li></ul>
 LECTURE
-Intermezzo: Union Find Formal Analysis 
+Knapsack Problem
 
 
 SECTION

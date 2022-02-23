@@ -162,7 +162,7 @@
 													return delannoy(M-1, N) + delannoy(M, N-1) + delannoy(M-1, N-1)]]></script> 
 											
 											<p>
-												But we know that there's a more efficient way to evaluate recurrence relations such as these by using <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video2">memoization</a>, where we fill in an entire dynamic programming table as follows
+												But we know that there's a more efficient way to evaluate recurrence relations such as these by using <a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video3">memoization</a>, where we fill in an entire dynamic programming table as follows
 												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 													def delannoy(NMax):
 														D = np.ones((M, N), dtype=int)
@@ -211,7 +211,7 @@
 
 										<h3><a name = "dynprogsol">Dynamic Programming Solution</a></h3>
 										<p>
-											To solve this efficiently, we're going to follow a dynamic programming strategy extremely similar to <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video4">the one we used to solve string edit distance</a>.  This means that we have to break down our problem into smaller problems and combine their solutions incrementally to build up to the full problem.  Let's say we have a time series <b>X</b> with <b>M</b> that we want to align to a time series <b>Y</b> with <b>N</b> samples, and that we're able to compute the distance between a point <b>x<SUB>i</SUB></b> in <b>X</b> and a point <b>y<SUB>j</SUB></b> in <b>Y</b> as <b>d<SUB>i, j</SUB></b>.  Furthermore, <u>let the optimal cost to align the first <b>i</b> samples of <b>X</b> to the first <b>j</b> samples of <b>Y</b> be expressed as <b>S[i, j]</b>; that is <b>S[i, j]</b> holds the sum of the distances of all segments in an optimal warping path from <code>[0, 0]</code> to <code>[i, j]</code>.</u>  Then, we can make the dynamic programming observation:
+											To solve this efficiently, we're going to follow a dynamic programming strategy extremely similar to <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">the one we used to solve string edit distance</a>.  This means that we have to break down our problem into smaller problems and combine their solutions incrementally to build up to the full problem.  Let's say we have a time series <b>X</b> with <b>M</b> that we want to align to a time series <b>Y</b> with <b>N</b> samples, and that we're able to compute the distance between a point <b>x<SUB>i</SUB></b> in <b>X</b> and a point <b>y<SUB>j</SUB></b> in <b>Y</b> as <b>d<SUB>i, j</SUB></b>.  Furthermore, <u>let the optimal cost to align the first <b>i</b> samples of <b>X</b> to the first <b>j</b> samples of <b>Y</b> be expressed as <b>S[i, j]</b>; that is <b>S[i, j]</b> holds the sum of the distances of all segments in an optimal warping path from <code>[0, 0]</code> to <code>[i, j]</code>.</u>  Then, we can make the dynamic programming observation:
 										</p>
 										<h3>
 											\[ S[i, j] = \min \left\{  \begin{array}{c} S[i-1, j] \\ S[i, j-1] \\ S[i-1, j-1] \end{array}  \right\} + d_{i, j} \]
@@ -326,6 +326,7 @@
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
 												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
 											</ul>
 										</li>
 										<li>
