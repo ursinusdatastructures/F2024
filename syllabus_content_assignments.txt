@@ -43,3 +43,6 @@ Homework 1 Due
 <a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Backtracing / Making Change Module</a> due before class
 
 2022-02-25
+<a href = "Labs/Lab4_DTW">Lab 4</a> Due
+
+2022-03-01

@@ -71,7 +71,7 @@ Change Making, Begin Dynamic Time Warping
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li><li><a href = "ClassExercises/DTWNotes">Dynamic Time Warping Notes</a></li></ul>
 LECTURE
-Lab 4: Dynamic Time Warping
+<a href = "Labs/Lab4_DTW">Lab 4: Dynamic Time Warping</a>
 
 
 LECTURE
