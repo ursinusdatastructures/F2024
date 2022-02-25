@@ -40,3 +40,6 @@ Homework 1 Due
 <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2022-02-18
+<a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Backtracing / Making Change Module</a> due before class
+
+2022-02-25
