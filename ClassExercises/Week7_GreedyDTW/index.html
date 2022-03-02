@@ -76,59 +76,59 @@
 												return np.sqrt(np.sum((u-v)**2))
 
 
-												def dtw_greedy(X, Y):
-													"""
-													Perform a greedy version of time warping between two time-ordered
-													point clouds
-													
-													Parameters
-													----------
-													X: ndarray(M, d)
-														First point cloud with M points in d dimensions
-													Y: ndarray(N, d)
-														Second point cloud with N points in d dimensions
-													
-													Return
-													------
-													path: Warping path list
-													"""
-													M = len(X)
-													N = len(Y)
-													path = [[0, 0]]
-													cost = 0
-													finished = False
-													while not finished:
-														[i, j] = path[-1]
-														minDist = np.inf
-														i2 = i
-														j2 = j
-														# Pick the best next valid move in a warping path
-														# out of [i+1, j], [i, j+1], or [i+1, j+1]
-														if i+1 < M:
-															d = distance(X[i+1], Y[j])
-															if d < minDist:
-																minDist = d
-																i2 = i+1
-																j2 = j
-														if j+1 < N:
-															d = distance(X[i], Y[j+1])
-															if d < minDist:
-																minDist = d
-																i2 = i
-																j2 = j+1
-														if i+1 < M and j+1 < N:
-															d = distance(X[i+1], Y[j+1])
-															if d < minDist:
-																minDist = d
-																i2 = i+1
-																j2 = j+1
-														i = i2
-														j = j2
-														path.append([i, j])
-														cost += minDist
-														if i == M-1 and j == N-1:
-															finished = True
-													return path, cost
+											def dtw_greedy(X, Y):
+												"""
+												Perform a greedy version of time warping between two time-ordered
+												point clouds
+												
+												Parameters
+												----------
+												X: ndarray(M, d)
+													First point cloud with M points in d dimensions
+												Y: ndarray(N, d)
+													Second point cloud with N points in d dimensions
+												
+												Return
+												------
+												path: Warping path list
+												"""
+												M = len(X)
+												N = len(Y)
+												path = [[0, 0]]
+												cost = 0
+												finished = False
+												while not finished:
+													[i, j] = path[-1]
+													minDist = np.inf
+													i2 = i
+													j2 = j
+													# Pick the best next valid move in a warping path
+													# out of [i+1, j], [i, j+1], or [i+1, j+1]
+													if i+1 < M:
+														d = distance(X[i+1], Y[j])
+														if d < minDist:
+															minDist = d
+															i2 = i+1
+															j2 = j
+													if j+1 < N:
+														d = distance(X[i], Y[j+1])
+														if d < minDist:
+															minDist = d
+															i2 = i
+															j2 = j+1
+													if i+1 < M and j+1 < N:
+														d = distance(X[i+1], Y[j+1])
+														if d < minDist:
+															minDist = d
+															i2 = i+1
+															j2 = j+1
+													i = i2
+													j = j2
+													path.append([i, j])
+													cost += minDist
+													if i == M-1 and j == N-1:
+														finished = True
+												return path, cost
 											
 										]]></script> 
 
