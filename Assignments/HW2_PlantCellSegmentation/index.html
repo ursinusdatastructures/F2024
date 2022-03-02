@@ -191,7 +191,7 @@
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											thresh = 0.8
+											thresh = 0.7
 											I = load_cells_grayscale("Cells.jpg")
 											labels = get_cell_labels(I, thresh)
 											# permute_labels shuffles around the labels to make it 
@@ -329,7 +329,7 @@
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											thresh = 0.8
+											thresh = 0.7
 											I = load_cells_grayscale("Cells.jpg")
 											labels = get_cell_labels(I, thresh)
 											cells_original = skimage.io.imread("Cells.jpg")
@@ -433,7 +433,7 @@
 											<ul>
 												<li>We ended up drawing the center of each cell, but as we mused about in the background, sometimes we want to know more about the shape of the cell.  Modify the code so that it draws the boundaries of cells instead of just their center.  The boundary should be expressed as a sequence of pixels in counter-clockwise order</li>
 												<li>
-													We had manually set a threshold of 0.8 in this assignment, but is there a way you can think of to autotune the threshold to get good cell segmentations?
+													We had manually set a threshold of 0.7 in this assignment, but is there a way you can think of to autotune the threshold to get good cell segmentations?
 												</li>
 												<li>
 													Are there images other than the cells image we looked at here that would work well with this algorithm?  Try them out and share your results!
@@ -524,6 +524,7 @@
 												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
 												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
 											</ul>
 										</li>
 										<li>
@@ -541,7 +542,7 @@
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
