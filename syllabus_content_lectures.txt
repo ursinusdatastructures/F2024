@@ -95,7 +95,7 @@ Insertion Sort, Bubble Sort, Kendall Tau Distance
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE
-Merge Sort
+Lab 5: Merge Sort
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul>
 LECTURE
