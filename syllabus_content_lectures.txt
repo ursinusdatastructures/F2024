@@ -91,7 +91,7 @@ Sorting, Selection, And Shuffling
 
 
 LECTURE
-Insertion Sort, Bubble Sort, Kendall Tau Distance
+Sorting Basics: Permutations, Insertion Sort, Bubble Sort (Asynchronous)
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE

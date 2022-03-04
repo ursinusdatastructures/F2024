@@ -49,6 +49,9 @@ Homework 1 Due
 <a href = "Assignments/HW3a_WarpingPaths">HW 3a: Warping Paths</a> and <a href = "Assignments/HW3_SeamCarving">HW3b: Seam Carving</a> Out
 
 2022-03-03
+<a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Sorting Basics Module</a> due
+
+2022-03-14
 HW 3a Due
 
 2022-03-18
