@@ -28,6 +28,3 @@
 [submodule "Assignments/HW3_SeamCarving/HW3_SeamCarving"]
 	path = Assignments/HW3_SeamCarving/HW3_SeamCarving
 	url = https://github.com/ursinus-cs371-s2022/HW3_SeamCarving.git
-[submodule "Assignments/HW3a_WarpingPaths/HW3a_WarpingPaths"]
-	path = Assignments/HW3a_WarpingPaths/HW3a_WarpingPaths
-	url = https://github.com/ursinus-cs371-s2022/HW3a_WarpingPaths.git
