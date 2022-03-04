@@ -41,71 +41,90 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Week 5: Hashing Table Theory</h2>
-										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+                                        <h2>Assignment 3a: Warping Paths And Delannoy Numbers (20 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										<h3></h3>
 									</header>
 
 									<div id="page-content">
-									
+											
+										<h2><a name = "overview">Overview / Logistics</a></h2>
+											<p>
+												The purpose of this assignment is to give you practice with recursions and stacks working together.  Recall that the number of possible warping paths, and the number of possible edit distance solutions, can be counted with <a href = "../../ClassExercises/DTWNotes/index.html#delannoy">Delannoy Numbers</a>.  Even though these numbers are huge as the input scales, it is still interesting to examine what all possible warping paths look like for smaller enough <b>M</b> and <b>N</b>.  Your task in this individual mini assignment will be to plot all possible warping paths for a particular <b>M</b> and <b>N</b> using recursion.
+											</p>
 
-									<h2>Background</h2>
-									<p>
-										<a href = "../Week2_Needle/">As we saw</a>, a <b>hash table</b> or <b>symbol table</b> is an efficient way to address the "needle in a haystack problem" where we want to find an object efficiently in a large set of objects.  
+	
+											<p>
+												<h3><a name = "learning">Learning Objectives</a></h3>
+												<ul>
+													<li>
+														Enumerate all possible solutions of dynamic time warping and string edit distance.
+													</li>
+													<li>
+														Use recursion and stacks in synergy to explore branching possibilities in solutions.
+													</li>
+												</ul>
+											</p>
+
+										<h2><a name = "programming">Programming Task</a></h2>
+
+										<p>
+											<a href = "https://github.com/ursinus-cs371-s2022/HW3a_WarpingPaths/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will edit <code>warppath.py</code> to recursively fill in a list of all possible warping paths of a particular size.  Code has been provided for you to plot all of them.  For example, here's where <b>M = 3, N = 5</b>
+										</p>
+
+										<img src = "3x5.gif">
+
+										<p>
+											And here's an example of <b>M = 4, N = 4</b>
+										</p>
+
+										<img src = "4x4.gif">
+
 										
-									</p>
-									
-									<p>
-										In implementation, a hash table consists of an array of linked lists.  Each linked list is referred to as a <b>bin</b> or <b>bucket</b>, and its index in the list is referred to as the <b>bin index</b>.  The "hash code" of an object under search tells us which bin index to visit to find it.  In practice, we need to fix <b>n</b> bins, so we take the bin index as <code>hash_code % n</code>.  For example, if we had the following hash codes which had a range from 0 to 11 below:
-									</p>
-
-									<img src = "../Week3_Hash/Week3_HashingExperiments/HarryPotter.svg">
-
-									<p>
-										but then we fixed the number of bins at <b>n = 7</b>, we'd have the following hash table
-									</p>
-
-									<img src = "../Week3_Hash/Week3_HashingExperiments/HarryPotterCondensed.svg">
-										
-									<p>
-										There is a clear space-time tradeoff with the design of hash tables.  If we use more bins, then the number of <b>collisions</b> (objects sharing the same bin) goes down, but we may also have empty bins.  Conversely, using too few bins leads towards a large number of collisions, but no bins are wasted.  Thus, we seek to analyze the time complexity of searching for objects under a hash table as we vary the number of bins and the total number of objects that are in the hash table.
-									</p>
-										
-									<p>
-										Of course, we can put all of our objects into a linked list, which will take worst case <b>O(N)</b> time.  We can also put them into a sorted list, which takes worst case <b>O(log(N))</b> time using binary search.  But as it turns out, we can do even better with hash maps.  Intuitively, narrowing down our search to a single bin is extremely helpful, though it will be a little more difficult to show theoretically.  In this class exercise, we will do some experiments to get a handle on this analysis
-									</p>
-
-									<h2>Balls/Bins Model</h2>
-									<p>
-										Often when we mathematically analyze things, it's helpful to "abstract away" our problem to a more concise problem that retains what we're trying to analyze.  In the case of hash tables, let's think about throwing <b>m</b> balls (which represent our objects) into <b>n</b> bins (which represent our hash table bins) randomly.  Below is an example of this with <b>m = 100, n = 10</b>:
-									</p>
-
-									<img src = "../Week3_Hash/Week3_HashingExperiments/Skewed.gif" width = 1000>
-
-									<p>
-										One thing that makes this a little less than ideal in practice is that the balls are skewed towards the center bins.  By contrast, and <b>ideal hash function</b> is analogous to distributing the balls <b>uniformly at random</b>.  This means that on any toss of a ball, we have an equal probability of <b>1/n</b> of going into any particular bin.  The animation below shows the same parameters <b>m = 100, n = 100</b> but thrown uniformly at random
-									</p>
-
-									<img src = "../Week3_Hash/Week3_HashingExperiments/Uniform.gif" width = 1000>
-
-									<p>
-										Notice how the balls are more evenly distributed.  One implication is that the maximum height over all bins is smaller, so the <b>worst case behavior</b> is improved.
-									</p>
+										<p>
+											If you've done this properly, the code will output these animated gifs to the same folder that you run it.  Note also how the number of paths matches the <a href = "../../ClassExercises/DTWNotes/index.html#delannoy">Delannoy Numbers</a> for these <b>M, N</b> pairs, which is another way you will know if your code is working properly.
+										</p>
 
 
+										<h2>Programming Tips</h2>
 
-                                    </div>
+										<p>
+											All paths start off with <code>[0, 0]</code> and end with <code>[M-1, N-1]</code>.  You should use recursive calls to branch off and consider the possible continuous steps <code>[+0, +1], [+1, +0], [+1, +1]</code> to the next pair in the warping path.  You may want to refer to the <a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video1">recursive backtracing code for edit distance</a>, which used a stack to help branch off for a bunch of paths.  The code here isn't exactly the same, but using push and pop to push on the next element before a recursive call and to pop it off before the next recursive call is the way to go.  Recall that you can use a python list as a stack; the <code>push</code> method is <code>append</code> for a list, but <code>pop</code> is still <code>pop</code>.  When you finish a path, you can copy it into a list of paths with the <code>copy()</code> method of the python list.
+										</p>
+
+										<p>
+											Be careful that you don't run out of bounds, or you may end up with infinite recursion!
+										</p>
+
+										<p>
+											The image below shows some pseudocode and a picture depicting how the recursion branches out and grows different paths.  Here <code>enumerate</code> is short for <code>plot_all_warppaths</code>.  The overlapping subproblems are quite visible even after only two branches, which is part of what motivates a dynamic programming solution.
+										</p>
+
+										<p>
+											<img src = "Recursion.svg" width=900>
+										</p>
+
+										<p>
+											<b>NOTE: </b> You may get the paths in a different order from the animation above, but as long as they are all unique and you have a number of paths equal to the respective <a href = "#delannoy">Delannoy number</a>, you're good to go.  You should also check several examples beyond the ones I've shown above and verify that you get the right number of paths.
+										</p>
+
+
+											
+                                    
+                                </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -238,4 +257,3 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
-</html>
