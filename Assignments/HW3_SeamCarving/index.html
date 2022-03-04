@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h2>Homework 3b: Seam Carving (50 Points)</h2>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+									
+
+
+										<div id="page-content">
+											<ul>
+												<li>
+													<a href = "#overview">Overview/Logistics</a>
+													<ul>
+														<li><a href = "#learning">Learning Objectives</a></li>
+													</ul>
+												</li>
+												<li>
+													<a href = "#background">Background</a>
+													<ul>
+														<li><a href = "#dynprog">Dynamic Programming Algorithm for Seam Carving</a></li>
+														<li><a href = "#rgb">RGB Images And Parallel Arrays</a></li>
+													</ul>
+												</li>
+												<li>
+													<a href = "#programming">Programming Tasks</a>
+													<ul>
+														<li><a href = "#seamcost">Compute Optimal Seam Cost (15 Points)</a></li>
+														<li><a href = "#seamcost">Backtrace Optimal Seam (15 Points)</a></li>
+														<li><a href = "#removeseam">Remove Seam (10 Points)</a></li>
+														<li><a href = "#erasure">Erasure (5 Points)</a></li>
+														<li><a href = "#artcontest">Mandatory Art Contest (5 Points)</a></li>
+													</ul>
+												</li>
+											</ul>
+	
+											<h2><a name = "overview">Overview / Logistics</a></h2>
+											<p>
+												The purpose of this assignment is to give you practice implementing a dynamic programming solution in the service of a cool application in image processing.
+											</p>
+
+											<p>
+												<a href = "https://github.com/ursinus-cs371-s2022/HW3_SeamCarving/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload <code>seams.py</code> to canvas, along with your <a href = "#artcontest">art contest</a> submission.  Also indicate the title of your art piece and your name/pseudonym to be displayed on the class web page.
+											</p>
+	
+											<p>
+												<h3><a name = "learning">Learning Objectives</a></h3>
+												<ul>
+													<li>
+														Use dynamic programming to devise and implement a polynomial time algorithm to a discrete optimization problem over an exponential solution space.
+													</li>
+													<li>
+														Work with 2D/3D arrays in python
+													</li>
+													<li>
+														Use parallel arrays in that hold different information about the same data
+													</li>
+													<li>
+														....
+													</li>
+													<li>
+														Profit??
+													</li>
+												</ul>
+											</p>
+											
+											<HR>
+											<h2><a name = "background">Background</a></h2>
+
+
+										<p>
+											Now that we're in the thick of dynamic programming solutions, let's look at an interesting problem in image processing. that benefits from this approach.  Let's suppose we have the following 530 row 800 column image of a living room
+										</p>
+
+										<p>
+											<img src = "HW3_SeamCarving/LivingRoom.jpg">
+										</p>
+
+										<p>
+											but we want to make it smaller in width down 500 columns.  One thing we could do is uniformly stretch across the x-axis to get the following:
+										</p>
+										<img src = "LivingRoomNaiveScale300.png">
+										<p>
+											However, this distorts features and throws off the aspect feature all over the image (everything is too thin).  Instead, what if we remove some of the whitespace and things we won't notice in the image to preserve some of the foreground objects first.  This is the goal of <b>seam carving</b>, and a result could look something like this:
+										</p>
+
+										<img src = "LivingRoom_300Seams.png">
+
+										<p>
+											We will now discuss a dynamic programming algorithm to do this, which is described in a <a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">paper</a> by Avidan and Shamir back in 2007.
+										</p>
+
+										<h3><a name = "dynprog">Dynamic Programming Algorithm for Seam Carving</a></h3>
+										<p>
+											At the core of seam carving is the notion of a <b>seam</b>, which is a connected sequence of pixels from top to bottom (it could also be from left to right, but we will focus on top to bottom without loss of generality).  There is one pixel in every row, and from row to row the pixels either move to the left by one column, stay where they are, or move to the right one column.  The image below shows an example seam that does a good job avoiding important objects in the picture
+										</p>
+
+										<img src = "LivingRoom_SeamExample.png" width=800>
+
+										<p>
+											To come up with a measure of what a good seam to choose is, we create something that <a href = "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.570.6321&rep=rep1&type=pdf">Avidan and Shamir</a> refer to as an <b>energy image</b>.  A pixel in an energy image should have a high value if we want to preserve it and a lower value if we are OK to remove it.  We then score a seam by summing up all of the values in the energy image that it passes through, and take the one with the lowest score.
+										</p>
+										
+										<p>
+											One simple energy function that works well is the so-called <b>gradient magnitude image</b>.  Basically, it's a measure of how strong the edges are in the image.  If we are in a region of uniform color, the values will be very small, but if we are at the boundary between objects, the values will be large.  This will keep seams away from the boundaries of objects in the image.  Below is an example of the gradient image on the living room scene
+										</p>
+
+										<img src = "Energy.png">
+
+										<p>
+											So the discrete optimization problem boils down to finding the seam whose sum through the gradient image is minimized.  One design difficulty is that there are <b>many</b> possible seams in the image.  In fact, for an <b>MxN</b> image, there are roughly 
+
+											\[ O(N3^{N-1}) \]
+
+											possible seams.  We're going to have to get creative to come up with an efficient algorithm to find the one with minimum cost.  For this, we can turn to dynamic programming. Let's consider a subproblem of computing a minimum cost seam that starts at the top of an image and ends at some pixel <code>[i, j]</code>.  For this, we need solutions to the subproblems <code>[i-1, j-1]</code>, <code>[i-1, j]</code>, and <code>[i, j+1]</code>, as shown in the image below
+										</p>
+										<img src = "SeamChoices.svg">
+
+										<p>
+											The cost of the optimal seam ending at <code>[i, j]</code> is the minimum cost of seams ending at these three possibilities, pluss the energy image value at <code>[i, j]</code>.  If we remember which of the three above subproblems was the optimal, we can backtrace to extract the full seam, <b>starting at the pixel at the bottom of the image which has the lowest cost</b>.
+										</p>
+									
+									<h3><a name = "rgb">RGB Images And Parallel Arrays</a></h3>
+									<p>
+										Even though we're computing seams using an <b>MxN</b> energy image, we want to remove the seam from the original image, which actually has 3 channels: red [0], green [1], and blue[2].  This means the original image is actually an <b>MxNx3</b> image, so you will have to remove the seam from 3 2D arrays.  To access channel <b>k</b> in row <b>i</b> and column <b>j</b> in an image <code>I</code>, the syntax is <code>I[i][j][k]</code>.  You can also access a slice of part of a row through all channels with the syntax <code>I[i, j1:j2, :]</code>
+									</p>
+
+									<HR>
+									<h2><a name = "programming">Programming Tasks</a></h2>
+									<p>
+										Below you will implement the dynamic programming algorithm to extract seams, and you will remove them from the image
+									</p>
+
+									<h2><a name = "seamcost">Compute Optimal Seam Cost (15 Points)</a></h2>
+
+									<p>
+										Your first step will be to write a method that takes in a gradient image and computes the cost of the minimum cost seam from top to bottom using dynamic programming.  Code to compute energy images has been provided to you in <code>seam.py</code>.  For example, if you run the following
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										img = plt.imread("LivingRoom.jpg") # This is a 530x800x3 array
+										G = grad_energy(img)
+									</script>
+
+									<p>
+										Then <code>G</code> will hold a 530x800 array of energy values.  If you've implemented the dynamic programming algorithm properly, then you will see that the optimal seam has a cost of around <code>135</code>
+									</p>
+
+									
+									<h2><a name = "seamcost">Backtrace Optimal Seam (15 Points)</a></h2>
+
+									<p>
+										Now that you've computed the cost of the optimal seam, modify your method to backtrace and return the optimal vertical seam.  If your images is <b>M x N</b>, then you should return a list with <b>M</b> row indices, since there is exactly one element of the seam for each row.
+									</p>
+
+									<p>
+										I've provided a method <code>plot_seam</code> to help you plot seams on top of the images.  Suppose your method for computing the seams is called <code>energy_img_seam</code>.  Then the following code
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										img = plt.imread("LivingRoom.jpg")
+										G = grad_energy(img)
+										seam = energy_img_seam(G)
+										plot_seam(img, seam)
+										plt.show()
+									</script>
+
+									<p>
+										Should plot the following image:
+									</p>
+
+									<img src = "LivingRoomSeam1.png">
+
+
+									<h2><a name = "removeseam">Remove Seam (10 Points)</a></h2>
+
+									<p>
+										Create a method <code>remove_seam</code> that takes as input an original <b>MxNx3</b> RGB image and a vertical seam of length <b>M</b>, and which returns a new <b>Mx(N-1)x3</b> image with the seam removed.  As an example, if you remove 100 seams from <a href = "HW3_SeamCarving/">LivingRoom.jpg</a>, you will see the following sequence of seams
+									</p>
+									
+
+									<img src = "LivingRoom_100Seams.gif">
+
+									<p>
+										Notice how the seams avoid the paintings and the objects on the floor to the extent possible
+									</p>
+
+
+									<h2><a name = "erasure">Erasure (5 Points)</a></h2>
+									<p>
+										One neat trick that we can play with seam carving is to force the energy image to be zero in some region.  This is referred to as a <b>mask</b>.  Consider the following example
+									</p>
+									
+									<table>
+										<tr>
+											<td><h4>Image</h4></td>
+											<td><h4>Mask</h4></td>
+										</tr>
+										<tr>
+											<td><img src = "HW3_SeamCarving/Handstand.png" width=400></td>
+											<td><img src = "HW3_SeamCarving/HandstandMask.png" width=400></td>
+										</tr>
+									</table>
+									<p>
+										Then we get the following sequence of seams
+									</p>
+
+									<p>
+										<img src = "HandStand_SeamCarve.gif" width=800>
+									</p>
+
+									<p>
+										Notice how the seams all go through the mask region.  Here's the final result
+									</p>
+
+									<p>
+										<img src = "HandstandResults.png">
+									</p>
+
+									<p>
+										It's like she was never there!  Sort of.  We'd still have to get rid of the shadow, but we can do that by removing horizontal seams also (if you're interested in a quick way to remove horizontal seams, you can switch the rows/columns with <a href = "https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html">np.moveaxis</a> and reuse the code you already have).
+									</p>
+
+									<p><b>Your Task:</b> Write a method that takes in two images: the original image and a mask image, and which returns the gradient image of the original image, set to be 0 in all of the places where the mask image is 0.  Then, pass along this masked energy image as normal to the method that finds seams, and verify that you can replicate the results on the above image.</p>
+
+									<h2><a name = "artcontest">Mandatory Art Contest (5 Points)</a></h2>
+									<p>
+										This algorithm does not work equally well on everything, but it can lead to some interesting "artistic" results.  For instance, let's suppose we remove 70 vertical seams in the image <a href = "HW3_SeamCarving/ctralie18.jpg">ctralie18.jpg</a> provided with the starter code (me at age 18).  Then this leads to the following sequence of seams
+									</p>
+
+									<p>
+										<img src = "Me.gif">
+									</p>
+
+									<p>
+										With the final result below
+									</p>
+
+									<p>
+										<img src = "Me70.png">
+									</p>
+
+									<p>
+										For an easy 5 points, create one such "blooper" with your code.  Or, alternatively, provide an example where seam carving seems to work very well.  In either case, you should include the original image, as well as a description of how many seams you took.
+									</p>
+
+
+
+                                    </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
+</html>

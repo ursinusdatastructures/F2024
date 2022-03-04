@@ -25,3 +25,6 @@
 [submodule "ClassExercises/Week5_EditBacktracing/Week5_EditBacktracing"]
 	path = ClassExercises/Week5_EditBacktracing/Week5_EditBacktracing
 	url = https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing.git
+[submodule "Assignments/HW3_SeamCarving/HW3_SeamCarving"]
+	path = Assignments/HW3_SeamCarving/HW3_SeamCarving
+	url = https://github.com/ursinus-cs371-s2022/HW3_SeamCarving.git
