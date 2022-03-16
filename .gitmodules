@@ -28,3 +28,6 @@
 [submodule "Assignments/HW3_SeamCarving/HW3_SeamCarving"]
 	path = Assignments/HW3_SeamCarving/HW3_SeamCarving
 	url = https://github.com/ursinus-cs371-s2022/HW3_SeamCarving.git
+[submodule "Labs/Lab5_MergeSort/Lab5_MergeSort"]
+	path = Labs/Lab5_MergeSort/Lab5_MergeSort
+	url = https://github.com/ursinus-cs371-s2022/Lab5_MergeSort.git

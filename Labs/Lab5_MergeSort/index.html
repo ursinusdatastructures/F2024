@@ -41,115 +41,225 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Week 7: Greedy Time Warping Pitfalls</h2>
+										<h2>Lab 5: Merge Sort And Brute Force Kendall Tau (6 Points)</h2>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
+									
+
+                                        <h2>Overview / Logistics</h2>
 										<p>
-											This is a brief note on the pitfalls of using a "greedy" approach for certain discrete optimization problems.  By greedy, I mean an algorithm that makes the best <b>local choice</b> as it's constructing a solution incrementally.  Unlike dynamic programming algorithms, which find the best <b>global solution</b> <i>even if some individual moves are expensive</i>, greedy solutions just follow the best step right in front of their nose.  We saw <a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video3">last week</a> that a greedy solution for making change sometimes leads to a bad global solution by boxing us into some bad choices later, and a similar thing happens with greedy approaches to time warping.  We will see later in the course that some greedy algorithms work, but we have to take care to prove that they yield optimal solutions.  So let's first examine a counter-example to the idea that a greedy solution will work for time warping.
+											The purpose of this lab is to get you practice with sorting algorithms and recursion.  It will also warm you up for the next assignment on fair voting and rank aggregation
 										</p>
 
 										<p>
-											Below is some code to implement greedy time warping
+											<a href = "https://github.com/ursinus-cs371-s2022/Lab5_MergeSort/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.  When you are finished, upload your <code>sort.py</code> and <code>kendalltau.py</code> files to canvas.
 										</p>
 
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											def distance(u, v):
-												"""
-												Compute the Euclidean distance between two points
-												in d dimensions
-												
-												Parameters
-												----------
-												u: ndarray(d)
-													First point
-												v: ndarray(d)
-													Second point
-												
-												Return
-												------
-												float: The distance between the two points
-												"""
-												u = np.array(u)
-												v = np.array(v)
-												return np.sqrt(np.sum((u-v)**2))
+										<h2>Part 1: Merge Sort (3 Points)</h2>
 
+										<p>
+											Fill in the <code>mergesort_rec</code> and <code>merge</code> methods in <code>sort.py</code> to complete a merge sort implementation  <a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video5">Click here</a> to review how this works.  A recursive call to merge sort puts the elements between indices <code>i1</code> and <code>i2</code> in order by breaking this range into half, sorting each half individually, and merging the sorted versions together.  Pictorially, the sorted region looks like this:
+										</p>
 
-											def dtw_greedy(X, Y):
-												"""
-												Perform a greedy version of time warping between two time-ordered
-												point clouds
-												
-												Parameters
-												----------
-												X: ndarray(M, d)
-													First point cloud with M points in d dimensions
-												Y: ndarray(N, d)
-													Second point cloud with N points in d dimensions
-												
-												Return
-												------
-												path: Warping path list
-												"""
-												M = len(X)
-												N = len(Y)
-												path = [[0, 0]]
-												cost = 0
-												finished = False
-												while not finished:
-													[i, j] = path[-1]
-													minDist = np.inf
-													i2 = i
-													j2 = j
-													# Pick the best next valid move in a warping path
-													# out of [i+1, j], [i, j+1], or [i+1, j+1]
-													if i+1 < M:
-														d = distance(X[i+1], Y[j])
-														if d < minDist:
-															minDist = d
-															i2 = i+1
-															j2 = j
-													if j+1 < N:
-														d = distance(X[i], Y[j+1])
-														if d < minDist:
-															minDist = d
-															i2 = i
-															j2 = j+1
-													if i+1 < M and j+1 < N:
-														d = distance(X[i+1], Y[j+1])
-														if d < minDist:
-															minDist = d
-															i2 = i+1
-															j2 = j+1
-													i = i2
-													j = j2
-													path.append([i, j])
-													cost += minDist
-													if i == M-1 and j == N-1:
-														finished = True
-												return path, cost
+										<img src = "../../ClassExercises/Week8_KendallTau/MergeVariables.svg" width="50%">
+
+										<p>
+											The recursive pseudocode for merge sort is as follows:
+										</p>
+
+										<ol>
+											<li>mid = (i1 + i2) // 2</li>
+											<li>recursively sort [i1, mid)</li>
+											<li>recursively sort [mid, i2]</li>
+											<li>Merge these two together</li>
+										</ol>
+
+										<p>
+											You will also have to consider a base case.  Then, if you implement the merge method and put this all together, you should end up with a sorted array.
+										</p>
+
+										<h2>Part 2: Brute Force Kendall Tau Distance (3 Points)</h2>
+										<p>
+											Read the notes <a href = "../../ClassExercises/Week8_KendallTau/">here</a> on the Kendall-Tau distance.  On the next homework, you will implement a clever algorithm that takes only <b>O(N)</b> space and <b>O(N log N)</b> time to compute this, but for now, you will implement a simple algorithm that is both <b>O(N<SUP>2</SUP>)</b> in time and space, but which follows directly from the definition of Kendall tau.  The algorithm should work as follows:
+										</p>
+
+										<ol>
+											<li>
+												For each ranking with a permutation of the numbers <b>0, 1, 2, ..., N-1</b>, create an <b>NxN</b> array, where element <code>[i][j]</code> in this array is a <b>+1</b> if <code>i</code> comes before <code>j</code> in the permutation, and a <b>-1</b> if <code>i</code> comes after <code>j</code> in the permutation.  Do this for all indices <code>j > i</code>, but you can leave the rest of the elements blank (this will form the "upper triangle" of the array).
+											<li>
+												Loop through the two arrays in parallel and count how many pairs they disagree on.
+											</li>
+										</ol>
+
+										<p>
+											For example, the ranking 
+										</p>
+
+										<p>
+											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
+										</p>
+
+										<p>
+											would have the table 
+										</p>
+
+										<table style="width:300px; color:rgb(6, 118, 211);">
+											<tr><td></td>
+											<td>0</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											</tr>
+											<tr><td>0</td>
+											<td></td>
+											<td>+1</td>
+											<td>+1</td>
+											<td>+1</td>
+											<td>+1</td>
+											</tr>
+											<tr><td>1</td>
+											<td></td>
+											<td></td>
+											<td>+1</td>
+											<td>-1</td>
+											<td>-1</td>
+											</tr>
+											<tr><td>2</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>-1</td>
+											<td>-1</td>
+											</tr>
+											<tr><td>3</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>-1</td>
+											</tr>
+											<tr><td>4</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											</tr>
+											</table>
 											
-										]]></script> 
-
 										<p>
-											Notice how this code is only <b>O(M+N)</b> instead of the <b>O(MN)</b> dynamic time warping algorithm with nested loops.  That's great, right?!  But uh oh, below is an example where this fails miserably:
+											And the ranking 
 										</p>
 
-										<img src = "Greedy.gif">
-
 										<p>
-											Actually, it starts out OK, but it makes some good local choices in the lower left that force it into a really bad position later on.  By contrast, as shown below, the optimal <b>dynamic</b> time warping solution takes a small hit by making a worse choice in the lower left, but it's able to keep on better track globally:
+											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
 										</p>
 
-										<img src = "Optimal.gif">
-
+										<table style="width:300px;color:rgb(182, 50, 50);">
+											<tr><td></td>
+											<td>0</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											</tr>
+											<tr><td>0</td>
+											<td></td>
+											<td>-1</td>
+											<td>-1</td>
+											<td>-1</td>
+											<td>-1</td>
+											</tr>
+											<tr><td>1</td>
+											<td></td>
+											<td></td>
+											<td>+1</td>
+											<td>+1</td>
+											<td>+1</td>
+											</tr>
+											<tr><td>2</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>+1</td>
+											<td>-1</td>
+											</tr>
+											<tr><td>3</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>-1</td>
+											</tr>
+											<tr><td>4</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											</tr>
+											</table>
+											
 										<p>
-											Below is the moment where the optimal dynamic programming solution takes a hit locally to lead to a much better path globally:
+											If we superimpose these on top of each other, we see they are different in the following places:
 										</p>
 
-										<img src = "GreedyHit.png">
 
+										<table style="width:300px;">
+											<tr><td></td>
+											<td>0</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											</tr>
+											<tr><td>0</td>
+											<td></td>
+											<td>*</td>
+											<td>*</td>
+											<td>*</td>
+											<td>*</td>
+											</tr>
+											<tr><td>1</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>*</td>
+											<td>*</td>
+											</tr>
+											<tr><td>2</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>*</td>
+											<td></td>
+											</tr>
+											<tr><td>3</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											</tr>
+											<tr><td>4</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											</tr>
+											</table>
+											
+
+											<p>
+												For a total of 7 discordant pairs.
+											</p>
+
+
+										
 
                                     </div>
 						</div>

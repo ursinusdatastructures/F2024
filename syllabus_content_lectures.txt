@@ -95,7 +95,7 @@ Sorting Basics: Permutations, Insertion Sort, Bubble Sort (Asynchronous)
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE
-Lab 5: Merge Sort
+<a href = "Labs/Lab5_MergeSort">Lab 5: Merge Sort And Brute Force Kendall Tau</a> 
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul>
 LECTURE
