@@ -41,139 +41,92 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>The Kendall Tau Distance between Two Rankings</h2>
-                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
-										<h3></h3>
+										<h2>Week 9: Radix Sort</h2>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
+									
+
+                                        <h2>Overview / Logistics</h2>
 										
-
 										<p>
-											The <b>Kendall Tau distance</b> is a way of comparing two rankings of items by counting the number of pairs that occur in a different order between the two rankings.  Each such pair is known as a "discordant pair," while pairs that agree are known as "concordant pairs."  For example, consider the following two rankings of the numbers 0-4:
+											<a href = "https://github.com/Ursinus-CS371-S2021/Week9_RadixSort/archive/refs/heads/main.zip">Click here</a> to download the starter code for today.
 										</p>
 
 										<p>
-											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
+											We saw in class (<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video4">click here</a> for a video) that the lower bound for any possible sort that's based on comparisons is <b>&Omega;(N log(N))</b>.  So if we have any hope of beating this, we have to think of a completely different strategy.  We'll start with a simple example first known as "counting sort"
 										</p>
 
-										versus
-
+										<HR>
+										<h2>Counting Sort</h2>
 										<p>
-											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
-										</p>
-
-										<p>
-											The image below shows that there are 7 discordant pairs out of all possible 10 pairs in this example.  Therefore, the Kendall-Tau distance between them is 7.
-										</p>
-
-
-										<img src = "KTExample.svg" width=600>
-
-										<p>
-											In general, if two rankings are the exact reverse of each other, the Kendall-Tau distance will be maximized, and if they are exactly the same, the Kendall-Tau distance will be 0.  For 5 items, the maximum distance is 10 (since there are 10 pairs in 5 items), so the above example reflects two rankings which are quite different. 
-										</p>
-
-										<h3><a name = "bgcomputing">Efficiently Computing The Kendall-Tau Distance</a></h3>
-										<p>
-											A brute force way to compute the Kendall-Tau distance to compare the order of every pair between the two rankings.  A ranked choice of <b>N</b> items, this is <b>N(N-1)/2</b> pairs to check, which is <b>O(N<SUP>2</SUP>)</b> checks.  We can do better, however, by exploiting sorting algorithms.  In algorithms jargon, we <b>reduce</b> the Kendall-Tau distance to comparison-based sorting.  Since we know such algorithms that run in worst-case <b>O(N log N)</b> time, we can beat the naive <b>O(N<SUP>2</SUP>)</b> scheme we get from following the definition too literally.  For example, let's again consider the following two rankings
-											
-										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
-										</p>
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
-										</p>
-										<p>
-											If we relabel the numbers so that the first list is strictly ascending, aka using the following relabelings
-										</p>
-										<ul>
-											<li>0 stays at 0</li>
-											<li>1 becomes 3</li>
-											<li>2 becomes 4</li>
-											<li>3 becomes 2</li>
-											<li>4 becomes 1</li>
-										</ul>
-										<p>
-											Then we get the following lists
-										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 1, 2, 3, 4</code>
-										</p>
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">3, 1, 4, 2, 0</code>
-										</p>
-
-										<p>
-											Then, we can simply count the number of <b>inversions</b> in the second list.  An inversion is a pair of numbers which is in the wrong order.  In the above example, we see that the pairs (3, 1), (3, 2), (3, 0), (1, 0), (4, 2), (4, 0), (2, 0).  There are 7 total inversions, which matches the Kendall-Tau distance we computed.
-											
-										</p>
-										<p>
-											Since inversions consist of pairs that are out of order, we can count them by putting the numbers in this list into order via a sorting routine.  One way is to simply count the number of swaps that <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video4">insertion sort</a> does to put that list in order.  This correctly computes the Kendall-Tau distance, but it takes <b>O(N<SUP>2</SUP>)</b> time in the worst case (since there can be up to N*(N-1)/2 discordant pairs if the lists are the reverse of each other).  The one advantage of this technique is that we're only using <b>O(N)</b> memory, whereas a more naive technique may have actually stored all <b>O(N<SUP>2</SUP>)</b> pairs in memory for one to check against the other.
-										</p>
-
-										<p>
-											If we think a little harder, though, we can also reach the <b>O(N log N)</b> computational worst case bound by shoehorning the <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Exercise1">merge sort algorithm</a>, which is <b>O(N log N)</b> in the worst case, into counting the number of inversions.  Let's now construct such an algorithm and prove its correctness as we go.  Somehow, we will have to count multiple inversions in a single step to avoid the <b>O(N<SUP>2</SUP>)</b> worst case.  Recall that the merge sort algorithm looks as follows (ignoring the base case for brevity)
+											What we can do is have a bunch of "bins" or "buckets," ordered in sequence in an array, where there's a bin for each possible value in our list.  We can then loop through the bins from left to right and extract the elements in order.  The code below shows this
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											mergesort(arr, i1, i2):
-											     mid = (i1+i2)//2
-												 # Recursively sort first half
-												 mergesort(arr, i1, mid) 
-												 # Recursively sort second half
-												 mergesort(arr, mid+1, i2) 
-												 # Merge the two halves together
-												 merge(arr, i1, mid, i2)]]>
-										</script> 
+											def countsort(arr):
+												"""
+												Sort an array using count sort, assuming, for simplicity,
+												that arr contains only nonnegative integers
+
+												Parameters
+												----------
+												arr: list
+													List of elements to sort
+												"""
+												if len(arr) > 0:
+													## Step 1: Find the maximum element of the array
+													max_elem = arr[0]
+													for i in range(1, len(arr)):
+														if arr[i] > max_elem:
+															max_elem = arr[i]
+													
+													## Step 2: Create an array of length max_elem+1 and 
+													## store the counts at each element
+													counts = [0]*(max_elem+1)
+													for x in arr:
+														counts[x] += 1
+
+													## Step 3: Loop through the counts array and put elements
+													## at their appropriate place 
+													idx = 0
+													for x, count in enumerate(counts):
+														for k in range(count):
+															arr[idx] = x
+															idx += 1]]></script> 
+										<p>
+											<h3>Question</h3> What is the time and space complexity of the above algorithm?
+										</p>
+
+										<HR>
+										<h2>Radix Sort</h2>
 
 										<p>
-											Up to this point, we've simply had merge sort operate on <code>arr</code> by reference, but we can also have it return the number of inversions it detected.  If we do this, we can recursively compute the inversions as
+											Depending on the maximum element, counting sort can be pretty inefficient.  But there's a way to use it as a subroutine in a more efficient sort.  If we're careful on how we implement counting sort, it can be done so that it's stable.  What we can do, then, is apply counting sort <b>one digit at a time</b>, from the right most digit left.  This is known as <b>Least Significant Digit Radix Sort</b>.  The table below shows this.
 										</p>
 
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											mergesort(arr, i1, i2):
-											     mid = (i1+i2)//2
-												 inv1 = mergesort(arr, i1, mid) 
-												 inv2 = mergesort(arr, mid+1, i2) 
-												 inv3 = merge(arr, i1, mid, i2)
-												 return inv1 + inv2 + inv3]]>
-										</script> 
+										<table><tr><td>Original Order</td><td>684</td><td>559</td><td>629</td><td>192</td><td>835</td><td>763</td><td>707</td><td>359</td><td>9</td><td>723</td><td>277</td><td>754</td><td>804</td><td>599</td><td>70</td><td>472</td><td>600</td><td>396</td><td>314</td><td>705</td></tr><tr><td>1s Place</td><td>7<b>0</b></td><td>60<b>0</b></td><td>19<b>2</b></td><td>47<b>2</b></td><td>76<b>3</b></td><td>72<b>3</b></td><td>68<b>4</b></td><td>75<b>4</b></td><td>80<b>4</b></td><td>31<b>4</b></td><td>83<b>5</b></td><td>70<b>5</b></td><td>39<b>6</b></td><td>70<b>7</b></td><td>27<b>7</b></td><td>55<b>9</b></td><td>62<b>9</b></td><td>35<b>9</b></td><td><b>9</b></td><td>59<b>9</b></td></tr><tr><td>10s Place</td><td>6<b>0</b>0</td><td>8<b>0</b>4</td><td>7<b>0</b>5</td><td>7<b>0</b>7</td><td>9</td><td>3<b>1</b>4</td><td>7<b>2</b>3</td><td>6<b>2</b>9</td><td>8<b>3</b>5</td><td>7<b>5</b>4</td><td>5<b>5</b>9</td><td>3<b>5</b>9</td><td>7<b>6</b>3</td><td><b>7</b>0</td><td>4<b>7</b>2</td><td>2<b>7</b>7</td><td>6<b>8</b>4</td><td>1<b>9</b>2</td><td>3<b>9</b>6</td><td>5<b>9</b>9</td></tr><tr><td>100s Place</td><td>9</td><td>70</td><td><b>1</b>92</td><td><b>2</b>77</td><td><b>3</b>14</td><td><b>3</b>59</td><td><b>3</b>96</td><td><b>4</b>72</td><td><b>5</b>59</td><td><b>5</b>99</td><td><b>6</b>00</td><td><b>6</b>29</td><td><b>6</b>84</td><td><b>7</b>05</td><td><b>7</b>07</td><td><b>7</b>23</td><td><b>7</b>54</td><td><b>7</b>63</td><td><b>8</b>04</td><td><b>8</b>35</td></tr></table>
 
-										<p>
-											In other words, we recursively count the inversions it took when we were sorting the first half and second half, and then we count the remaining inversions that occur when we merge them together.
-										</p>
-											Just as when we were doing the sorting, the challenge / meat of the work here becomes to count the inversions in the merge step.  Review the code you wrote in <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Exercise1">module 15</a>, and recall that the first loop in the merge step keeps track of an index <b>i</b> on the left half and an index <b>j</b> on the right half, as show below:
-										</p>
 
-										<img src = "MergeVariables.svg" width=400>
 
-										<p>
-											One possibility is that all of the elements on the left side are less than all of the elements on the right side, in which case everything is sorted already.  The first merge loop will then take all of the elements from the left, incrementing <b>i</b> until we get up to <b>mid</b>.  It follows, then, that picking an index from the left side should not add any inversions.  
-										</p>
-										<p>	
-											However, if at a particular iteration of this loop we take the element at index <b>j</b> on the right side as the next element that we merge in, then that means that <i><b>x[j]</b> is less than everything between index <b>i</b> and index <b>mid</b>, since the left hand side is sorted</i>.  Thus, if we pick <b>x[j]</b> to go next, then we must add <b>mid-i+1</b> to the total number of inversions resolved while merging.  And that's it!  The last two loops simply fill out items that are already in order that are left.
-										</p>
 
-                                </div>
+
+
+
+                                    </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -310,3 +263,4 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
+</html>
