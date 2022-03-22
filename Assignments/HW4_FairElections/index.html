@@ -1,0 +1,535 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 4: Fair Elections of Animals (40 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										<h3></h3>
+									</header>
+
+									<div id="page-content">
+										<ul>
+											<li>
+												<a href = "#overview">Overview/Logistics</a>
+												<ul>
+													<li><a href = "#learning">Learning Objectives</a></li>
+													<li><a href = "#submit">What To Submit</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href = "#programming">Programming Tasks</a>
+												<ul>
+													<li>
+														<a href = "#ranknum">Rankings As Numbers</a>
+													</li>
+													<li>
+														<a href = "#computekt">Computing The Kendall-Tau Distance (12 Points)</a>
+													</li>
+													<li>
+														<a href = "#diameter">Diameter (6 Points)</a>
+													</li>
+													<li>
+														<a href = "#avgrank">Average Rank Aggregation (7 Points)</a>
+													</li>
+													<li>
+														<a href = "#permutations">Brute Force Kemeny Optimal Ranking (15 Points)</a>
+													</li>
+												</ul>
+											</li>
+											
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											The purpose of this assignment is to give you practice with recursion and ideas from permutation theory/sorting in a fun application to which the whole class has contributed: <b>fair elections of animals</b>.  Each member of the class ranked a subset of animals that students volunteered on discord at the beginning of the course.  In this assignment, we will define mathematically an optimal "average ranking" that incorporates everyone's choices in a fair and even way, and we will explore computational issues that arise when we attempt to create algorithms to compute this average ranking.
+										</p>
+
+										<p>
+											Though this is a pretty whimsical application of election theory, hopefully it will get you thinking about some of the computational issues involved with ranked choice voting as people begin to reckon with the myriad issues we have with fairness in our current democractic system.  <a href = "https://time.com/5718941/ranked-choice-voting/">Click here</a> to read a recent Time article on this topic.
+										</p>
+
+										
+
+										<p>
+											<a href = "../../ClassExercises/Week8_KendallTau/">Click here</a> to review notes on Kendall-Tau and Kemeny Optimal rankings.
+										</p>
+										
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Implement an exact and an approximate version of the same algorithm.
+												</li>
+												<li>
+													Use recursion to implement both efficient and brute source solutions to problems.
+												</li>
+												<li>
+													Manage permutations, orders, and sorts in arrays.
+												</li>
+												<li>
+													Be introduced to the the notion of an algorithm reduction.
+												</li>
+                                            </ul>
+                                        </p>
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                  
+											Submit your file <code>ranking.py</code> to canvas
+
+                                        
+
+										
+										
+										<h2><a name = "programming">Programming Tasks</a></h2>
+
+										<p>
+											<a href = "https://github.com/ursinus-cs371-s2022/HW4_FairElections/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will be editing <code>ranking.py</code>.  Code has been provided for loading in the rankings and plotting a dimension reduced version of all pairwise ranking comparisons.
+										</p>
+
+										<h3><a name = "ranknum">Rankings As Numbers</a></h3>
+
+										<p>	
+											To keep things simple, if we have <b>N</b> items we're ranking, we'll label them from <b>0</b> to <b>N-1</b> in some arbitrary order.  In this assignment, we'll be using the animal votes that students cast, and we'll use the following labels (in alphabetical order of animal name):
+										</p>
+
+<pre>
+	0: Dog
+	1: Guinea pig
+	2: Hedgehog
+	3: Kangaroo
+	4: Owl
+	5: Penguin
+	6: Shark
+	7: Tiger
+</pre>	
+										<p>
+											So, for instance, if someone gives the rankings 
+										</p>
+										<ol>
+											<li>Owl</li>
+											<li>Hedgehog</li>
+											<li>Guinea pig</li>
+											<li>Kangaroo</li>
+											<li>Penguin</li>
+											<li>Tiger</li>
+											<li>Shark</li>
+											<li>Dog</li>
+										</ol>
+
+										<p>
+											then this would correspond to the list <code>4, 2, 1, 3, 5, 7, 6, 0</code>.  I have intentionally kept the list small so we can explore all permutations of this list in some later tasks.
+										</p>
+
+
+										<p>
+											In the starter code, you will see a method called <code>load_rankings</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 animal strings in alphabetical order.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
+										</p>
+										
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											animals = ['Dog', 'Guinea pig', 'Hedgehog', 'Kangaroo', 'Owl', 'Penguin', 'Shark', 'Tiger']
+											raters = {
+												'Josh K': [4, 5, 0, 3, 6, 7, 2, 1], 
+												'Thomas B': [6, 0, 1, 7, 2, 5, 3, 4], 
+												'Rach G': [7, 0, 6, 4, 2, 5, 3, 1], 
+												'Matt W': [2, 0, 5, 7, 3, 4, 1, 6], 
+												'Dylan F': [0, 1, 5, 4, 6, 2, 3, 7], 
+												'Sean S': [3, 5, 7, 6, 4, 2, 1, 0], 
+												'Henry W': [2, 6, 4, 5, 0, 7, 3, 1], 
+												'Vincent H': [5, 0, 6, 2, 1, 7, 3, 4], 
+												'Michael E': [7, 4, 3, 5, 6, 0, 2, 1], 
+												'Will P.': [7, 5, 2, 1, 0, 4, 6, 3], 
+												'Michael T': [4, 3, 7, 0, 1, 6, 5, 2], 
+												'Kevin H': [0, 3, 5, 7, 4, 6, 2, 1], 
+												'Jose A': [2, 0, 5, 1, 4, 7, 3, 6], 
+												'Josh B': [7, 0, 6, 3, 5, 1, 2, 4], 
+												'Brenden R': [6, 0, 5, 2, 7, 4, 3, 1], 
+												'Will O': [0, 5, 3, 7, 6, 2, 4, 1], 
+												'Jeremy M': [0, 5, 2, 4, 1, 7, 3, 6], 
+												'Rich B': [5, 2, 0, 3, 1, 4, 7, 6], 
+												'Arthur A': [2, 0, 1, 3, 5, 4, 7, 6], 
+												'Michael L': [1, 5, 0, 2, 3, 7, 6, 4], 
+												'David K': [0, 5, 7, 6, 3, 1, 2, 4], 
+												'Nikolai L': [1, 2, 6, 4, 5, 7, 0, 3], 
+												'Matt Q': [2, 0, 3, 7, 5, 6, 4, 1], 
+												'Matt P': [5, 0, 6, 7, 3, 4, 1, 2]}]]>
+										</script> 
+
+											
+
+
+
+										<h3><a name = "computekt">Computing The Kendall-Tau Distance (12 Points)</a></h3>
+										<p>
+											Fill in the method <code>kendall_tau</code> to compute the Kendall-Tau distance between two rankings.  <b>For N rankings, your method should run in O(N log N) time and use O(N) space</b>.  Review the technique <a href = "../../ClassExercises/Week8_KendallTau/index.html#efficient">here</a> for how to do this using merge sort
+										</p>
+
+										<p>
+											To test this on the example in the background, you can write the code
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											print(kendall_tau([0, 4, 3, 1, 2], [1, 4, 2, 3, 0]))
+											]]>
+										</script> 
+
+										<p>
+											If this works, you should see an output of 7, as explained in the background.  For a more comprehensive example, you can run the method <code>plot_mds_distances</code>, which will use a method known as <a href = "https://www.stat.pitt.edu/sungkyu/course/2221Fall13/lec8_mds_combined.pdf">multidimensional scaling (MDS)</a> to come up with a set of 2D coordinates that best preserve the Kendall-Tau distances between every pair of raters (though it will usually introduce some distortion, for a similar reason to the fact that it's impossible to create a square map of the earth without stretching some areas).  If you run the code below
+
+											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+												plt.figure(figsize=(8, 8))
+												animals, raters = load_rankings()
+												plot_mds_distances(raters, 1)
+												plt.show()]]>
+											</script> 
+
+											You should see the following plot
+										</p>
+
+										<p>
+											<img src = "MDSSimilarity.svg" width=600>
+										</p>
+
+										<p>
+											You can study this plot to choose your movie buddies who are close to you in your preferences!
+										</p>
+
+										
+
+										<h3><a name = "diameter">Diameter (6 Points)</a></h3>
+
+										<p>
+											As hinted by the MDS example above, the The Kendall-Tau distance is truly a distance, in the sense that it is a <a href = "https://en.wikipedia.org/wiki/Metric_space#Definition">metric space</a>.  Even though we can't perfectly visualize it spatially without error, we can still reason geometrically about it with numerics.  For instance, we can search for the two rankings which are closest to each other in this space.  In this case, those would be 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											"Kevin H": [0, 3, 5, 7, 4, 6, 2, 1]
+											"Will O" : [0, 5, 3, 7, 6, 2, 4, 1]
+										</script> 
+
+										who are at a distance of 3 from each other; they agree except for the the pairs <code>(3, 5), (4, 6), (2, 4)</code>.  We will also find this is true for Jose A and Jeremy M, who agree except for <code>(2, 0), (2, 5), (1, 4)</code>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											"Jose A":    [2, 0, 5, 1, 4, 7, 3, 6]
+											"Jeremy M":  [0, 5, 2, 4, 1, 7, 3, 6]
+										</script> 
+
+										<p>
+											Actually, we see here some of the distortion that's introduced in the MDS plot above, because, for instance, Kevin and Will appear to be the same distance apart as Rach G and Josh B, but the latter two are actually 8 apart.
+										</p>
+
+										<p>
+											Aside from closest rankings, we can also define the opposite notion of the two ratings that are furthest apart from each other, which we refer to as the "diameter."  
+										</p>
+
+										<p>
+											<h4>Your Task</h4> Write a method that takes in the rankings dictionary, and which prints out the two people who achieve the diameter, along with their rankings and the Kendall-Tau distance between them.  For <b>M</b> rankings and <b>N</b> items, your method should run in <b>O(M<SUP>2</SUP> N log(N))</b> time. 
+										</p>
+
+										<p>
+											If this worked properly, you should see that Kevin H and Nikolai L are the most different, with 26 pairwise disagreements (in fact, they are nearly exact reverses of each other except for two pairs!).  
+										</p>
+
+										<p>
+											<b>Hint: </b> You might take inspiration by studying the code in <code>plot_mds_distances</code>, which does some similar preprocessing to the code you will have to write.
+										</p>
+
+										<h3><a name = "avgrank">Average Rank Aggregation (7 Points)</a></h3>
+
+										<p>
+											We discussed the <a href = "../../ClassExercises/Week8_KendallTau/index.html#bgkemeny">Kemeny optimal rank aggregation</a>, but there is a simpler technique we can try first to incorporate everyone's votes.  We can think of every ranking as giving rise to a place number associated to each index.  For example, if a number shows up at index 6 in the a permutation, we give it a place of 7 (since we're zero-indexed).  We then simply average these place numbers to get a final average place.  For example, in our rankings, we get the following averages:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											Dog (0): 2.9
+											Guinea pig (1): 5.6
+											Hedgehog (2): 4.4
+											Kangaroo (3): 5.1
+											Owl (4): 5.3
+											Penguin (5): 3.3
+											Shark (6): 5.0
+											Tiger (7): 4.4
+										</script> 
+
+										which leads to these results in the election if we sort in ascending order of average place number
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											1 : Dog
+											2 : Penguin
+											3 : Hedgehog
+											4 : Tiger
+											5 : Shark
+											6 : Kangaroo
+											7 : Owl
+											8 : Guinea pig
+
+										</script> 
+
+										<p>
+											Expressed as a list, this corresponds to the permutation <code>[0 5 2 7 6 3 4 1]</code>
+										</p>
+
+										<h4>Your Task</h4>
+										<p> 
+											Create a method <code>get_average_rankings</code> that accepts the parameters <code>animals</code> and <code>raters</code> and which prints out the animals in the order of their average aggregated rankings.  For <b>N</b> choices and <b>M</b> rankings, your method should run in <b>O(MN)</b> time.  If you've computed averages at each index, you can simply use the <a href = "https://numpy.org/doc/stable/reference/generated/numpy.argsort.html">np.argsort</a> method to figure out their order, rather than using your own sorting method.
+										</p>
+
+
+										<h3><a name = "permutations">Brute Force Kemeny Optimal Ranking (15 Points)</a></h3>
+										<p>
+											The above answer seemed to match peoples' preferences, but what about the Kemeny Optimal rank? (<a href = "../../ClassExercises/Week8_KendallTau/index.html#bgkemeny">click here</a> to review notes on this).  Unfortunately, there is no known way to compute this efficiently.  But we can create a brute force scheme to recursively examine every permutation and find the one which minimizes the sum of the Kendall-Tau distances to <b>all</b> rankings.  In this case, this is doable, because we only have 8 alternatives, and <b>8! = 40320</b>, so we can just crunch through this number of possibilities (though many more animals than this would be intractable). 
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Create a recursive method which computes the Kemeny Optimal ranking by trying all possible permutations.  You can use the <a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">permutation enumeration code from the sorting module</a> as a starting point.  You will probably want to pass a python dictionary by reference recursively that stores the minimum cost seen so far, as well as a copy of the permutation that achieved that cost (you can use list.copy() to copy it over).
+										</p>
+
+										<p>
+											If this works correctly, you should get the following permutation as the one that minimizes the sum of Kendall-Tau distances:
+										</p>
+										<p>
+											<code>[1, 4, 0, 6, 7, 5, 2, 3]</code>
+										</p>
+
+										<p>
+											Let's look at what characters these are and compare them side by side with the average ranking
+										</p>
+
+										<table>
+											<tr>
+												<td>Average Raking</td>
+												<td>Kemeny Optimal</td>
+											</tr>
+											<tr>
+												<td>
+													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+														1 : Dog
+														2 : Penguin
+														3 : Hedgehog
+														4 : Tiger
+														5 : Shark
+														6 : Kangaroo
+														7 : Owl
+														8 : Guinea pig
+
+													</script> 
+												</td>
+												<td>
+													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+														1 : Dog
+														2 : Penguin
+														3 : Tiger
+														4 : Shark
+														5 : Hedgehog
+														6 : Kangaroo
+														7 : Owl
+														8 : Guinea pig
+													</script> 
+												</td>
+											</tr>
+										</table>
+										
+
+										
+										
+
+										<p>
+											Interestingly, the trends are the same, but tiger, shark, and hedgehog are shuffled between the two.
+											<ol>
+												
+											</ol>
+											It's encouraging that they are so similar, but how do we know that the Kemeny optimal one is better?  Well, if we examine the sum of the Kendall-Tau distances of the average ranking to all rankings, we see that it is <b>238</b>.  But the Kemeny optimal one has a sum of Kendall-Tau distances of <b>234</b>.  Therefore, though it is very close, the <b>Kemeny optimal rank has four fewer disagreements with everyone in the class than the average ranking</b>.  And that's all there is to it!
+										</p>
+
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
