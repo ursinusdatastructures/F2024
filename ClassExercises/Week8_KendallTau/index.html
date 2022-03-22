@@ -41,14 +41,20 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>The Kendall Tau Distance between Two Rankings</h2>
+                                        <h2>The Kendall Tau Distance between Two Rankings, And Kemeny-Optimal Rank Aggregation</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										<h3></h3>
 									</header>
 
 									<div id="page-content">
+										<h3>Rankings</h3>
+										<p>
+											Our goal below is to build to an algorithm that computes an "average ranking" that makes sense from a set of rankings.  Such algorithms can be thought of as addressing a final order in ranked choice voting elections. 
+										</p>
 										
 
+
+										<h3><a name = "kendalltaudef">Kendall-Tau Distance</a></h3>
 										<p>
 											The <b>Kendall Tau distance</b> is a way of comparing two rankings of items by counting the number of pairs that occur in a different order between the two rankings.  Each such pair is known as a "discordant pair," while pairs that agree are known as "concordant pairs."  For example, consider the following two rankings of the numbers 0-4:
 										</p>
@@ -74,7 +80,11 @@
 											In general, if two rankings are the exact reverse of each other, the Kendall-Tau distance will be maximized, and if they are exactly the same, the Kendall-Tau distance will be 0.  For 5 items, the maximum distance is 10 (since there are 10 pairs in 5 items), so the above example reflects two rankings which are quite different. 
 										</p>
 
-										<h3><a name = "bgcomputing">Efficiently Computing The Kendall-Tau Distance</a></h3>
+										<p>
+											For simplicity, we'll consider ranking the numbers from <b>0, 1, ..., N-1</b>, since we could number <b>N</b> items each set in an arbitrary but consistent way.
+										</p>
+
+										<h3><a name = "efficient">Efficiently Computing The Kendall-Tau Distance</a></h3>
 										<p>
 											A brute force way to compute the Kendall-Tau distance to compare the order of every pair between the two rankings.  A ranked choice of <b>N</b> items, this is <b>N(N-1)/2</b> pairs to check, which is <b>O(N<SUP>2</SUP>)</b> checks.  We can do better, however, by exploiting sorting algorithms.  In algorithms jargon, we <b>reduce</b> the Kendall-Tau distance to comparison-based sorting.  Since we know such algorithms that run in worst-case <b>O(N log N)</b> time, we can beat the naive <b>O(N<SUP>2</SUP>)</b> scheme we get from following the definition too literally.  For example, let's again consider the following two rankings
 											
@@ -160,6 +170,14 @@
 											However, if at a particular iteration of this loop we take the element at index <b>j</b> on the right side as the next element that we merge in, then that means that <i><b>x[j]</b> is less than everything between index <b>i</b> and index <b>mid</b>, since the left hand side is sorted</i>.  Thus, if we pick <b>x[j]</b> to go next, then we must add <b>mid-i+1</b> to the total number of inversions resolved while merging.  And that's it!  The last two loops simply fill out items that are already in order that are left.
 										</p>
 
+										<h3><a name = "bgkemeny">Kemeny Optimal Rank Aggregation</a></h3>
+										<p>
+											Now that we have developed the Kendall-Tau distance to measure the dissimilarity of a pair of rankings, we can define a <a href = "https://en.wikipedia.org/wiki/Kemeny%E2%80%93Young_method">Kemeny Optimal Ranking</a> over a set of <b>M</b> rankings to complete the election.  A Kemeny Optimal rank has the very nice property of being a <a href = "https://en.wikipedia.org/wiki/Condorcet_method">Condorcet method</a>, which means that the candidate who gets the first spot would always win the majority vote in a head-to-head election against any of the other candidates, based on the rankings that were submitted.
+										</p>
+										<p>	
+											A Kemeny Optimal ranking minimizes the sum of the Kendall-Tau distances to all <b>M</b> rankings.  In other words, <i>it is a ranking which minimizes pairwise disagreements between all people who voted</i>.  As it turns out, it is <a href = "https://cstheory.stackexchange.com/questions/5995/efficient-verification-of-kemeny-optimal-rankings">provably hard</a> to compute this distance exactly, but you will work on a brute force recursive algorithm to achieve this, and to compare it to more efficient, approximate answers.
+										</p>
+
                                 </div>
 						</div>
 					</div>
@@ -212,6 +230,7 @@
 												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
 												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
 												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
 											</ul>
 										</li>
 										<li>

@@ -61,3 +61,9 @@ HW 3b Due
 <a href = "Labs/Lab5_MergeSort">Lab 5</a> Due
 
 2022-03-21
+<HR><a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Animals</a> Out
+
+2022-03-21
+HW4 Due
+
+2022-03-31
