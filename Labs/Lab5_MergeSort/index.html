@@ -82,19 +82,11 @@
 
 										<h2>Part 2: Brute Force Kendall Tau Distance (3 Points)</h2>
 										<p>
-											Read the notes <a href = "../../ClassExercises/Week8_KendallTau/">here</a> on the Kendall-Tau distance.  On the next homework, you will implement a clever algorithm that takes only <b>O(N)</b> space and <b>O(N log N)</b> time to compute this, but for now, you will implement a simple algorithm that is both <b>O(N<SUP>2</SUP>)</b> in time and space, but which follows directly from the definition of Kendall tau.  The algorithm should work as follows:
+											Read the notes <a href = "../../ClassExercises/Week8_KendallTau/">here</a> on the Kendall-Tau distance.  On the next homework, you will implement a clever algorithm that takes only <b>O(N log N)</b> time to compute this, but for now, you will implement a simple algorithm that takes <b>O(N<SUP>2</SUP>)</b> time, but which follows directly from the definition of Kendall tau.
 										</p>
 
-										<ol>
-											<li>
-												For each ranking with a permutation of the numbers <b>0, 1, 2, ..., N-1</b>, create an <b>NxN</b> array, where element <code>[i][j]</code> in this array is a <b>+1</b> if <code>i</code> comes before <code>j</code> in the permutation, and a <b>-1</b> if <code>i</code> comes after <code>j</code> in the permutation.  Do this for all indices <code>j > i</code>, but you can leave the rest of the elements blank (this will form the "upper triangle" of the array).
-											<li>
-												Loop through the two arrays in parallel and count how many pairs they disagree on.
-											</li>
-										</ol>
-
 										<p>
-											For example, the ranking 
+											To see how the algorithm works, let's consider the following two permutations:
 										</p>
 
 										<p>
@@ -102,160 +94,131 @@
 										</p>
 
 										<p>
-											would have the table 
-										</p>
-
-										<table style="width:300px; color:rgb(6, 118, 211);">
-											<tr><td></td>
-											<td>0</td>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-											</tr>
-											<tr><td>0</td>
-											<td></td>
-											<td>+1</td>
-											<td>+1</td>
-											<td>+1</td>
-											<td>+1</td>
-											</tr>
-											<tr><td>1</td>
-											<td></td>
-											<td></td>
-											<td>+1</td>
-											<td>-1</td>
-											<td>-1</td>
-											</tr>
-											<tr><td>2</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>-1</td>
-											<td>-1</td>
-											</tr>
-											<tr><td>3</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>-1</td>
-											</tr>
-											<tr><td>4</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											</tr>
-											</table>
-											
-										<p>
-											And the ranking 
-										</p>
-
-										<p>
 											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
 										</p>
 
-										<table style="width:300px;color:rgb(182, 50, 50);">
-											<tr><td></td>
-											<td>0</td>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-											</tr>
-											<tr><td>0</td>
-											<td></td>
-											<td>-1</td>
-											<td>-1</td>
-											<td>-1</td>
-											<td>-1</td>
-											</tr>
-											<tr><td>1</td>
-											<td></td>
-											<td></td>
-											<td>+1</td>
-											<td>+1</td>
-											<td>+1</td>
-											</tr>
-											<tr><td>2</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>+1</td>
-											<td>-1</td>
-											</tr>
-											<tr><td>3</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>-1</td>
-											</tr>
-											<tr><td>4</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											</tr>
-											</table>
-											
 										<p>
-											If we superimpose these on top of each other, we see they are different in the following places:
+											The first thing we should do is convert these into rankings, or arrays that record the place that each element shows up in.  So, for example, in the first permutation, element 4 has a ranking of 1, and element 2 has a ranking of 4.  So we'd have the following rankings for each permutation
 										</p>
 
+										<table style="width:200px;">
+											<Tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></Tr>
+											<Tr style="color:rgb(6, 118, 211)">
+												<td>
+													0
+												</td>
+												<td>3</td>
+												<td>4</td>
+												<td>2</td>
+												<td>1</td>
+											</Tr>
+											<Tr style="color:rgb(182, 50, 50)">
+												<td>
+													4
+												</td>
+												<td>0</td>
+												<td>2</td>
+												<td>3</td>
+												<td>1</td>
+											</Tr>
+										</table>
 
-										<table style="width:300px;">
-											<tr><td></td>
-											<td>0</td>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
+										<p>
+											Now we just need to check every pair of rankings.
+										</p>
+
+										<table style="width:600px;">
+											<tr>
+												<td>Number 1</td>
+												<td>Number 2</td>
+												<td>
+													<span style="color:rgb(6, 118, 211);">Rank #1 > Rank #2</span>
+												</td>
+												<td>
+													<span style="color:rgb(182, 50, 50);">Rank #1 > Rank #2</span>
+												</td>
+												<td>
+													Disagreement?
+												</td>
 											</tr>
-											<tr><td>0</td>
-											<td></td>
-											<td>*</td>
-											<td>*</td>
-											<td>*</td>
-											<td>*</td>
-											</tr>
-											<tr><td>1</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>*</td>
-											<td>*</td>
-											</tr>
-											<tr><td>2</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td>*</td>
-											<td></td>
-											</tr>
-											<tr><td>3</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											</tr>
-											<tr><td>4</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											</tr>
-											</table>
+											<Tr>
+												<td>0</td><td>1</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
+													<span style="color:rgb(182, 50, 50);">Yes</span>
+												</td>
+												<td>*</td>
+											</Tr>
+											
+											<Tr>
+												<td>0</td><td>2</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
+													<span style="color:rgb(182, 50, 50);">Yes</span>
+												</td>
+												<td>*</td>
+												
+												<Tr>
+													<td>0</td><td>3</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
+														<span style="color:rgb(182, 50, 50);">Yes</span>
+													</td>
+													<td>*</td>
+												</Tr>
+
+												<Tr>
+													<td>0</td><td>4</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
+														<span style="color:rgb(182, 50, 50);">Yes</span>
+													</td>
+													<td>*</td>
+												</Tr>
+
+												<Tr>
+													<td>1</td><td>2</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
+														<span style="color:rgb(182, 50, 50);">No</span>
+													</td>
+													<td></td>
+												</Tr>
+
+												<Tr>
+													<td>1</td><td>3</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
+														<span style="color:rgb(182, 50, 50);">No</span>
+													</td>
+													<td>*</td>
+												</Tr>
+
+												<Tr>
+													<td>1</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
+														<span style="color:rgb(182, 50, 50);">No</span>
+													</td>
+													<td>*</td>
+												</Tr>
+
+												<Tr>
+													<td>2</td><td>3</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
+														<span style="color:rgb(182, 50, 50);">No</span>
+													</td>
+													<td>*</td>
+												</Tr>
+
+												<Tr>
+													<td>2</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
+														<span style="color:rgb(182, 50, 50);">Yes</span>
+													</td>
+													<td></td>
+												</Tr>
+
+												<Tr>
+													<td>3</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
+														<span style="color:rgb(182, 50, 50);">Yes</span>
+													</td>
+													<td></td>
+												</Tr>
+											</Tr>
+										</table>
+
+
+
+
 											
 
 											<p>
-												For a total of 7 discordant pairs.
+												For a total of 7 discordant pairs if we count the stars where they disagree
 											</p>
 
 

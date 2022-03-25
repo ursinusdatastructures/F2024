@@ -34,3 +34,6 @@
 [submodule "ClassExercises/Week9_RadixSort/Week9_RadixSort"]
 	path = ClassExercises/Week9_RadixSort/Week9_RadixSort
 	url = https://github.com/ursinus-cs371-s2022/Week9_RadixSort.git
+[submodule "ClassExercises/Week9_SortingNetworks/Week9_SortingNetworks"]
+	path = ClassExercises/Week9_SortingNetworks/Week9_SortingNetworks
+	url = https://github.com/ursinus-cs371-s2022/Week9_SortingNetworks.git
