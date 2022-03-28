@@ -163,7 +163,7 @@
 
 
 										<p>
-											In the starter code, you will see a method called <code>load_rankings</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 animal strings in alphabetical order.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
+											In the starter code, you will see a method called <code>load_permutations</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 animal strings in alphabetical order.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
 										</p>
 										
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
@@ -218,7 +218,7 @@
 
 											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 												plt.figure(figsize=(8, 8))
-												animals, raters = load_rankings()
+												animals, raters = load_permutations()
 												plot_mds_distances(raters, 1)
 												plt.show()]]>
 											</script> 

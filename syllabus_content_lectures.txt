@@ -111,13 +111,13 @@ Finish Radix Sort, Fisher-Yates Shuffling
 
 
 LECTURE
-Parallel Algorithms And Bitonic Sort
+Parallel Sorting Networks And Bitonic Sort
 
 
 LECTURE
-Linear Time Selection
+Finish Bitonic Sort, Linear Time Selection
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li><li><a href = "https://rcoh.me/posts/linear-time-median-finding/">Russel Cohen's Notes on Linear Time Median Finding</a></li></ul>
 SECTION
 Tree Data Structures And Algorithms
 
