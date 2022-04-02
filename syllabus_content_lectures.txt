@@ -27,7 +27,7 @@ Begin Asymptotics: Big-O
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li></ul>
 LECTURE
-Continue asymptotics: Little o, Big Gamma, Little Gamma
+Continue asymptotics: Little o, Big Omega, Little Omega
 
 
 LECTURE
@@ -123,13 +123,25 @@ Tree Data Structures And Algorithms
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 16</li></ul>
 LECTURE
-Binary Trees: Preorder, Inorder, Postorder / Drawing Binary Trees
+Binary Trees: Preorder/Inorder/Postorder, Drawing Binary Trees
 
 
 LECTURE
-Binary search trees: Search/Addition/Removal
+Binary search trees: Search, Addition
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
+LECTURE
+Binary search trees: Removal
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
+LECTURE
+Minimum Spanning Trees, Kruskal's Algorithm
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
+LECTURE
+Prim's Algorithm, Automatic Mazes
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.5</li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul>
 LECTURE
 Tree Rotations
 
@@ -139,10 +151,6 @@ Balanced Binary Search Trees
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
-Q&A Session, Tree Rotations Review
-
-
-LECTURE
 Huffman Trees / Huffman Encoding
 
 
@@ -150,24 +158,16 @@ LECTURE
 Priority Queues / Binary Heaps
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
-LECTURE
-Tries
-
-
 SECTION
 Graph Data Structures And Algorithms
 
 
 LECTURE
-Graph Data Structures, Minimum Spanning Trees
+Graph Data Structures, Breadth-First Search
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 20</li></ul>
-LECTURE
-Complexity of Minimium Spanning Trees, Automatic Mazes
 
-<ul><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul>
 LECTURE
-Breadth-First Search, Depth-First Search, Euclidean Traveling Salesperson
+Depth-First Search, Euclidean Traveling Salesperson
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
 LECTURE
