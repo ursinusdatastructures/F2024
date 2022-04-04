@@ -57,6 +57,10 @@
 											<a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval/archive/refs/heads/main.zip">Click here</a> to download the starter notebook for this lab.  If you are using Google colab, the notebook is hosted at <a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval">https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval</a>.  Either way, you will need to use jupyter to create the tree plots to check your work.
 										</p>
 
+										<p>
+											When you are finished, upload your <code>Trees.ipynb</code> notebook to canvas.
+										</p>
+
 										<h2>Part 1: A Slow Remove</h2>
 										<p>
 											One naive algorithm to remove nodes from a tree is to take out a node and add all of its children to the tree again from scratch.  For example, let's suppose we started with the following tree, which is what's constructed in the lab by default:
@@ -65,7 +69,7 @@
 										<img src = "StartTree.svg">
 
 										<p>
-											And let's suppose we wanted to remove 11 from the subtree.  Then we would set 16's left child to be <code>None</code>, and then we would add nodes 12, 13, 14, and 15 back to the tree.  Below is an animation of doing this and adding them back in the shuffled order 14, 13, 12, 15, to keep the tree balanced (you can use <code><a href = "https://numpy.org/doc/stable/reference/random/generated/numpy.random.shuffle.html">np.random.shuffle</a></code> to accomplish this)
+											And let's suppose we wanted to remove 11 from the subtree.  Then we would set 16's left child to be <code>None</code>, and then we would add keys 12, 13, 14, and 15 back to the tree.  Below is an animation of doing this and adding them back in the shuffled order 14, 13, 12, 15, to keep the tree balanced (you can use <code><a href = "https://numpy.org/doc/stable/reference/random/generated/numpy.random.shuffle.html">np.random.shuffle</a></code> to accomplish this)
 										</p>
 
 										<img src = "NaiveRemoval.gif">
@@ -85,7 +89,7 @@
 										</p>
 
 										<p>
-											<b>Hint: </b> One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
+											<b>Hint: </b> One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references and complicating our data structure, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
 										</p>
 										
 										<p>

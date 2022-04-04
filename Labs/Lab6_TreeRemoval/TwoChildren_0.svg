@@ -28,11 +28,11 @@
      inkscape:window-height="698"
      id="namedview470"
      showgrid="false"
-     inkscape:zoom="2.8488867"
-     inkscape:cx="161.97082"
-     inkscape:cy="183.61589"
-     inkscape:window-x="2733"
-     inkscape:window-y="286"
+     inkscape:zoom="1.4244434"
+     inkscape:cx="242.21171"
+     inkscape:cy="161.81676"
+     inkscape:window-x="2046"
+     inkscape:window-y="118"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg468" />
   <metadata
@@ -1161,4 +1161,15 @@
      cy="55.942913"
      rx="14.87423"
      ry="13.557926" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+     x="92.141258"
+     y="41.595188"
+     id="text1102"><tspan
+       sodipodi:role="line"
+       id="tspan1100"
+       style="stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round;font-size:24.99999898px"
+       x="92.141258"
+       y="41.595188">x</tspan></text>
 </svg>

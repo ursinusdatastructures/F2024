@@ -29,10 +29,10 @@
      id="namedview470"
      showgrid="false"
      inkscape:zoom="1.4244434"
-     inkscape:cx="168.73517"
+     inkscape:cx="37.806837"
      inkscape:cy="171.23947"
-     inkscape:window-x="2076"
-     inkscape:window-y="245"
+     inkscape:window-x="2406"
+     inkscape:window-y="255"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg468" />
   <metadata
@@ -1161,4 +1161,33 @@
      cy="133.47318"
      rx="16.848686"
      ry="16.058905" />
+  <ellipse
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.26771641;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+     id="path1277-7"
+     cx="125.83299"
+     cy="57.209969"
+     rx="14.87423"
+     ry="13.557926" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+     x="91.214218"
+     y="42.862244"
+     id="text1102"><tspan
+       sodipodi:role="line"
+       id="tspan1100"
+       style="font-size:24.99999809px;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+       x="91.214218"
+       y="42.862244">x</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+     x="79.000877"
+     y="112.14023"
+     id="text1102-1"><tspan
+       sodipodi:role="line"
+       id="tspan1100-2"
+       style="font-size:24.99999809px;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+       x="79.000877"
+       y="112.14023">y</tspan></text>
 </svg>

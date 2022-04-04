@@ -28,11 +28,11 @@
      inkscape:window-height="750"
      id="namedview470"
      showgrid="false"
-     inkscape:zoom="6.3040435"
-     inkscape:cx="182.35174"
-     inkscape:cy="166.65025"
-     inkscape:window-x="2076"
-     inkscape:window-y="245"
+     inkscape:zoom="0.78800544"
+     inkscape:cx="-71.989233"
+     inkscape:cy="273.5157"
+     inkscape:window-x="2169"
+     inkscape:window-y="242"
      inkscape:window-maximized="0"
      inkscape:current-layer="axes_1" />
   <metadata
@@ -1113,14 +1113,14 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
-         x="104.31548"
-         y="55.366241"
+         x="142.38629"
+         y="65.835709"
          id="text1137"><tspan
            sodipodi:role="line"
            id="tspan1135"
            style="font-size:23.99999809px;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
-           x="104.31548"
-           y="55.366241">6</tspan></text>
+           x="142.38629"
+           y="65.835709">6</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
@@ -1155,6 +1155,28 @@
              id="use32" />
         </g>
       </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+         x="95.201256"
+         y="53.335602"
+         id="text1102"><tspan
+           sodipodi:role="line"
+           id="tspan1100"
+           style="font-size:24.99999809px;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+           x="95.201256"
+           y="53.335602">x</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:47.99999619px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round"
+         x="95.442535"
+         y="114.49209"
+         id="text1102-6"><tspan
+           sodipodi:role="line"
+           id="tspan1100-2"
+           style="font-size:24.99999809px;stroke-width:0.74999994;stroke-linecap:butt;stroke-linejoin:round;fill:#ff0000;fill-opacity:1"
+           x="95.442535"
+           y="114.49209">y</tspan></text>
     </g>
   </g>
   <defs

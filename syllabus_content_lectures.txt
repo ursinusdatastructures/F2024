@@ -131,7 +131,7 @@ Binary search trees: Search, Addition
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
 LECTURE
-Binary search trees: Removal
+<a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
