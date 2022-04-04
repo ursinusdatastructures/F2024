@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h2>Lab 6: Tree Key Removal</h2>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+									
+
+                                        <h2>Overview / Logistics</h2>
+										<p>
+											The purpose of this lab is to get practice with recursion in the service of tree algorithms.  In particular, students will explore two different algorithms for removing keys in trees: one simple algorithm which is <b>O(N)</b> in the worst case, and another algorithm that is <b>O(logN)</b> if the tree is <b>balanced</b>.
+										</p>
+
+										<p>
+											<a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval/archive/refs/heads/main.zip">Click here</a> to download the starter notebook for this lab.  If you are using Google colab, the notebook is hosted at <a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval">https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval</a>.  Either way, you will need to use jupyter to create the tree plots to check your work.
+										</p>
+
+										<h2>Part 1: A Slow Remove</h2>
+										<p>
+											One naive algorithm to remove nodes from a tree is to take out a node and add all of its children to the tree again from scratch.  For example, let's suppose we started with the following tree, which is what's constructed in the lab by default:
+										</p>
+
+										<img src = "StartTree.svg">
+
+										<p>
+											And let's suppose we wanted to remove 11 from the subtree.  Then we would set 16's left child to be <code>None</code>, and then we would add nodes 12, 13, 14, and 15 back to the tree.  Below is an animation of doing this and adding them back in the shuffled order 14, 13, 12, 15, to keep the tree balanced (you can use <code><a href = "https://numpy.org/doc/stable/reference/random/generated/numpy.random.shuffle.html">np.random.shuffle</a></code> to accomplish this)
+										</p>
+
+										<img src = "NaiveRemoval.gif">
+
+										<p>
+											<b>Your task</b>: Add a method <code>remove_naive</code> to the <code>BinaryTree</code> class to kick off the recursion, as well as a corresponding recursive helper method <code>remove_naive</code> to the <code>TreeNode</code> class, that implement this technique together.  The methods should do the following:
+											<ol>
+												<li>Find the node to remove, if it exists in the tree</li>
+												<li>Set a reference to that node in its parent to be <code>None</code></li>
+												<li>
+													Recursively fill in a list with all of the nodes in that node's left and right subtrees (there can be <b>O(N)</b> of these if the node is high enough up in the tree, which is what makes this slow)
+												</li>
+												<li>
+													Shuffle the nodes in that subtree, and add their keys one by one back to the tree
+												</li>
+											</ol>
+										</p>
+
+										<p>
+											<b>Hint: </b> One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
+										</p>
+										
+										<p>
+											<code>self.root = self.root.remove(key, ...)</code>
+										</p>
+
+										<p>
+											<code>self.left = self.left.remove(key, ...)</code>
+										</p>
+										<p>
+											<code>self.right = self.right.remove(key, ...)</code>
+										</p>
+
+										<p>
+											In the <code>remove_naive</code> algorithm, if we end up at the node we want to remove, we return <code>None</code>.  Otherwise, we return that node.
+										</p>
+
+										<HR>
+										<h2>Part 1: A Faster Remove</h2>
+
+										<p>
+											There is a cleverer way to remove a node that will take <b>O(logN)</b> time if the tree is balanced, rather than <b>O(N)</b> time.  We have three cases to consider
+										</p>
+
+										<ol>
+											<li>
+												<p>
+													The key we want to remove is in a leaf node.  In this case, all we have to do is reassign its parent's reference to it to be <code>None</code>
+												</p>
+											</li>
+											<li>
+												<p>
+													The key we want to remove has only one child.  In this case, we set the key's parent to refer to that child.  For example, if we remove node 11 in the tree below, then 16's left child changes from 11 to 14
+												</p>
+
+												<table>
+													<tr>
+														<td><img src = "StartTree.svg"></td>
+														<td><img src = "OneChild.svg"></td>
+													</tr>
+												</table>
+											</li>
+											<li>
+												The trickiest case to consider is the case where we have to remove a node <code>x</code> that has two children.  What we can do is the following:
+												<ol>
+													<li>Find the node in the left subtree with the greatest key.  Call this node <code>y</code></li>
+													<li>
+														Set <code>x</code>'s key to be <code>y</code>'s key.  This guarantees that every child in <code>x</code>'s subtree still respects the binary tree order, except for <code>y</code>
+													</li> 
+													<li>
+														Because <code>y</code> is the greatest node, we can guarantee that <code>y</code> has either only one child or none, so we can remove it via the first two cases.
+													</li>
+												</ol>
+												<p>
+													For example, if we remove node with the key 7 in the tree we start with, we identify 6 greatest value in the left subtree that we can swap in, and then we remove that 6
+												</p>
+												<table>
+													<tr>
+														<td>
+															<img src = "TwoChildren_0.svg">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<img src = "TwoChildren_1.svg">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<img src = "TwoChildren_2.svg">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<img src = "TwoChildren_3.svg">
+														</td>
+													</tr>
+												</table>
+											</li>
+										</ol>
+
+
+										
+
+                                    </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
+</html>
