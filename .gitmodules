@@ -40,3 +40,6 @@
 [submodule "ClassExercises/Week10_Trees/Week10_Trees"]
 	path = ClassExercises/Week10_Trees/Week10_Trees
 	url = https://github.com/ursinus-cs371-s2022/Week10_Trees.git
+[submodule "Labs/Lab6_TreeRemoval/Lab6_TreeRemoval"]
+	path = Labs/Lab6_TreeRemoval/Lab6_TreeRemoval
+	url = https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval.git

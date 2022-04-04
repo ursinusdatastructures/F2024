@@ -102,10 +102,10 @@
 										</p>
 										<ul>
 											<li>0 stays at 0</li>
+											<li>4 becomes 1</li>
+											<li>3 becomes 2</li>
 											<li>1 becomes 3</li>
 											<li>2 becomes 4</li>
-											<li>3 becomes 2</li>
-											<li>4 becomes 1</li>
 										</ul>
 										<p>
 											Then we get the following lists
@@ -158,7 +158,7 @@
 										<p>
 											In other words, we recursively count the inversions it took when we were sorting the first half and second half, and then we count the remaining inversions that occur when we merge them together.
 										</p>
-											Just as when we were doing the sorting, the challenge / meat of the work here becomes to count the inversions in the merge step.  Review the code you wrote in <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Exercise1">module 15</a>, and recall that the first loop in the merge step keeps track of an index <b>i</b> on the left half and an index <b>j</b> on the right half, as show below:
+											Just as when we were doing the sorting, the challenge / meat of the work here becomes to count the inversions in the merge step.  Review the code you wrote in <a href = "../../Labs/Lab5_MergeSort/">lab 5</a>, and recall that the first loop in the merge step keeps track of an index <b>i</b> on the left half and an index <b>j</b> on the right half, as show below:
 										</p>
 
 										<img src = "MergeVariables.svg" width=400>
@@ -177,6 +177,19 @@
 										<p>	
 											A Kemeny Optimal ranking minimizes the sum of the Kendall-Tau distances to all <b>M</b> rankings.  In other words, <i>it is a ranking which minimizes pairwise disagreements between all people who voted</i>.  As it turns out, it is <a href = "https://cstheory.stackexchange.com/questions/5995/efficient-verification-of-kemeny-optimal-rankings">provably hard</a> to compute this distance exactly, but you will work on a brute force recursive algorithm to achieve this, and to compare it to more efficient, approximate answers.
 										</p>
+
+										<P>
+											Pseudocode for the brute force algorithm is roughly
+										</P>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											for every possible permutation **p**
+												disagreements = 0
+												for each rater permutation **r**
+													disagreements += kendall_tau(p, r)
+												if disagreements < smallest disagreements seen so far
+													update smallest / permutation
+										</script> 
 
                                 </div>
 						</div>
@@ -241,6 +254,7 @@
 												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
 												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
 												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
 											</ul>
 										</li>
                                         <li>
