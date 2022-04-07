@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Notes on Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										<h3></h3>
+									</header>
+
+									<div id="page-content">
+										<p>
+											These notes go over the background topics for <a href = "../../Assignments/HW5_PhylogeneticTrees/">homework 5</a>, which bring together minimum spanning tree algorithms and dynamic programming an cool application to biology and the "tree of life."
+										</p>
+
+										<ul>
+											<h3>Table of Contents</h3>
+											<ul>
+												<li><a href = "#aminoacids">Amino Acids</a></li>
+												<li><a href = "#needleman">The Needleman-Wunsch Algorithm</a></li>
+												<li><a href = "#applet">Needleman-Wunsch Interactive Applet</a></li>
+												<li><a href = "#blosum">BLOSUM Amino Acid Substitution Costs</a></li>
+												<li><a href = "#phylogeneticbg">Phylogenetic Trees</a></li>
+												<li><a href = "#slcluster">Single-Linkage Clustering</a>
+												<ul>
+													<li>
+														<a href = "#algorithm1">Algorithm 1: O(N<SUP>3</SUP>) Naive Single-Linkage Clustering</a>
+													</li>
+													<li>
+														<a href = "#algorithm2">Algorithm 2: Kruskal's Algorithm for O(N<SUP>2</SUP>logN) Single Linkage Clustering</a>
+													</li>
+												</ul>
+												</li>
+											</ul>
+											
+
+
+										
+
+										
+										<h3><a name = "aminoacids">Amino Acids</a></h3>
+										<p>
+											A DNA sequence can be thought of as a string.  Roughly, DNA encodes building blocks known as <b>amino acids</b>, which, when decoded and strung together in sequence, form proteins.  The sequence has a large impact on the way the protein structure folds and ultimately forms a 3D shape, leading towards a particular biomolecular role.
+										</p>
+										<p>
+											<a href = "https://www.technologynetworks.com/applied-sciences/articles/essential-amino-acids-chart-abbreviations-and-structure-324357">Click here</a> to see more information about each type of amino acid.  In <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>, we will be considering an alphabet of 23 amino acids, including all of the standard 20, as well as the B,Z,X special ones highlighted in red in the aforementioned link.   
+										</p>
+
+										<h3><a name = "needleman">The Needleman-Wunsch Algorithm</a></h3>
+										<p>
+                                            Since DNA is a string, we can compare two DNA sequences with string comparison methods, but when comparing the sequences across organisms, the technique needs to account for mutations that have occurred over evolutionary histories, including additions, deletions, and substitutions of individual amino acids.  We've discussed dynamic programing techniques for computing the <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">string edit distance</a>, which accounts for such mutations.  However, it models a unit cost for an addition, deletion, and substitution alike, and there are biological reasons that we may want to have costs that are more less expensive for certain amino acid edits, as explained <a href = "#blosum">below</a>.
+										</p>
+										<p>
+											To address the need for variable costs, there is a variant of edit distance known as <i>Needleman-Wunsch</i>, in which the costs can change depending on what characters are involved.  By convention, we actually switch from a "minimizing cost" mindset to a <b>maximizing score</b> mindset.  Given a string of length <b>M</b> and a string of length <b>N</b>, the optimal Needleman-Wunsch score can be computed in <b>O(MN)</b> time using a similar dynamic programming algorithm to edit distance and <a href = "../DTWNotes">dynamic time warping</a>.  In particular, to match a string of length <b>M</b> to a string of length <b>N</b>, the vanilla version proceeds by filling in an <b>(M+1) x (N+1)</b> table <b>S</b><SUP><a href = "#footnote1">*</a></SUP> storing all solutions to sub-problems, using the following recurrence relation, where <b>d<SUB>i</SUB></b> and <b>d<SUB>j</SUB></b> refer to the cost of deleting the <b>i<SUP>th</SUP></b> and <b>j<SUP>th</SUP></b> characters of the first and second strings, respectively, and <b>c<SUB>ij</SUB></b> refers to the cost of substituting the <b>i<SUP>th</SUP></b> character of the first string for the <b>j<SUP>th</SUP></b> character of the second string (and everything is 0-indexed):
+											
+                                        </p>
+
+										<h3>
+											\[
+												S_{ij} = \left\{ \begin{array}{cc} S_{i-1, 0} + d_{i-1} & j = 0 \\ S_{0, j-1} + d_{j-1} & i = 0 \\ \max \left\{  \begin{array}{c} S_{i-1, j-1} + c_{i-1, j-1} \\ S_{i, j-1} + d_{j-1} \\ S_{i-1, j} + d_{i-1} \end{array} \right\} & i > 0, j > 0 \end{array} \right\}
+											\]
+										</h3>
+
+										<p>
+											<i><a name = "footnote1">(*)</a> Note that there is a version that uses only <a href = "https://en.wikipedia.org/wiki/Hirschberg%27s_algorithm">&Theta;(N) memory</a>, which uses a similar trick to a recent algorithm I developed with an Ursinus student for <a href = "http://www.ctralie.com/Research/linmdtw/">dynamic time warping</a> </i>
+										</p>
+
+                                        <p>
+                                            To help you explore examples of Needleman-Wunsch scoring, I have provided a live demo app below.  In the default example, we have an alphabet of two letters <b>a</b> and <b>b</b>, and the scores are as follows
+                                            <ul>
+                                                <li>A -1 penalty for deleting <b>a</b></li>
+                                                <li>
+                                                    A -2 penalty for deleting <b>b</b>
+                                                </li>
+                                                <li>
+                                                    A -3 penalty for swapping an <b>a</b> for a <b>b</b> or a <b>b</b> for an <b>a</b>
+                                                </li>
+                                                <li>
+                                                    A +2 score for matching an <b>a</b> to an <b>a</b>
+                                                </li>
+                                                <li>
+                                                    A +3 score for matching a <b>b</b> to a <b>b</b>
+                                                </li>
+                                            </ul>
+
+                                            All of this information is specified in a dictionary, which you can see in the "pairwise costs" menu, and the format of this dictionary mirrors the format of the Python dictionaries you will be using in <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>.  In particular, <b>a single character key represents the cost of deleting that character, while a key of concatenated characters represents the cost (or score) of substituting one character for the other</b>.  For instance, <code>{"ab":-3}</code> means that it costs 3 both to swap <b>a</b> in for <b>b</b> <i>and</i> to swap <b>b</b> in for <b>a</b>, and <code>{"a":-1}</code> refers to a penalty of -1 for deleting <b>a</b>.
+											
+										</p>
+										<p>
+											To generate examples, when you hit "match strings" in the live demo below, this program will run the Needleman-Wunsch algorithm to fill out the dynamic programming table.  It will also perform a backtracing to find one of the optimal-cost sequence of edit operations, though this is not something you have to do in <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>.  Play around with different examples and explore the results until you feel comfortable.
+                                        </p>
+
+                                        <h3><a name = "applet">Needleman-Wunsch Interactive Applet</a></h3>
+                                        <table cellpadding=5>
+                                            <tr><td><h3>String 1</h3></td><td><input type="text" id = "string1" size="20"></input></td></tr>
+                                            <tr><td><h3>String 2</h3></td><td><input type="text" id = "string2" size="20"></input></td></tr>
+                                            <tr><td><h3>Alphabet</h3></td><td><input type="text" id = "alphabet" size="3"></td></tr>
+                                            <tr><td><h3>Pairwise<BR>Costs</h3></td><td><textarea id="costs" cols="60" rows = "5"></textarea></td></tr>
+                                            <tr><td colspan="2"><button type = "button" onclick = "call_matchStrings()" id="matchStrings">Match Strings</button>
+                                            <tr><td><h3>Optimal Matching Score</h3></td><td><input type="text" id = "matchingscore" size="3"></td></tr>
+                                        </table>
+                                    
+                                        <p id = "backtracing">
+                                    
+                                        </p>
+                                    
+                                        <table id="mytable" border = "1" cellpadding="5">
+                                        </table>
+                                    
+										<script src="StringMatching.js"></script>
+                                        <script>
+                                            var string1_text = document.getElementById("string1");
+                                            string1_text.value = "aabaab";
+                                            var string2_text = document.getElementById("string2");
+                                            string2_text.value = "ababaa";
+                                            var alphabet_text = document.getElementById("alphabet");
+                                            alphabet_text.value = "ab";
+                                            var costs_text = document.getElementById("costs");
+                                            costs_text.value = "{\"a\":-1, \"b\":-2, \"ab\":-3, \"ba\":-3, \"aa\":2, \"bb\":3}";
+                                            var matchingscore_text = document.getElementById("matchingscore");
+                                            var returnValues;
+                                    
+                                            function call_matchStrings() {
+                                                let string1 = string1_text.value;
+                                                let string2 = string2_text.value;
+                                                let alphabet = alphabet_text.value;
+                                                let costs = JSON.parse(costs_text.value);
+                                                console.log(costs); //This outputs the object which holds the costs
+                                                returnValues = matchStrings(string1, string2, alphabet, costs);
+                                                matchingscore_text.value = returnValues.score;
+                                                backtrace_list = returnValues.backtrace;
+                                                
+                                                var backtracing = document.getElementById("backtracing");
+                                                backtracing.innerHTML = "Results of the backtracing: ";
+                                    
+                                                for(var i = 0; i < backtrace_list.length; i++){
+                                                    backtracing.innerHTML += ("<BR>" + backtrace_list[i]);
+                                                }
+                                            }
+                                    
+                                            
+                                        </script>
+
+                                    </p>
+
+									<h3><a name = "blosum">BLOSUM Amino Acid Substitution Costs</a></h3>
+
+									
+									<p>
+										Now that we have an alphabet for DNA strings and an algorithm to compare them, we can define meaningful costs for matchings and substitutions of amino acids.  We will be using tables obtained from an experimental, data-driven technique that constructs a "Blocks Substitution Matrix," or "BLOSUM" for short, as described in <a href = "http://146.6.100.192/users/BCH339N_2018/BLOSUM62Miscalculations.pdf">this paper</a>.  In a nutshell, the technique computes statistical likelihoods that substitutions take place by examining many well-aligned sequences.
+									</p>
+
+									<p>
+										There are different similarity thresholds at which BLOSUM tables can be constructed, and higher numbers mean that we're more conservative in which symbols we allow to be aligned.  In <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>, we'll be considering BLOSUM50 and BLOSUM62, as obtained from <a href = "ftp://ftp.ncbi.nih.gov/repository/blocks/unix/blosum/blosum.tar.Z">ftp://ftp.ncbi.nih.gov/repository/blocks/unix/blosum/blosum.tar.Z</a>.  Click the "show/hide" buttons to view each of these below.  You'll notice that we get a positive score when matching an amino acid to itself, and a negative score when swapping amino acids and when deleting them (matching to a *), so this is compatible with Needleman-Wunsch.  You'll also notice that this matrix is symmetric (e.g. A to D and D to A are both -2), so we will only be storing the non-redundant parts in a lookup dictionary.
+									</p>
+
+									<table>
+										<tr>
+											<td><h4>BLOSUM 62</h4></td><td><h4>BLOSUM 50</h4></td>
+										</tr>
+										<tr>
+											<td>
+												<button type="button" onclick="toggleBlossum62()">Show/Hide</button>
+									
+												<table id="blosum62"><tr><td></td><td>A</td><td>R</td><td>N</td><td>D</td><td>C</td><td>Q</td><td>E</td><td>G</td><td>H</td><td>I</td><td>L</td><td>K</td><td>M</td><td>F</td><td>P</td><td>S</td><td>T</td><td>W</td><td>Y</td><td>V</td><td>B</td><td>Z</td><td>X</td><td>*</td></td><tr><td>A</td><td>4</td><td>-1</td><td>-2</td><td>-2</td><td>0</td><td>-1</td><td>-1</td><td>0</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>1</td><td>0</td><td>-3</td><td>-2</td><td>0</td><td>-2</td><td>-1</td><td>0</td><td>-4</td></tr><tr><td>R</td><td>-1</td><td>5</td><td>0</td><td>-2</td><td>-3</td><td>1</td><td>0</td><td>-2</td><td>0</td><td>-3</td><td>-2</td><td>2</td><td>-1</td><td>-3</td><td>-2</td><td>-1</td><td>-1</td><td>-3</td><td>-2</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-4</td></tr><tr><td>N</td><td>-2</td><td>0</td><td>6</td><td>1</td><td>-3</td><td>0</td><td>0</td><td>0</td><td>1</td><td>-3</td><td>-3</td><td>0</td><td>-2</td><td>-3</td><td>-2</td><td>1</td><td>0</td><td>-4</td><td>-2</td><td>-3</td><td>3</td><td>0</td><td>-1</td><td>-4</td></tr><tr><td>D</td><td>-2</td><td>-2</td><td>1</td><td>6</td><td>-3</td><td>0</td><td>2</td><td>-1</td><td>-1</td><td>-3</td><td>-4</td><td>-1</td><td>-3</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-4</td><td>-3</td><td>-3</td><td>4</td><td>1</td><td>-1</td><td>-4</td></tr><tr><td>C</td><td>0</td><td>-3</td><td>-3</td><td>-3</td><td>9</td><td>-3</td><td>-4</td><td>-3</td><td>-3</td><td>-1</td><td>-1</td><td>-3</td><td>-1</td><td>-2</td><td>-3</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-1</td><td>-3</td><td>-3</td><td>-2</td><td>-4</td></tr><tr><td>Q</td><td>-1</td><td>1</td><td>0</td><td>0</td><td>-3</td><td>5</td><td>2</td><td>-2</td><td>0</td><td>-3</td><td>-2</td><td>1</td><td>0</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-2</td><td>-1</td><td>-2</td><td>0</td><td>3</td><td>-1</td><td>-4</td></tr><tr><td>E</td><td>-1</td><td>0</td><td>0</td><td>2</td><td>-4</td><td>2</td><td>5</td><td>-2</td><td>0</td><td>-3</td><td>-3</td><td>1</td><td>-2</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-2</td><td>1</td><td>4</td><td>-1</td><td>-4</td></tr><tr><td>G</td><td>0</td><td>-2</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-2</td><td>6</td><td>-2</td><td>-4</td><td>-4</td><td>-2</td><td>-3</td><td>-3</td><td>-2</td><td>0</td><td>-2</td><td>-2</td><td>-3</td><td>-3</td><td>-1</td><td>-2</td><td>-1</td><td>-4</td></tr><tr><td>H</td><td>-2</td><td>0</td><td>1</td><td>-1</td><td>-3</td><td>0</td><td>0</td><td>-2</td><td>8</td><td>-3</td><td>-3</td><td>-1</td><td>-2</td><td>-1</td><td>-2</td><td>-1</td><td>-2</td><td>-2</td><td>2</td><td>-3</td><td>0</td><td>0</td><td>-1</td><td>-4</td></tr><tr><td>I</td><td>-1</td><td>-3</td><td>-3</td><td>-3</td><td>-1</td><td>-3</td><td>-3</td><td>-4</td><td>-3</td><td>4</td><td>2</td><td>-3</td><td>1</td><td>0</td><td>-3</td><td>-2</td><td>-1</td><td>-3</td><td>-1</td><td>3</td><td>-3</td><td>-3</td><td>-1</td><td>-4</td></tr><tr><td>L</td><td>-1</td><td>-2</td><td>-3</td><td>-4</td><td>-1</td><td>-2</td><td>-3</td><td>-4</td><td>-3</td><td>2</td><td>4</td><td>-2</td><td>2</td><td>0</td><td>-3</td><td>-2</td><td>-1</td><td>-2</td><td>-1</td><td>1</td><td>-4</td><td>-3</td><td>-1</td><td>-4</td></tr><tr><td>K</td><td>-1</td><td>2</td><td>0</td><td>-1</td><td>-3</td><td>1</td><td>1</td><td>-2</td><td>-1</td><td>-3</td><td>-2</td><td>5</td><td>-1</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-2</td><td>0</td><td>1</td><td>-1</td><td>-4</td></tr><tr><td>M</td><td>-1</td><td>-1</td><td>-2</td><td>-3</td><td>-1</td><td>0</td><td>-2</td><td>-3</td><td>-2</td><td>1</td><td>2</td><td>-1</td><td>5</td><td>0</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>1</td><td>-3</td><td>-1</td><td>-1</td><td>-4</td></tr><tr><td>F</td><td>-2</td><td>-3</td><td>-3</td><td>-3</td><td>-2</td><td>-3</td><td>-3</td><td>-3</td><td>-1</td><td>0</td><td>0</td><td>-3</td><td>0</td><td>6</td><td>-4</td><td>-2</td><td>-2</td><td>1</td><td>3</td><td>-1</td><td>-3</td><td>-3</td><td>-1</td><td>-4</td></tr><tr><td>P</td><td>-1</td><td>-2</td><td>-2</td><td>-1</td><td>-3</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-3</td><td>-3</td><td>-1</td><td>-2</td><td>-4</td><td>7</td><td>-1</td><td>-1</td><td>-4</td><td>-3</td><td>-2</td><td>-2</td><td>-1</td><td>-2</td><td>-4</td></tr><tr><td>S</td><td>1</td><td>-1</td><td>1</td><td>0</td><td>-1</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>-2</td><td>-2</td><td>0</td><td>-1</td><td>-2</td><td>-1</td><td>4</td><td>1</td><td>-3</td><td>-2</td><td>-2</td><td>0</td><td>0</td><td>0</td><td>-4</td></tr><tr><td>T</td><td>0</td><td>-1</td><td>0</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>1</td><td>5</td><td>-2</td><td>-2</td><td>0</td><td>-1</td><td>-1</td><td>0</td><td>-4</td></tr><tr><td>W</td><td>-3</td><td>-3</td><td>-4</td><td>-4</td><td>-2</td><td>-2</td><td>-3</td><td>-2</td><td>-2</td><td>-3</td><td>-2</td><td>-3</td><td>-1</td><td>1</td><td>-4</td><td>-3</td><td>-2</td><td>11</td><td>2</td><td>-3</td><td>-4</td><td>-3</td><td>-2</td><td>-4</td></tr><tr><td>Y</td><td>-2</td><td>-2</td><td>-2</td><td>-3</td><td>-2</td><td>-1</td><td>-2</td><td>-3</td><td>2</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>3</td><td>-3</td><td>-2</td><td>-2</td><td>2</td><td>7</td><td>-1</td><td>-3</td><td>-2</td><td>-1</td><td>-4</td></tr><tr><td>V</td><td>0</td><td>-3</td><td>-3</td><td>-3</td><td>-1</td><td>-2</td><td>-2</td><td>-3</td><td>-3</td><td>3</td><td>1</td><td>-2</td><td>1</td><td>-1</td><td>-2</td><td>-2</td><td>0</td><td>-3</td><td>-1</td><td>4</td><td>-3</td><td>-2</td><td>-1</td><td>-4</td></tr><tr><td>B</td><td>-2</td><td>-1</td><td>3</td><td>4</td><td>-3</td><td>0</td><td>1</td><td>-1</td><td>0</td><td>-3</td><td>-4</td><td>0</td><td>-3</td><td>-3</td><td>-2</td><td>0</td><td>-1</td><td>-4</td><td>-3</td><td>-3</td><td>4</td><td>1</td><td>-1</td><td>-4</td></tr><tr><td>Z</td><td>-1</td><td>0</td><td>0</td><td>1</td><td>-3</td><td>3</td><td>4</td><td>-2</td><td>0</td><td>-3</td><td>-3</td><td>1</td><td>-1</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-2</td><td>1</td><td>4</td><td>-1</td><td>-4</td></tr><tr><td>X</td><td>0</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>0</td><td>0</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-4</td></tr><tr><td>*</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td>-4</td><td></td></tr></table>
+
+											</td>
+
+
+											<td>
+												<button type="button" onclick="toggleBlossum50()">Show/Hide</button>
+												
+												<table id="blosum50"><tr><td></td><td>A</td><td>R</td><td>N</td><td>D</td><td>C</td><td>Q</td><td>E</td><td>G</td><td>H</td><td>I</td><td>L</td><td>K</td><td>M</td><td>F</td><td>P</td><td>S</td><td>T</td><td>W</td><td>Y</td><td>V</td><td>B</td><td>Z</td><td>X</td><td>*</td></td><tr><td>A</td><td>5</td><td>-2</td><td>-1</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>0</td><td>-2</td><td>-1</td><td>-2</td><td>-1</td><td>-1</td><td>-3</td><td>-1</td><td>1</td><td>0</td><td>-3</td><td>-2</td><td>0</td><td>-2</td><td>-1</td><td>-1</td><td>-5</td></tr><tr><td>R</td><td>-2</td><td>7</td><td>-1</td><td>-2</td><td>-4</td><td>1</td><td>0</td><td>-3</td><td>0</td><td>-4</td><td>-3</td><td>3</td><td>-2</td><td>-3</td><td>-3</td><td>-1</td><td>-1</td><td>-3</td><td>-1</td><td>-3</td><td>-1</td><td>0</td><td>-1</td><td>-5</td></tr><tr><td>N</td><td>-1</td><td>-1</td><td>7</td><td>2</td><td>-2</td><td>0</td><td>0</td><td>0</td><td>1</td><td>-3</td><td>-4</td><td>0</td><td>-2</td><td>-4</td><td>-2</td><td>1</td><td>0</td><td>-4</td><td>-2</td><td>-3</td><td>4</td><td>0</td><td>-1</td><td>-5</td></tr><tr><td>D</td><td>-2</td><td>-2</td><td>2</td><td>8</td><td>-4</td><td>0</td><td>2</td><td>-1</td><td>-1</td><td>-4</td><td>-4</td><td>-1</td><td>-4</td><td>-5</td><td>-1</td><td>0</td><td>-1</td><td>-5</td><td>-3</td><td>-4</td><td>5</td><td>1</td><td>-1</td><td>-5</td></tr><tr><td>C</td><td>-1</td><td>-4</td><td>-2</td><td>-4</td><td>13</td><td>-3</td><td>-3</td><td>-3</td><td>-3</td><td>-2</td><td>-2</td><td>-3</td><td>-2</td><td>-2</td><td>-4</td><td>-1</td><td>-1</td><td>-5</td><td>-3</td><td>-1</td><td>-3</td><td>-3</td><td>-2</td><td>-5</td></tr><tr><td>Q</td><td>-1</td><td>1</td><td>0</td><td>0</td><td>-3</td><td>7</td><td>2</td><td>-2</td><td>1</td><td>-3</td><td>-2</td><td>2</td><td>0</td><td>-4</td><td>-1</td><td>0</td><td>-1</td><td>-1</td><td>-1</td><td>-3</td><td>0</td><td>4</td><td>-1</td><td>-5</td></tr><tr><td>E</td><td>-1</td><td>0</td><td>0</td><td>2</td><td>-3</td><td>2</td><td>6</td><td>-3</td><td>0</td><td>-4</td><td>-3</td><td>1</td><td>-2</td><td>-3</td><td>-1</td><td>-1</td><td>-1</td><td>-3</td><td>-2</td><td>-3</td><td>1</td><td>5</td><td>-1</td><td>-5</td></tr><tr><td>G</td><td>0</td><td>-3</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-3</td><td>8</td><td>-2</td><td>-4</td><td>-4</td><td>-2</td><td>-3</td><td>-4</td><td>-2</td><td>0</td><td>-2</td><td>-3</td><td>-3</td><td>-4</td><td>-1</td><td>-2</td><td>-2</td><td>-5</td></tr><tr><td>H</td><td>-2</td><td>0</td><td>1</td><td>-1</td><td>-3</td><td>1</td><td>0</td><td>-2</td><td>10</td><td>-4</td><td>-3</td><td>0</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>-2</td><td>-3</td><td>2</td><td>-4</td><td>0</td><td>0</td><td>-1</td><td>-5</td></tr><tr><td>I</td><td>-1</td><td>-4</td><td>-3</td><td>-4</td><td>-2</td><td>-3</td><td>-4</td><td>-4</td><td>-4</td><td>5</td><td>2</td><td>-3</td><td>2</td><td>0</td><td>-3</td><td>-3</td><td>-1</td><td>-3</td><td>-1</td><td>4</td><td>-4</td><td>-3</td><td>-1</td><td>-5</td></tr><tr><td>L</td><td>-2</td><td>-3</td><td>-4</td><td>-4</td><td>-2</td><td>-2</td><td>-3</td><td>-4</td><td>-3</td><td>2</td><td>5</td><td>-3</td><td>3</td><td>1</td><td>-4</td><td>-3</td><td>-1</td><td>-2</td><td>-1</td><td>1</td><td>-4</td><td>-3</td><td>-1</td><td>-5</td></tr><tr><td>K</td><td>-1</td><td>3</td><td>0</td><td>-1</td><td>-3</td><td>2</td><td>1</td><td>-2</td><td>0</td><td>-3</td><td>-3</td><td>6</td><td>-2</td><td>-4</td><td>-1</td><td>0</td><td>-1</td><td>-3</td><td>-2</td><td>-3</td><td>0</td><td>1</td><td>-1</td><td>-5</td></tr><tr><td>M</td><td>-1</td><td>-2</td><td>-2</td><td>-4</td><td>-2</td><td>0</td><td>-2</td><td>-3</td><td>-1</td><td>2</td><td>3</td><td>-2</td><td>7</td><td>0</td><td>-3</td><td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>-3</td><td>-1</td><td>-1</td><td>-5</td></tr><tr><td>F</td><td>-3</td><td>-3</td><td>-4</td><td>-5</td><td>-2</td><td>-4</td><td>-3</td><td>-4</td><td>-1</td><td>0</td><td>1</td><td>-4</td><td>0</td><td>8</td><td>-4</td><td>-3</td><td>-2</td><td>1</td><td>4</td><td>-1</td><td>-4</td><td>-4</td><td>-2</td><td>-5</td></tr><tr><td>P</td><td>-1</td><td>-3</td><td>-2</td><td>-1</td><td>-4</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-3</td><td>-4</td><td>-1</td><td>-3</td><td>-4</td><td>10</td><td>-1</td><td>-1</td><td>-4</td><td>-3</td><td>-3</td><td>-2</td><td>-1</td><td>-2</td><td>-5</td></tr><tr><td>S</td><td>1</td><td>-1</td><td>1</td><td>0</td><td>-1</td><td>0</td><td>-1</td><td>0</td><td>-1</td><td>-3</td><td>-3</td><td>0</td><td>-2</td><td>-3</td><td>-1</td><td>5</td><td>2</td><td>-4</td><td>-2</td><td>-2</td><td>0</td><td>0</td><td>-1</td><td>-5</td></tr><tr><td>T</td><td>0</td><td>-1</td><td>0</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>2</td><td>5</td><td>-3</td><td>-2</td><td>0</td><td>0</td><td>-1</td><td>0</td><td>-5</td></tr><tr><td>W</td><td>-3</td><td>-3</td><td>-4</td><td>-5</td><td>-5</td><td>-1</td><td>-3</td><td>-3</td><td>-3</td><td>-3</td><td>-2</td><td>-3</td><td>-1</td><td>1</td><td>-4</td><td>-4</td><td>-3</td><td>15</td><td>2</td><td>-3</td><td>-5</td><td>-2</td><td>-3</td><td>-5</td></tr><tr><td>Y</td><td>-2</td><td>-1</td><td>-2</td><td>-3</td><td>-3</td><td>-1</td><td>-2</td><td>-3</td><td>2</td><td>-1</td><td>-1</td><td>-2</td><td>0</td><td>4</td><td>-3</td><td>-2</td><td>-2</td><td>2</td><td>8</td><td>-1</td><td>-3</td><td>-2</td><td>-1</td><td>-5</td></tr><tr><td>V</td><td>0</td><td>-3</td><td>-3</td><td>-4</td><td>-1</td><td>-3</td><td>-3</td><td>-4</td><td>-4</td><td>4</td><td>1</td><td>-3</td><td>1</td><td>-1</td><td>-3</td><td>-2</td><td>0</td><td>-3</td><td>-1</td><td>5</td><td>-4</td><td>-3</td><td>-1</td><td>-5</td></tr><tr><td>B</td><td>-2</td><td>-1</td><td>4</td><td>5</td><td>-3</td><td>0</td><td>1</td><td>-1</td><td>0</td><td>-4</td><td>-4</td><td>0</td><td>-3</td><td>-4</td><td>-2</td><td>0</td><td>0</td><td>-5</td><td>-3</td><td>-4</td><td>5</td><td>2</td><td>-1</td><td>-5</td></tr><tr><td>Z</td><td>-1</td><td>0</td><td>0</td><td>1</td><td>-3</td><td>4</td><td>5</td><td>-2</td><td>0</td><td>-3</td><td>-3</td><td>1</td><td>-1</td><td>-4</td><td>-1</td><td>0</td><td>-1</td><td>-2</td><td>-2</td><td>-3</td><td>2</td><td>5</td><td>-1</td><td>-5</td></tr><tr><td>X</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>-1</td><td>-2</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-2</td><td>-2</td><td>-1</td><td>0</td><td>-3</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-5</td></tr><tr><td>*</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td>-5</td><td></td></tr></table>
+
+											</td>
+
+										</tr>
+									</table>
+
+									
+
+									<script>
+										let blosum62 = document.getElementById("blosum62");
+										let show62 = true;
+										function toggleBlossum62() {
+											show62 = !show62;
+											if (show62) {
+												blosum62.style.display = "block";
+											}
+											else {
+												blosum62.style.display = "none";	
+											}
+										}
+										toggleBlossum62();
+										
+										let blosum50 = document.getElementById("blosum50");
+										let show50 = true;
+										function toggleBlossum50() {
+											show50 = !show50;
+											if (show50) {
+												blosum50.style.display = "block";
+											}
+											else {
+												blosum50.style.display = "none";	
+											}
+										}
+										toggleBlossum50();
+
+									</script>
+
+									<p>
+										<b>NOTE:</b> Interestingly, as shown in <a href = "http://146.6.100.192/users/BCH339N_2018/BLOSUM62Miscalculations.pdf">this paper</a>, the <a href = "https://www.pnas.org/content/pnas/89/22/10915.full.pdf">original authors</a> had a normalization error when computing the BLOSUM matrices according to their procedure, but the matrices somehow yield better search results.  So we will be using the original matrices in <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>.
+									</p>
+
+									<h3><a name = "phylogeneticbg">Phylogenetic Trees</a></h3>
+									<p>
+										Now that we have ways of measuring similarity between amino acid sequences, we can use these similarity measures as a proxy for overall similarity between species.  Amazingly, if we choose the right genes to analyze, we can use Needleman-Wunsch similarity to build a "tree of life" from the bottom up.  In this context, the tree will show branching in evolutionary history, and it is known as a <b>Phylogenetic tree</b>.  To build it, we'll merge nodes together first that have the highest similarity score, and they will end up towards the bottom of the tree.  Internal nodes can then be thought of as common ancestors, and eventually we will end up at a root which can be thought of as the origin of life.
+									</p>
+
+									<p>
+										When inferring the evolution of species, good genes to examine come from mitochondrial DNA (DNA describing the energy factory in cells), as the DNA mutates quickly and is only passed on from the mother.  Using <a href = "https://www.ncbi.nlm.nih.gov/nuccore/">https://www.ncbi.nlm.nih.gov/nuccore/</a>, I've provided amino acid sequences data for 71 species in the file <a href = "../../Assignments/HW5_PhylogeneticTrees/HW5_PhylogeneticTrees/organisms.json">organisms.json</a> from the <a href = "https://en.wikipedia.org/wiki/COX-3">COX-3 mitochondrial gene</a> on homework 5.  The figure below shows the phylogenetic tree of these species obtained using Needleman-Wunsch with BLOSUM62 costs.  We will walk through how to construct this in the next section.
+									</p>
+
+									<p>
+										<img src = "blosum62.svg" width=800>
+									</p>
+
+
+									<h3><a name = "slcluster">Single-Linkage Clustering</a></h3>
+
+									<p>
+										We will now describe an algorithm, known as "single linkage clustering with the min rule," that can be used to construct phylogenetic trees.  In this context, a phylogenetic tree is a specific example of a more general construct known as a <b>dendrogram</b>.
+									</p>
+
+
+									<h4><a name = "algorithm1">Algorithm 1: O(N<SUP>3</SUP>) Naive Single-Linkage Clustering </a></h4>
+									<p>
+										We will first describe an algorithm that will help to explain conceptually how the tree is built, but this algorithm is inefficient, so we will then explain a better algorithm that computes the same information, and you will implement the latter algorithm.
+									</p>
+									
+									<ol>
+										<li>
+											Start off with each species in its own cluster, which is represented by a leaf node in the tree.  
+										</li>
+										<li>
+											Merge the two clusters with the highest similarity, according to the Needleman-Wunsch distance.  Similarity is defined as the maximum similarity between all pairs of items in one and the other cluster.  Create a new internal node in the tree whose children are the root nodes of each cluster that's being merged.
+	
+											<p>
+												As an example, suppose that Fugu rubipres and Goldfish are paired together, and Eastern newt and Fire salamander are paired together.  Then the BLOSUM62-based Needleman-Wunsch scores are as follows:
+	
+												<table style="display:block;">
+													<tr>
+														<td></td>
+														<td>Eastern newt</td>
+														<td>Fire salamander</td>
+													</tr>
+													<tr>
+														<td>Fugu rubipres</td>
+														<td>1319</td>
+														<td>1294</td>
+													</tr>
+													<tr>
+														<td>Goldfish</td>
+														<td>1341</td>
+														<td>1300</td>
+													</tr>
+												</table>
+	
+												In this case, the maximum similarity between members of the two clusters occurs between the Eastern Newt and Goldfish at 1341.  So if at this step 1341 is the largest similarity between all pairs of clusters that exist, then we merge these four and form an internal node representing that.
+											</p>
+											<img src = "MergingClusterExample.svg" width=500>
+										</li>
+										<li>
+											Repeat step 2 as long as there is more than one cluster.
+										</li>
+										<li>
+											The final node that's created is the root of the tree.
+										</li>
+									</ol>
+	
+									
+	
+									<h4><a name = "algorithm2">Algorithm 2: Kruskal's Algorithm for O(N<SUP>2</SUP>logN) Single Linkage Clustering</a> </h4>
+	
+									<p>
+										The algorithm we've described so far totally works, but the problem is that a straightforward implementation from this description takes <b>O(N<SUP>3</SUP>)</b> time for <b>N</b> items. That's OK for only 71 species in our example, but these sorts of trees are often built on images, where every pixel starts off in its own node.  Even a 100x100 image has 10,000 pixels, so N<SUP>3</SUP> is a trillion at that point.  So even though we can get away with a naive algorithm in <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>, for the purposes of the class, we will be implementing a more efficient version based on an algorithm known as <a href = "https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">Kruskal's algorithm</a>, using <a href = "../../Labs/Lab2_UnionFind/">union find</a> to help us.  The algorithm uses union find to keep track of clusters as clusters are merged together from most to least similar until everything is in one tree.  The algorithm maintains three data structures in tandem as it goes along
+										<ol>
+											<li>
+												The tree that's being built
+											</li>
+											<li>
+												A union find data structure to keep track of which leaf nodes (corresponding to species) are part of the same connected component
+											</li>
+											<li>
+												An array or dictionary that keeps track of the node of the tree corresponding to a root in the union find data structure
+											</li>
+										</ol>
+										In this way, we can quickly look up whether a pair of nodes is part of the same cluster by seeing if their roots are the same.  Then, it's just a matter of merging nodes from most similar to least similar.  The steps below spell this out.
+									</p>
+	
+									<ol>
+										<li>
+											Create a node for each species, and create a union find structure where each node starts off as its own component.  Set the roots of each of these components to be the leaf nodes in the tree in a separate array.
+										</li>
+										<li>
+											Compute all pairwise similarities between nodes based on Needleman-Wunsch.
+										</li>
+										<li>
+											Sort all pairs of nodes in decreasing order of similarity to ensure that the most similar pairs get grouped together first.  This step incurs the dominant cost of <b>O(N<SUP>2</SUP> log N)</b> since there are <b>O(N<SUP>2</SUP>)</b> pairs.
+										</li>
+										<li>
+											Now we need to merge the nodes together from the bottom up according to our sort.  In particular, for each pair of nodes in the above order, check to see if they are part of different clusters by comparing their roots in union find.  If they have different roots, merge them together in the union find data structure, create a new internal node for them, and set the new root to point to this internal node.  Otherwise, if they are already part of the same cluster, they have the same root (adding an edge would form a cycle), and you can simply skip this pair.
+										</li>
+										<li>
+											The last node to be added after repeating step 4 for all pairs is the root of the tree.
+										</li>
+									</ol>
+
+									<p>
+										This algorithm is tricky enough to warrant an example showing the dynamics of the three data structures.  For simplicity of illustration, we'll show building a dendrogram corresponding to a minimal spanning tree on a set of points in the plane, though the algorithm is very similar for phylogenetic trees on Needleman Wunsch; we basically just switch sorting in ascending order of length to sorting in descending order of similarity.  The example is shown below.  The left plot shows the tree being built on the original point cloud, as well as the parents pointers of the union find.  The right plot shows the dendrogram being constructed as new internal nodes are being added, and it also shows the array that keeps track of which union find roots correspond to which dendrogram roots.
+									</p>
+
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/qd9Vq2TAUmg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+									
+
+									<p>
+										<b>NOTE:</b> For those interested, there is an <b>O(N<SUP>2</SUP>)</b> algorithm that does this.  It's basically the same, except there's an extra <b>O(N<SUP>2</SUP>)</b> step at the beginning that builds the tree first, not necessarily from the bottom up, using <a href = "https://en.wikipedia.org/wiki/Prim%27s_algorithm">Prim's algorithm</a>.  In this way, we narrow down the <b>O(N)</b> pairs that are merged, so the sorting only takes <b>O(N log N)</b> steps.
+									</p>
+	
+									<p>
+										<b>NOTE ALSO:</b> The maximum rule algorithm is not necessarily the best algorithm for constructing phylogenetic trees, because it tends to produce subtrees whose most similar nodes are quite similar, but whose least similar nodes can be quite different.  A better scheme is the "average rule," in which nodes are merged together based on average similarity of pairs between them.  But this is beyond the scope of <a href = "../../Assignments/HW5_PhylogeneticTrees/">assignment 5</a>.
+									</p>
+
+
+										
+
+											
+
+
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 11: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week11_Phylogenetic">Week 11: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
