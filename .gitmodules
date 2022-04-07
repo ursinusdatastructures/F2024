@@ -43,3 +43,6 @@
 [submodule "Labs/Lab6_TreeRemoval/Lab6_TreeRemoval"]
 	path = Labs/Lab6_TreeRemoval/Lab6_TreeRemoval
 	url = https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval.git
+[submodule "ClassExercises/Week11_Kruskal/Week11_Kruskal"]
+	path = ClassExercises/Week11_Kruskal/Week11_Kruskal
+	url = https://github.com/ursinus-cs371-s2022/Week11_Kruskal.git

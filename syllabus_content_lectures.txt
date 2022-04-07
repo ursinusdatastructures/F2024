@@ -137,7 +137,7 @@ LECTURE
 LECTURE
 Minimum Spanning Trees, Kruskal's Algorithm
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
+<ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
 LECTURE
 Prim's Algorithm, Automatic Mazes
 
