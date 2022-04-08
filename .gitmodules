@@ -46,3 +46,6 @@
 [submodule "ClassExercises/Week11_Kruskal/Week11_Kruskal"]
 	path = ClassExercises/Week11_Kruskal/Week11_Kruskal
 	url = https://github.com/ursinus-cs371-s2022/Week11_Kruskal.git
+[submodule "Assignments/HW5_PhylogeneticTrees/HW5_Phylogenetic"]
+	path = Assignments/HW5_PhylogeneticTrees/HW5_Phylogenetic
+	url = https://github.com/ursinus-cs371-s2022/HW5_Phylogenetic.git
