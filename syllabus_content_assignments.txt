@@ -73,7 +73,7 @@ HW4 Due
 <a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Trees Module</a> due before class
 
 2022-04-01
-HW5: Phylogenetic Trees out
+<a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
 2022-04-07
 <a href = "Labs/Lab6_TreeRemoval">Lab 6</a> Due
