@@ -147,11 +147,11 @@ Tree Rotations
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
 LECTURE
-Balanced Binary Search Trees
+Lab 7: AVL Trees (Balanced Binary Search Trees)
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
-Huffman Trees / Huffman Encoding
+N-Ary Trees, Tries
 
 
 LECTURE

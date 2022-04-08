@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 5: Phylogenetic Trees (60 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										<h3></h3>
+									</header>
+
+									<div id="page-content">
+										<ul>
+											<li>
+												<a href = "#overview">Overview/Logistics</a>
+												<ul>
+													<li><a href = "#learning">Learning Objectives</a></li>
+													<li><a href = "#submit">What To Submit</a></li>
+													<li><a href = "#timeline">Suggested Timeline</a></li>
+												</ul>
+											</li>
+											
+											<li>
+												<a href = "#programming">Programming Tasks</a>
+												<ul>
+													<li><a href = "#nwcode">Needleman-Wunsch (10 Points)</a></li>
+													<li><a href = "#allpairs">All-Pairs Needleman-Wunsch (5 Points)</a></li>
+													<li>
+														<a href = "#buildingphylo">Building Phylogenetic Trees (25 Points)</a>
+													</li>
+													<li>
+														<a href = "#clustering">Clustering (15 Points)</a>
+													</li>
+													<li>
+														<a href = "#evenfaster">An Even Faster Algorithm (5 Points)</a>
+													</li>
+												</ul>
+											</li>
+											
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+
+										<p>
+											This assignment forms the culmination of the unit 5 on trees.  In it, you will explore a full pipeline for creating evolutionary trees of species.  Amazingly, starting from raw amino acid sequence data from carefully chosen genes and comparing it across species with a dynamic programming algorithm, we are able to create a <i>phylogenetic tree</i> from the ground up, which shows common ancestors in an evolutionary history.  What makes this particularly fascinating is that it's all done purely from experimental data and some clever algorithms, and it mirrors theories that have been made about evolutionary history.
+										</p>
+
+										<p>
+											There is some extensive background you should review at <a href = "../../ClassExercises/Week11_Phylogenetic/">this link</a> before you get started.
+										</p>
+										
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+
+											<p>
+												This assignment brings together many different ideas about trees, as well as dynamic programming, sorting, and even union find, so it will move you towards mastery of the course content covered to date.  Specific learning objectives are as follows:
+											</p>
+												
+                                            <ul>
+												<li>
+													Work with dictionaries in Python.
+												</li>
+												<li>
+													Implement Needleman-Wunsch scoring for gene sequence comparison using dynamic programming.
+												</li>
+												<li>
+													Use Kruskal's algorithm with union find to efficiently implement single-linkage clustering to build phylogenetic trees.
+												</li>
+												<li>
+													Use recursion to perform hierarchical clustering on dendrogram trees.
+												</li>
+												
+												<!--<li>
+													Cache the result of expensive computations on disk using the <code>json</code> library in python.
+												</li>!-->
+                                            </ul>
+                                        </p>
+
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                  
+											Submit a .zip file with all of your code to canvas.  This should include everything needed to run your code, including <code>phylogenetic.py</code> and your union find code.  Also submit your small document on the <a href ="#evenfaster">complexity of the faster algorithm</a>.  Finally, <b>write a brief description of the code you wrote, and indicate the name of your buddy if you had one</b>.
+										</p>
+
+										<h3><a name = "timeline">Suggested Timeline</a></h3>
+										<p>
+											Below is a suggested timeline to keep you on track
+										</p>
+										<ul>
+											<li>By <b>Tuesday 2/12</b>, you should be wrapping up Needleman-Wunsch</li>
+											<li>By <b>Friday 4/15</b>, you should have your tree data structure mostly worked out, and you should be working on the single linkage clustering algorithm</li>
+											<li>By <b>Tuesday 4/19</b>, you should be finishing up drawing your phyolgenetic trees, and you should be moving onto clustering</li>
+											<li>Final submission on <b>Friday 4/22</b></li>
+										</ul>
+
+                                        
+
+
+									<HR>
+                                    <h2><a name = "programming">Programming Tasks</a></h2>
+
+									<p>
+										<a href = "https://github.com/ursinus-cs371-s2022/HW5_Phylogenetic/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  This comes along with species DNA data in <code>organisms.json</code>, as well as the two BLOSUM tables <a href = "HW5_Phylogenetic/blosum50.bla">blosum50.bla</a> and <a href = "HW5_Phylogenetic/blosum62.bla">blosum62.bla</a> (<a href = "HW5_Phylogenetic/organisms.json">Click here</a> to view the raw DNA data from <code>organisms.json</code> in your browser's JSON viewer if you're curious).  
+									</p>
+									<p>	
+										You will be editing the python file <code>phylogenetic.py</code>.  Actually, very little code has been provided; I have simply included boilerplate code to load the BLOSUM matrices.  You will have to implement Needleman-Wunsch and define your own tree classes.
+									</p>
+
+									<p>
+										<b>NOTE:</b> This assignment was inspired heavily by <a href = "https://bostjan-cigan.medium.com/using-the-needleman-wunsch-algorithm-to-draw-evolutionary-trees-90d9db149413">this blog post</a>, and you are welcome to refer to this as you're writing code for Needleman-Wunsch, but the starter code you're using has some different conventions, and you will be writing your own code for Phylogenetic trees and clustering, going well beyond what's discussed in that blog post.
+									</p>
+
+									<HR>
+									<h3><a name = "nwcode">Needleman-Wunsch (10 Points)</a></h3>
+									<h4>Your Task</h4>
+									<p>
+										Create a method <code>needleman_wunsch</code> that accepts three parameters
+										<ul>
+											<li>The first string to compare</li>
+											<li>The second string to compare</li>
+											<li>A dictionary of scores for swapping</li>
+										</ul>
+										and that returns the Needleman-Wunsch score between the two strings according to the score.  For example, if you run the following code 
+										
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											costs = {"a":-1, "b":-2, "ab":-3, "ba":-3, "aa":2, "bb":3}
+											s1 = "aabaab"
+											s2 = "ababaa"
+											print(needleman_wunsch(s1, s2, costs))
+											#
+										</script> 
+
+										Your code should print "7", as per the <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#applet">example in the live demo</a>. 
+
+									</p>
+
+									<p>
+										<b>Hints</b>
+									</p>
+									<p>
+										First, review the notes here <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#needleman">the background</a>.  You can also review the code at <a href = "https://bostjan-cigan.medium.com/using-the-needleman-wunsch-algorithm-to-draw-evolutionary-trees-90d9db149413">this blog post</a>, which does a very similar thing.
+									</p>
+									<p>
+										When you think you have this, test it on the BLOSUM data.  You can load in a BLOSUM table as a dictionary in the same format as in the <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#applet">live demo</a>.  For instance,
+									</p>
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										costs = load_blosum("blosum50.bla")
+										#
+									</script> 
+
+									<p>
+										Then, you can load in the species in a dictionary format as 
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										species = json.load(open("organisms.json"))
+									</script>
+
+									<p>
+										The keys of this dictionary store the species name and the values store the amino acid string for COX3, with characters corresponding to labels in the BLOSUM table. 
+									
+									</p>
+									<p>
+										As an example, using BLOSUM62, you should get a similarity of <b>1375</b> between a Dog and a Hyaena and a similarity of <b>1427</b> between a Domestic Cat and a Cougar.  Make sure these are correct before you continue!
+									</p>
+
+									<h3><a name = "allpairs">All-Pairs Needleman-Wunsch (5 Points)</a></h3>
+									<p>
+										Once you're convinced this is working properly, you should compute Needleman-Wunsch on all pairs of species to get ready for the next step.  This is by far the bottleneck in the whole process, and <i>it will take a few minutes in pure python</i> (you can make it faster by using <a href = "https://numba.pydata.org/">numba</a>, but I don't have the time to go over this).  To make it so you can tweak things in the next part without having to wait a few minutes to recompute all of this, <b>you should save the results of your computation to disk</b>.  The easiest way to do this is by using the <code><a href = "https://docs.python.org/3/library/json.html">json</a></code> library in python, which allows you to save dictionaries as plaintext to disk.  For example, the code
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										data = {...}
+										json.dump({"data":data}, open("distances.json", "w"))
+									</script>
+
+									<p>
+										will write the table to a file, and the code
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										data = json.load(open("distances.json"))['data']
+									</script>
+
+									<p>
+										will read this information back from the file.
+									</p>
+
+
+									<!--<p>
+										<b>HINT:</b> As a final hint, there are a few options for how to store all pairs of the distances.  You can store them in dictionaries with strings or tuples of strings as keys describing the pair of species and values describing the distances.  Or you can come up with a unique numbered index to represent each species and store the distances in a 2D array.
+									</p>!-->
+								
+								<HR>
+								<h3><a name = "buildingphylo">Building Phylogenetic Trees (25 Points)</a></h3>
+								<p>
+									Now that you have similarities between all pairs of species,load them from disk and use them to build a tree from the ground up using the <a href = '../../ClassExercises/Week11_Phylogenetic/index.html#algorithm2'>efficient <b>O(N<SUP>2</SUP> log(N)</b>) single-linkage clustering algorithm</a>, and then draw the phylogenetic tree so that the Needleman-Wunsch distances that gave rise to different merge events are depicted on the x-axis, and so that the names of the animals are drawn next to the leaf nodes, as shown below:
+								</p>
+
+								<img src = "../../ClassExercises/Week11_Phylogenetic/blosum62.svg">
+
+								<h4>
+									Programming Task
+								</h4>
+								<p>
+									
+									To accomplish this, you should design a dendrogram tree class and an accompanying tree node class.  Also, import your union find code from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a>, which you will use to keep track of which animals have merged together.  Then, create a method <code>construct_dendrogram</code> which returns an instance of your tree class.  The steps to construct the dendrogram tree are roughly as follows
+								</p>
+
+								<h4><a name = "constructdendrogram">Dendrogram Construction Pseudocode</a></h4>
+								<ol>
+									<li>Make a leaf node for each animal in the tree</li>
+									<li>Sort the pairs of distances in decreasing order of Needleman-Wunsch similarity</li>
+									<li>
+										For each pair of animals in order of the above sort, check to see if they're part of the same connected component (using union find).  If they are not, there's a new merge event.  Create a new node in the tree with the root of each of their components as the two children (left/right is arbitrary here).  Record the Needleman-Wunsch distance in that node.
+									</li>
+									<li>
+										Once all of the animals are connected, set the root of the tree to be the last merged node.
+									</li>
+								</ol>
+
+								<p>
+									Once you've constructed the tree, create a <code>draw</code> method to draw it it using similar <a href = "https://github.com/ursinus-cs371-s2022/Week10_Trees/blob/main/Trees.ipynb">recursive drawing code to what we did in class</a>, except you will lay out the tree horizontally, and the x coordinates are determined by the Needleman-Wunsch distances.  The y coordinates can be chosen with an "inorder" traversal of the nodes (although left/right child order is arbitrary in dendrograms, so your tree may look slightly different from mine).
+								</p>
+
+								<h4>Hints</h4>
+
+								<ul>
+									<ul>
+										<li>
+											As in <a href = "../HW2_PlantCellSegmentation/">assignment 2</a>, you will need to refer to your species as zero-indexed numbers to use union find
+										</li>
+										<li>
+											It might help to keep a list or dictionary of <code>TreeNode</code> references so you can quickly convert from union find root numbers to nodes in the dendrogram that are at the root of particular clusters.  Since each animal starts out as its own root, you will begin by merging the leaf nodes, but later you will merge internal nodes.
+										</li>
+									</ul>
+								</ul>
+								
+
+								<HR>
+								<h3><a name = "clustering">Clustering (15 Points)</a></h3>
+
+								<p>
+									Now that you've built the tree, it's possible to choose different thresholds and to <b>cluster</b> different species together that are similar, based on a chosen threshold.  This is easiest to explain in a picture.  What we want to do is to choose a particular similarity threshold and to cut the tree into branches at that threshold.  For instance, consider a threshold of 1260, as measured by BLOSUM62:
+								</p>
+
+								<p>
+									<img src = "blosum62_1260.svg" width=600>
+								</p>
+
+								<p>
+									If we do this, we get the following clusters, with sizes indicated on the left:
+								</p>
+
+								<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+									1 ['Western honeybee']
+									1 ['Russels viper']
+									1 ['American alligator']
+									44 ['African bush elephant', 'American beaver', 'American black bear', 'Asian black bear', 'Bonobo', 'Brown rat', 'Cattle', 'Cheetah', 'Chimpanzee', 'Chipmunk', 'Cougar', 'Dingo', 'Dog', 'Dolphin', 'Domestic Cat', 'Domestic Yak', 'Eastern gray kangaroo', 'Eastern wolf', 'Fox squirrel', 'Giant panda', 'Gorilla', 'Guinea pig', 'Horse', 'House mouse', 'Human', 'Hyaena', 'Indian rhinoceros', 'Indian wolf', 'Koala', 'Malayan porcupine', 'Neanderthal', 'Northern giraffe', 'Ocelot', 'Orangutan', 'Platypus', 'Polar bear', 'Red fox', 'Reindeer', 'Tiger', 'Virginia opossum', 'Wallaby', 'White rhinoceros', 'White-tailed deer', 'Wild boar']
+									9 ['Alpine newt', 'Chinese giant salamander', 'Eastern newt', 'Edible frog', 'Fire salamander', 'Fugu rubripes', 'Goldfish', 'Gray treefrog', 'Great white shark']
+									6 ['American robin', 'Bald Eagle', 'Cardinal', 'Eurasian eagle-owl', 'Eurasian golden oriole', 'Mourning dove']
+									1 ['Chameleon']
+									1 ['Bearded Dragon']
+									1 ['Monarch butterfly']
+									1 ['Common clothes moth']
+									1 ['Housefly']
+									1 ['Termite']
+									1 ['Asian lady beetle']
+									1 ['Black garden ant']
+									1 ['Spotted Lanternfly']
+								</script> 
+
+								<p>
+									As you can see both by the picture and from the clusters, all of the mammals (including marsupials) cluster together, all of the birds cluster together, and the amphibians cluster together with the fish.
+								</p>
+								<p>
+									By contrast, if we choose a more restrictive threshold of 1350, then we get the following clusters:
+								</p>
+
+								<p>
+									<img src = "blosum62_1350.svg" width=600>
+								</p>
+
+								<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+									1 ['Western honeybee']
+									1 ['Russels viper']
+									1 ['American alligator']
+									1 ['African bush elephant']
+									1 ['Guinea pig']
+									2 ['Brown rat', 'House mouse']
+									1 ['Malayan porcupine']
+									3 ['Eastern gray kangaroo', 'Virginia opossum', 'Wallaby']
+									2 ['Chipmunk', 'Fox squirrel']
+									25 ['American black bear', 'Asian black bear', 'Cattle', 'Cheetah', 'Cougar', 'Dingo', 'Dog', 'Dolphin', 'Domestic Cat', 'Domestic Yak', 'Eastern wolf', 'Giant panda', 'Horse', 'Hyaena', 'Indian rhinoceros', 'Indian wolf', 'Northern giraffe', 'Ocelot', 'Polar bear', 'Red fox', 'Reindeer', 'Tiger', 'White rhinoceros', 'White-tailed deer', 'Wild boar']
+									1 ['American beaver']
+									1 ['Platypus']
+									1 ['Koala']
+									6 ['Bonobo', 'Chimpanzee', 'Gorilla', 'Human', 'Neanderthal', 'Orangutan']
+									1 ['Gray treefrog']
+									1 ['Edible frog']
+									2 ['Fugu rubripes', 'Goldfish']
+									2 ['Eastern newt', 'Fire salamander']
+									1 ['Great white shark']
+									1 ['Alpine newt']
+									1 ['Chinese giant salamander']
+									1 ['Eurasian golden oriole']
+									2 ['American robin', 'Cardinal']
+									2 ['Bald Eagle', 'Mourning dove']
+									1 ['Eurasian eagle-owl']
+									1 ['Chameleon']
+									1 ['Bearded Dragon']
+									1 ['Monarch butterfly']
+									1 ['Common clothes moth']
+									1 ['Housefly']
+									1 ['Termite']
+									1 ['Asian lady beetle']
+									1 ['Black garden ant']
+									1 ['Spotted Lanternfly']
+								</script> 
+
+								<p>
+									More of the animals end up by themselves in a cluster, but we did manage to separate out most of the marsupials (kangaroo, opossum, wallaby) and all of the primeates (bonobo, chimpanzee, gorilla, human, neanderthal, orangutan) from the mammals cluster.
+								</p>
+
+								<h4><a name = "clusteringcode">Programming Task</a></h4>
+								<p>
+									Create a method <code>get_clusters</code> in your tree class that accepts a single parameter of the threshold you're choosing, and which returns the clusters as a list of lists, as shown in the example above.  
+								</p>
+
+								<h4>Hints</h4>
+								<ul>
+									<li>
+										As usual with recursive methods in trees, you can make the <code>get_clusters</code> method an entry point int the tree class, but the bulk of the work can be done by a corresponding recursive helper method in the node class.
+									</li>
+									<li>
+										Pass along a list by reference to the node class's recursive method that holds the clusters.  Each cluster is itself a list, which you may want to generate with a separate recursive helper method that enumerates all of the nodes in a particular subtree.
+									</li>
+								</ul>
+
+								
+
+								<HR>
+									<h3><a name = "evenfaster">An Even Faster Algorithm (5 Points)</a></h3>
+
+									<p>
+										As far as big-O scaling goes, the bottleneck in the algorithm to build the phylogenetic trees is the sorting step, which has to sort <b>N<SUP>2</SUP></b> items, so it takes <b>O(N<SUP>2</SUP> log(N<SUP>2</SUP>))</b> steps, which is actually  <b>O(N<SUP>2</SUP> log(N))</b> up to constants with the logarithm rule <b>log(a<SUP>2</SUP>) = 2 log(a)</b>.  If we can narrow down the number of edges we have to consider, then we can address the complexity of this step.  One very slick way to do this is to build a maximum spanning tree first using Prim's algorithm to narrow down the edges.  This doesn't give us the dendrogram, but it does narrow down the edges we have to consider, so we can just run Kruskal's algorithm again, constrained to the edges we found with Prim's algorithm. 
+									</p>
+
+									<h4>Your Task</h4>
+									<p>
+										Write a small document (in word or latex) describing the complexity, in big-O notation, of the above described algorithm that preprocesses the edge list using Prim's algorithm.  Be sure to describe the complexity of each step in the <a href = "#constructdendrogram">dendrogram construction algorithm</a>, as well as this new Prim's step, and explain what the dominant term ends up being.
+									</p>
+
+									<h4>Extra Credit (+5 Points)</h4>
+									<p>
+										Actually implement this code in your <code>construct_dendrogram</code> method using a <a href = "https://docs.python.org/3/library/heapq.html">heap</a>.  Make a note that you've done this so I don't miss it when grading.
+									</p>
+
+
+										
+
+											
+
+
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 11: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week11_Phylogenetic">Week 11: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
