@@ -49,3 +49,6 @@
 [submodule "Assignments/HW5_PhylogeneticTrees/HW5_Phylogenetic"]
 	path = Assignments/HW5_PhylogeneticTrees/HW5_Phylogenetic
 	url = https://github.com/ursinus-cs371-s2022/HW5_Phylogenetic.git
+[submodule "Labs/Lab7_AVL/Lab7_AVL"]
+	path = Labs/Lab7_AVL/Lab7_AVL
+	url = https://github.com/ursinus-cs371-s2022/Lab7_AVL.git
