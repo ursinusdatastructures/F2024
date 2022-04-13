@@ -151,7 +151,7 @@ LECTURE
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
-N-Ary Trees, Tries
+Huffman Trees
 
 
 LECTURE
