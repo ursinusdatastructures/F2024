@@ -88,6 +88,6 @@ HW4 Due
 HW5 Due
 
 2022-04-22
-<HR>HW6: Traveling Salesperson Out
+<a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson</a> Out
 
-2022-04-22
+2022-04-26

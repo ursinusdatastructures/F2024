@@ -158,36 +158,32 @@ LECTURE
 Priority Queues / Binary Heaps
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
+LECTURE
+Continue Priority Queues
+
+
 SECTION
 Graph Data Structures And Algorithms
 
 
 LECTURE
-Graph Data Structures, Breadth-First Search
+Graph Data Structures
 
 
 LECTURE
-Depth-First Search, Euclidean Traveling Salesperson
+Breadth-First Search, Depth-First Search
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
 LECTURE
-Dijkstra's Algorithm, Prim's Algorithm
+Euclidean Traveling Salesperson Problem, Work Session
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul>
 LECTURE
-Complexity of Dijkstra's Algorithm, Fibonacci Heaps
+Dijkstra's Algorithm
 
 
 LECTURE
-Graph Cuts
-
-
-LECTURE
-Floyd-Warshall, Bellman-Ford
-
-
-LECTURE
-Directed Acyclic Graphs / Topological Sort
+Bellman Ford
 
 
 
