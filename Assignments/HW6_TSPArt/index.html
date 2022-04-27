@@ -1,0 +1,434 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2022</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 6: Traveling Salesperson Art (35 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										<h3></h3>
+									</header>
+
+									<div id="page-content">
+										<ul>
+											<li>
+												<a href = "#overview">Overview/Logistics</a>
+												<ul>
+													<li><a href = "#learning">Learning Objectives</a></li>
+													<li><a href = "#submit">What To Submit</a></li>
+												</ul>
+											</li>
+											
+											
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+
+										<p>
+											For the last assignment in this class, you will explore an application of minimum spanning trees and depth first search to create computer generated art known as "traveling salesperson art."
+										</p>
+
+										<p>
+											<a href = "https://github.com/ursinus-cs371-s2022/HW6_TSPArt/archive/refs/heads/main.zip">Click here</a> to download the starter code.  You will have to write all of the code to do a traveling salesperson tour, but I have provided some image processing tools, as well example images.
+										</p>
+										
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+
+											
+												
+                                            <ul>
+												<li>
+													Implement depth first search in python
+												</li>
+												<li>
+													Approximate traveling salesperson solutions using minimum spanning trees and the <a href = "https://en.wikipedia.org/wiki/2-opt">2-opt heuristic</a>
+												</li>
+												<li>
+													Create art programmatically
+												</li>
+                                            </ul>
+                                        </p>
+
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                  
+											
+										</p>
+
+                                        
+									<HR>
+									<h2><a name = "background">Background: Traveling Salesperson Art</a></h2>
+									<p>
+										There's a neat paper by Craig S. Kaplan and Robert Bosch on using the Traveling Salesperson Problem (TSP) to create art (<a href = "TSPArt.pdf">Click here</a> to read the paper).  The first step is to use something called "Voronoi Stippling" (see paper <a href = "Secord_VoronoiStippling.pdf">here</a> by Adrian Secord) to turn an image into a dot pattern.  For instance, let's say we started with the following image of Emperor penguins, courtesy of <a href = "https://flickr.com/photos/cmichel67/11278870305">Christopher Michel</a>
+									</p>
+
+									<img src = "HW6_TSPArt/images/penguins.png" width="0%">
+
+									<p>
+										And now let's say we ran the following code in the directory of the starter code
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										from stipple import *
+										np.random.seed(0)
+										I = skimage.io.imread("images/penguins.png")
+										# Initial stippling
+										X = voronoi_stipple(I, thresh=0.3, target_points=2000, canny_sigma=0.8)
+										# Filter out lowest 4 points by density
+										X = density_filter(X, (X.shape[0]-4)/X.shape[0]) 
+										plt.figure(figsize=(10, 10))
+										plt.scatter(X[:, 0], X[:, 1], 2)
+										plt.savefig("penguins_stipple.svg", bbox_inches='tight')
+									</script> 
+
+									<p>
+										Then we would get this image:
+									</p>
+
+									<img src = "penguins_stipple.svg" width="50%">
+
+									<p>
+										Notice how the dots are more highly concentrated in darker regions of the image.  This is what gives us the illusion of shading with just a distribution of dots.  Also, as a programmatic note, note that <code>X</code> is an <b>N x 2</b> array that holds all of the data, with the x coordinates in the first column and the y coordinates in the second column.  Hence the slices in <code>plt.scatter(X[:, 0], X[:, 1], 2)</code>
+									</p>
+
+									<p>
+										The <a href = "TSPArt.pdf">traveling salesperson art</a> paper goes one step further, though.  If we then treat each point as a "city," we can then search for a Traveling salesperson tour (i.e. a permutation of the dots that minimizes the length of the distances between adjacent dots, and between the first and the last dot).  Let's suppose we indexed such a permutation with an array <code>tour</code> of indices, and then we ran the following code:
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										plt.figure(figsize=(10, 10))
+										plt.plot(X[tour, 0], X[tour, 1], c='k')
+										plt.scatter(X[tour, 0], X[tour, 1], s=15, c=np.arange(len(tour)), cmap='magma_r')
+										plt.gca().set_facecolor((0.8, 0.8, 0.8))
+									</script> 
+
+									<p>
+										Then we get the following image:
+									</p>
+
+									<img src = "penguins_tsp.svg" width="50%">
+
+									<p>
+										If we use more points, we get an even prettier image, at the expense of more computation time:
+									</p>
+
+									<img src = "penguins_tsp_10000.svg" width="50%">
+
+									
+
+									<HR>
+                                    <h2><a name = "programming">Programming Tasks</a></h2>
+
+										<p>This assignment will walk you through an approximation algorithm for the traveling salesperson problem.  This problem is <a href = "https://news.cs.washington.edu/2021/05/20/shayan-oveis-gharan-receives-eatcs-presburger-award-for-groundbreaking-contributions-to-the-traveling-salesperson-problem/">NP hard</a>, so we can't expect to get a good exact solution.  However, we will find an approximate solution to the problem which is provably within a factor of 2 of the best solution, and which is probalby much better in practice.  And this will be good enough for artistic applications!</p>
+
+									<h3><a name = "mstdfs">A 2-Approximation with MST DFS (15 Points)</a></h3>
+									<p>
+										As we noted in class, it is possible to come up with a 2-approximation of the TSP by doing a depth first traversal of the minimum spanning tree of the points in 2D. Review the code <a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video4">here</a> on how to compute an MST of points in 2D efficiently, and then perform the DFS.  As an example, here's what you should get on the penguins: 
+									</p>
+
+									<img src = "penguins_mst.svg" width="50%">
+
+									<p>
+										This is not bad for how quick the algorithm is!  However, it's clearly not perfect, and in particular, we can see some places where the tour crosses over itself, which is a telltale sign that this is not optimal, because an optimal solution will have no crossings.  We will exploit this in the next section to improve this solution.
+									</p>
+
+									<h3><a name = "twoopt">An Improvement with The 2-Opt Heuristic (15 Points)</a></h3>
+									<p>
+										One observation we can make to improve our initial guess of a tour is that an optimal solution will never contain a crossing because of the <a href = "https://en.wikipedia.org/wiki/Triangle_inequality">triangle inequality</a>.  This is most easily seen visually.  The picture below shows how a crossing occurs between the edges between <code>i</code> and <code>i+1</code> and <code>j</code> and <code>j+1</code>
+									</p>
+
+									<img src = "Crossing.svg" width="50%">
+
+									<p>
+										But we can change this to another traveling salesperson tour by swapping the indices so that we use the edges from <code>i</code> to <code>j</code> and <code>i+1</code> to <code>j+1</code> instead of the edges between <code>i</code> and <code>i+1</code> and <code>j</code> and <code>j+1</code>.  This improves the overall tour length because the distances 
+										<h4>
+											\[ d(P_i, P_j) + d(P_{i+1}, P_{j+1}) &lt; d(P_i, P_{i+1}) + d(P_j, P_{j+1}) \]
+										</h4>
+										where <b>P<SUB>k</SUB></b> is the point at index <b>k</b> of the current tour
+									</p>
+									<p>
+										This flip can be realized by creating a new tour out of the following three chunks, in order:
+										<a name = "swapping"><h5>Swapping Order</h5></a>
+										<ul>
+											<li>From index <code>0</code> to index <code>i</code> in the original tour</li>
+											<li>
+												From index <code>i+1</code> to index <code>j+1</code> from the original tour <b>in reverse order</b>
+											</li>
+											<li>
+												From index <code>j+1</code> to the end in the original tour
+											</li>
+										</ul>
+
+									</p>
+
+									<p>
+										If we repeatedly do this in the penguin example, we see that we improve from the initial MST-based tour which has length <b>29020.836</b>, to one which has a length of <b>22838.024</b>, which is quite a big improvement!  More importantly for our artistic application, this final tour has no crossings.  The animation below shows this process step by step
+									</p>
+
+									<img src = "penguins2opt.gif">
+
+									<h4>Your Task</h4>
+									<p>
+										Implement the 2-opt heuristic to improve your MST-based solution.  The pseudocode for this is as follows:
+									</p>
+
+									<div style="background-color: blanchedalmond; padding:10px">
+										<ul>
+											<li>
+												While an improvement is possible
+												<ul>
+													<li>
+														Look through each pair of edges in the current tour until you find a pair <b>i, j</b> where  
+														<h4>
+														\[ d(P_i, P_j) + d(P_{i+1}, P_{j+1}) &lt; d(P_i, P_{i+1}) + d(P_j, P_{j+1}) \]
+														</h4>
+														<p>
+															Be sure that <b>i</b> and <b>j</b> are not the first or last points in the tour, as swapping those might mess things up.
+														</p>
+													</li>
+													<li>
+														Create a new tour by <a href = "#swapping">swapping</a> the edges
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									
+
+									<p>
+										
+										You should write a helper method whose job it is to find the next two indices <code>i</code> and <code>j</code> whose edges can be swapped, which you call from within a loop while there are still indices to be swapped.   You should use <a href = "https://numba.pydata.org/">numba</a> with the decorator <code>@jit(nopython=True)</code> above your helper method so that this code runs efficiently.  As an example, I'm currently doing this in the <code><a href = "https://github.com/ursinus-cs371-s2022/HW6_TSPArt/blob/e82d3746575c278cfb9ebcc48f1b1b0ae2be4065/stipple.py#L71">get_centroids</a></code> method of my stippling code.  Otherwise, your code will run very slowly.
+									</p>
+
+									<p>
+										Another suggestion for speed is to pick up your search at the index <code>i</code> that you swapped last time, and then loop around if necessary.
+									</p>
+
+
+									<h3><a name = "artcontest">Mandatory Art Contest (5 Points)</a></h3>
+
+									<p>
+										You just made a really cool program to create computer generated art!  Use it to create a nice image, which will we show in a gallery for the class (you can use a pseudonym if you don't want your name to be up publicly).  We will vote, and the winner will get extra credit!  Here are a few suggestions to fine tune things:
+									</p>
+
+									<ul>
+										<li>
+											The parameter <code>thresh</code> to stipple is a variable between 0 and 1 that determines the grayscale level above which to exclude samples.  So make this closer to 0 if you only want to include darker parts of the image.
+										</li>
+										<li>
+											If you want edges to show up more strongly, play around with the <code>canny_sigma</code> parameter
+										</li>
+										<li>
+											Usually using more points will lead to a prettier drawing, but it will take longer
+										</li>
+										<li>
+											If you're getting some undesirable points in the middle of an otherwise white region, you can filter them out with the <code>density_filter</code> method.  For instance, <code>X = density_filter(X, (X.shape[0]-10)/X.shape[0]) </code> will filter out the 10 points that are furthest from their nearest neighbor.
+										</li>
+										<li>
+											You can change the colormap from <code>'magma_r'</code> to get different color pattern over time.  <a href = "https://matplotlib.org/stable/tutorials/colors/colormaps.html">Click here</a> to see the plethora of options.
+										</li>
+									</ul>
+											
+
+
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_DTW/index.html">Lab 4: Dynamic Time Warping</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+												<li><a href = "../../Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<!--<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3: Asymptotics Examples / Tricks of The Trade</a></li>!-->
+												<li><a href = "../../ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "../../ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 11: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week11_Phylogenetic">Week 11: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<!--<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>!-->
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>

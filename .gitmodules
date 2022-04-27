@@ -52,3 +52,6 @@
 [submodule "Labs/Lab7_AVL/Lab7_AVL"]
 	path = Labs/Lab7_AVL/Lab7_AVL
 	url = https://github.com/ursinus-cs371-s2022/Lab7_AVL.git
+[submodule "Assignments/HW6_TSPArt/HW6_TSPArt"]
+	path = Assignments/HW6_TSPArt/HW6_TSPArt
+	url = https://github.com/ursinus-cs371-s2022/HW6_TSPArt.git
