@@ -197,11 +197,26 @@
 										As we noted in class, it is possible to come up with a 2-approximation of the TSP by doing a depth first traversal of the minimum spanning tree of the points in 2D. Review the code <a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video4">here</a> on how to compute an MST of points in 2D efficiently, and then perform the DFS.  As an example, here's what you should get on the penguins: 
 									</p>
 
+									
+
 									<img src = "penguins_mst.svg" width="50%">
 
 									<p>
 										This is not bad for how quick the algorithm is!  However, it's clearly not perfect, and in particular, we can see some places where the tour crosses over itself, which is a telltale sign that this is not optimal, because an optimal solution will have no crossings.  We will exploit this in the next section to improve this solution.
 									</p>
+
+									<h4>
+										Your Task
+									</h4>
+									<P>
+										Create a method that takes in a stipple pattern as a matrix <code>X</code> (as shown above), and which returns a <code>tour</code> of <code>X</code> which is a 2-approximation of the best possible tour.  You should 
+										<ol>
+											<Li>Compute the MST of X and store the edges of the MST in appropriate data structures</Li>
+											<li>
+												Run depth-first search on the graph you get in step 1, and fill in the tour by recording the order that the nodes are visited.
+											</li>
+										</ol>
+									</P>
 
 									<h3><a name = "twoopt">An Improvement with The 2-Opt Heuristic (15 Points)</a></h3>
 									<p>
