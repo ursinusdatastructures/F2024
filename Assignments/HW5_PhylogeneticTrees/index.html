@@ -264,7 +264,7 @@
 								</ol>
 
 								<p>
-									Once you've constructed the tree, create a <code>draw</code> method to draw it it using similar recursive drawing code used to layout trees in <a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval/blob/main/Trees.ipynb">lab 6</a>, except you will lay out the tree horizontally, and the x coordinates are determined by the Needleman-Wunsch distances.  The y coordinates can be chosen with an "inorder" traversal of the nodes (although left/right child order is arbitrary in dendrograms, so your tree may look slightly different from mine).
+									Once you've constructed the tree, create a <code>draw</code> method to draw it it using similar recursive drawing code used to layout trees in <a href = "https://github.com/ursinus-cs371-s2022/Lab6_TreeRemoval/blob/main/Trees.ipynb">lab 6</a>, except you will lay out the tree horizontally, and the x coordinates are determined by the Needleman-Wunsch distances.  <b>The x coordinate of the leaf nodes should be the max similarity in the tree plus a small number</b>.  The y coordinates can be chosen with an "inorder" traversal of the nodes (although left/right child order is arbitrary in dendrograms, so your tree may look slightly different from mine).
 								</p>
 
 								<h4>Hints</h4>
