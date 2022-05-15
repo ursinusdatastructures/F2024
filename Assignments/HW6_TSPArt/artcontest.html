@@ -41,155 +41,89 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>The Kendall Tau Distance between Two Rankings, And Kemeny-Optimal Rank Aggregation</h2>
-                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+                                        <h2>Assignment 6: Traveling Salesperson Art</h2>
+										<h2>Art Contest</h2>
 										<h3></h3>
 									</header>
 
 									<div id="page-content">
-										<h3>Rankings</h3>
 										<p>
-											Our goal below is to build to an algorithm that computes an "average ranking" that makes sense from a set of rankings.  Such algorithms can be thought of as addressing a final order in ranked choice voting elections. 
+											Following <a href = "TSPArt.pdf">this paper</a>, students used the traveling salesperson problem to create art.  <a href = "index.html">Click here</a> to see the assignment description.
 										</p>
+
+										<h2>"Everything Is Fine" by Arthur</h2>
+
+										<img src = "ArtContest/aartene.jpg">
+
+										<HR>
+										<h2>"Goomba Stipple" by Rich</h2>
+										<img src = "ArtContest/Goomba.svg">
+
+										<HR>
+										<h2>"<a href = "https://www.youtube.com/watch?v=lbI1Ld0h3xY">Moby</a> The Bass" by Tom Boccuto</h2>
+
+										<img src = "ArtContest/Moby.png">
+
+										<!--<p>
+											Also ICP stipple..
+										</p>
+
+										<img src = "ArtContest/ICP_stipple.jpg">!-->
+
+										<HR>
+										<h2>"Greifhardt" by Mevan</h2>
+
+										<img src = "ArtContest/GReifhardt.png">
+
+										<HR>
+											<h2>"Starfish" by Vincent</h2>
+											<img src = "ArtContest/vincent.png">
+
 										
+										<HR>
+											<h2>"Cartoon Salesman" by Kevin Hoffman</h2>
+											<img src = "ArtContest/cartoon.png" width="100%">	
+																				
+										<HR>
+											<h2>"Penguins Stipple" by Josh K</h2>
+											<img src = "ArtContest/penguins_stipple.svg">
+										
+										
+										<HR>
+											<h2>"Mario Bros" by David K</h2>
+											<img src = "ArtContest/mariobros.png">
+										
+										<HR>
+											<h2>"Spongegar Stipple" by Jeremy M.</h2>
+											<img src = "ArtContest/spongegar_stipple.svg">
 
+										<HR>
+											<h2>"Empire State" by Will O</h2>
+											<img src = "ArtContest/empirestate.png">
+										
+										<HR>
+											<h2>"Lost Cabbages" by Will P</h2>
+											<img src = "ArtContest/cabbages.png" width="100%">
+										
+										<HR>
+											<h2>"Star Wars" by Brenden R.</h2>
+											<img src = "ArtContest/StarWars.png">
+										
+										<HR>
+											<h2>"Darth Vader" by Sean S.</h2>
+											<img src = "ArtContest/darthVader.svg">
+										
+										<HR>
+											<h2>"A Crappy Submission" by Michael Tecce</h2>
+											<img src = "ArtContest/crap.png">
+										
+										<HR>
+											<h2>"Phillies" by Matt W</h2>
+											<img src = "ArtContest/WallaceArtContest.png">
 
-										<h3><a name = "kendalltaudef">Kendall-Tau Distance</a></h3>
-										<p>
-											The <b>Kendall Tau distance</b> is a way of comparing two rankings of items by counting the number of pairs that occur in a different order between the two rankings.  Each such pair is known as a "discordant pair," while pairs that agree are known as "concordant pairs."  For example, consider the following two rankings of the numbers 0-4:
-										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
-										</p>
-
-										versus
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
-										</p>
-
-										<p>
-											The image below shows that there are 7 discordant pairs out of all possible 10 pairs in this example.  Therefore, the Kendall-Tau distance between them is 7.
-										</p>
-
-
-										<img src = "KTExample.svg" width=600>
-
-										<p>
-											In general, if two rankings are the exact reverse of each other, the Kendall-Tau distance will be maximized, and if they are exactly the same, the Kendall-Tau distance will be 0.  For 5 items, the maximum distance is 10 (since there are 10 pairs in 5 items), so the above example reflects two rankings which are quite different. 
-										</p>
-
-										<p>
-											For simplicity, we'll consider ranking the numbers from <b>0, 1, ..., N-1</b>, since we could number <b>N</b> items each set in an arbitrary but consistent way.
-										</p>
-
-										<h3><a name = "efficient">Efficiently Computing The Kendall-Tau Distance</a></h3>
-										<p>
-											A brute force way to compute the Kendall-Tau distance to compare the order of every pair between the two rankings.  A ranked choice of <b>N</b> items, this is <b>N(N-1)/2</b> pairs to check, which is <b>O(N<SUP>2</SUP>)</b> checks.  We can do better, however, by exploiting sorting algorithms.  In algorithms jargon, we <b>reduce</b> the Kendall-Tau distance to comparison-based sorting.  Since we know such algorithms that run in worst-case <b>O(N log N)</b> time, we can beat the naive <b>O(N<SUP>2</SUP>)</b> scheme we get from following the definition too literally.  For example, let's again consider the following two rankings
-											
-										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
-										</p>
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
-										</p>
-										<p>
-											If we relabel the numbers so that the first list is strictly ascending, aka using the following relabelings
-										</p>
-										<ul>
-											<li>0 stays at 0</li>
-											<li>4 becomes 1</li>
-											<li>3 becomes 2</li>
-											<li>1 becomes 3</li>
-											<li>2 becomes 4</li>
-										</ul>
-										<p>
-											Then we get the following lists
-										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 1, 2, 3, 4</code>
-										</p>
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">3, 1, 4, 2, 0</code>
-										</p>
-
-										<p>
-											Then, we can simply count the number of <b>inversions</b> in the second list.  An inversion is a pair of numbers which is in the wrong order.  In the above example, we see that the pairs (3, 1), (3, 2), (3, 0), (1, 0), (4, 2), (4, 0), (2, 0).  There are 7 total inversions, which matches the Kendall-Tau distance we computed.
-											
-										</p>
-										<p>
-											Since inversions consist of pairs that are out of order, we can count them by putting the numbers in this list into order via a sorting routine.  One way is to simply count the number of swaps that <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video4">insertion sort</a> does to put that list in order.  This correctly computes the Kendall-Tau distance, but it takes <b>O(N<SUP>2</SUP>)</b> time in the worst case (since there can be up to N*(N-1)/2 discordant pairs if the lists are the reverse of each other).  The one advantage of this technique is that we're only using <b>O(N)</b> memory, whereas a more naive technique may have actually stored all <b>O(N<SUP>2</SUP>)</b> pairs in memory for one to check against the other.
-										</p>
-
-										<p>
-											If we think a little harder, though, we can also reach the <b>O(N log N)</b> computational worst case bound by shoehorning the <a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Exercise1">merge sort algorithm</a>, which is <b>O(N log N)</b> in the worst case, into counting the number of inversions.  Let's now construct such an algorithm and prove its correctness as we go.  Somehow, we will have to count multiple inversions in a single step to avoid the <b>O(N<SUP>2</SUP>)</b> worst case.  Recall that the merge sort algorithm looks as follows (ignoring the base case for brevity)
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											mergesort(arr, i1, i2):
-											     mid = (i1+i2)//2
-												 # Recursively sort first half
-												 mergesort(arr, i1, mid) 
-												 # Recursively sort second half
-												 mergesort(arr, mid+1, i2) 
-												 # Merge the two halves together
-												 merge(arr, i1, mid, i2)]]>
-										</script> 
-
-										<p>
-											Up to this point, we've simply had merge sort operate on <code>arr</code> by reference, but we can also have it return the number of inversions it detected.  If we do this, we can recursively compute the inversions as
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											mergesort(arr, i1, i2):
-											     mid = (i1+i2)//2
-												 inv1 = mergesort(arr, i1, mid) 
-												 inv2 = mergesort(arr, mid+1, i2) 
-												 inv3 = merge(arr, i1, mid, i2)
-												 return inv1 + inv2 + inv3]]>
-										</script> 
-
-										<p>
-											In other words, we recursively count the inversions it took when we were sorting the first half and second half, and then we count the remaining inversions that occur when we merge them together.
-										</p>
-											Just as when we were doing the sorting, the challenge / meat of the work here becomes to count the inversions in the merge step.  Review the code you wrote in <a href = "../../Labs/Lab5_MergeSort/">lab 5</a>, and recall that the first loop in the merge step keeps track of an index <b>i</b> on the left half and an index <b>j</b> on the right half, as show below:
-										</p>
-
-										<img src = "MergeVariables.svg" width=400>
-
-										<p>
-											One possibility is that all of the elements on the left side are less than all of the elements on the right side, in which case everything is sorted already.  The first merge loop will then take all of the elements from the left, incrementing <b>i</b> until we get up to <b>mid</b>.  It follows, then, that picking an index from the left side should not add any inversions.  
-										</p>
-										<p>	
-											However, if at a particular iteration of this loop we take the element at index <b>j</b> on the right side as the next element that we merge in, then that means that <i><b>x[j]</b> is less than everything between index <b>i</b> and index <b>mid</b>, since the left hand side is sorted</i>.  Thus, if we pick <b>x[j]</b> to go next, then we must add <b>mid-i+1</b> to the total number of inversions resolved while merging.  And that's it!  The last two loops simply fill out items that are already in order that are left.
-										</p>
-
-										<h3><a name = "bgkemeny">Kemeny Optimal Rank Aggregation</a></h3>
-										<p>
-											Now that we have developed the Kendall-Tau distance to measure the dissimilarity of a pair of rankings, we can define a <a href = "https://en.wikipedia.org/wiki/Kemeny%E2%80%93Young_method">Kemeny Optimal Ranking</a> over a set of <b>M</b> rankings to complete the election.  A Kemeny Optimal rank has the very nice property of being a <a href = "https://en.wikipedia.org/wiki/Condorcet_method">Condorcet method</a>, which means that the candidate who gets the first spot would always win the majority vote in a head-to-head election against any of the other candidates, based on the rankings that were submitted.
-										</p>
-										<p>	
-											A Kemeny Optimal ranking minimizes the sum of the Kendall-Tau distances to all <b>M</b> rankings.  In other words, <i>it is a ranking which minimizes pairwise disagreements between all people who voted</i>.  As it turns out, it is <a href = "https://cstheory.stackexchange.com/questions/5995/efficient-verification-of-kemeny-optimal-rankings">provably hard</a> to compute this distance exactly, but you will work on a brute force recursive algorithm to achieve this, and to compare it to more efficient, approximate answers.
-										</p>
-
-										<P>
-											Pseudocode for the brute force algorithm is roughly
-										</P>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											for every possible permutation **p**
-												disagreements = 0
-												for each rater permutation **r**
-													disagreements += kendall_tau(p, r)
-												if disagreements < smallest disagreements seen so far
-													update smallest / permutation
-										</script> 
+										<HR>
+											<h2>"Henry" by Henry W</h2>
+											<img src = "ArtContest/henry.jpg">
 
                                 </div>
 						</div>
