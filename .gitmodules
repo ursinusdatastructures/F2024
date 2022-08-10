@@ -1,0 +1,3 @@
+[submodule "Assignments/HW1_Autocomplete/HW1_Autocomplete"]
+	path = Assignments/HW1_Autocomplete/HW1_Autocomplete
+	url = https://github.com/ursinus-cs271-f2022/HW1_Autocomplete.git
