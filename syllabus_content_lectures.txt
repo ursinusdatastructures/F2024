@@ -13,7 +13,7 @@ Continue Needle In A Haystack: The ADT Concept, Sorted List Data Structure And L
 LECTURE
 Python Classes And Objects, Hash Tables Intro
 
-<ul><li><a href = "ClassExercises/Week2_Needle">Notes on Set ADT And Hash Tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+<ul><li><a href = "ClassExercises/Week2_Needle">Class Notes on Set ADT And Hash Tables</a></li><li><a href = "https://medium.com/out-of-the-pigeonhole/hash-functions-and-the-most-underrated-data-structure-26312e7f2dec">Amy Liu's notes on hash tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 LECTURE
 <a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a>
 

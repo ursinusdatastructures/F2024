@@ -7,7 +7,7 @@
 <html>
 <!-- Header !-->
 	<head>
-		<title>Ursinus CS 371: Data Structures And Algorithms, Spring 2021</title>
+		<title>Ursinus CS 271: Data Structures And Algorithms, Fall 2022</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -34,7 +34,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Ursinus CS 371: Data Structures And Algorithms, Spring 2021</strong></a>
+									<a href="index.html" class="logo"><strong>Ursinus CS 271: Data Structures And Algorithms, Fall 2022</strong></a>
 								</header>
 <!-- End Header !-->
 
@@ -42,9 +42,9 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>CS 371: Data Structures And Algorithms</h1>
+											<h1>CS 271: Data Structures And Algorithms</h1>
 
-											<h2><a href = "http://www.ursinus.edu">Ursinus College</a>, Spring 2021</h2>
+											<h2><a href = "http://www.ursinus.edu">Ursinus College</a>, Fall 2022</h2>
 										</header>
 	
 
@@ -64,7 +64,7 @@
 										<HR>
 										<h2><a name = "multimediaexpo">Option 2: Geometric Algorithm Multimedia Expo</a></h2>
 										<p>
-											The annual Symposium on Computational Geometry (SOCG) always has a multimedia expo, where people are invited to submit short movies/skits/apps to make an algorithm "come alive."  The focus of this conference is on <a href = "https://en.wikipedia.org/wiki/Computational_geometry">"geometric algorithms,"</a> so basically geometry meets CS 371.  Algorithms in this area have applications to computer graphics, robotics, video game design, city planning, map making, and beyond.
+											The annual Symposium on Computational Geometry (SOCG) always has a multimedia expo, where people are invited to submit short movies/skits/apps to make an algorithm "come alive."  The focus of this conference is on <a href = "https://en.wikipedia.org/wiki/Computational_geometry">"geometric algorithms,"</a> so basically geometry meets CS 271.  Algorithms in this area have applications to computer graphics, robotics, video game design, city planning, map making, and beyond.
 										</p>
 
 										<p>
@@ -147,7 +147,7 @@ or video is encouraged (but not required).
 										<img src = "OverviewPictures/C7.gif">
 
 										<p>
-											Students should create a program that creates a similar animation visiting all possible binary trees with a fixed number of nodes, but which only has rotations between adjacent trees.  Students should read <a href = "Papers/021.pdf">this paper</a> and study its implementation details.  <b>This was just a theoretical paper, and nobody has ever done this in code, so this would be a really cool, novel project bridging math and CS!</b>
+											The idea of this project is to create a similar animation that visits all possible binary trees with a fixed number of nodes, but in which .  Last spring a student implemented the algorithm on page 19 of <a href = "Papers/021.pdf">this paper</a> in python to <a href = "https://medium.com/@liuamyj/its-triangles-all-the-way-down-part-1-17f932f4c438">equivalently create triangulations of polygons</a>.  This semester, I'd like a student to re-implement this in Javascript and show the trees that are generated from the above algorithm. <b>This was just a theoretical paper, and nobody has ever done this in code, so this would be a really cool, novel project bridging math and CS!</b>
 										</p>
 
 										<h4>Convex Hulls in 3D</h4>
@@ -156,24 +156,12 @@ or video is encouraged (but not required).
 										</p>
 										<img src = "OverviewPictures/3DConvexHull.png">
 
-										<h4>Onions</h4>
-										<p>
-											Given a set of <b>N</b> points in the plane, it is possible to build an efficient data structure to query the <b>K</b> points that are to the right of any line in <b>O(log(N) + K)</b> time with a data structure called an <a href = "https://en.wikipedia.org/wiki/Convex_layers">onion</a> and a version of binary search on steriods called <a href = "https://en.wikipedia.org/wiki/Fractional_cascading">fractional cascading</a>.  An onion is a series of <a href = "https://www.nayuki.io/page/convex-hull-algorithm">convex hulls</a> that are peeled back from outer to inner layer, as shown in the image below (courtesy of wikipedia)
-										</p>
-
-										<img src = "https://upload.wikimedia.org/wikipedia/commons/1/13/Convex_layers_halfspace.svg" width=400>
-
-										<p>
-											I could imagine a ridiculous multimedia video where someone was peeling an onion while explaining this
-										</p>
-								
-
 										<h4>Dynamic Time Warping / Discrete Fréchet Distance</h4>
 										<p>
-											Dynamic time warping is an algorithm we will explore in the class to align two time series that are warped.  <a href = "ClassExercises/DTWNotes/">Click here</a> for more information on this.
+											Dynamic time warping is an algorithm to align two time series that are warped.  <a href = "https://ursinus-cs371-s2022.github.io/CoursePage/ClassExercises/DTWNotes/">Click here</a> for more information on this.  In the past, it has been part of CS 271, but it got cut in favor of more graph algorithms.
 										</p>
 										<p>
-											It might be neat to create a skit about dynamic time warping where two people have to hop along some trajectory while minimizing the sum of ropes that they use to connect each other.  
+											Regardless, it might be neat to create a skit about dynamic time warping where two people have to hop along some trajectory while minimizing the sum of ropes that they use to connect each other.  
 										</p>
 
 										<p>
@@ -190,13 +178,7 @@ or video is encouraged (but not required).
 										</p>
 										<img src = "OverviewPictures/DTWApprox.svg" width=700>
 
-										<h4>Iterative Closest Points</h4>
-										<p>
-											There's a really neat algorithm to align 3D shapes that "snaps one of them into place" on top of the other one.  <a href = "http://www.ctralie.com/Teaching/COMPSCI290/Assignments/Mini3_ICP/">Click here</a> to view an assignment I made in the past that explains this concept.  An animation is below, courtesy of a former student Nina Sun.  This is a project that's particularly well-suited for a web demo.
-										</p>
-										<p>
-											<img src = "OverviewPictures/Sun4.gif">
-										</p>
+										
 										
 
 										<h4>K-Center Clustering And Greedy Permutations</h4>
@@ -230,14 +212,6 @@ or video is encouraged (but not required).
 											Students on this paper might try to create a Javascript app to implement the original greedy k-center, as well as Sheehy's version.  They also might want to run some experiments comparing the two on real datasets.
 										</p>
 
-										<!--
-										<h4>Linear Programming</h4>
-										<p>
-											There is a fundamental optimization problem in algorithms known as <a href = "https://en.wikipedia.org/wiki/Linear_programming">linear programming</a>, which generally boils down to maximizing some linear function subject to a set of inequalities.  It has an amazing geometric interpretation behind the scenes, and a breakthrough in computational complexity occurred when it was discovered that there's actually a <a href = "https://en.wikipedia.org/wiki/Linear_programming#Ellipsoid_algorithm,_following_Khachiyan">polynomial time algorithm</a> to solve it.
-										</p>
-										<p>
-											<img src = "OverviewPictures/LP.png">
-										</p>-->
 										
 
 										<h4>Sonification of Alpha Filtrations</h4>
@@ -273,11 +247,6 @@ or video is encouraged (but not required).
 										<p>
 											What I'd like to see is a "sonification" of these filtrations.  Every time an edge is added, it should make one sound.  Every time a triangle is added, it should make another sound.  And every time a topological feature is created or is destroyed, other sounds should be made, with loudness proportional to how important those features were.  A student last year started this in python, but there's more to be done, and I'd like to see a Javascript version that's easier to share.  It could be really fun to refine and to be creative with this.
 										</p>
-
-										<!--<h4>Duality of Points And Lines</h4>
-										<p>
-											<a href = "https://i11www.iti.kit.edu/_media/teaching/winter2015/compgeom/algogeom-ws15-vl10-print.pdf">Click here</a> to view some slides on this topic.
-										</p>!-->
 
 
 										<HR>
@@ -336,7 +305,12 @@ or video is encouraged (but not required).
 											<ul> 
 												<li><a href = "index.html#overview">Overview</a></li>
 												<li><a href = "index.html#logistics">Technology Logistics</a></li>
-												<li><a href = "index.html#deliverables">Deliverables</a></li>
+												<li><a href = "index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
 												<li><a href = "index.html#grading">Grading</a></li>
 												<li><a href = "index.html#environment">Classroom Environment</a></li>
 												<li><a href = "index.html#participation">Participation</a></li>
@@ -345,20 +319,68 @@ or video is encouraged (but not required).
 											</ul>
 										</li>
 										<li><a href = "Software/index.html">Software</a></li>
-										<li><a href = "Schedule/index.html">Schedule</a></li>
+										<li><a href = "index.html#schedule">Schedule</a></li>
                                         <li>
 											<span class="opener">Assignments</span>
 											<ul>
-												<li><a href = "Assignments/HW1_PlantCellSegmentation">HW1: Union Find And Plant Cell Segmentation</a></li>
-												<li><a href = "Assignments/HW2_Autocomplete">HW2: Complexity Proofs And Autocomplete</a></li>
-												<li><a href = "Assignments/HW3_DTW_AudioAlignment">HW3: Audio Alignment with Dynamic Time Warping</a></li>
-												<li><a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Superheros</a></li>
-												<li><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/HW6/Exercise0">HW6: The Rush Hour Game</a></li>
+												<li><a href = "Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete And Spell Check</a></li>
+												<!--<li><a href = "Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "Assignments/HW3a_WarpingPaths/index.html">Assignment 3a (Individual): Warping Paths And Delannoy Numbers</a></li>
+												<li><a href = "Assignments/HW3_SeamCarving/index.html">Assignment 3b: Seam Carving</a></li>
+												<li><a href = "Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+												<li><a href = "Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+												<li><a href = "Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
+												</li>
+												!-->
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<!--<li><a href = "Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
+												<li><a href = "Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+												<li><a href = "Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>!-->
 											</ul>
 										</li>
                                         <li>
-											<span class="opener">Pre-Class Modules</span>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "ClassExercises/Week2_Needle">Week 1/2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<!--
+												<li><a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "ClassExercises/Week3_BigO">Week 3: Big-O Exercises</a></li>
+												<li><a href = "ClassExercises/Week4_DiscoveringUnionFind">Week 4: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Week 4: Disjoint Sets / Union Find Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Week 5: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Week 5: Edit Distance Module</a></li>
+												<li><a href = "ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance And Backtracing</a></li>
+												<li><a href = "ClassExercises/DTWNotes">Week 6: Dynamic Time Warping Notes</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
+												<li><a href = "ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 11: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "ClassExercises/Week11_Phylogenetic">Week 11: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
+												</li>
+												-->
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
 											<ul>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
@@ -372,7 +394,6 @@ or video is encouraged (but not required).
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module12/Exercise0">Module 12: Seam Carving</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
@@ -384,29 +405,6 @@ or video is encouraged (but not required).
 												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
 											</ul>
 										</li>
-                                        <li>
-											<span class="opener">Class Exercises</span>
-											<ul>
-												<li><a href = "ClassExercises/Week1/rushhour/">Week 1: Rush Hour Icebreaker</a></li>
-												<li><a href = "ClassExercises/Week2/Week2_UnionFind/">Week 2: Union Find</a></li>
-												<li><a href = "ClassExercises/Week3/Week3_BigO/">Week 3: Big O Practice</a></li>
-												<li><a href = "ClassExercises/Week3/Week3_LinkedLists/">Week 3: Linked Lists</a></li>
-												<li><a href = "ClassExercises/Week3/Week3_DoublyLinkedLists/">Week 3: Doubly-Linked Lists</a></li>
-												<li><a href = "ClassExercises/Week4/Week4_HashingExperiments/">Week 4: Hashing Experiments</a></li>
-												<li><a href = "ClassExercises/Week4/Week4_MovieReviews/">Week 4: Movie Reviews</a></li>
-												<li><a href = "ClassExercises/Week5/Week5_RecursiveEvaluation/">Week 5: Recursive Evaluation</a></li>
-												<li><a href = "ClassExercises/Week5/Week5_RecursiveDrawing/">Week 5: Recursive Drawing</a></li>
-												<li><a href = "ClassExercises/Week5/Week5_TowersOfHanoi/">Week 5: Towers of Hanoi</a></li>
-												<li><a href = "ClassExercises/Week6/Week6_EditBacktracing">Week 6: Edit Distance Backtracing</a></li>
-												<li><a href = "ClassExercises/Week6/Week6_SeamCarving">Week 6: Seam Carving</a></li>
-												<li><a href = "ClassExercises/Week8/Week8_LCS">Week 8: Longest Common Subsequence</a></li>
-												<li><a href = "ClassExercises/Week8/Week8_Sorting">Week 8: Sorting</a></li>
-												<li><a href = "ClassExercises/Week9/Week9_RecursiveSorts">Week 9: Recursive Sorts</a></li>
-												<li><a href = "ClassExercises/Week9/Week9_RadixSort">Week 9: Radix Sort</a></li>
-												<li><a href = "ClassExercises/Week10/Week10_TreeDrawing">Week 10: Tree Drawing</a></li>
-												<li><a href = "ClassExercises/Week11/Week11_BSTComplexity">Week 11: Tree Balancing via Rotations</a></li>
-											</ul>
-										</li>
 										<li>
 											<span class="opener">Final Assessment</span>
 											<ul>
@@ -416,13 +414,6 @@ or video is encouraged (but not required).
 										</li>
 									</ul>
 								</nav>
-
-							<!-- Section -->
-								<section>
-									<div class="mini-posts">
-										Announcements							
-                                    </div>
-								</section>
 
 
 							<!-- Footer -->

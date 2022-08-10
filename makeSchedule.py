@@ -3,9 +3,9 @@ import datetime
 daysstr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 #Last day of class 12/4
 #Final Examples 12/9-14
-FIRSTDAY = datetime.date(2022, 1, 19)
-Ds = [datetime.timedelta(2), datetime.timedelta(3), datetime.timedelta(2)] #Wednesday To Friday, Friday To Money, Monday To Wednesday
-Holidays = {datetime.date(2022, 3, 7):"Spring Break", datetime.date(2022, 3, 9):"Spring Break", datetime.date(2022, 3, 11):"Spring Break"}
+FIRSTDAY = datetime.date(2022, 8, 29)
+Ds = [datetime.timedelta(2), datetime.timedelta(2), datetime.timedelta(3)] #Monday To Wednesday, Wednesday To Friday, Friday To Monday
+Holidays = {datetime.date(2022, 10, 14):"<a href = \"https://ursinus.edu/live/news/6481-introducing-robyn-hannigan-ursinus-colleges-19th\">Robyn Hannigan</a> inauguration", datetime.date(2022, 10, 17):"Fall Break", datetime.date(2022, 11, 23):"Thanksgiving", datetime.date(2022, 11, 25):"Thanksgiving"}
 
 schedule_HTML = ""
 
@@ -40,9 +40,9 @@ for i in range(int(len(lines)/4)):
             color = colors[coloridx]
             coloridx = (coloridx + 1)%2
             day = daysstr[date.weekday()%7]
-            taskstr = "No CS 371 Class.  Enjoy the break!"
+            taskstr = "No CS 271 Class.  Enjoy the break!"
             if "Designated" in Holidays[date]:
-                taskstr = "No CS 371 Class"
+                taskstr = "No CS 271 Class"
             schedule_HTML += "<tr><td>--</td><td>%s %i/%i/%i</td><td>%s</td><td></td><td>%s</td></tr>\n"%(day, date.month, date.day, date.year, Holidays[date], taskstr)
             date = date + Ds[addidx]
             addidx = (addidx + 1)%len(Ds)
