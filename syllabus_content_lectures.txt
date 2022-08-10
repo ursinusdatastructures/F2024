@@ -3,39 +3,35 @@ Intro To Python, Abstract Data Types, And Complexity
 
 
 LECTURE
-Course Intro, Python/numpy basics, Needle In A Haystack
+Course Intro, Log, Log*, And Triangular Numbers
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li><li><a href = "https://docs.google.com/presentation/d/1UxB8sVMV_IB1wjrfv464HVEigam2amYhaOlunMfHg_0/edit?usp=sharing">Slides from Today</a></ul>
+<ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li></ul>
 LECTURE
-Continue Needle In A Haystack: The ADT Concept, Sorted List Data Structure And Linked Lists
+Needle In A Haystack: The ADT Concept, Sorted List Data Structure And Linked Lists
 
-<ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
+<ul><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul>
 LECTURE
-Python Classes And Objects, Hash Tables Intro
+Python Classes And Objects, Linked Lists in Python
 
-<ul><li><a href = "ClassExercises/Week2_Needle">Class Notes on Set ADT And Hash Tables</a></li><li><a href = "https://medium.com/out-of-the-pigeonhole/hash-functions-and-the-most-underrated-data-structure-26312e7f2dec">Amy Liu's notes on hash tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li></ul>
 LECTURE
 <a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
-Continue Binary Search, Linked List Implementation, Unit Tests And TimeIt
+Hash Tables
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li></ul>
+<ul><li><a href = "ClassExercises/Week2_Needle">Class Notes on Set ADT And Hash Tables</a></li><li><a href = "https://medium.com/out-of-the-pigeonhole/hash-functions-and-the-most-underrated-data-structure-26312e7f2dec">Amy Liu's notes on hash tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 LECTURE
 Begin Asymptotics: Big-O
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li></ul>
 LECTURE
-Continue asymptotics: Little o, Big Omega, Little Omega
+Little o, Big Omega, Little Omega, Complexity Hierarchies
 
 
 LECTURE
-Finish Asymptotics Intro, Complexity Hierarchies
-
-
-LECTURE
-Testing, Disjoint Sets And Union Find
+Disjoint Sets And Union Find
 
 <ul><li><a href = "Week4_DiscoveringUnionFind">Class Exercise: Discovering Union Find</a></li></ul>
 LECTURE
@@ -44,10 +40,6 @@ LECTURE
 <ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
 LECTURE
 The list ADT and Data Structure, Amortized Analysis
-
-
-LECTURE
-Hashing Theory
 
 
 SECTION
@@ -67,17 +59,9 @@ Recursively Backtracing Tied Optimal Solutions with Stacks
 
 <ul><li><a href = "https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing/blob/recursivebacktracing/edit.py">Code from class</a></li></ul>
 LECTURE
-Change Making, Begin Dynamic Time Warping
+Making Change
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li><li><a href = "ClassExercises/DTWNotes">Dynamic Time Warping Notes</a></li></ul>
-LECTURE
-<a href = "Labs/Lab4_DTW">Lab 4: Dynamic Time Warping</a>
-
-
-LECTURE
-Continue Dynamic Time Warping, Begin Longest Common Subsequence
-
-<ul><li><a href = "ClassExercises/Week7_GreedyDTW">Class Notes on Greedy Time Warping Pitfalls</a></li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
 LECTURE
 Longest Common Subsequence
 
@@ -111,11 +95,11 @@ Finish Radix Sort, Fisher-Yates Shuffling
 
 
 LECTURE
-Parallel Sorting Networks And Bitonic Sort
+Parallel Sorting Networks
 
 
 LECTURE
-Finish Bitonic Sort, Linear Time Selection
+Linear Time Selection
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li><li><a href = "https://rcoh.me/posts/linear-time-median-finding/">Russel Cohen's Notes on Linear Time Median Finding</a></li></ul>
 SECTION
@@ -151,15 +135,15 @@ LECTURE
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
-Huffman Trees
-
-
-LECTURE
 Priority Queues / Binary Heaps
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
 LECTURE
 Continue Priority Queues
+
+
+LECTURE
+Tries
 
 
 SECTION
@@ -175,7 +159,7 @@ Breadth-First Search, Depth-First Search
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
 LECTURE
-Euclidean Traveling Salesperson Problem, Work Session
+Euclidean Traveling Salesperson Problem
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul>
 LECTURE
@@ -183,7 +167,14 @@ Dijkstra's Algorithm
 
 
 LECTURE
-Bellman Ford
+Bellman Ford, Negative Cycles
 
+
+LECTURE
+Directed Acyclic Graphics, Topological Sort
+
+
+LECTURE
+Graph Cuts
 
 
