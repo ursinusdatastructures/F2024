@@ -41,48 +41,24 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 1: Autocomplete And Spell Check (65 Points)</h2>
+                                        <h2>Assignment 1: Autocomplete And Spell Check (30 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
-										<h3>Due Monday 2/7/2022</h3>
 									</header>
 
 									<div id="page-content">
 										<ul>
 											<li><a href = "#overview">Overview/Logistics</a></li>
 											<li><a href = "#starter">Data / Starter Code</a></li>
+											<li><a href = "#autocompletebg">Autocomplete Background</a></li>
+											<li><a href = "#autocompleteprog">Autocomplete Programming Tasks (30 Points)</a></li>
 											<li>
-												<a href = "#autocomplete">Part 1: Autocomplete</a>
-												<ul>
-													<li><a href = "#autocompletebg">Autocomplete Background</a></li>
-													<li><a href = "#autocompleteprog">Autocomplete Programming Tasks (30 Points)</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href = "#spellcheck">Part 2: Spellcheck</a>
-												<ul>
-													<li>
-														<a href = "#hashtable">Step 1: HashTable Class (20 Points)
-													</li>
-													<li>
-														<a href = "#hashcodeprog">Background: Programming Hash Codes</a>
-													</li>
-													<li>
-														<a href = "#hashcodes">Step 2: String Hash Codes (5 Points)</a>
-													</li>
-													<li>
-														<a href = "#spellchecker">Step 3: Spellchecker (10 Points)</a>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<a href = "#interfaces">For Fun: Interactive Interfaces</a>
+												<a href = "#interfaces">For Fun: Interactive Interface</a>
 											</li>
 										</ul>
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											The purpose of this assignment is to give you practice implementing efficient algorithms in python in the service of two ubiquitous real world applications: autocompletion of text and spell check.  Crucially, you will ensure that your algorithms meet a particularly efficiency standard, as per the theme of our course.
-										
+											The purpose of this assignment is to give you practice implementing efficient algorithms in python in the service of a ubiquitous real world applications: autocompletion of text.  Crucially, you will ensure that your algorithms meet a particularly efficiency standard, as per the theme of our course.
 										</p>
 										
 
@@ -91,14 +67,14 @@
                                             <ul>
 												<li>Implement comparators to sort items in a custom way.</li>
 												<li>Use binary search to efficiently find a range of items in an ordered list.</li>
-												<li>Implement hash tables using object oriented paradigms</li>
+												<li>Practice with objects in python</li>
                                             </ul>
                                         </p>
 
 										<h3><a name = "submit">What To Submit</a></h3>
 
 										<p>                                  
-											Submit your files <code>autocomplete.py</code>, <code>hashtable.py</code>, <code>spellcheck.py</code>, and <code>strwraper.py</code> to canvas, as well as any other .py files and notebooks you made.  Also submit answers to the following questions on Canvas
+											Submit your file <code>autocomplete.py</code> to canvas, as well as any other .py files and notebooks you made.  Also submit answers to the following questions on Canvas
 										
 										<ol>
 											<li>
@@ -130,9 +106,7 @@
 
 										<HR>
 
-										<h2><a name = "autocomplete">Part 1: Autocomplete</a></h2>
-
-										<h3><a name = "autocompletebg">Autocomplete Background</a></h3>
+										<h2><a name = "autocompletebg">Autocomplete Background</a></h2>
 
 										<p>
 											Most of the interfaces we use in modern computing contain huge databases of text that can be used to predict what we're trying to type from just a few characters, as shown below:
@@ -163,8 +137,8 @@
 
                                         
 
-
-										<h3><a name = "autocompleteprog">Autocomplete Programming Tasks (30 Points)</a></h3>
+										<HR>
+										<h2><a name = "autocompleteprog">Autocomplete Programming Tasks</a></h2>
 
 										<p>
 											<b>NOTE: </b> This part of the assignment was heavily inspired by <a href = "https://www.cs.princeton.edu/courses/archive/spring20/cos226/assignments/autocomplete/specification.php">Princeton COS 226</a>
@@ -281,179 +255,13 @@
 										</p>
 
 										<HR>
-										<h2><a name = "spellcheck">Part 2: Spellcheck</a></h2>
+										<h2><a name = "interfaces">For Fun: Interactive Interface</a></h2>
 
 										<p>
-											In this section, you will create a hash table class and use it to do spell check by quickly checking to see if typed words are actually in our list of ~300k words.
-										</p>
-
-										<h3><a name = "hashtable">Step 1: HashTable Class (20 Points)</a></h3>
-										<p>
-											First, you should create a <code>HashTable</code> class with the following methods, as per a set ADT:
-										</p>
-										<ul>
-											<li>
-												<code>find(obj)</code>: Return <code>True</code> if <code>obj</code> is in the hash table, or <code>False</code> otherwise
-											</li>
-											<li>
-												<code>add(obj)</code>: Add <code>obj</code> to the hash table
-											</li>
-											<li>
-												<code>remove(obj)</code>: Remove <code>obj</code> from the hash table if it exists in the table, or do nothing if it's not there.
-											</li>
-										</ul>
-
-										<p>
-											Your hash table constructor should take a parameter <code>n_bins</code> as a parameter for determining how many bins should be used.
-										</p>
-										
-										<p>
-											<b>Hint: </b> If you're not sure where to get started, have a look at the <a href = "../../ClassExercises/Week2_Needle/">needle in a haystack notes</a>, as well as some <a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">starter code for linked lists</a> that we made in class.
-										</p>
-
-										<h3><a name = "hashcodeprog">Background: Programming Hash Codes</a></h3>
-
-										<p>
-											In order for an object to be compatible with this data structure, it must be <b>hashable</b>; that is, it must implement a method <code>hash_code</code> that returns a number for this particular object that's used to place it in the appropriate bin.  We'll use "<a href = "https://realpython.com/lessons/duck-typing/">duck typing</a>," so that as long as an object has this method, it doesn't matter what class it's come from, and we can use it in our <code>HashTable</code> class.  As an example, I've provided the file <code>harrypotter.py</code> which defines a <code>Wizard</code> class with the hash code based on the wizard's birthday:
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											def hash_code(self):
-												return self.day*12 + self.month
-										</script>
-
-										<p>
-											So, if you were to run the following code:
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											wizards = get_all_wizards()
-											table = HashTable(20) # You could of course change the number of bins to be something different from 20
-											for w in wizards:
-												table.add(w)
-											dean = Wizard("Dean Thomas", 12, 2, 1988)
-											barack = Wizard("Barack Obama", 8, 4, 1961)
-											print("Dean Thomas is a wizard: ", table.find(dean))
-											print("Removing dean twice over...")
-											table.remove(dean)
-											table.remove(dean)
-											print("Dean Thomas is a wizard: ", table.find(dean))
-											print("Barack Obama is a wizard: ", table.find(barack))
-										</script>
-
-										<p>
-											It should print
-										</p>
-
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											Dean Thomas is a wizard:  True
-											Removing dean twice over...
-											Dean Thomas is a wizard:  False
-											Barack Obama is a wizard:  False
-										</script>
-
-										<p>
-											At this point, I'd recommend that you test the above code, as well as some other examples, on your implementation before proceeding.
-										</p>
-
-
-										<h3><a name = "hashcodes">Step 2: String Hash Codes (5 Points)</a></h3>
-										
-										<p>
-											In order to use this for spell check, we will need to devise a hash code for strings.  We'll use Java's default hash code scheme for strings, which is defined recursively as follows (though you can implement it with a loop)
-										</p>
-
-										<h3>
-											\[ h_0 = 0 \]
-											\[ h_i = 31 * h_{i-1} + c_i \]
-										</h3>
-
-										<p>
-											where <b>c<SUB>i</SUB></b> is an int associated to the i<SUP>th</SUP> character, and the hash code for an entire string of length <b>N</b> is taken to be <b>h<SUB>N</SUB></b>.  In python, an int associated with a character can be obtained with the <code><a href = "https://www.programiz.com/python-programming/methods/built-in/ord">ord</a></code> method.  For instance,
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											ord("c")
-										</script>
-
-										<p>
-											would yield the number 99.
-										</p>
-
-										<p>
-											<b>Your Task: </b> Implement the <code>hash_code</code> method in the <code>StrWrapper</code> class in <code>hashtable.py</code> according to the above definition.  If it works and you run the following code, for example:
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											for s in ["hello", "cs 371", "computers rock"]:
-												swrap = StrWrapper(s)
-												print(swrap, swrap.hash_code())
-										</script>
-
-										<p>
-											Then you should get 
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											hello 99162322
-											cs 371 2941494941
-											computers rock 2507632170051866213837
-										</script>
-										<p></p>
-
-										<h3><a name = "spellchecker">Step 3: Spellchecker (10 Points)</a></h3>
-										<p>
-											Create a file called <code>spellcheck.py</code> with a class called <code>SpellChecker</code> with the following methods:
-											<ul>
-												<li>
-													A constructor with one parameter which is the number of words in <code>words.txt</code> to use, starting at the top of the file.  Since words towards the top are more likely (though not guaranteed) to be spelled correctly, cutting them off will improve the performance (though cutting off too many will omit some correct words).
-												</li>
-												<li>
-													A method <code>check</code>, which takes a string parameter and returns a list of booleans corresponding to each word.  Each boolean is <code>True</code> if the word is spelled correctly and <code>False</code> otherwise.  <b>Be sure to compare the lowercase version of each word</b>, since all words in <code>words.txt</code> are lowercase.
-												</li>
-											</ul>
-										</p>
-
-										<p>
-											You should use your hash table implementation with string wrappers so that the search for each word is done efficiently.  Choose an appropriate number of bins to make this efficient.
-										</p>
-
-										<p>
-											As an example, let's suppose you ran the following code:
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											s = SpellChecker(40000)
-											s.spellcheck("Hello world tihs is a comptuer science class")
-										</script>
-
-										<p>
-											Then this should return
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											[True, True, False, True, True, False, True, True]
-										</script>
-
-										<p></p>
-
-										<HR>
-										<h2><a name = "interfaces">For Fun: Interactive Interfaces</a></h2>
-
-										<p>
-											I've provided two Jupyter notebooks, <code>AutocompleteInteractive.ipynb</code> and <code>SpellCheckInteractive.ipynb</code> to interactively use your code for autocomplete and spell check, respectively, using <a href = "https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html">Jupyter widgets</a>.  Below shows an example running the autocomplete interface.  This updates super quickly if you've done binary search correctly, and it will be noticeably laggy if you implement linear search instead by accident
+											I've provided a Jupyter notebook <code>AutocompleteInteractive.ipynb</code> to interactively use your code, using <a href = "https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html">Jupyter widgets</a>.  Below shows an example running the interface.  This updates super quickly if you've done binary search correctly, and it will be noticeably laggy if you implement linear search instead by accident
 										</p>
 
 										<img src = "autocomplete.gif">
-
-										<p>
-											Below shows an example running the spellcheck interface
-										</p>
-
-										<img src = "spellcheck.gif">
-
-
 										
 
                                     

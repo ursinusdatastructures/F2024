@@ -19,10 +19,6 @@ LECTURE
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
-Hash Tables
-
-<ul><li><a href = "ClassExercises/Week2_Needle">Class Notes on Set ADT And Hash Tables</a></li><li><a href = "https://medium.com/out-of-the-pigeonhole/hash-functions-and-the-most-underrated-data-structure-26312e7f2dec">Amy Liu's notes on hash tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
-LECTURE
 Begin Asymptotics: Big-O
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li></ul>
@@ -42,6 +38,10 @@ LECTURE
 The list ADT and Data Structure, Amortized Analysis
 
 
+LECTURE
+Hash Tables: The Ultimate Needle in A Haystack Data Structure
+
+<ul><li><a href = "ClassExercises/Week2_Needle">Class Notes on Set ADT And Hash Tables</a></li><li><a href = "https://medium.com/out-of-the-pigeonhole/hash-functions-and-the-most-underrated-data-structure-26312e7f2dec">Amy Liu's notes on hash tables</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, Ch. 6.1</li><li><a href = "ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter Hashing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 15</li></ul>
 SECTION
 Recursion And Dynamic Programming
 

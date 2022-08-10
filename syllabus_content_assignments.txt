@@ -4,18 +4,21 @@
 <a href = "https://ursinus-cs371-s2022.github.io/Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due
 
 2022-09-02
-<a href = "Labs/Lab1_BinarySearch">Lab 1</a> Due
+Big-O Self Study Module Due Before Class
 
 2022-09-07
+Lab 1 Due
+
+2022-09-09
+Doubly Linked List Exercise Due
+
+2022-09-04
 Homework 1: Autocomplete Out
 
 2022-09-05
 Homework 1 Due
 
-2022-09-19
-<a href = "https://ursinus.instructure.com/courses/13782/quizzes/18024">Big-O Self Study Module</a> Due Before Class
-
-2022-09-10
+2022-09-14
 <HR><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2022-09-19
