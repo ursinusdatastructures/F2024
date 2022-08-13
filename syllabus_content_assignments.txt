@@ -10,24 +10,24 @@ Big-O Self Study Module Due Before Class
 Lab 1 Due
 
 2022-09-09
-Doubly Linked List Exercise Due
-
-2022-09-04
 Homework 1: Autocomplete Out
 
 2022-09-05
+<HR>Doubly Linked List, Stacks, Queues Exercise Due
+
+2022-09-05
+<a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
+
+2022-09-12
 Homework 1 Due
 
-2022-09-14
-<HR><a href = "https://ursinus-cs371-s2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
+2022-09-16
+<HR>Homework 2: Plant Cell Segmentation Out
+
+2022-09-16
+Lab 2 Due
 
 2022-09-19
-<a href = "Labs/Lab2_UnionFind">Lab 2</a> Due
-
-2022-09-24
-<a href = "Assignments/HW2_PlantCellSegmentation">Homework 2: Plant Cell Segmentation</a> Out
-
-2022-09-23
 <a href = "Labs/Lab3_Towers">Lab 3</a> Due
 
 2022-10-01
@@ -37,15 +37,12 @@ Homework 1 Due
 <a href = "Assignments/HW2_PlantCellSegmentation/index.html#cellcenters">Homework 2 Part 2</a> Due
 
 2022-10-04
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video1">Recursion Module</a> due before class
+Recursion Module due before class
 
-2022-09-26
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
+2022-09-21
+Edit Distance Module due before class
 
-2022-09-28
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Backtracing / Making Change Module</a> due before class
-
-2022-10-05
+2022-09-23
 <a href = "Assignments/HW3a_WarpingPaths">HW 3a: Warping Paths</a> and <a href = "Assignments/HW3_SeamCarving">HW3b: Seam Carving</a> Out
 
 2022-10-11
