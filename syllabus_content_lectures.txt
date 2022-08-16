@@ -15,7 +15,7 @@ Python Classes And Objects, Linked Lists in Python
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li></ul>
 LECTURE
-<a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a>
+<b><a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a></b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
 LECTURE
@@ -81,9 +81,9 @@ Sorting, Selection, And Shuffling
 LECTURE
 Sorting Basics: Permutations, Insertion Sort, Bubble Sort
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Sorting basics and theory of sorting module</a> from CS 371</li></ul>
 LECTURE
-<a href = "Labs/Lab5_MergeSort">Lab 5: Merge Sort And Brute Force Kendall Tau</a> 
+<b>Lab 5: Merge Sort, Kendall Tau Examples</b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul>
 LECTURE
@@ -99,10 +99,6 @@ Finish Radix Sort, Fisher-Yates Shuffling
 
 
 LECTURE
-Parallel Sorting Networks
-
-
-LECTURE
 Linear Time Selection
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li><li><a href = "https://rcoh.me/posts/linear-time-median-finding/">Russel Cohen's Notes on Linear Time Median Finding</a></li></ul>
@@ -115,27 +111,27 @@ Binary Trees: Preorder/Inorder/Postorder, Drawing Binary Trees
 
 
 LECTURE
+Minimum Spanning Trees, Kruskal's Algorithm
+
+<ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Dr. Tralie's notes on making mazes with MSTs</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
+LECTURE
 Binary search trees: Search, Addition
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
 LECTURE
-<a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a>
+<b>Lab 6: Binary Search Tree Removal</b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
-Minimum Spanning Trees, Kruskal's Algorithm
+Tries
 
-<ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
-LECTURE
-Prim's Algorithm, Automatic Mazes
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.5</li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Notes from class</a></li></ul>
 LECTURE
 Tree Rotations
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
 LECTURE
-<a href = "Labs/Lab7_AVL">Lab 7: AVL Trees</a> (Balanced Binary Search Trees)
+<b>Lab 7: AVL Trees</b> (Balanced Binary Search Trees)
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
@@ -144,10 +140,6 @@ Priority Queues / Binary Heaps
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
 LECTURE
 Continue Priority Queues
-
-
-LECTURE
-Tries
 
 
 SECTION
@@ -171,7 +163,15 @@ Dijkstra's Algorithm
 
 
 LECTURE
+<b>Lab 8: Implementing Dijkstra's Algorithm</b>
+
+
+LECTURE
 Bellman Ford, Negative Cycles
+
+
+LECTURE
+Floyd-Warshall
 
 
 LECTURE

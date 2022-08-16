@@ -21,70 +21,76 @@ Homework 1: Autocomplete Out
 2022-09-12
 Homework 1 Due
 
-2022-09-16
-<HR>Homework 2: Plant Cell Segmentation Out
+2022-09-15
+Homework 2: Plant Cell Segmentation Out
 
-2022-09-16
+2022-09-15
 Lab 2 Due
 
 2022-09-19
-<a href = "Labs/Lab3_Towers">Lab 3</a> Due
-
-2022-10-01
-<HR><a href = "Assignments/HW2_PlantCellSegmentation/index.html#celllabels">Homework 2 Part 1</a> Due
-
-2022-10-01
-<a href = "Assignments/HW2_PlantCellSegmentation/index.html#cellcenters">Homework 2 Part 2</a> Due
-
-2022-10-04
 Recursion Module due before class
 
 2022-09-21
 Edit Distance Module due before class
 
 2022-09-23
+Lab 3 Due
+
+2022-09-26
+<HR>Homework 2 Due
+
+2022-09-26
+<HR>Homework 3: Seam Carving Out
+
+2022-09-26
+Homework 3 Due
+
+2022-10-07
+Lab 4 Due
+
+2022-10-03
 <a href = "Assignments/HW3a_WarpingPaths">HW 3a: Warping Paths</a> and <a href = "Assignments/HW3_SeamCarving">HW3b: Seam Carving</a> Out
 
 2022-10-11
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Sorting Basics Module</a> due
+Lab 5 Due
 
-2022-10-22
-HW 3a Due
+2022-10-13
+HW4: Fair Elections of Favorite Foods Out
 
-2022-10-26
-HW 3b Due
+2022-10-10
+HW4 Part 1 Due
 
-2022-10-31
-<a href = "Labs/Lab5_MergeSort">Lab 5</a> Due
+2022-10-21
+Radix Sort / Fisher Yates Module Due
 
-2022-10-29
-<HR><a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Animals</a> Out
+2022-10-23
+Trees Module due
 
-2022-10-29
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Radix Sort / Fisher Yates Module Due</a>
+2022-10-25
+HW4 Part 2 Due
 
-2022-11-02
-HW4 Due
+2022-10-27
+HW5: Phylogenetic Trees out
 
-2022-11-12
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Trees Module</a> due before class
+2022-10-28
+Lab 6 Due
 
-2022-11-09
-<a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
+2022-11-07
+HW5 Part 1 Due
 
-2022-11-15
-<a href = "Labs/Lab6_TreeRemoval">Lab 6</a> Due
+2022-11-03
+Lab 7 Due
+
+2022-11-14
+HW5 Part 2 Due
 
 2022-11-16
-<a href = "Labs/Lab7_AVL">Lab 7</a> Due
+HW6: Traveling Salesperson Art Out
 
-2022-11-26
-<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Huffman Trees Module Due</a>
+2022-11-21
+Lab 8 Due
 
-2022-11-27
-HW5 Due
+2022-12-05
+HW6 Due
 
-2022-11-30
-<a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson</a> Out
-
-2022-12-04
+2022-12-09
