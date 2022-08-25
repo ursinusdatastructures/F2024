@@ -73,10 +73,54 @@
 										</p>
 
 
+									<HR>
+										<h2><a name = "pycharm">PyCharm</a></h2>
+										<p>
+											For an option even more like Netbeans, there is <a href = "https://www.jetbrains.com/pycharm/">PyCharm community version</a>.  The first thing you will have to do is install a couple of packages.  Create a script and run the following two lines
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											import subprocess
+											subprocess.call("pip install numpy matplotlib jupyter scikit-image".split())]]></script>  
+
+										<p>
+											Then, to make sure everything is working, run the following code:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											import numpy as np
+											import matplotlib.pyplot as plt
+											import skimage.io
+
+											t = np.linspace(0, 2*np.pi, 100)
+											X = np.zeros((t.size, 2))
+											X[:, 0] = np.cos(t)
+											X[:, 1] = np.sin(t)
+											plt.scatter(X[:, 0], X[:, 1])
+											plt.axis("equal")
+											plt.savefig("out.png")
+
+											img = skimage.io.imread("out.png")
+											img[:, :, 0] = 0
+											skimage.io.imsave("out.png", img)]]></script> 
+										
+										<p>
+											You should see an image that looks like this:
+										</p>
+
+										<img src = "pycharmtest.png">
+
 
 
 						</div>
 					</div>
+
+
+				<!--Syntax highlighting in Javascript!-->
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+				<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+				<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
 					<div id="sidebar">
