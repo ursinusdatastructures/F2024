@@ -7,19 +7,19 @@ Course Intro, Log, Log*, And Triangular Numbers
 
 <ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li></ul>
 LECTURE
-Continue Math Background, The ADT Concept, Set ADT
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1, 2</li></ul>
-LECTURE
-Python Classes And Objects, Linked Lists in Python
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li></ul>
-LECTURE
 <b><a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a></b>
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
-Begin Asymptotics: Big-O
+Python Classes And Objects, The ADT Concept, Set ADT
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 1 - 3</li></ul>
+LECTURE
+(Doubly) Linked Lists, Stack And Queue ADTs
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
+LECTURE
+Begin Asymptotics: Big-O, Polynomial, Exponential, Factorial
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li></ul>
 LECTURE
@@ -35,7 +35,7 @@ LECTURE
 
 <ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
 LECTURE
-The list ADT and Data Structure, Amortized Analysis
+The ArrayList ADT and Data Structure, Amortized Analysis
 
 
 LECTURE

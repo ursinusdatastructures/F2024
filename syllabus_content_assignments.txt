@@ -12,13 +12,10 @@ Big-O Self Study Module Due Before Class
 2022-09-07
 Lab 1 Due
 
-2022-09-09
-Homework 1: Autocomplete Out
-
 2022-09-05
-<HR>Doubly Linked List, Stacks, Queues Exercise Due
+<HR><a href = "Assignments/HW1_Autocomplete">Homework 1: Autocomplete</a> Out
 
-2022-09-05
+2022-09-02
 Disjoint Set / Union Find Module Due Before Class
 
 2022-09-14
