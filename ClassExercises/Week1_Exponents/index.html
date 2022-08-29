@@ -41,78 +41,30 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Lab 3: Towers of Hanoi (4 Points)</h2>
-										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+                                        <h2>Intro To Exponents / Exponential Time Algorithms</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
-									
+										
+										<iframe src="Exponents.html" width=100% height=2600></iframe>
+										
 
-                                        <h2>Overview / Logistics</h2>
-										<p>
-											The purpose of this lab is to get you practice with recursion, and to show you how recursion can be used to plan the solution to a very complex problem with many steps in just a few lines of code.
-										</p>
-
-										<p>
-											We talked about the Towers of Hanoi problem in the <a href = "https://ursinus-cs371-s2022.github.io/Modules/RecursionModule/Video2">recursion module</a>, and we came up with a way of computing the optimal number of steps, but now we're going to take it to the next level and actually show what the steps are in an animation.
-										</p>
-
-										<p>
-											<a href = "https://github.com/ursinus-cs371-s2022/Lab3_TowersOfHanoi/archive/refs/heads/main.zip">Click here</a> to download the starter code for this exercise.  It represents each peg as a stack, which uses a singly-linked list at the underlying data structure (<a href = "https://github.com/ursinus-cs371-s2022/Lab3_TowersOfHanoi/blob/main/stack.py">click here</a> to see that code).
-										</p>
-
-										<p>
-											<b>Your task:</b>  Fill in the <code>solve_rec</code> method in <b>hanoi.py</b> to recursively show a solution.  Every time you move a peg, you should call <code>self.draw_frame()</code>, which will save an image of that step to the folder where you're running the code.  As you go, you will have to change the role of pegs, so you'll have to carefully figure out which pegs to pass along as the "source," "target," and "free" pegs.
-										</p>
-
-										<p>
-											To see the progress of the solver, you can use the provided <code>draw_frame</code> method.  <b>Be sure to only call <code>self.draw_frame()</code> directly after you move a disc, and nowhere else</b>.
-										</p>
-
-										<p>
-											Below are a few examples of this working.  To run this, an object is initialized at the bottom
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											h = Hanoi(num)
-											h.solve()]]></script> 
-
-										<p>
-											This will output a bunch of frames as png images of each step.
-										</p>
-										<HR>
-
-										<h3><code>Hanoi(2)</code></h3>
-										<img src = "Hanoi2.gif">
-
-										<h3><code>Hanoi(3)</code></h3>
-										<img src = "Hanoi3.gif">
-
-										<h3><code>Hanoi(4)</code></h3>
-										<img src = "Hanoi4.gif">
-
-										<h3><code>Hanoi(5)</code></h3>
-										<img src = "Hanoi5.gif">
-
-										<h3><code>Hanoi(6)</code></h3>
-										<img src = "Hanoi6.gif">
-
-
-
-
-                                    </div>
+                                    
+                                </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -263,4 +215,3 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
-</html>
