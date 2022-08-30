@@ -7,9 +7,9 @@ Course Intro, Exponential Functions, Subset Sum
 
 <ul><li><a href = "https://docs.google.com/presentation/d/1uio_BcUtAAw9O37Zw3xq4TmVjc43DEqN28TYGOA2KAk/edit?usp=sharing">Slides from today</a></li><li><a href = "ClassExercises/Week1_Exponent">Notes on exponents and exponential time algorithms</a></li></ul>
 LECTURE
-Logs, Loops in python, <b><a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a></b>
+Logs, Loops in python, <p><b><a href = "Labs/Lab1_BinarySearch">Lab 1: Binary Search</a></b></p>
 
-<ul><li><a href = "ClassExercises/Week1_CSLog/">Notes on CS definition of a log</a></li><li><a href = "https://en.akinator.com/game">Akinator The Genie</a> (A logarithmic algorithm)</li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
+<ul><li><a href = "ClassExercises/Week1_Loops">Class notes on loops in python</a></li><li><a href = "ClassExercises/Week1_CSLog/">Class notes on CS definition of a log</a></li><li><a href = "https://en.akinator.com/game">Akinator The Genie</a> (A logarithmic algorithm)</li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 11 (Optional sneak preview of recursion)</li><li><a href = "https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">How only 10% of expert programmers correctly implement binary search</a></li></ul>
 LECTURE
 Continue Lab 1, Python Classes And Objects, The ADT Concept, Set ADT
 
