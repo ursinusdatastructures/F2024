@@ -7,7 +7,7 @@
 <a href = "https://ursinus-cs271-s2022.github.io/Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due
 
 2022-09-02
-Big-O Self Study Module Due Before Class
+<a href = "https://ursinus.instructure.com/courses/14918/quizzes/20057">Big-O Self Study Module</a> Due Before Class
 
 2022-09-07
 Lab 1 Due

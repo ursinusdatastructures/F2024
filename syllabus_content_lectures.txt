@@ -17,7 +17,7 @@ Continue Lab 1, Python Classes And Objects, The ADT Concept, Set ADT
 LECTURE
 (Doubly) Linked Lists, Stack And Queue ADTs
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">Python linked list jump start</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 3, 4, 5.1-5.3</li><li><a href = "ClassExercises/Week2_LinkedList">Linked list class notes</a></li><li><a href = "ClassExercises/Week2_Sorting">Notes on sorting in Python</a></li></ul>
 LECTURE
 Begin Asymptotics: Big-O, Polynomial, Exponential, Factorial
 

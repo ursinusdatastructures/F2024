@@ -41,30 +41,59 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>A Computer Science Definition of The Log</h2>
-										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+										<h2>Week 2: Doubly Linked Lists</h2>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
-										
-										<iframe src="Log.html" width=100% height=2600></iframe>
-										
+									
 
-                                    
-                                </div>
+									<p>
+										If we want to remove items from the end of a linked list a single step, we have to add a tail node.  But that also means that to remove things quickly, every node needs to have both a next pointer <b>and</b> a previous pointer, so that we can quickly find what the new tail should be.  
+									</p>
+									<p>
+										Today, students will finish up by implementing such a <b>doubly-linked list</b> data structure so that all operations take a single step, regardless of how many elements are in the list.  Skeleton code has been provided for <code>add_first</code>, <code>add_last</code>, <code>remove_first</code>, and <code>remove_last</code>.  Students should also write a method <code>concatenate</code> that takes another doubly-linked list as a parameter, and which adds that list to the back of the current list in <b>O(1)</b> time.
+									</p>
+									
+									<p>
+										<a href = "DLinkedList.py">Click here</a> to download the starter code.  A few things to keep in mind as you're going:
+										<ul>
+											<li>Be careful to update both <code>next</code> and <code>prev</code> nodes in all of your operations</li>
+											<li>
+												There are special cases in adding and removing when there is only one node in the list 
+											</li>
+											<li>
+												To check if two objects are equal, you can say 
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													obj1 is obj2
+												</script>
+											</li>
+											<li>
+												To check if an object is not <code>None</code>, you can type
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													if is obj:
+												</script>
+												Or, conversely, to check if an object is <code>None</code>, you can say
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													if not obj:
+												</script>
+											</li>
+										</ul>
+									</p>
+
+                                    </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -217,3 +246,4 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
+</html>
