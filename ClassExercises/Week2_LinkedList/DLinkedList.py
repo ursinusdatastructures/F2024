@@ -19,10 +19,20 @@ class DoublyLinkedList:
         """
         ## TODO: Fill this in
         self._N += 1
+        node = Node(value)
+        if not self._head: # If the head is None
+            pass
+        
      
     def add_last(self, value):
         ## TODO: Fill this in
         self._N += 1
+        new_node = Node(value)
+        if self._tail:
+            curr = self._tail
+            curr.next = new_node
+            self._tail = new_node
+            new_node.prev = curr
      
     def remove_first(self):
         """
