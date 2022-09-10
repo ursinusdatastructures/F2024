@@ -66,6 +66,31 @@
 										Personally, I prefer Jupyter, and this is what we'll be using in class.  But for those who are more used to things like Netbeans, you may prefer Spyder.
 									</p>
 
+
+									<HR>
+										<h2><a name = "preferred">My Preferred Solution: External .py Files Autoreloaded in Jupyter</a></h2>
+										<p>
+											My personal preferred way to code in python is to have most of my code that's going to be reused in a separate <code>.py</code> file that I import into a jupyter notebook, and I use the jupyter notebook like an extended "main" where I simply run experiments and plot results.  You can make a .py file from within the jupyter interface as follows (or you can use any other text editor such as <a href = "https://code.visualstudio.com/">Visual Studio Code</a> or <a href = "https://atom.io/">Atom</a>, as long as you save it in the same directory as your notebook):
+										</p>
+
+										<img src = "makepy.gif">
+
+										<p>
+											Then, you can create a notebook and import all of the code from your file by typing
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											%load_ext autoreload
+											%autoreload 2
+											from mycode import *
+										]]></script> 
+
+										<p>
+											Where I'm assuming I'm in the same directory as a file called mycode.py (or whatever else you want to call it).  The <a href = "https://ipython.org/ipython-doc/3/config/extensions/autoreload.html">autoreload</a> extension makes it so that you don't have to restart your notebook every time you make changes to your <code>.py</code> file, unless you add methods, in which case you'll still need to restart the notebook
+										</p>
+
+										<img src = "makenotebook.gif">
+
 									<HR>
 										<h2><a name = "colab">Google Colab</a></h2>
 										<p>
