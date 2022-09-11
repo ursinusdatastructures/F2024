@@ -100,7 +100,7 @@
 										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
 											fin = open("words.txt", encoding="utf8")
 											for line in fin.readlines():
-												word, importance = line.split()
+												word, importance = line.split("\t")
 												importance = int(importance)
 										</script>  
 
