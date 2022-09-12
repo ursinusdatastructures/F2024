@@ -29,7 +29,7 @@ Little o, Big Omega, Little Omega, Complexity Hierarchies
 LECTURE
 Disjoint Sets And Union Find
 
-<ul><li><a href = "Week4_DiscoveringUnionFind">Class Exercise: Discovering Union Find</a></li></ul>
+<ul><li><a href = "ClassExercises/Week3_DiscoveringUnionFind">Class Exercise: Discovering Union Find</a></li></ul>
 LECTURE
 <b>Lab 2: The Union Find Algorithm</b>
 
