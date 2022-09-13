@@ -31,9 +31,9 @@ Disjoint Sets And Union Find
 
 <ul><li><a href = "ClassExercises/Week3_DiscoveringUnionFind">Class Exercise: Discovering Union Find</a></li></ul>
 LECTURE
-<b>Lab 2: The Union Find Algorithm</b>
+<b><a href = "Labs/Lab2_UnionFind">Lab 2: The Union Find Algorithm</a></b>
 
-<ul><li><a href = "../ClassExercises/Week2/Week2_UnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
+<ul><li><a href = "../ClassExercises/Week3/Week3_DiscoveringUnionFind">Class Notes</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.1-22.5</li></ul>
 LECTURE
 The ArrayList ADT and Data Structure, Amortized Analysis
 
