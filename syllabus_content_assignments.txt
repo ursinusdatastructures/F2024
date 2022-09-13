@@ -16,7 +16,7 @@ Lab 1 Due
 <HR><a href = "Assignments/HW1_Autocomplete">Homework 1: Autocomplete</a> Out
 
 2022-09-02
-Disjoint Set / Union Find Module Due Before Class
+<a href = "https://ursinus-cs271-f2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2022-09-14
 Homework 1 Due
