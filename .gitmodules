@@ -4,3 +4,9 @@
 [submodule "Labs/Lab2_UnionFind/Lab2_UnionFind"]
 	path = Labs/Lab2_UnionFind/Lab2_UnionFind
 	url = https://github.com/ursinus-cs271-f2022/Lab2_UnionFind.git
+[submodule "ClassExercises/Week3_ArrayList"]
+	path = ClassExercises/Week3_ArrayList
+	url = https://github.com/ursinus-cs271-f2022/Week3_ArrayList.git
+[submodule "ClassExercises/Week4_Hash/Week4_Hash"]
+	path = ClassExercises/Week4_Hash/Week4_Hash
+	url = https://github.com/ctralie/Week4_Hash.git
