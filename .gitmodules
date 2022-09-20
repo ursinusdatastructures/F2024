@@ -10,3 +10,6 @@
 [submodule "ClassExercises/Week4_Hash/Week4_Hash"]
 	path = ClassExercises/Week4_Hash/Week4_Hash
 	url = https://github.com/ctralie/Week4_Hash.git
+[submodule "Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation"]
+	path = Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation
+	url = https://github.com/ursinus-cs271-f2022/HW2_PlantCellSegmentation.git
