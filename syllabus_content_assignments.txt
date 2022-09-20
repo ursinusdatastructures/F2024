@@ -28,9 +28,12 @@ Lab 2 Due
 <HR><a href = "Assignments/HW2_PlantCellSegmentation">Homework 2: Plant Cell Segmentation</a> Out
 
 2022-09-19
-Recursion Module due before class
+<a href = "https://ursinus-cs271-f2022.github.io/Modules/RecursionModule/Video0">Recursion Module</a> due before class
 
 2022-09-21
+<a href = "https://ursinus-cs271-f2022.github.io/Modules/StackModule/Video">Stacks And Queues Module</a> Due
+
+2022-09-25
 Edit Distance Module due before class
 
 2022-09-23
