@@ -47,7 +47,7 @@ Recursion And Dynamic Programming
 
 
 LECTURE
-<b>Lab 3: Towers of Hanoi</b>
+Union Find Recursive Solution, <b><a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a></b>
 
 
 LECTURE
