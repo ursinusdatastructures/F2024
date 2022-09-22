@@ -34,7 +34,7 @@ Lab 2 Due
 <a href = "https://ursinus-cs271-f2022.github.io/Modules/StackModule/Video">Stacks And Queues Module</a> Due
 
 2022-09-25
-Edit Distance Module due before class
+<a href = "https://ursinus-cs271-f2022.github.io/Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2022-09-23
 Lab 3 Due
@@ -52,7 +52,7 @@ Homework 3 Due
 Lab 4 Due
 
 2022-10-03
-<a href = "Assignments/HW3a_WarpingPaths">HW 3a: Warping Paths</a> and <a href = "Assignments/HW3_SeamCarving">HW3b: Seam Carving</a> Out
+<a href = "Assignments/HW3_SeamCarving">HW3: Seam Carving</a> Out
 
 2022-10-11
 Lab 5 Due
