@@ -59,6 +59,10 @@ Memoization, Dynamic Programming
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul>
 LECTURE
+Backtracing, Longest Common Subsequence
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
+LECTURE
 <b>Lab 4: Making Change</b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
@@ -66,10 +70,6 @@ LECTURE
 Recursively Backtracing Multiple Solutions
 
 <ul><li><a href = "https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing/blob/recursivebacktracing/edit.py">Code from class</a></li></ul>
-LECTURE
-Longest Common Subsequence
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
 LECTURE
 Knapsack Problem
 
