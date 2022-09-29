@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Lab 4: Dynamic Time Warping (6 Points)</h2>
+										<h2>Lab 4: Making Change with Dynamic Programming (5 Points)</h2>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -50,110 +50,64 @@
 
                                         <h2>Overview / Logistics</h2>
 										<p>
-											The purpose of this lab is to get you practice with dynamic programming and backtracing optimal solutions. To that end, you will be implementing the <a href = "../../ClassExercises/DTWNotes/">dynamic time warping algorithm</a> to match two piecewise linear curves to each other.
+											The purpose of this lab is to get you practice with dynamic programming.  The problem is as follows: make change of a particular number with an arbitrary set of valued coins.  You can take as many of each type of coin as you want, but your goal is to minimize the number of coins used.
+										</p>
+
+										<h3>Step 1: Recursive Solution with Memoization (2 Points)</h3>
+										<p>
+											As your first task, write a method <code>make_change(coins, value, mem)</code> that computes the minimum number of coins from the list <code>coins</code> needed to make the amount <code>value</code>, while passing along a dictionary <code>mem</code> for memoization
 										</p>
 
 										<p>
-											When you are finished, upload your code with the method <code>dtw</code> to canvas.
+											As an example, if you call <code>print(make_change([1, 5, 10, 25], 70, {}))</code>, you should get <b>4</b> (e.g. 2x25c + 2x10c)
 										</p>
 
-										<h2>Part 1: Dynamic Programming Cost (3 Points)</h2>
-
-									
 										<p>
-											Your first task is to implement the dynamic time warping algorithm <a href = "../../ClassExercises/DTWNotes/">described in the notes</a> to compute an optimal warping path between a sequence of points <b>X</b> and a sequence of points <b>Y</b>.  Create a method <code>dtw</code> to accomplish this.  The method should take as input two lists of points, and it should return the cost of the optimal warping path between them.
+											For a slightly more exotic example, if you call <code>print(make_change([1, 7, 10, 25], 41, {}))</code>, you should get <b>5</b> (e.g. 4x10c + 1x1c, or 2x1c + 2x7c + 1x25c)
+										</p>
+
+										<p>
+											<b>NOTE: </b> As we saw in class, it's possible to use <a href = "https://docs.python.org/3/library/functools.html">functools</a> to memoize automatically, but I want you to get practice with dictionaries  
+										</p>
+
+										<h3>Step 1: Dynamic Programming Solution with Backtracing (3 Points)</h3>
+										<p>
+											In your second task, write a method <code>make_change_dyn(coins, value)</code> that implements the same thing using dynamic programming.  But instead of returning the number of coins needed, you should go a step further and return a solution with the specific coins used to achieve the optimal solution, as a list.  For example, if you call 
+										</p>
+
+										<p>
+											<code>print(make_change_dyn([1, 5, 10, 25], 70))</code>
+										</p>
+										<p>
+											then you should get <code>[25, 25, 10, 10]</code> (not necessarily in that order)
+										</p>
+
+										<p>
+											If you instead call 
+										</p>
+										<p>
+											<code>print(make_change_dyn([1, 7, 10, 25], 41))</code>
+										</p>
+										<p>
+											then you should get a list of 5 coins that add up to 41, such as <code>[25, 7, 7, 1, 1]</code>
 										</p>
 										
-										<h4>Implementation Details</h4>
+										<h3>A Note on Greedy Solutions</h3>
 										<p>
-											If <b>X</b> has <b>M</b> points and <b>Y</b> has <b>N</b> points, then you should fill in an <b>M x N</b> dynamic programming table called <code>S</code>.  As you're filling in <code>S</code>, you can use the following code to compute the distance between two points <code>u</code> and <code>v</code> 
-										</p>
-											
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											import numpy as np
-											def distance(u, v):
-												"""
-												Compute the Euclidean distance between two points
-												in d dimensions
-												
-												Parameters
-												----------
-												u: ndarray(d)
-													First point
-												v: ndarray(d)
-													Second point
-												
-												Return
-												------
-												float: The distance between the two points
-												"""
-												u = np.array(u)
-												v = np.array(v)
-												return np.sqrt(np.sum((u-v)**2))
-											]]></script>
-
-										<h4>Usain Bolt</h4>
-										<p>
-											Let's suppose you want to test the Usain Bolt example from the notes.  Then you can run the following code
-										</p>
-											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-												X = np.array([[0, 2], [17, 0], [25, 0], [31, 0]])
-												Y = np.array([[0, 4], [5, 4], [16, 4], [24, 4], [30, 4]])
-												print(dtw(X, Y))]]></script> 
-										<p>
-											If this works, you should get the optimal solution of <b>19.8</b>.  Make sure you're getting this number before you proceed.
+											It might be tempting to solve this problem by taking the highest coins away that we can first.  For example, if we have the 1, 5, 10, and 25 that we're used to using, and we want to make change of 71, we'll start by taking away as many 25c as we can way, leaving us with 71-2x25 = 21, and then taking as many of the next largest coin (10c) as we can away, so 21-2x10 = 1, and then finally taking one 1c away.  This works perfectly well for the 1, 5, 10, and 25 cent coins we're used to using, but it doesn't work when we use some more exotic values.
 										</p>
 
-
-										<h2>Part 2: Backtracing An Optimal Warping Path (3 Points)</h2>
 										<p>
-											Once you feel you have the table right, you should add code to remember the optimal choices you made so you can trace back to extract the optimal warping path.  <b>For the purposes of this assignment, it's fine to break ties arbitrarily if there happen to be multiple warping paths that achieve the optimal cost.</b>   So your solution should be similar to how the <a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">iterative backtracing</a> was done in edit distance, using a while loop.  When you are finished, you should return the warping path expressed as a list.  <b>Be sure to return a path that starts at <code>[0, 0]</code> and ends at <code>[M-1, N-1]</code></b>, not the other way around.  As in the edit distance example, you may find that the <code>reverse</code> method of python lists comes in handy.
-										</p>
-
-										<h4>Usain Bolt</h4>
-										<p>
-											If this is working properly, you should get the following warping path for the Usain Bolt example: <code>[[0, 0], [0, 1], [1, 2], [2, 3], [3, 4]]</code>
-										</p>
-
-										<h4>Figure 8</h4>
-										<p>
-											Below is a slightly more intricate example that you can test before moving onto audio.  It matches two sets of point samples on Figure 8 curves in 2D which go at different rates around the Figure 8:
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											import numpy as np
-											import matplotlib.pyplot as plt
-											N = 50
-											t = np.linspace(0, 1, N)
-											X = np.zeros((N, 2))
-											X[:, 0] = np.cos(2*np.pi*t)
-											X[:, 1] = np.sin(4*np.pi*t)
-											Y = np.zeros((N, 2))
-											Y[:, 0] = 1.3*np.cos(2*np.pi*(t**2))
-											Y[:, 1] = 1.3*np.sin(4*np.pi*(t**2))+0.1
-											path = np.array(dtw(X, Y))
-											plt.figure(figsize=(10, 5))
-											plt.subplot(121)
-											plt.plot(X[:, 0], X[:, 1], c='C0')
-											plt.scatter(X[:, 0], X[:, 1], c='C0')
-											plt.plot(Y[:, 0], Y[:, 1], c='C1')
-											plt.scatter(Y[:, 0], Y[:, 1], c='C1')
-											path = np.array(path)
-											for [i, j] in path:
-												plt.plot([X[i, 0], Y[j, 0]], [X[i, 1], Y[j, 1]], color='k')
-											plt.subplot(122)
-											plt.plot(path[:, 1], path[:, 0])
-											plt.title("Warping Path")
-											plt.ylabel("Blue Curve")
-											plt.xlabel("Orange Curve")
-											plt.gca().invert_yaxis()]]></script> 
-
-										<p>
-											If this works properly, you should get a result like the following, where you see the points are well-matched even though the two Figure 8s have been warped in time:
+											As an example of where there's a disparity, we know from the above examples that making 41 cents with 1, 7, 10, and 25 cent coins should only take 5 steps. However, a greedy solution will first take 25 away, leaving 16. Then it will take 10 away, leaving 6. And the best it can do after that is 6x1c. So a greedy solution ends up taking 8 steps instead of 5!
 										</p>
 										<p>
-											<img src = "Figure8.svg">
+											By contrast, if we switch to ordinary coins, the greedy solution works just the same. But this is a cautionary tale about greedy solutions in general; sometimes we take steps that look good in the near term, but they end up trapping us into taking non-optimal steps later.  Below is a plot showing the disparity between greedy and optimal solutions for values up to 100c using 1, 7, 10, and 25 cent coins:
 										</p>
+										<img src = "DynamicVsGreedy_1_7_10_25.svg">
+
+										
+
+
 
 
                                     </div>
@@ -220,6 +174,7 @@
 												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
 												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
 												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_MakingChange/index.html">Lab 4: Making Change with Dynamic Programming</a></li>
 												<!--
 												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
 												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
