@@ -47,10 +47,8 @@
 
 									<div id="page-content">
 									
-
-                                        <h2>Overview / Logistics</h2>
 										<p>
-											We talked about an iterative dynamic programming solution for the string edit distance in <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Video2">the last module</a>.  The method we came up with was able to compute the optimal distance by filling in a table of costs of matching all pairs of substrings, and we were able to lookup the cost as the lower right element in this table, which corresponded to the cost between full strings.  The table below shows an example for "school" versus "fools," where the optimal cost is 4
+											We talked about an iterative dynamic programming solution for the string edit distance in class.  The method we came up with was able to compute the optimal distance by filling in a table of costs of matching all pairs of substrings, and we were able to lookup the cost as the lower right element in this table, which corresponded to the cost between full strings.  The table below shows an example for "school" versus "fools," where the optimal cost is 4
 										</p>
 
 										<p>
@@ -127,25 +125,185 @@ Add s
 											Interestingly, this also has a cost of 4, but it's a different way of getting that answer! (2 deletes, 1 swap, one add).  And there is actually one more way (see if you can find it)
 										</p>
 
-										<h2>Programming Tasks</h2>
+										<HR>
+										<h2>Solutions in Code</h2>
 										<p>
-											<a href = "https://raw.githubusercontent.com/ursinus-cs371-s2022/Week5_EditBacktracing/main/edit.py">Click here</a> to download the starter code.
+											For now, let's examine some solutions to find one of these paths.  We'll break ties if they exist.  Next week, we'll talk about how to get all of the solutions.  Here is the first solution
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											def edit(a, b):
+											"""
+											Compute an optimal edit sequence between two strings,
+											storing the optimal directions in a parallel array before
+											backtracing.  This solution uses more space, but it can
+											backtrace without recomputing minima
+										
+											Parameters
+											----------
+											a: string
+												First string
+											b: string
+												Second string
+											"""
+											M = len(a)
+											N = len(b)
+											## Fill in an empty table that's (M+1) x (N+1)
+											table = []
+											for i in range(M+1):
+												table.append([])
+												for j in range(N+1):
+													table[i].append(0)
+											## Fill in a parallel array that will store directions
+											directions = []
+											for i in range(M+1):
+												directions.append([])
+												for j in range(N+1):
+													directions[i].append(0)
+											
+											## Base cases
+											## First row
+											for j in range(N+1):
+												table[0][j] = j 
+												directions[0][j] = "Left"
+											for i in range(M+1):
+												table[i][0] = i
+												directions[i][0] = "Up"
+											
+											## Fill in the rest using the recurrence relations
+											for i in range(1, M+1):
+												for j in range(1, N+1):
+													left = table[i][j-1] + 1
+													up = table[i-1][j] + 1 
+													diag = table[i-1][j-1]
+													if a[i-1] != b[j-1]:
+														diag += 1
+													table[i][j] = min(left, up, diag)
+													if table[i][j] == left:
+														directions[i][j] = "Left"
+													elif table[i][j] == up:
+														directions[i][j] = "Up"
+													else:
+														directions[i][j] = "Diag"
+											
+											## Backtrace through the directions and keep track of them
+											## in a human readable format
+											i = M
+											j = N
+											steps = []
+											while i != 0 or j != 0:
+												if directions[i][j] == "Left":
+													steps.append("Deleting {} from string 2 (+1)".format(b[j-1]))
+													j -= 1
+												elif directions[i][j] == "Up":
+													steps.append("Deleting {} from string 1 (+1)".format(a[i-1]))
+													i -= 1
+												else:
+													if a[i-1] == b[j-1]:
+														steps.append("Matching {} in string 1 to {} in string 2".format(a[i-1], b[j-1]))
+													else:
+														steps.append("Swapping {} in string 1 with {} in string 2 (+1)".format(a[i-1], b[j-1]))
+													i -= 1
+													j -= 1
+											## Reverse the directions so we can see what happens starting at the beginning
+											steps.reverse()
+											return steps, table[-1][-1]
+											
+										
+										steps, cost = edit("school", "fools")
+										for step in steps:
+											print(step)
+										print("Total Cost:", cost)
+										</script>
+
+										<p>
+											This prints out the following:
 										</p>
 
-										<h3>Task 1: Backtrace breaking ties</h3>
-										<p>
-											Your first task is to backtrace by breaking ties in the optimal moves.  The code already does this for you by choosing the left arrow if all else is equal, followed by the up arrow, followed by the diagonal arrow.  The table <code>moves</code> stores a 1 if the left arrow (cost1) was the optimal at that cell, a 2 if the the up arrow (cost2) was optimal at that cell, and a 3 if the diagonal arrow (cost3) was optimal at that cell.  You should create a loop to follow these arrows back from [M, N] to [0, 0]
-										</p>
+<pre>
+Swapping s in string 1 with f in string 2 (+1)
+Deleting c from string 1 (+1)
+Deleting h from string 1 (+1)
+Matching o in string 1 to o in string 2
+Matching o in string 1 to o in string 2
+Matching l in string 1 to l in string 2
+Deleting s from string 2 (+1)
+Total Cost: 4
+</pre>
 
-										<h3>Task 2: Backtracing all paths</h3>
+<p>
+	Interestingly, we can get identical backtracing behavior if we avoid storing the table in memory, but we recompute which one is the minimum while backtracing.  This solution is a bit shorter and nicer to read!  Though it has to recompute the costs of the 3 directions in the recurrence while backtracing:
+</p>
 
-										<h3><a href = "https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing/blob/recursivebacktracing/edit.py">Click here</a> to see a solution</h3>
+<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+	def edit(a, b):
+    """
+    Compute an optimal edit sequence between two strings, but only
+    using the table.  This solution uses less space, but it has to
+    recompute the minima while backtracing
 
-										<p>
-											If there are ties, it might also be interesting to know <b>all possible paths</b> from the lower right to the upper left of the table.  So we don't just want to break ties, but to store all of the arrows.  Write code to extract all paths this way.  The easiest way to do this is using recursion.  Every time you branch off, you need to make a new list.
-										</p>
+    Parameters
+    ----------
+    a: string
+        First string
+    b: string
+        Second string
+    """
+    M = len(a)
+    N = len(b)
+    ## Fill in an empty table that's (M+1) x (N+1)
+    table = []
+    for i in range(M+1):
+        table.append([])
+        for j in range(N+1):
+            table[i].append(0)
+    
+    ## Base cases
+    ## First row
+    for j in range(N+1):
+        table[0][j] = j 
+    for i in range(M+1):
+        table[i][0] = i
+    
+    ## Fill in the rest using the recurrence relations
+    for i in range(1, M+1):
+        for j in range(1, N+1):
+            left = table[i][j-1] + 1
+            up = table[i-1][j] + 1 
+            diag = table[i-1][j-1]
+            if a[i-1] != b[j-1]:
+                diag += 1
+            table[i][j] = min(left, up, diag)
+    
+    ## Backtrace through the directions and keep track of them
+    ## in a human readable format
+    i = M
+    j = N
+    steps = []
+    while i != 0 or j != 0:
+        ## Check all of the directions to see which was the optimal
+        if j > 0 and table[i][j-1]+1 == table[i][j]:
+            steps.append("Deleting {} from string 2 (+1)".format(b[j-1]))
+            j -= 1
+        elif i > 0 and table[i-1][j]+1 == table[i][j]:
+            steps.append("Deleting {} from string 1 (+1)".format(a[i-1]))
+            i -= 1
+        else:
+            if a[i-1] == b[j-1]:
+                steps.append("Matching {} in string 1 to {} in string 2".format(a[i-1], b[j-1]))
+            else:
+                steps.append("Swapping {} in string 1 with {} in string 2 (+1)".format(a[i-1], b[j-1]))
+            i -= 1
+            j -= 1
+    ## Reverse the directions so we can see what happens starting at the beginning
+    steps.reverse()
+    return steps, table[-1][-1]
+    
 
-
+steps, cost = edit("school", "fools")
+for step in steps:
+    print(step)
+print("Total Cost:", cost)
+</script>
                                     </div>
 						</div>
 					</div>
@@ -237,6 +395,8 @@ Add s
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/StackModule/Video">Week 4: Stacks And Queues Module</a></li>
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/RecursionModule/Video0">Week 4: Recursion Module</a></li>
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance Backtracing</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/LCSModule/Video1">Week 5: Longest Common Subsequence Module</a></li>
 												<!--
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
 												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
