@@ -179,10 +179,14 @@
 
 									<h2><a name = "dynprog">Devise Dynamic Programming Rules (5 Points)</a></h2>
 									<p>
-										Before you get started coding, your will first come up with an algorithm yourself.  In particular, you should devise a dynamic programming solution to compute the energy of the minimum cost seam that starts anywhere on the top and which ends at a particular pixel <b>[i, j]</b> somewhere in the middle of the image, as depicted below
+										Before you get started coding, your will first come up with a <b>recurrence relation</b> that can be used to compute the optimal seams efficiently using dynamic programming.  In particular, consider the cost of the minimum cost seam that starts anywhere on the top and and which ends at a particular pixel <b>[i, j]</b> somewhere in the middle of the image, as depicted below
 									</p>
 
 									<img src = "SeamChoices.svg" width="25%">
+
+									<p>
+										How would you related the cost of this seam to cost of other subproblems at locations <b>[k, j]</b>?
+									</p>
 									
 									<p>
 										In your writeup, specify 
@@ -197,7 +201,7 @@
 									</p>
 
 									<p>
-										It should be possible to fill costs of optimal seams to all pixels <b>in polynomial time</b> following your rules.
+										It should be possible to fill costs of optimal seams to all pixels <b>in polynomial time</b> following your rules.  No need to describe how you'll actually store this and loop through and compute it at this time...just the recurrence rules are fine.
 									</p>
 
 									<h2><a name = "seamcost">Compute Optimal Seam Cost (15 Points)</a></h2>
