@@ -69,7 +69,7 @@ LECTURE
 LECTURE
 Recursively Backtracing Multiple Solutions
 
-<ul><li><a href = "https://github.com/ursinus-cs371-s2022/Week5_EditBacktracing/blob/recursivebacktracing/edit.py">Code from class</a></li></ul>
+
 LECTURE
 Knapsack Problem
 
