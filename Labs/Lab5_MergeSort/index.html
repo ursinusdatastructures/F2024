@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Lab 5: Merge Sort And Brute Force Kendall Tau (6 Points)</h2>
+										<h2>Lab 5: Merge Sort And Kendall Tau Comprehension (4 Points)</h2>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -54,16 +54,21 @@
 										</p>
 
 										<p>
-											<a href = "https://github.com/ursinus-cs371-s2022/Lab5_MergeSort/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.  When you are finished, upload your <code>sort.py</code> and <code>kendalltau.py</code> files to canvas.
+											<a href = "https://github.com/ursinus-cs271-f2022/Lab5_MergeSort/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.  When you are finished, upload your <code>sort.py</code> and <code>kendalltau.py</code> files to canvas.
 										</p>
 
 										<h2>Part 1: Merge Sort (3 Points)</h2>
 
 										<p>
-											Fill in the <code>mergesort_rec</code> and <code>merge</code> methods in <code>sort.py</code> to complete a merge sort implementation  <a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video5">Click here</a> to review how this works.  A recursive call to merge sort puts the elements between indices <code>i1</code> and <code>i2</code> in order by breaking this range into half, sorting each half individually, and merging the sorted versions together.  Pictorially, the sorted region looks like this:
+											Fill in the <code>mergesort_rec</code> and <code>merge</code> methods in <code>sort.py</code> to complete a merge sort implementation  <a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video5">Click here</a> to review how this works. 
+										</p>
+											
+										
+										<p>
+											A recursive call to merge sort puts the elements between indices <code>i1</code> and <code>i2</code> in order by breaking this range into half, sorting each half individually, and merging the sorted versions together.  Pictorially, the sorted region looks like this:
 										</p>
 
-										<img src = "../../ClassExercises/Week8_KendallTau/MergeVariables.svg" width="50%">
+										<img src = "../../ClassExercises/Week7_KendallTau/MergeVariables.svg" width="50%">
 
 										<p>
 											The recursive pseudocode for merge sort is as follows:
@@ -80,146 +85,14 @@
 											You will also have to consider a base case.  Then, if you implement the merge method and put this all together, you should end up with a sorted array.
 										</p>
 
-										<h2>Part 2: Brute Force Kendall Tau Distance (3 Points)</h2>
 										<p>
-											Read the notes <a href = "../../ClassExercises/Week8_KendallTau/">here</a> on the Kendall-Tau distance.  On the next homework, you will implement a clever algorithm that takes only <b>O(N log N)</b> time to compute this, but for now, you will implement a simple algorithm that takes <b>O(N<SUP>2</SUP>)</b> time, but which follows directly from the definition of Kendall tau.
+											<b>Note: </b> Your solution should run in <b>O(N log N) time and use O(N) memory</b>.  Our textbook presents a solution that uses O(N log N) time and O(N log N) memory with very succinct code using slices, but I want us to be more careful.
 										</p>
 
+										<h2>Part 2: Kendall Tau Comprehension Questions</h2>
 										<p>
-											To see how the algorithm works, let's consider the following two permutations:
+											Coming soon...
 										</p>
-
-										<p>
-											<code style="color:rgb(6, 118, 211);">0, 4, 3, 1, 2</code>
-										</p>
-
-										<p>
-											<code style="color:rgb(182, 50, 50);">1, 4, 2, 3, 0</code>
-										</p>
-
-										<p>
-											The first thing we should do is convert these into rankings, or arrays that record the <b>index that each element shows up in.</b>.  If, <code>ranking[i] > ranking[j]</code>, that means that <code>i</code> comes after <code>j</code>.  So, for example, in the first permutation, element 4 has a ranking of 1, and element 2 has a ranking of 4, so we see that element 4 actually comes before and beats element 1.  All of the rankings for each permutation look as follows:
-										</p>
-
-										<table style="width:200px;">
-											<Tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></Tr>
-											<Tr style="color:rgb(6, 118, 211)">
-												<td>
-													0
-												</td>
-												<td>3</td>
-												<td>4</td>
-												<td>2</td>
-												<td>1</td>
-											</Tr>
-											<Tr style="color:rgb(182, 50, 50)">
-												<td>
-													4
-												</td>
-												<td>0</td>
-												<td>2</td>
-												<td>3</td>
-												<td>1</td>
-											</Tr>
-										</table>
-
-										<p>
-											Now we just need to check every pair of rankings.
-										</p>
-
-										<table style="width:600px;">
-											<tr>
-												<td>Number 1</td>
-												<td>Number 2</td>
-												<td>
-													<span style="color:rgb(6, 118, 211);">Rank #1 > Rank #2</span>
-												</td>
-												<td>
-													<span style="color:rgb(182, 50, 50);">Rank #1 > Rank #2</span>
-												</td>
-												<td>
-													Disagreement?
-												</td>
-											</tr>
-											<Tr>
-												<td>0</td><td>1</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
-													<span style="color:rgb(182, 50, 50);">Yes</span>
-												</td>
-												<td>*</td>
-											</Tr>
-											
-											<Tr>
-												<td>0</td><td>2</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
-													<span style="color:rgb(182, 50, 50);">Yes</span>
-												</td>
-												<td>*</td>
-												
-												<Tr>
-													<td>0</td><td>3</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
-														<span style="color:rgb(182, 50, 50);">Yes</span>
-													</td>
-													<td>*</td>
-												</Tr>
-
-												<Tr>
-													<td>0</td><td>4</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
-														<span style="color:rgb(182, 50, 50);">Yes</span>
-													</td>
-													<td>*</td>
-												</Tr>
-
-												<Tr>
-													<td>1</td><td>2</td><td><span style="color:rgb(6, 118, 211);">No</span></td><td>
-														<span style="color:rgb(182, 50, 50);">No</span>
-													</td>
-													<td></td>
-												</Tr>
-
-												<Tr>
-													<td>1</td><td>3</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
-														<span style="color:rgb(182, 50, 50);">No</span>
-													</td>
-													<td>*</td>
-												</Tr>
-
-												<Tr>
-													<td>1</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
-														<span style="color:rgb(182, 50, 50);">No</span>
-													</td>
-													<td>*</td>
-												</Tr>
-
-												<Tr>
-													<td>2</td><td>3</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
-														<span style="color:rgb(182, 50, 50);">No</span>
-													</td>
-													<td>*</td>
-												</Tr>
-
-												<Tr>
-													<td>2</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
-														<span style="color:rgb(182, 50, 50);">Yes</span>
-													</td>
-													<td></td>
-												</Tr>
-
-												<Tr>
-													<td>3</td><td>4</td><td><span style="color:rgb(6, 118, 211);">Yes</span></td><td>
-														<span style="color:rgb(182, 50, 50);">Yes</span>
-													</td>
-													<td></td>
-												</Tr>
-											</Tr>
-										</table>
-
-
-
-
-											
-
-											<p>
-												For a total of 7 discordant pairs if we count the stars where they disagree
-											</p>
 
 
 										
@@ -289,8 +162,8 @@
 												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
 												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
 												<li><a href = "../../Labs/Lab4_MakingChange/index.html">Lab 4: Making Change with Dynamic Programming</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Kendall-Tau Comprehension</a></li>
 												<!--
-												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Brute Force Kendall-Tau</a></li>
 												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
 												<li><a href = "../../Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>!-->
 											</ul>
@@ -318,11 +191,13 @@
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>
 												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance Backtracing</a></li>
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/LCSModule/Video1">Week 5: Longest Common Subsequence Module</a></li>
+												<li><a href = "../../ClassExercises/Week7_KendallTau">Week 7: The Kendall Tau Distance between Two Rankings</a></li>
+
 												<!--
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
 												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Week 8: Sorting Basics Module</a></li>
-												<li><a href = "../../ClassExercises/Week8_KendallTau">Week 8: The Kendall Tau Distance between Two Rankings</a></li>
+												
 												<li><a href = "../../ClassExercises/Week9_RadixSort">Week 9: Radix Sort</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>

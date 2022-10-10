@@ -73,7 +73,7 @@ Recursively Backtracing Multiple Solutions
 LECTURE
 Knapsack Problem
 
-
+<ul><li><a href = "https://github.com/ursinus-cs271-f2022/CoursePage/blob/main/ClassExercises/Week6_Knapsack/knapsack.py">Class solution to the knapsack problem</li></ul>
 SECTION
 Sorting, Selection, And Shuffling
 
@@ -85,7 +85,7 @@ Sorting Basics: Permutations, Insertion Sort, Bubble Sort
 LECTURE
 <b>Lab 5: Merge Sort, Kendall Tau Examples</b>
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li><li><a href = "ClassExercises/Week7_KendallTau">Kendall Tau / Kemeny Optimal Class Notes</a></li></ul>
 LECTURE
 Quick Sort, Stability of Sorts
 
@@ -167,11 +167,7 @@ LECTURE
 
 
 LECTURE
-Bellman Ford, Negative Cycles
-
-
-LECTURE
-Floyd-Warshall
+Bellman Ford, Floyd-Warshall
 
 
 LECTURE
@@ -179,6 +175,10 @@ Directed Acyclic Graphics, Topological Sort
 
 
 LECTURE
-Graph Cuts
+Bipartite Graphics, Maximum Matching
+
+
+LECTURE
+The Hungarian Algorithm
 
 
