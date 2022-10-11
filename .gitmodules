@@ -19,3 +19,6 @@
 [submodule "Labs/Lab5_MergeSort/Lab5_MergeSort"]
 	path = Labs/Lab5_MergeSort/Lab5_MergeSort
 	url = https://github.com/ursinus-cs271-f2022/Lab5_MergeSort.git
+[submodule "Assignments/HW4_FairElections/HW4_FairElections"]
+	path = Assignments/HW4_FairElections/HW4_FairElections
+	url = https://github.com/ursinus-cs271-f2022/HW4_FairElections.git
