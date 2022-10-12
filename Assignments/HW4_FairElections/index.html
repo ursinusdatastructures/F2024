@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 4: Fair Elections of Animals (40 Points)</h2>
+                                        <h2>Assignment 4: Fair Elections of Foods (55 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										<h3></h3>
 									</header>
@@ -53,6 +53,7 @@
 												<ul>
 													<li><a href = "#learning">Learning Objectives</a></li>
 													<li><a href = "#submit">What To Submit</a></li>
+													<li><a href = "#timeline">Suggested Timeline</a></li>
 												</ul>
 											</li>
 											<li>
@@ -62,16 +63,19 @@
 														<a href = "#ranknum">Rankings As Numbers</a>
 													</li>
 													<li>
-														<a href = "#computekt">Computing The Kendall-Tau Distance (12 Points)</a>
+														<a href = "#computekt">Brute Force Kendall-Tau Distance (10 Points)</a>
 													</li>
 													<li>
-														<a href = "#diameter">Diameter (6 Points)</a>
+														<a href = "#diameter">Diameter (7 Points)</a>
 													</li>
 													<li>
-														<a href = "#avgrank">Average Rank Aggregation (7 Points)</a>
+														<a href = "#avgrank">Average Rank Aggregation (8 Points)</a>
 													</li>
 													<li>
 														<a href = "#permutations">Brute Force Kemeny Optimal Ranking (15 Points)</a>
+													</li>
+													<li>
+														<a href = "#efficientkt">Efficient Kendall-Tau (15 Points)</a>
 													</li>
 												</ul>
 											</li>
@@ -80,7 +84,7 @@
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											The purpose of this assignment is to give you practice with recursion and ideas from permutation theory/sorting in a fun application to which the whole class has contributed: <b>fair elections of animals</b>.  Each member of the class ranked a subset of animals that students volunteered on discord at the beginning of the course.  In this assignment, we will define mathematically an optimal "average ranking" that incorporates everyone's choices in a fair and even way, and we will explore computational issues that arise when we attempt to create algorithms to compute this average ranking.
+											The purpose of this assignment is to give you practice with recursion and ideas from permutation theory/sorting in a fun application to which the whole class has contributed: <b>fair elections of foods</b>.  Each member of the class ranked a subset of foods that students volunteered on discord at the beginning of the course.  In this assignment, we will define mathematically an optimal "average ranking" that incorporates everyone's choices in a fair and even way, and we will explore computational issues that arise when we attempt to create algorithms to compute this average ranking.
 										</p>
 
 										<p>
@@ -90,7 +94,7 @@
 										
 
 										<p>
-											<a href = "../../ClassExercises/Week8_KendallTau/">Click here</a> to review notes on Kendall-Tau and Kemeny Optimal rankings.
+											<a href = "../../ClassExercises/Week7_KendallTau/">Click here</a> to review notes on Kendall-Tau and Kemeny Optimal rankings.
 										</p>
 										
 
@@ -117,6 +121,22 @@
 										<p>                                  
 											Submit your file <code>ranking.py</code> to canvas
 
+										<h3><a name = "timeline">Suggested Timeline</a></h3>
+										<ul>
+											<li>
+												Finish brute force kendall-tau by Wednesday 10/19
+											</li>
+											<li>
+												Finish diameter and average rank by Friday 10/21
+											</li>
+											<li>
+												Finish brute force kemeny by Monday 10/24
+											</li>
+											<li>
+												Finish efficient Kendall-Tau by Thursday 10/27
+											</li>
+										</ul>
+
                                         
 
 										
@@ -124,37 +144,37 @@
 										<h2><a name = "programming">Programming Tasks</a></h2>
 
 										<p>
-											<a href = "https://github.com/ursinus-cs371-s2022/HW4_FairElections/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will be editing <code>ranking.py</code>.  Code has been provided for loading in the rankings and plotting a dimension reduced version of all pairwise ranking comparisons.
+											<a href = "https://github.com/ursinus-cs271-f2022/HW4_FairElections/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will be editing <code>ranking.py</code>.  Code has been provided for loading in the rankings and plotting a dimension reduced version of all pairwise ranking comparisons.
 										</p>
 
 										<h3><a name = "ranknum">Rankings As Numbers</a></h3>
 
 										<p>	
-											To keep things simple, if we have <b>N</b> items we're ranking, we'll label them from <b>0</b> to <b>N-1</b> in some arbitrary order.  In this assignment, we'll be using the animal votes that students cast, and we'll use the following labels (in alphabetical order of animal name):
+											To keep things simple, if we have <b>N</b> items we're ranking, we'll label them from <b>0</b> to <b>N-1</b> in some arbitrary order.  In this assignment, we'll be using the food votes that students cast, and we'll use the following labels:
 										</p>
 
 <pre>
-	0: Dog
-	1: Guinea pig
-	2: Hedgehog
-	3: Kangaroo
-	4: Owl
-	5: Penguin
-	6: Shark
-	7: Tiger
+	0: Sushi
+	1: Tacos
+	2: Pho
+	3: Spaghetti_Meatballs
+	4: Strawberries
+	5: Dumplings
+	6: Pizza
+	7: Brownies
 </pre>	
 										<p>
 											So, for instance, if someone gives the rankings 
 										</p>
 										<ol>
-											<li>Owl</li>
-											<li>Hedgehog</li>
-											<li>Guinea pig</li>
-											<li>Kangaroo</li>
-											<li>Penguin</li>
-											<li>Tiger</li>
-											<li>Shark</li>
-											<li>Dog</li>
+											<li>Strawberries</li>
+											<li>Pho</li>
+											<li>Tacos</li>
+											<li>Spaghetti_Meatballs</li>
+											<li>Dumplings</li>
+											<li>Brownies</li>
+											<li>Pizza</li>
+											<li>Sushi</li>
 										</ol>
 
 										<p>
@@ -163,46 +183,38 @@
 
 
 										<p>
-											In the starter code, you will see a method called <code>load_permutations</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 animal strings in alphabetical order.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
+											In the starter code, you will see a method called <code>load_permutations</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 food strings.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
 										</p>
 										
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											animals = ['Dog', 'Guinea pig', 'Hedgehog', 'Kangaroo', 'Owl', 'Penguin', 'Shark', 'Tiger']
-											raters = {
-												'Josh K': [4, 5, 0, 3, 6, 7, 2, 1], 
-												'Thomas B': [6, 0, 1, 7, 2, 5, 3, 4], 
-												'Rach G': [7, 0, 6, 4, 2, 5, 3, 1], 
-												'Matt W': [2, 0, 5, 7, 3, 4, 1, 6], 
-												'Dylan F': [0, 1, 5, 4, 6, 2, 3, 7], 
-												'Sean S': [3, 5, 7, 6, 4, 2, 1, 0], 
-												'Henry W': [2, 6, 4, 5, 0, 7, 3, 1], 
-												'Vincent H': [5, 0, 6, 2, 1, 7, 3, 4], 
-												'Michael E': [7, 4, 3, 5, 6, 0, 2, 1], 
-												'Will P.': [7, 5, 2, 1, 0, 4, 6, 3], 
-												'Michael T': [4, 3, 7, 0, 1, 6, 5, 2], 
-												'Kevin H': [0, 3, 5, 7, 4, 6, 2, 1], 
-												'Jose A': [2, 0, 5, 1, 4, 7, 3, 6], 
-												'Josh B': [7, 0, 6, 3, 5, 1, 2, 4], 
-												'Brenden R': [6, 0, 5, 2, 7, 4, 3, 1], 
-												'Will O': [0, 5, 3, 7, 6, 2, 4, 1], 
-												'Jeremy M': [0, 5, 2, 4, 1, 7, 3, 6], 
-												'Rich B': [5, 2, 0, 3, 1, 4, 7, 6], 
-												'Arthur A': [2, 0, 1, 3, 5, 4, 7, 6], 
-												'Michael L': [1, 5, 0, 2, 3, 7, 6, 4], 
-												'David K': [0, 5, 7, 6, 3, 1, 2, 4], 
-												'Nikolai L': [1, 2, 6, 4, 5, 7, 0, 3], 
-												'Matt Q': [2, 0, 3, 7, 5, 6, 4, 1], 
-												'Matt P': [5, 0, 6, 7, 3, 4, 1, 2]}]]>
+											foods = ['Sushi', 'Tacos', 'Pho', 'Spaghetti_Meatballs', 'Strawberries', 'Dumplings', 'Pizza', 'Brownies']
+											raters = {	
+												'Ootz': [0, 2, 1, 5, 7, 6, 4, 3], 
+												'Connor': [7, 5, 3, 6, 1, 0, 2, 4], 
+												'Breeze': [5, 7, 2, 3, 4, 1, 0, 6], 
+												'Jess ': [1, 4, 6, 2, 3, 7, 5, 0], 
+												'Tom': [5, 3, 7, 6, 2, 1, 4, 0], 
+												'James': [3, 0, 1, 7, 2, 5, 4, 6], 
+												'Josh': [2, 5, 6, 7, 3, 0, 1, 4], 
+												'Abby': [0, 7, 1, 2, 6, 3, 4, 5], 
+												'sean': [2, 7, 0, 6, 4, 3, 1, 5], 
+												'Jack': [5, 3, 1, 7, 2, 0, 6, 4], 
+												'Ducks': [0, 4, 6, 1, 3, 5, 7, 2], 
+												'Jon_Berman': [0, 3, 4, 1, 7, 6, 5, 2], 
+												'Manning': [7, 6, 0, 4, 1, 2, 3, 5], 
+												'Shiba': [0, 4, 1, 2, 6, 3, 5, 7], 
+												'Jaden': [1, 4, 0, 2, 5, 6, 3, 7], 
+												'Evan_Chee': [6, 2, 0, 3, 1, 4, 7, 5]
+											}]]>
 										</script> 
 
 											
 
 
 
-										<h3><a name = "computekt">Computing The Kendall-Tau Distance (12 Points)</a></h3>
+										<h3><a name = "computekt">Brute Force Kendall-Tau Distance (10 Points)</a></h3>
 										<p>
-											Fill in the method <code>kendall_tau</code> to compute the Kendall-Tau distance between two rankings.  <b>For N rankings, your method should run in O(N log N) time and use O(N) space</b>.  Review the technique <a href = "../../ClassExercises/Week8_KendallTau/index.html#efficient">here</a> for how to do this using merge sort
-										</p>
+											Fill in the method <code>kendall_tau</code> to compute the Kendall-Tau distance between two rankings.  <b>For N rankings, your method should run in O(N<SUP>2</SUP>) time and use O(N) space</b>.
 
 										<p>
 											To test this on the example in the background, you can write the code
@@ -218,7 +230,7 @@
 
 											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 												plt.figure(figsize=(8, 8))
-												animals, raters = load_permutations()
+												foods, raters = load_permutations()
 												plot_mds_distances(raters, 1)
 												plt.show()]]>
 											</script> 
@@ -231,31 +243,26 @@
 										</p>
 
 										<p>
-											You can study this plot to choose your next partner with whom to visit the Philadelphia zoo, or with whom to co-parent your next pet!
+											You can study this plot to choose your next partner with whom to setup a dinner CS 271 work session, or perhaps with whom to setup a catering business!
 										</p>
 
 										
 
-										<h3><a name = "diameter">Diameter (6 Points)</a></h3>
+										<h3><a name = "diameter">Diameter (7 Points)</a></h3>
 
 										<p>
 											As hinted by the MDS example above, the The Kendall-Tau distance is truly a distance, in the sense that it is a <a href = "https://en.wikipedia.org/wiki/Metric_space#Definition">metric space</a>.  Even though we can't perfectly visualize it spatially without error, we can still reason geometrically about it with numerics.  For instance, we can search for the two rankings which are closest to each other in this space.  In this case, those would be 
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											"Kevin H": [0, 3, 5, 7, 4, 6, 2, 1]
-											"Will O" : [0, 5, 3, 7, 6, 2, 4, 1]
+											"Connor": [7, 5, 3, 6, 1, 0, 2, 4]
+											"Tom" : [5, 3, 7, 6, 2, 1, 4, 0]
 										</script> 
 
-										who are at a distance of 3 from each other; they agree except for the the pairs <code>(3, 5), (4, 6), (2, 4)</code>.  We will also find this is true for Jose A and Jeremy M, who agree except for <code>(2, 0), (2, 5), (1, 4)</code>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											"Jose A":    [2, 0, 5, 1, 4, 7, 3, 6]
-											"Jeremy M":  [0, 5, 2, 4, 1, 7, 3, 6]
-										</script> 
+										who are at a distance of 5 from each other; they agree except for the the pairs <code>(7, 5), (7, 3), (2, 1), (0, 2), (0, 4)</code>. 
 
 										<p>
-											Actually, we see here some of the distortion that's introduced in the MDS plot above, because, for instance, Kevin and Will appear to be further apart than Matt P and Josh B, but the latter two are actually 8 apart.
+											Actually, we see here some of the distortion that's introduced in the MDS plot above, because, for instance, Connor and Tom appear to be further apart than Connor and Breeze, but the latter two are actually 10 apart.
 										</p>
 
 										<p>
@@ -263,73 +270,73 @@
 										</p>
 
 										<p>
-											<h4>Your Task</h4> Write a method that takes in the rankings dictionary, and which prints out the two people who achieve the diameter, along with their rankings and the Kendall-Tau distance between them.  For <b>M</b> rankings and <b>N</b> items, your method should run in <b>O(M<SUP>2</SUP> N log(N))</b> time. 
+											<h4>Your Task</h4> Write a method that takes in the rankings dictionary, and which prints out the two people who achieve the diameter, along with their rankings and the Kendall-Tau distance between them.  For <b>M</b> rankings and <b>N</b> items, your method should run in <b>O(M<SUP>2</SUP> N<SUP>2</SUP>)</b> time. 
 										</p>
 
 										<p>
-											If this worked properly, you should see that Kevin H and Nikolai L are the most different, with 26 pairwise disagreements (in fact, they are nearly exact reverses of each other except for two pairs!).  
+											If this worked properly, you should see that Tom and Shiba L are the most different, with 26 pairwise disagreements (in fact, they are nearly exact reverses of each other except for two pairs: (5, 3) and (3, 7)!).  
 										</p>
 
 										<p>
 											<b>Hint: </b> You might take inspiration by studying the code in <code>plot_mds_distances</code>, which does some similar preprocessing to the code you will have to write.
 										</p>
 
-										<h3><a name = "avgrank">Average Rank Aggregation (7 Points)</a></h3>
+										<h3><a name = "avgrank">Average Rank Aggregation (8 Points)</a></h3>
 
 										<p>
-											We discussed the <a href = "../../ClassExercises/Week8_KendallTau/index.html#bgkemeny">Kemeny optimal rank aggregation</a>, but there is a simpler technique we can try first to incorporate everyone's votes.  We can think of every ranking as giving rise to a place number associated to each index.  For example, if a number shows up at index 6 in the a permutation, we give it a place of 7 (since we're zero-indexed).  We then simply average these place numbers to get a final average place.  For example, in our rankings, we get the following averages:
+											We discussed the <a href = "../../ClassExercises/Week7_KendallTau/index.html#bgkemeny">Kemeny optimal rank aggregation</a>, but there is a simpler technique we can try first to incorporate everyone's votes.  We can think of every ranking as giving rise to a place number associated to each index.  For example, if a number shows up at index 6 in the a permutation, we give it a place of 7 (since we're zero-indexed).  We then simply average these place numbers to get a final average place.  For example, in our rankings, we get the following averages:
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											Dog (0): 2.9
-											Guinea pig (1): 5.6
-											Hedgehog (2): 4.4
-											Kangaroo (3): 5.1
-											Owl (4): 5.3
-											Penguin (5): 3.3
-											Shark (6): 5.0
-											Tiger (7): 4.4
+											Sushi (0): 3.8
+											Dumplings (1): 4.1
+											Brownies (2): 4.3
+											Pizza (3): 4.6
+											Pho (4): 5.2
+											Spaghetti_Meatballs (5): 5.1
+											Strawberries (6): 4.7
+											Tacos (7): 4.3
 										</script> 
 
 										which leads to these results in the election if we sort in ascending order of average place number
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											1 : Dog
-											2 : Penguin
-											3 : Hedgehog
-											4 : Tiger
-											5 : Shark
-											6 : Kangaroo
-											7 : Owl
-											8 : Guinea pig
+											1 : Sushi
+											2 : Dumplings
+											3 : Brownies
+											4 : Tacos
+											5 : Pizza
+											6 : Strawberries
+											7 : Spaghetti_Meatballs
+											8 : Pho
 
 										</script> 
 
 										<p>
-											Expressed as a list, this corresponds to the permutation <code>[0 5 2 7 6 3 4 1]</code>
+											Expressed as a list, this corresponds to the permutation <code>[0, 1, 2, 7, 3, 6, 5, 4]</code>
 										</p>
 
 										<h4>Your Task</h4>
 										<p> 
-											Create a method <code>get_average_rankings</code> that accepts the parameters <code>animals</code> and <code>raters</code> and which prints out the animals in the order of their average aggregated rankings.  For <b>N</b> choices and <b>M</b> rankings, your method should run in <b>O(MN)</b> time.  You may use a python or numpy sorting method to help with this if you'd like.
+											Create a method <code>get_average_rankings</code> that accepts the parameters <code>foods</code> and <code>raters</code> and which prints out the foods in the order of their average aggregated rankings.  For <b>N</b> choices and <b>M</b> rankings, your method should run in <b>O(MN)</b> time.  You may use a python or numpy sorting method to help with this if you'd like.
 										</p>
 
 
 										<h3><a name = "permutations">Brute Force Kemeny Optimal Ranking (15 Points)</a></h3>
 										<p>
-											The above answer seemed to match peoples' preferences, but what about the Kemeny Optimal rank? (<a href = "../../ClassExercises/Week8_KendallTau/index.html#bgkemeny">click here</a> to review notes on this).  Unfortunately, there is no known way to compute this efficiently.  But we can create a brute force scheme to recursively examine every permutation and find the one which minimizes the sum of the Kendall-Tau distances to <b>all</b> rankings.  In this case, this is doable, because we only have 8 alternatives, and <b>8! = 40320</b>, so we can just crunch through this number of possibilities (though many more animals than this would be intractable). 
+											The above answer seemed to match peoples' preferences, but what about the Kemeny Optimal rank? (<a href = "../../ClassExercises/Week7_KendallTau/index.html#bgkemeny">click here</a> to review notes on this).  Unfortunately, there is no known way to compute this efficiently.  But we can create a brute force scheme to recursively examine every permutation and find the one which minimizes the sum of the Kendall-Tau distances to <b>all</b> rankings.  In this case, this is doable, because we only have 8 alternatives, and <b>8! = 40320</b>, so we can just crunch through this number of possibilities (though many more foods than this would be intractable). 
 										</p>
 
 										<h4>Your Task</h4>
 										<p>
-											Create a recursive method which computes the Kemeny Optimal ranking by trying all possible permutations.  You can use the <a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">permutation enumeration code from the sorting module</a> as a starting point.  You will probably want to pass a python list or dictionary by reference recursively that stores the minimum cost seen so far, as well as a copy of the permutation that achieved that cost (you can use list.copy() to copy it over).
+											Create a recursive method which computes the Kemeny Optimal ranking by trying all possible permutations.  You can use the <a href = "https://ursinus-cs271-f2022.github.io/Modules/BasicSortingModule/Video1">permutation enumeration code from the sorting module</a> as a starting point.  You will probably want to pass a python list or dictionary by reference recursively that stores the minimum cost seen so far, as well as a copy of the permutation that achieved that cost (you can use list.copy() to copy it over).
 										</p>
 
 										<p>
 											If this works correctly, you should get the following permutation as the one that minimizes the sum of Kendall-Tau distances:
 										</p>
 										<p>
-											<code>[0, 5, 7, 6, 2, 3, 4, 1]</code>
+											<code>[0, 1, 7, 2, 6, 3, 4, 5]</code>
 										</p>
 
 										<p>
@@ -344,27 +351,28 @@
 											<tr>
 												<td>
 													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-														1 : Dog
-														2 : Penguin
-														3 : Hedgehog
-														4 : Tiger
-														5 : Shark
-														6 : Kangaroo
-														7 : Owl
-														8 : Guinea pig
+														1 : Sushi
+														2 : Dumplings
+														3 : Brownies
+														4 : Tacos
+														5 : Pizza
+														6 : Strawberries
+														7 : Spaghetti_Meatballs
+														8 : Pho
 
 													</script> 
 												</td>
 												<td>
 													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-														1 : Dog
-														2 : Penguin
-														3 : Tiger
-														4 : Shark
-														5 : Hedgehog
-														6 : Kangaroo
-														7 : Owl
-														8 : Guinea pig
+														1 : Sushi
+														2 : Dumplings
+														8 : Tacos
+														3 : Brownies
+														7 : Strawberries
+														4 : Pizza
+														5 : Pho
+														6 : Spaghetti_Meatballs
+
 													</script> 
 												</td>
 											</tr>
@@ -375,12 +383,35 @@
 										
 
 										<p>
-											Interestingly, the trends are the same, but moving the hedgehog down two places leads to more agreements overall.
+											Interestingly, the trends are the same, but if we swap brownies and tacos, strawberries and pizza, and pho and Spaghetti_Meatballs, we get more agreements overall.
 											<ol>
 												
 											</ol>
-											It's encouraging that they are so similar, but how do we know that the Kemeny optimal one is better?  Well, if we examine the sum of the Kendall-Tau distances of the average ranking to all rankings, we see that it is <b>238</b>.  But the Kemeny optimal one has a sum of Kendall-Tau distances of <b>234</b>.  Therefore, though it is very close, the <b>Kemeny optimal rank has four fewer disagreements with everyone in the class than the average ranking</b>.  And that's all there is to it!
+											It's encouraging that they are so similar, but how do we know that the Kemeny optimal one is better?  Well, if we examine the sum of the Kendall-Tau distances of the average ranking to all rankings, we see that it is <b>195</b>.  But the Kemeny optimal one has a sum of Kendall-Tau distances of <b>187</b>.  Therefore, though it is very close, the <b>Kemeny optimal rank has eight fewer disagreements with everyone in the class than the average ranking</b>.  And that's all there is to it!
 										</p>
+
+
+										<h3><a name = "efficientkt">Efficient Kendall-Tau (15 Points)</a></h3>
+
+										<p>
+											The implementation of brute force Kemeny Optimal ranking using your <b>O(N<SUP>2</SUP>)</b> code for Kendall-Tau probably took a few minutes to complete.  It's worthwhile to speed up the individual Kendall-Tau distance computations since we have to do so many of them.  In fact, it's possible to compute the Kendall-Tau distance in <b>O(N log N)</b> time using merge sort.  Review the technique <a href = "../../ClassExercises/Week7_KendallTau/index.html#efficient">here</a> for how to do this.
+										</p>
+
+										<p>
+											<b>Your task: </b> Implement a method <code>kendall_tau_fast</code> which computes the Kendall-Tau distance between two rankings in <b>O(N log N)</b> time.  Then, replace the calls to Kendall-Tau in your Kemeny Optimal code with this method.  To quantify the performance increase, time your Kemeny Optimal code with the brute force method, and compare that to Kemeny Optimal with your faster merge sort-based method.  You can use the snippet below to help you time the code:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											import time
+											tic = time.time()
+
+											# Run code
+
+											toc = time.time()
+											print("Elapsed Time: {:.3f}".format(toc-tic))
+
+										</script>
+
 
                                 </div>
 						</div>
@@ -433,8 +464,8 @@
 												<li><a href = "../../Assignments/HW1_Autocomplete/index.html">Assignment 1: Autocomplete</a></li>
 												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
 												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3: Seam Carving</a></li>
-												<!--
 												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Animals</a></li>
+												<!--
 												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
 												<li><a href = "../../Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
 												</li>
