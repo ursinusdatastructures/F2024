@@ -93,7 +93,7 @@ Quick Sort, Stability of Sorts
 LECTURE
 &Omega;(NlogN) Barrier for Comparison-Based Sorts, Counting Sort, Begin Radix Sort
 
-<ul><li><a href = "ClassExercises/Week9_RadixSort">Radix Sort Notes</a></li><li><a href = "https://www.youtube.com/watch?v=pJ1IQD5rv4o">Algorithms with Attitude Video on Counting Sort, Radix Sort, And Bucket Sort</a></li></ul>
+<ul><li><a href = "ClassExercises/Week8_RadixSort">Radix Sort Notes</a></li><li><a href = "https://www.youtube.com/watch?v=pJ1IQD5rv4o">Algorithms with Attitude Video on Counting Sort, Radix Sort, And Bucket Sort</a></li></ul>
 LECTURE
 Finish Radix Sort, Fisher-Yates Shuffling
 
