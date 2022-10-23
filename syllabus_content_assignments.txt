@@ -70,7 +70,7 @@ Lab 5 Due
 Radix Sort / Fisher Yates Module Due
 
 2022-10-23
-Trees Module due
+<a href = "https://ursinus-cs271-f2022.github.io/Modules/TreesModule/Video1">Trees Module</a> due
 
 2022-10-25
 Last day to drop courses with a "W"
