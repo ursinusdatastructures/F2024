@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 5: Phylogenetic Trees (60 Points)</h2>
+                                        <h2>Assignment 5: Phylogenetic Trees (55 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										<h3></h3>
 									</header>
@@ -68,9 +68,6 @@
 													<li>
 														<a href = "#clustering">Clustering (15 Points)</a>
 													</li>
-													<li>
-														<a href = "#evenfaster">An Even Faster Algorithm (5 Points)</a>
-													</li>
 												</ul>
 											</li>
 											
@@ -83,7 +80,7 @@
 										</p>
 
 										<p>
-											There is some extensive background you should review at <a href = "../../ClassExercises/Week11_Phylogenetic/">this link</a> before you get started.
+											There is some extensive background you should review at <a href = "../../ClassExercises/Week9_Phylogenetic/">this link</a> before you get started.
 										</p>
 										
 
@@ -126,10 +123,10 @@
 											Below is a suggested timeline to keep you on track
 										</p>
 										<ul>
-											<li>By <b>Tuesday 2/12</b>, you should be wrapping up Needleman-Wunsch</li>
-											<li>By <b>Friday 4/15</b>, you should have your tree data structure mostly worked out, and you should be working on the single linkage clustering algorithm</li>
-											<li>By <b>Tuesday 4/19</b>, you should be finishing up drawing your phyolgenetic trees, and you should be moving onto clustering</li>
-											<li>Final submission on <b>Friday 4/22</b></li>
+											<li>By <b>Wednesday 11/2</b>, you should be wrapping up Needleman-Wunsch</li>
+											<li>By <b>Monday 11/7</b>, you should have your tree data structure mostly worked out, and you should be working on the single linkage clustering algorithm</li>
+											<li>By <b>Friday 11/11</b>, you should be finishing up drawing your phyolgenetic trees, and you should be moving onto clustering</li>
+											<li>Final submission on <b>Wednesday 11/16</b></li>
 										</ul>
 
                                         
@@ -139,7 +136,7 @@
                                     <h2><a name = "programming">Programming Tasks</a></h2>
 
 									<p>
-										<a href = "https://github.com/ursinus-cs371-s2022/HW5_Phylogenetic/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  This comes along with species DNA data in <code>organisms.json</code>, as well as the two BLOSUM tables <a href = "HW5_Phylogenetic/blosum50.bla">blosum50.bla</a> and <a href = "HW5_Phylogenetic/blosum62.bla">blosum62.bla</a> (<a href = "HW5_Phylogenetic/organisms.json">Click here</a> to view the raw DNA data from <code>organisms.json</code> in your browser's JSON viewer if you're curious).  
+										<a href = "https://github.com/ursinus-cs271-f2022/HW5_Phylogenetic/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  This comes along with species DNA data in <code>organisms.json</code>, as well as the two BLOSUM tables <a href = "HW5_Phylogenetic/blosum50.bla">blosum50.bla</a> and <a href = "HW5_Phylogenetic/blosum62.bla">blosum62.bla</a> (<a href = "HW5_Phylogenetic/organisms.json">Click here</a> to view the raw DNA data from <code>organisms.json</code> in your browser's JSON viewer if you're curious).  
 									</p>
 									<p>	
 										You will be editing the python file <code>phylogenetic.py</code>.  Actually, very little code has been provided; I have simply included boilerplate code to load the BLOSUM matrices.  You will have to implement Needleman-Wunsch and define your own tree classes.
@@ -381,26 +378,6 @@
 									</li>
 								</ul>
 
-								
-
-								<HR>
-									<h3><a name = "evenfaster">An Even Faster Algorithm (5 Points)</a></h3>
-
-									<p>
-										As far as big-O scaling goes, the bottleneck in the algorithm to build the phylogenetic trees is the sorting step, which has to sort <b>N<SUP>2</SUP></b> items, so it takes <b>O(N<SUP>2</SUP> log(N<SUP>2</SUP>))</b> steps, which is actually  <b>O(N<SUP>2</SUP> log(N))</b> up to constants with the logarithm rule <b>log(a<SUP>2</SUP>) = 2 log(a)</b>.  If we can narrow down the number of edges we have to consider, then we can address the complexity of this step.  One very slick way to do this is to build a maximum spanning tree first using Prim's algorithm to narrow down the edges.  This doesn't give us the dendrogram, but it does narrow down the edges we have to consider, so we can just run Kruskal's algorithm again, constrained to the edges we found with Prim's algorithm. 
-									</p>
-
-									<h4>Your Task</h4>
-									<p>
-										Write a small document (in word or latex) describing the complexity, in big-O notation, of the above described algorithm that preprocesses the edge list using Prim's algorithm.  Be sure to describe the complexity of each step in the <a href = "#constructdendrogram">dendrogram construction algorithm</a>, as well as this new Prim's step, and explain what the dominant term ends up being.
-									</p>
-
-									<h4>Extra Credit (+5 Points)</h4>
-									<p>
-										Actually implement this code in your <code>construct_dendrogram</code> method using a <a href = "https://docs.python.org/3/library/heapq.html">heap</a>.  Make a note that you've done this so I don't miss it when grading.
-									</p>
-
-
 										
 
 											
@@ -458,8 +435,8 @@
 												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
 												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3: Seam Carving</a></li>
 												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Foods</a></li>
-												<!--
 												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+												<!--
 												<li><a href = "../../Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
 												</li>
 												!-->
@@ -505,6 +482,8 @@
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/BasicSortingModule/Video1">Week 7: Sorting Basics Module</a></li>
 												<li><a href = "../../ClassExercises/Week8_RadixSort">Week 8: Counting Sort + Radix Sort</a></li>
 												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/TreesModule/Video1">Week 9: Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 9: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week9_Phylogenetic">Week 9: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
 												<!--
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
 												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
@@ -513,8 +492,7 @@
 												
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
 												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
-												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 11: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
-												<li><a href = "../../ClassExercises/Week11_Phylogenetic">Week 11: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												
 												<li>
 													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
 												</li>
