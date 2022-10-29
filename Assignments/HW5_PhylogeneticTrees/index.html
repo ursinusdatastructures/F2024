@@ -166,7 +166,7 @@
 											#
 										</script> 
 
-										Your code should print "7", as per the <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#applet">example in the live demo</a>. 
+										Your code should print "7", as per the <a href = "../../ClassExercises/Week9_Phylogenetic/index.html#applet">example in the live demo</a>. 
 
 									</p>
 
@@ -174,7 +174,7 @@
 										<b>Hints</b>
 									</p>
 									<p>
-										First, review the notes here <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#needleman">the background</a>.  Then, review <a href = "https://ursinus-cs371-s2022.github.io/Modules/EditDistanceModule/Exercise2">the dynamic programming solution for edit distance</a>.  Your code will be very similar, except you have to look up the costs/scores in the dictionary instead of assuming they're always 1.
+										First, review the notes here <a href = "../../ClassExercises/Week9_Phylogenetic/index.html#needleman">the background</a>.  Then, review <a href = "../../ClassExercises/Week5_EditBacktracing/">the dynamic programming solution for edit distance</a>.  Your code will be very similar, except you have to look up the costs/scores in the dictionary instead of assuming they're always 1.
 									</p>
 
 									<p>
@@ -182,7 +182,7 @@
 									</p>
 
 									<p>
-										When you think you have this, test it on the BLOSUM data.  You can load in a BLOSUM table as a dictionary in the same format as in the <a href = "../../ClassExercises/Week11_Phylogenetic/index.html#applet">live demo</a>.  For instance,
+										When you think you have this, test it on the BLOSUM data.  You can load in a BLOSUM table as a dictionary in the same format as in the <a href = "../../ClassExercises/Week9_Phylogenetic/index.html#applet">live demo</a>.  For instance,
 									</p>
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 										costs = load_blosum("blosum50.bla")
@@ -235,10 +235,10 @@
 								<HR>
 								<h3><a name = "buildingphylo">Building Phylogenetic Trees (25 Points)</a></h3>
 								<p>
-									Now that you have similarities between all pairs of species,load them from disk and use them to build a tree from the ground up using the <a href = '../../ClassExercises/Week11_Phylogenetic/index.html#algorithm2'>efficient <b>O(N<SUP>2</SUP> log(N)</b>) single-linkage clustering algorithm</a>, and then draw the phylogenetic tree so that the Needleman-Wunsch distances that gave rise to different merge events are depicted on the x-axis, and so that the names of the animals are drawn next to the leaf nodes, as shown below:
+									Now that you have similarities between all pairs of species,load them from disk and use them to build a tree from the ground up using the <a href = '../../ClassExercises/Week9_Phylogenetic/index.html#algorithm2'>efficient <b>O(N<SUP>2</SUP> log(N)</b>) single-linkage clustering algorithm</a>, and then draw the phylogenetic tree so that the Needleman-Wunsch distances that gave rise to different merge events are depicted on the x-axis, and so that the names of the animals are drawn next to the leaf nodes, as shown below:
 								</p>
 
-								<img src = "../../ClassExercises/Week11_Phylogenetic/blosum62.svg">
+								<img src = "../../ClassExercises/Week9_Phylogenetic/blosum62.svg">
 
 								<h4>
 									Programming Task
