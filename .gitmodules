@@ -22,3 +22,6 @@
 [submodule "Assignments/HW4_FairElections/HW4_FairElections"]
 	path = Assignments/HW4_FairElections/HW4_FairElections
 	url = https://github.com/ursinus-cs271-f2022/HW4_FairElections.git
+[submodule "Labs/Lab6_TreeRemoval/Lab6_TreeRemoval"]
+	path = Labs/Lab6_TreeRemoval/Lab6_TreeRemoval
+	url = https://github.com/ursinus-cs271-f2022/Lab6_TreeRemoval.git

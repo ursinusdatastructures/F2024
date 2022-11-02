@@ -61,7 +61,7 @@
 											When you are finished, upload your <code>Trees.ipynb</code> notebook to canvas.
 										</p>
 
-										<h2>Part 1: A Slow Remove</h2>
+										<h2>Background: A Slow Remove</h2>
 										<p>
 											One naive algorithm to remove nodes from a tree is to take out a node and add all of its children to the tree again from scratch.  For example, let's suppose we started with the following tree, which is what's constructed in the lab by default:
 										</p>
@@ -75,7 +75,7 @@
 										<img src = "NaiveRemoval.gif">
 
 										<p>
-											<b>Your task</b>: Add a method <code>remove_naive</code> to the <code>BinaryTree</code> class to kick off the recursion, as well as a corresponding recursive helper method <code>remove_naive</code> to the <code>TreeNode</code> class, that implement this technique together.  The methods should do the following:
+											In class, I'll show you how to add a method <code>remove_naive</code> to the <code>BinaryTree</code> class to kick off the recursion, as well as a corresponding recursive helper method <code>remove_naive</code> to the <code>TreeNode</code> class, that implement this technique together.  The methods will do the following:
 											<ol>
 												<li>Find the node to remove, if it exists in the tree</li>
 												<li>Set a reference to that node in its parent to be <code>None</code></li>
@@ -89,7 +89,7 @@
 										</p>
 
 										<p>
-											<b>Hint: </b> One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references and complicating our data structure, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
+											One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references and complicating our data structure, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
 										</p>
 										
 										<p>
@@ -108,10 +108,10 @@
 										</p>
 
 										<HR>
-										<h2>Part 2: A Faster Remove</h2>
+										<h2>Your Task: A Faster Remove</h2>
 
 										<p>
-											There is a cleverer way to remove a node that will take <b>O(logN)</b> time if the tree is balanced, rather than <b>O(N)</b> time.  We have three cases to consider
+											Your task in this lab will be to implement a cleverer way to remove a node that will take <b>O(logN)</b> time if the tree is balanced, rather than <b>O(N)</b> time.  We have three cases to consider
 										</p>
 
 										<ol>
