@@ -129,7 +129,7 @@ Tries
 LECTURE
 Tree Rotations
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
+<ul><li><a href = "https://ursinus-cs271-f2022.github.io/Modules/TreeRotations/Video">Class Exercise on Tree Rotations</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
 LECTURE
 <b>Lab 7: AVL Trees</b> (Balanced Binary Search Trees)
 
