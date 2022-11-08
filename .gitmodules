@@ -25,3 +25,6 @@
 [submodule "Labs/Lab6_TreeRemoval/Lab6_TreeRemoval"]
 	path = Labs/Lab6_TreeRemoval/Lab6_TreeRemoval
 	url = https://github.com/ursinus-cs271-f2022/Lab6_TreeRemoval.git
+[submodule "ClassExercises/Week11_TreeRotations/Week11_TreeRotations"]
+	path = ClassExercises/Week11_TreeRotations/Week11_TreeRotations
+	url = https://github.com/ursinus-cs271-f2022/Week11_TreeRotations.git
