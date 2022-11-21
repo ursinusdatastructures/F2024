@@ -91,7 +91,7 @@ Lab 7 Due
 HW5 Due
 
 2022-11-16
-HW6: Traveling Salesperson Art Out
+<a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
 
 2022-11-21
 Lab 8 Due
