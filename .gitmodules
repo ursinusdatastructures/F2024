@@ -37,3 +37,6 @@
 [submodule "Assignments/HW6_TSPArt/HW6_TSPArt"]
 	path = Assignments/HW6_TSPArt/HW6_TSPArt
 	url = https://github.com/ursinus-cs271-f2022/HW6_TSPArt.git
+[submodule "Labs/Lab8_Dijkstra/Lab8_Dijkstra"]
+	path = Labs/Lab8_Dijkstra/Lab8_Dijkstra
+	url = https://github.com/ursinus-cs271-f2022/Lab8_Dijkstra.git
