@@ -40,6 +40,3 @@
 [submodule "Labs/Lab8_Dijkstra/Lab8_Dijkstra"]
 	path = Labs/Lab8_Dijkstra/Lab8_Dijkstra
 	url = https://github.com/ursinus-cs271-f2022/Lab8_Dijkstra.git
-[submodule "ClassExercises/Week14_Cliques/Week14_Cliques"]
-	path = ClassExercises/Week14_Cliques/Week14_Cliques
-	url = https://github.com/ursinus-cs271-f2022/Week14_Cliques.git
