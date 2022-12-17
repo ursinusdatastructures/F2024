@@ -175,10 +175,10 @@ Directed Acyclic Graphs (DAGs), Begin Topological Sort
 
 <ul><li><a href = "ClassExercises/Week14_TopologicalSort/Prerequisites.svg">Ursinus CS Prerequisites as a DAG</a></li></ul>
 LECTURE
-Finish Topological Sort, Clique Finding
+Finish Topological Sort
+
+
+LECTURE
+Clique FInding
 
 <ul><li><a href = "https://iq.opengenus.org/algorithm-to-find-cliques-of-a-given-size-k/">Polynomial time k-clique finding</a></li></ul>
-LECTURE
-Maximum Matching, The Hungarian Algorithm
-
-
