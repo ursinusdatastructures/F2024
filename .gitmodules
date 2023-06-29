@@ -1,0 +1,3 @@
+[submodule "Assignments/HW6_TSPArt/HW6_TSPArt"]
+	path = Assignments/HW6_TSPArt/HW6_TSPArt
+	url = https://github.com/ursinus-cs271-f2023/HW6_TSPArt.git
