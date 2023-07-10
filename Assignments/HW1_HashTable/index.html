@@ -302,7 +302,7 @@
 										<h3><a name = "hashset">Part 2: HashSet (24 Points)</a></h3>
 										
 										<p>
-											Now that we've convinced ourselves that the built-in python <code>set</code> class works properly, let's implement our own verison of a set from scratch using a hash table <a href = "../../ClassExercises/Week2_Needle/">hash tables</a>.
+											Now that we've convinced ourselves that the built-in python <code>set</code> class works properly, let's implement our own verison of a set from scratch using a <a href = "../../ClassExercises/Week2_Needle/">hash table</a>.
 										</p>
 
 										<h4>Your Task</h4>
@@ -423,7 +423,7 @@
 
 									<h4>Your task</h4>
 									<p>
-										Create a class <code>HashMap</code> which, like the <code>HashSet</code> class, aggregates an array of linked lists.  You'll just need to tweak
+										Create a class <code>HashMap</code> which, like the <code>HashSet</code> class, aggregates an array of linked lists.  You'll just need to tweak the node class in your linked list to hold a value in addition to a key.  For those who had CS 174 with me, it's similar to the <a href = "https://ursinus-cs174-s2023.github.io/CoursePage/Assignments/HW5_BasketballHashing/">last assignment</a> I gave in that class.  Below are the instance methods you'll need to implement:
 									</p>
 									<ul>
 										<li>
@@ -496,7 +496,7 @@
 
 										<h4>Tips</h4>
 										<p>
-											To keep your code organized, you should make an internal helper instance method to do the rebalancing.
+											To keep your code organized, you should make an internal helper instance method to do the rebalancing, which you call from within <code>__setitem__</code> at the appropriate time.
 										</p>
 										<p>
 											Make sure the rebalancing doesn't break your code.  If everything is working properly and you start off with an initial capacity of <code>10</code> and a load factor of <code>0.75</code>, then you should see <code>160</code> buckets after running the following code.
@@ -574,7 +574,7 @@
 													</p>
 												</li>
 												<li>
-													Use <code>np.argsort</code> to find the indices of the words with the highest counts (we will talk more about sorting algorithms in the third unit of the course).  For instance, 
+													Use <code>np.argsort</code> to find the indices of the words with the highest counts (we will talk more about sorting algorithms in the third unit of the course, but we'll take this as a given for now).  For instance, 
 
 													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 														import numpy as np
