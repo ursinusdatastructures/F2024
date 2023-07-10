@@ -1,0 +1,779 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 271: Data Structures And Algorithms, Fall 2023</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 271: Data Structures And Algorithms, Fall 2023</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 1: Hash Maps And Tweets (72 Points)</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+										<h3>Table of Contents</h3>
+										<ul>
+											<li>
+												<a href = "#overview">Overview / Logistics</a>
+												<ul>
+													<li>
+														<a href = "#learning">Learning Objectives</a>
+													</li>
+													<li>
+														<a href = "#starter">Data / Starter Code</a>
+													</li>
+													<li>
+														<a href = "#submit">What To Submit</a>
+													</li>
+
+												</ul>
+											</li>
+											<li>
+												<a href = "#programming">Programming Tasks</a>
+												<ul>
+													<li>
+														<a href = "#hashcodes">Part 1: Hash Codes And Object Equality in Python (6 Points)</a>
+													</li>
+													<li>
+														<a href = "#hashset">Part 2: HashSet (24 Points)</a>
+													</li>
+													<li>
+														<a href = "#hashmap">Part 3: HashMap (17 Points)</a>
+													</li>
+													<li>
+														<a href = "#rebalancing">Part 4: Rebalancing (10 Points)</a>
+													</li>
+													<li>
+														<a href = "#tweets">Part 5: Tweet Wrangling (15 Points)</a>
+													</li>
+												</ul>
+											</li>
+												
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											The purpose of this assignment is to implement one of the most important data structures in all of CS: a hash map, which is actually quite simply just an array of singly-linked lists.  This will enable us to implement two abstract data types (ADTs): the <code>Set</code> and the <code>Map</code> (also known as a <i>dictionary</i> in python), which both have tons of applications.  Before you proceed, review the notes at <a href = "../../ClassExercises/Week2_Needle/">this link</a>, which cover the background for hash tables.										
+										</p>
+										
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Implement a singly-linked list in python
+												</li>
+												<li>
+													Implement hash tables using pythonic object oriented paradigms
+												</li>
+												<li>
+													Use hash table to fulfill set and map ADTs, including exception handling
+												</li>
+												<li>
+													Apply the dictionary API to natural language processing
+												</li>
+                                            </ul>
+                                        </p>
+
+										<h3><a name = "starter">Data / Starter Code</a></h3>
+										<p>
+											<a href = "https://github.com/ursinus-cs271-f2023/HW1_HashTable/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  Actually, the starter code is quite minimal; it mainly has a dataset you'll be using in the <a href = "#tweets">last task</a>.
+										</p>
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                  
+											Submit your files <code>wizard.py</code> and <code>hash.py</code> to canvas, as well as any other .py files and notebooks you made.  Also submit answers to the following questions on Canvas
+										
+										<ol>
+											<li>
+												The name of your <a href = "../../index.html#buddy">buddy</a>, if you chose to work with one.
+											</li>
+											<li>
+												Any other concerns that you have. For instance, if you have a bug that you were unable to solve but you made progress, write about it. The more you articulate the problem the more partial credit you will receive (fine to leave this blank)
+											</li>
+										</ol>
+
+										<HR>
+										<h2><a name = "programming">Programming Tasks</a></h2>
+										
+										<p>
+											To explain the data structures you'll be implementing, let's first look at python's built in versions of them.  First, we'll examine a set, which is a <i>unordered</i> collection of objects <i>without repetition</i> 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s = set()
+											s.add(2)
+											s.add(7)
+											s.add(1)
+											s.add(2)
+											print(s)
+										</script>
+
+										<p>
+											This prints 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											{1, 2, 7}
+										</script>
+											
+										<p>
+											Notice how the numbers are not in the same order we put them in (since the set order is arbitrary), and that even though we added 2 twice, it only showed up once (no repetitions).
+										</p>
+
+										<p>
+											Actually, the set is quite flexible, and we can add anything to it, as long as it has a <a href = "../../ClassExercises/Week2_Needle/">hash code</a>.  For example, we can add
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s.add("data")
+											s.add("structures")
+											s.add("rocks")
+										</script>
+
+										<p>
+											and then we'll see 
+										</p>
+										
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											{1, 2, 'rocks', 'data', 7, 'structures'}
+										</script>
+										</p>
+										<p>
+										But then if we try to do
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s.add([1, 2, 3])
+										</script>
+
+										<p>
+											then we get 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											TypeError: unhashable type: 'list'
+										</script>
+
+										
+
+										<p>
+											This is because a list can change, so it's impossible to generate a unique hash code for it, since one of the properties of hash codes is that they <b>remain fixed</b>, so they can only work with "immutable" objects.
+										</p>
+
+										<h3><a name = "hashcodes">Part 1: Hash Codes And Object Equality in Python (6 Points)</a></h3>
+										
+
+										<p>
+											Let's now consider a more interesting class that's been provided with the assignment.  I've created a <code>Wizard</code> class in <code>wizard.py</code> that mirrors the <a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Harry Potter hashing class exercise</a>.  Let's run the following code from within some .py file or notebook in the same directory as <code>wizard.py</code>:
+										</p>
+										
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											from wizard import *
+											s = set([])
+											for i in range(5):
+												w = Wizard("Severus Snape", 5, 26, 1962)
+											s.add(w)
+											print(s)
+										</script>
+
+										<p>
+											but then this prints out 
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											{Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962}
+										</script>
+
+										<p>
+											It seems like the set's not working, because it's not supposed to have more than one copy of the same object!  But let's drill down and look at the hash codes.  We can do this by calling the built-in method <code><a href = "https://www.geeksforgeeks.org/python-hash-method/">hash</a></code> in python:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											for i in range(5):
+												w = Wizard("Severus Snape", 5, 26, 1962)
+												print(w, hash(w))
+										</script>
+
+										<p>
+											When I run this, I get the following on my computer (but you will get something different every time you run this, which will become clear in a moment): 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											Severus Snape: 5/26/1962 8785000196787
+											Severus Snape: 5/26/1962 8785000196994
+											Severus Snape: 5/26/1962 8785000196787
+											Severus Snape: 5/26/1962 8785000196994
+											Severus Snape: 5/26/1962 8785000196787																					
+										</script>
+
+										<p>
+											What on earth are these numbers, and how did python come up with them?  Let's try one more thing.  If we run the built-in <code>id()</code> method, it will tell us the memory address of the object passed to it:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											for i in range(5):
+												w = Wizard("Severus Snape", 5, 26, 1962)
+												print(w, hash(w), id(w), id(w)//16)
+										</script>
+
+										<p>
+											which yields the following
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
+											Severus Snape: 5/26/1962 8785000196229 140560003139664 8785000196229
+											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
+											Severus Snape: 5/26/1962 8785000196229 140560003139664 8785000196229
+											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
+										</script>
+
+										<p>
+											As it turns out, since we haven't told python how to make a hash code for a wizard, it ends up using <a href = "https://github.com/python/cpython/blob/ca8b55c7f54b38e264056148075a8061a7082013/Python/pyhash.c#L138">the memory address // 16</a>.
+										</p>
+										<p>
+											However, even so, there are some collisions here: the only unique hash codes are <code>8785000196838</code> and <code>8785000196229</code>.  So why are we still seeing 5 unique objects in the set?  Well, python doesn't actually know that they're equal; if we don't tell python how to compare objects, <b>it will default to comparing them by their memory address</b>.  Since each of the 5 objects has a different memory address, they are considered unique.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Write code in <code>wizard.py</code> to override the default behavior of object equality and hashing for the <code>Wizard</code> class:
+										</p>
+										<ol>
+											<li>
+												Implement the <code>__hash__</code> method, which takes no parameters (other than <code>self</code>), and which returns the <u>day * 12 + the month</u>
+											</li>
+											<li>
+												Implement the <code>__eq__</code> method, which takes one parameter (in addition to <code>self</code>) which is object to which to compare it.  Return <code>True</code> if the name, month, day, and year are equal between this object and the other object, and <code>False</code> otherwise.
+											</li>
+										</ol>
+
+										<p>
+											If this works properly, the hash codes for all of the Snape wizards above should be 317, and when you run 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s1 = Wizard("Severus Snape", 5, 26, 1962)
+											s2 = Wizard("Severus Snape", 5, 26, 1962)
+											print(s1 == s2)
+										</script>
+
+										<p>
+											It should print <code>True</code>.  Finally, you should only see one Snape wizard in the set if you add them in the loop.
+										</p>
+
+										<HR>
+										<h3><a name = "hashset">Part 2: HashSet (24 Points)</a></h3>
+										
+										<p>
+											Now that we've convinced ourselves that the built-in python <code>set</code> class works properly, let's implement our own verison of a set from scratch using a hash table <a href = "../../ClassExercises/Week2_Needle/">hash tables</a>.
+										</p>
+
+										<h4>Your Task</h4>
+
+										<p>
+											Create a singly-linked list class and/or linked node class that wraps around a <code>key</code> object, which is what will be stored in the set.  Create a class <code>HashSet</code> that aggregates and array of linked lists, and which has the following instance methods (that all have <code>self</code> as a first parameter)
+										</p>
+										<ul>
+											<li>
+												<p>
+													<b>(4 Points)</b> <code>__init__</code>: The construtor should take one parameter specifying the number of buckets to use, and you should initialize an array of empty linked lists with that number of buckets
+												</p>
+											</li>
+											<li>
+												<b>(4 Points)</b> <code>__contains__</code>: A method that takes one parameter, the <code>key</code>, and which returns <code>True</code> if the key is in the linked list and <code>False</code> otherwise.  When you've finished implementing this method, then saying
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													s = HashSet(100)
+													s.add(Wizard("Severus Snape", 5, 26, 1962))
+													query = Wizard("Severus Snape", 5, 26, 1962)
+													print(query in s)		
+												</script>
+												<p>
+													Should print out <code>True</code>.  Note the "syntactic sugar" with the <code>in</code> keyword, which you can use to make your code look nicer.  Under the hood, saying <code>x in y</code> in python is equivalent to calling <code>y.__contains__(x)</code>
+												</p>
+																						
+											</li>
+											<li>
+												<p>
+													<b>(4 Points)</b> <code>add</code>: Takes one parameter and adds that object to the set.  You should compute the hash code of the object, find its appropriate bucket index, and add it <b>if it doesn't already exist</b> (we don't want duplicate objects).
+												</p>
+											</li>
+											<li>
+												<p>
+													<b>(4 Points)</b> <code>remove(obj)</code>: Remove <code>obj</code> from the hash table if it exists in the table, or throw a <code>KeyError</code> if the object isn't in the table.  You can do this with the following code:
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													raise KeyError("Item {} not in set!".format(key))		
+												</script>
+												</p>
+												
+											</li>
+											<li>
+												<p>
+													<b>(4 Points)</b> <code>__len__</code>: A method with no parameters (other than <code>self</code>) which returns how many elements are in the set.  <b>This should run in constant time</b>; you should not have to loop through all of the linked lists to count.  Instead, store a member variable that keeps track of the number of objects as they are added and deleted so you can simply return that member variable.
+												</p>
+												<p>
+													Note also the syntactic sugar; if we say <code>len(s)</code>, this is equivalent to saying <code>s.__len__()</code>
+												</p>
+											</li>
+											<li>
+												<p>
+													<b>(4 Points)</b> <code>keys</code>: A method with no parameters that returns all of the elements in the set as a python list.
+												</p>
+											</li>
+										</ul>
+										
+										<p>
+											If you're not sure where to get started, have a look at the <a href = "../../ClassExercises/Week2_Needle/">needle in a haystack notes</a>, as well as some <a href = "https://github.com/ursinus-cs371-s2022/Week2_LinkedList/blob/main/LinkedList.ipynb">starter code for linked lists</a> that we made in class.
+										</p>
+
+										<h4>Tips</h4>
+										<p>
+											The first thing you should do in the <code>__contains__</code>, <code>add</code>, and <code>remove</code> methods is to compute the hash code for the object that's being passed in and <code>%</code> it by the number of buckets to figure out which bucket you should start looking in.
+										</p>
+										<p>
+											If this is all working properly, then the following code:
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s = HashSet(n_buckets=10)
+											for i in range(100):
+												s.add(i)
+											s.remove(50)
+											s.remove(90)
+											print(s.keys())
+											print(len(s))	
+										</script>
+
+										<p>
+											should print something like this:
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											[80, 70, 60, 40, 30, 20, 10, 0, 91, 81, 71, 61, 51, 41, 31, 21, 11, 1, 92, 82, 72, 62, 52, 42, 32, 22, 12, 2, 93, 83, 73, 63, 53, 43, 33, 23, 13, 3, 94, 84, 74, 64, 54, 44, 34, 24, 14, 4, 95, 85, 75, 65, 55, 45, 35, 25, 15, 5, 96, 86, 76, 66, 56, 46, 36, 26, 16, 6, 97, 87, 77, 67, 57, 47, 37, 27, 17, 7, 98, 88, 78, 68, 58, 48, 38, 28, 18, 8, 99, 89, 79, 69, 59, 49, 39, 29, 19, 9]
+											98
+										</script>
+
+									<HR>
+									<h3><a name = "hashmap">Part 3: HashMap (17 Points)</a></h3>
+									<p>
+										Sometimes, we may not know everything about a wizard, but we do know partial information like their name.  In this case, it's more appropriate to use a <b>map</b> ADT instead of a set ADT to look up more info from the partial info we have.  In this ADT, they key is something hashable that we look up in the hash table, but it is glued to something called a <b>value</b> which is the associated thing we're trying to look up.  Python calls its implementation of a map a <b>dictionary</b> (in Java it's a <code>Map</code>, in C++ STL it's a <code>map</code>, in PHP it's an called an <a href = "https://www.w3schools.com/php/php_arrays_associative.asp">"associative array"</a>, ...).  Here's how we might set up some information in a dictionary:
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										m = {}
+										m["Severus Snape"] = Wizard("Severus Snape", 5, 26, 1962) # Add a key/value pair (__setitem__)
+										m["Ginny Weasley"] = Wizard("Ginny Weasley", 2, 17, 1991)
+										m["Draco Malfoy"]  = Wizard("Draco Malfoy",  9, 22, 1989)
+										print(m["Ginny Weasley"]) # Look something up by a key (__getitem__)
+										print("Chris Tralie" in m) # Check whether a key is in the dictionary (__contains__)
+										print(list(m.keys())) # Print out a list of all of the keys (keys())
+										del m["Draco Malfoy"] # Remove a key and its associated value (__delitem__)
+										print("Dracoy Malfoy" in m)
+									</script>
+
+									<p>
+										after which we'll see the following output
+									</p>
+
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										Ginny Weasley: 2/17/1991
+										False
+										['Severus Snape', 'Ginny Weasley', 'Draco Malfoy']
+										False
+									</script>
+
+									
+									<p>
+										Note that a python dictionary has a quite convenient syntax; it looks just like an array, but <b>we index it with keys instead of 0-indexed integers</b>.  We will use built-in python methods to replicate this syntactic sugar in our implementation of HashMap
+									</p>
+
+									<h4>Your task</h4>
+									<p>
+										Create a class <code>HashMap</code> which, like the <code>HashSet</code> class, aggregates an array of linked lists.  You'll just need to tweak
+									</p>
+									<ul>
+										<li>
+											<p>
+												<b>(2 Points)</b> <code>__init__</code>: The construtor should take one parameter specifying the number of buckets to use, and you should initialize an array of empty linked lists with that number of buckets
+											</p>
+										</li>
+										<li>
+											<p>
+												<b>(2 Points)</b> <code>__contains__</code>: A method that takes one parameter, the <code>key</code>, and which returns <code>True</code> if the key is in the linked list and <code>False</code> otherwise.  This should be incredibly similar to the <code>__contains__</code> method in <code>HashSet</code> that you did before.
+											</p>							
+										</li>
+										<li>
+											<p>
+												<b>(3 Points)</b> <code>__setitem__</code>: A method that takes two parameters, the <code>key</code> and the <code>value</code> that should be associated to that key.  
+												<ul>
+													<li>
+														If the key doesn't exist in the map, add the key/value pair.
+													</li>
+													<li>
+														If the key already exists in the map, update its value to be the value that's being passed here
+													</li>
+												</ul>
+												This should be fairly similar to the <code>add</code> method in <code>HashSet</code> that you did before.
+											</p>							
+										</li>
+										<li>
+											<p>
+												<b>(3 Points)</b> <code>__getitem__</code>: A method that takes one parameter, the <code>key</code>, and which returns the value associated to the key, or which raises a <code>KeyError</code> if that key doesn't exist in the map.  This should be fairly similar in structure to the <code>__contains__</code> method
+											</p>							
+										</li>
+										<li>
+											<p>
+												<b>(3 Points)</b> <code>__delitem__</code>: A method that takes one parameter, the <code>key</code>, and which deletes the key/value pair associated to this key, or which raises a <code>KeyError</code> if that key doesn't exist in the map.  This should be fairly similar in structure to the <code>remove</code> method in your <code>HashSet</code> class
+											</p>							
+										</li>
+										<li>
+											<p>
+												<b>(2 Points)</b> <code>__len__</code>: A method with no parameters (other than <code>self</code>) which returns how many elements are in the set.  As in the <code>HashSet</code><b>, this should run in constant time</b>
+										</li>
+										<li>
+											<p>
+												<b>(2 Points)</b> <code>keys</code>: A method with no parameters that returns all of the <b>keys</b> in the map as a python list.
+											</p>
+										</li>
+									</ul>
+
+									<h4>Tips</h4>
+									<p>
+										If you replace the example above with <code>m = HashSet(10)</code> instead of <code>m = {}</code>, you should get exactly the same behavior.  Just make sure your keys are getting evenly distributed throughout the buckets
+									</p>
+                                    
+									<HR>
+										<h3><a name = "rebalancing">Part 4: Rebalancing (10 Points)</a></h3>
+										<p>
+											In order for <code>__contains__</code>, <code>__getitem__</code>, <code>__setitem__</code>, and <code>__delitem__</code> to work in nearly constant time on average, we need to make sure the number of buckets is on the same order as the number of elements stored in the map.  For example, if we're storing 100 key/value pairs, we should have around 100 buckets, and if we're storing a million key/value pairs, we should have around a million buckets.  
+										</p>
+										<p>
+											This may seem wasteful since many buckets will be empty, but at worst, we're still have within a constant factor of the the storage of an array with N elements; we now have N pointers to buckets, plus the N elements and the overhead of the linked nodes.  What we gain on average is that each bucket only has 1 element in it.  Furthermore, if the hash codes are sufficiently staistically random, then most buckets will not have much more than 1 element in them. 
+										</p>
+
+										<p>
+											In what follows, you will implement a scheme to ensure that the buckets stay balanced in this way, while not incuring much additional computation on average.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Modify the constructor to take two parameters: the initial number of buckets and a "load factor."  Then, modify the <code>__setitem__</code> method so that if the number of elements in the map goes beyond <code>load_factor * # buckets</code>, then you should <b>double</b> the number of buckets and re-add every key/value pair that was in there before to the new buckets.  This is exactly like how a <a href = "https://ursinus-cs174-s2023.github.io/CoursePage/Labs/Lab5_MyVector/">C++ vector</a>, Java ArrayList, and python list <code>[]</code> work to keep list accesses and adding to the end of the list constant <b>amortized</b> time.
+										</p>
+
+										<h4>Tips</h4>
+										<p>
+											To keep your code organized, you should make an internal helper instance method to do the rebalancing.
+										</p>
+										<p>
+											Make sure the rebalancing doesn't break your code.  If everything is working properly and you start off with an initial capacity of <code>10</code> and a load factor of <code>0.75</code>, then you should see <code>160</code> buckets after running the following code.
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											s = HashMap(10, 0.75)
+											for i in range(100):
+												s[i] = "Number {}".format(i)
+										</script>
+
+									<HR>
+										<h3><a name = "tweets">Part 5: Tweet Wrangling (15 Points)</a></h3>
+
+										<p>
+											Now that you have an industrial strength hash map implementation, it's time to use it in an application.  Provided with the starter code are all of Donald Trump's tweets up to 2021.  You can load them as follows:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											import json
+											tweets = json.load(open("tweets_01-08-2021.json"))
+										</script>
+
+										<p>
+											Each tweet is a dictionary.  For instance, the first tweet, <code>tweets[0]</code>, looks like this:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											{'id': 98454970654916600,
+											'text': 'Republicans and Democrats have both created our economic problems.',
+											'isRetweet': 'f',
+											'isDeleted': 'f',
+											'device': 'TweetDeck',
+											'favorites': 49,
+											'retweets': 255,
+											'date': '2011-08-02 18:07:48',
+											'isFlagged': 'f'}
+										</script>
+
+										<h4>Your Task</h4>
+										<p>
+											In this exercise, your goal will be to use the <code>HashMap</code> class you made to print out the top 200 words that Trump used across all his tweets.  This will be a stress test for your implementation, as there are over 100k unique words that pop up throughout all of his tweets.  To loop through all of the words, use the following code
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											for t in tweets:
+												text = t['text']
+												for w in text.split():
+													w = w.lower() # Convert to lowercase
+													## Fill in some code
+										</script>
+
+										<p>
+											If you've done this correctly, here are the first 120 you should see:
+										</p>
+										
+
+										<table><tr><td>
+											1 : the <BR>2 : to <BR>3 : and <BR>4 : a <BR>5 : of <BR>6 : is <BR>7 : in <BR>8 : for <BR>9 : i <BR>10 : rt <BR>11 : on <BR>12 : you <BR>13 : @realdonaldtrump <BR>14 : will <BR>15 : be <BR>16 : are <BR>17 : that <BR>18 : great <BR>19 : with <BR>20 : we <BR></td><td>
+											21 : our <BR>22 : have <BR>23 : it <BR>24 : at <BR>25 : this <BR>26 : he <BR>27 : they <BR>28 : trump <BR>29 : was <BR>30 : my <BR>31 : &amp, <BR>32 : has <BR>33 : not <BR>34 : by <BR>35 : all <BR>36 : thank <BR>37 : president <BR>38 : just <BR>39 : - <BR>40 : your <BR></td><td>
+											41 : as <BR>42 : so <BR>43 : from <BR>44 : very <BR>45 : who <BR>46 : people <BR>47 : his <BR>48 : no <BR>49 : but <BR>50 : do <BR>51 : what <BR>52 : new <BR>53 : would <BR>54 : about <BR>55 : if <BR>56 : get <BR>57 : an <BR>58 : more <BR>59 : out <BR>60 : should <BR></td><td>
+											61 : like <BR>62 : now <BR>63 : their <BR>64 : big <BR>65 : than <BR>66 : can <BR>67 : or <BR>68 : never <BR>69 : make <BR>70 : been <BR>71 : one <BR>72 : up <BR>73 : me <BR>74 : when <BR>75 : america <BR>76 : many <BR>77 : good <BR>78 : only <BR>79 : going <BR>80 : how <BR></td><td>
+											81 : time <BR>82 : democrats <BR>83 : want <BR>84 : obama <BR>85 : american <BR>86 : donald <BR>87 : there <BR>88 : news <BR>89 : country <BR>90 : vote <BR>91 : much <BR>92 : over <BR>93 : even <BR>94 : why <BR>95 : were <BR>96 : &amp; <BR>97 : back <BR>98 : must <BR>99 : see <BR>100 : us <BR></td><td>
+											101 : fake <BR>102 : am <BR>103 : need <BR>104 : being <BR>105 : had <BR>106 : @realdonaldtrump: <BR>107 : u.s. <BR>108 : love <BR>109 : best <BR>110 : last <BR>111 : because <BR>112 : think <BR>113 : really <BR>114 : she <BR>115 : run <BR>116 : doing <BR>117 : go <BR>118 : did <BR>119 : after <BR>120 : yo!</td></tr></table>                                                    
+									<h4>Hints</h4>
+										<p>
+											The following algorithm will do this task efficiently:
+											<ol>
+												<li>
+													<p>
+														Create a <code>HashMap</code> object where the key is a word and the associated value is the number of times that word appears across all tweets
+													</p>
+												</li>
+												<li>
+													<p>
+														Once this is filled in, grab all of the keys into a list, and create a parallel list of the associated counts
+													</p>
+												</li>
+												<li>
+													Use <code>np.argsort</code> to find the indices of the words with the highest counts (we will talk more about sorting algorithms in the third unit of the course).  For instance, 
+
+													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+														import numpy as np
+														x = [2, 7, 1]
+														print(np.argsort(x))
+													</script>
+
+													<p>
+														Will yield <code>[2, 0, 1]</code>
+													</p>
+												</li>
+											</ol>
+											</p>
+										<h4>P.S.</h4>
+										<p>
+											Hopefully now it makes sense why they're called "hash tags"!
+										</p>
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a> <a href = "https://www.online-python.com/">Online-Python</a><a href = "https://colab.research.google.com/">Google Colab</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_HashTable/index.html">Assignment 1: Hash Maps And Tweets</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3: Seam Carving</a>
+												<!--<ul>
+													<li>
+														<a href = "../../Assignments/HW3_SeamCarving/ArtContest/index.html">Art Contest</a>
+													</li>
+												</ul>!-->
+												</li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Foods</a></li>
+												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+												<li><a href = "../../Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
+													<ul>
+														<li>
+															<a href = "../../Assignments/HW6_TSPArt/ArtContest/index.html">Art Contest</a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_MakingChange/index.html">Lab 4: Making Change with Dynamic Programming</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Kendall-Tau Comprehension</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+												<li><a href = "../../Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "https://ursinus-cs271-f2022.github.io/Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												
+												<li><a href = "../../ClassExercises/Week1_Exponents">Week 1: Intro To Exponents / Exponential Time Algorithms</a></li></li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week1_Loops">Week 1: Loops in Python</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "../../ClassExercises/Week2_LinkedList">Week 2: Doubly Linked Lists</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<!--<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/StackModule/Video">Week 4: Stacks And Queues Module</a></li>-->
+												<li><a href = "../../ClassExercises/Week3_DiscoveringUnionFind">Week 3: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/UnionFindModule/Video1">Week 3: Disjoint Sets / Union Find Pre-Lab Module</a></li>
+												<li><a href = "https://ursinus.instructure.com/courses/14918/quizzes/20057">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3/4: Asymptotics</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/RecursionModule/Video0">Week 4: Recursion Module</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance Backtracing</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/LCSModule/Video1">Week 5: Longest Common Subsequence Module</a></li>
+												<li><a href = "../../ClassExercises/Week7_KendallTau">Week 7: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/BasicSortingModule/Video1">Week 7: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week8_RadixSort">Week 8: Counting Sort + Radix Sort</a></li>
+												<li><a href = "https://ursinus-cs271-f2022.github.io/Modules/TreesModule/Video1">Week 9: Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 9: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week9_Phylogenetic">Week 9: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												<li>
+													<a href = "https://ursinus-cs271-f2022.github.io/Modules/TreeRotations/Video">Week 11: Tree Rotations Exercise</a>
+												</li>
+												<!--
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												
+												
+												
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
+												</li>
+												-->
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>

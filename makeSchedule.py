@@ -3,9 +3,9 @@ import datetime
 daysstr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 #Last day of class 12/4
 #Final Examples 12/9-14
-FIRSTDAY = datetime.date(2022, 8, 29)
-Ds = [datetime.timedelta(2), datetime.timedelta(2), datetime.timedelta(3)] #Monday To Wednesday, Wednesday To Friday, Friday To Monday
-Holidays = {datetime.date(2022, 10, 14):"<a href = \"https://ursinus.edu/live/news/6481-introducing-robyn-hannigan-ursinus-colleges-19th\">Robyn Hannigan</a> inauguration", datetime.date(2022, 10, 17):"Fall Break", datetime.date(2022, 11, 23):"Thanksgiving", datetime.date(2022, 11, 25):"Thanksgiving"}
+FIRSTDAY = datetime.date(2023, 8, 28)
+Ds = [datetime.timedelta(2), datetime.timedelta(2), datetime.timedelta(3)] #Monday To to Wednesday, Wednesday To Friday, Friday To Monday
+Holidays = {datetime.date(2023, 10, 16):"Fall Break", datetime.date(2023, 11, 22):"Thanksgiving", datetime.date(2023, 11, 24):"Thanksgiving"}
 
 schedule_HTML = ""
 

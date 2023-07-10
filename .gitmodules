@@ -1,3 +1,6 @@
 [submodule "Assignments/HW6_TSPArt/HW6_TSPArt"]
 	path = Assignments/HW6_TSPArt/HW6_TSPArt
 	url = https://github.com/ursinus-cs271-f2023/HW6_TSPArt.git
+[submodule "Assignments/HW1_HashTable/HW1_HashTable"]
+	path = Assignments/HW1_HashTable/HW1_HashTable
+	url = https://github.com/ursinus-cs271-f2023/HW1_HashTable.git
