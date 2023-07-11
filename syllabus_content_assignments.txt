@@ -1,10 +1,10 @@
 <a href = "https://ursinus.instructure.com/courses/14918/quizzes/19608">Syllabus Quiz Due</a>, <a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_9HsfpTzfISRmMS2">Survey Due</a>, <a href = "https://ursinus.instructure.com/courses/14918/assignments/152486">Discord Post</a> Due
 
 2023-08-29
-<a href = "https://ursinus-cs271-s2022.github.io/Modules/Module1/Video1">Python Module Parts 1-2 Due</a> Due
+<a href = "../Modules/Module1/Video1">Python Module Parts 1-2 Due</a> Due
 
 2023-08-30
-<a href = "https://ursinus-cs271-s2022.github.io/Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due
+<a href = "../Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due
 
 2023-09-01
 <a href = "https://ursinus.instructure.com/courses/14918/quizzes/20057">Big-O Self Study Module</a> Due Before Class
@@ -16,7 +16,7 @@ Lab 1 Due
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2023-09-01
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
+<a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2023-09-13
 Homework 1 Parts 1-2 Due
@@ -31,13 +31,13 @@ Lab 2 Due
 <HR><a href = "Assignments/HW2_PlantCellSegmentation">Homework 2: Plant Cell Segmentation</a> Out
 
 2023-09-18
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/RecursionModule/Video0">Recursion Module</a> due before class
+<a href = "../Modules/RecursionModule/Video0">Recursion Module</a> due before class
 
 2023-09-20
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/StackModule/Video">Stacks And Queues Module</a> Due
+<a href = "../Modules/StackModule/Video">Stacks And Queues Module</a> Due
 
 2023-09-24
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
+<a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2023-09-22
 Lab 3 Due
@@ -55,7 +55,7 @@ Homework 3 Dynamic Programming Rules Due
 Homework 3 Due
 
 2023-10-09
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
+<a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
 2023-10-01
 Lab 4 Due
@@ -67,13 +67,13 @@ Lab 5 Due
 <a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Favorite Foods</a> Out
 
 2023-10-10
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
+<a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
 
 2023-10-18
 Radix Sort / Fisher Yates Module Due
 
 2023-10-22
-<a href = "https://ursinus-cs271-f2022.github.io/Modules/TreesModule/Video1">Trees Module</a> due
+<a href = "../Modules/TreesModule/Video1">Trees Module</a> due
 
 2023-10-24
 Last day to drop courses with a "W"
