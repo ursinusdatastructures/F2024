@@ -89,16 +89,13 @@ or video is encouraged (but not required).
 
 										<h3>Videos/Skits</h3>
 										<p>
-											One of the videos in last year's multimedia expo was a video on how to make videos (very meta), which can serve as a practical guide for those who want to do a skit or an overview video. <a href = "https://www.youtube.com/watch?v=xR4OhkBWiw4">Click here</a> to view this video.
-										<p>
-											Below are two examples of videos from the past two years
+											Below is an example from CS 371 spring 2022 which made it all the way to the geometry conference!  <a href = "https://ctralie.github.io/GodzillaOnions/">Click here</a> to see an app I made with it (which could have been a final project in its own right)
 										</p>
-										<iframe width="560" height="315" src="https://www.youtube.com/embed/p8LuQQkRPVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-										<iframe width="560" height="315" src="https://www.youtube.com/embed/9zmm1g7n85E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/5qDgJ589u_Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-										<h3>Web Apps / Games</h3>
+										<h3>Web Applets</h3>
 										<p>
-											For those who want to make an app, I'd highly recommend making a web demo using Javascript.  For those who have not used Javascript, it is basically like Java meets Python, so it shouldn't take too long to learn. Here are a few examples from recent conferences
+											For those who want to make an applet, I'd highly recommend making a web demo using Javascript.  For those who have not used Javascript, it is basically like Java meets Python, so it shouldn't take too long to learn. Here are a few examples from recent conferences
 										</p>
 										<ul>
 											<li><a href = "https://spiroplots.itch.io/spiroplots?secret=sAEpIumYquB8FNA3pkfdpdgQo">Spiroplot app</a></li>
@@ -133,26 +130,9 @@ or video is encouraged (but not required).
 											</tr>
 										</Table>
 										
-
-										<h4>Hamiltonian Cycles in The Space of Binary Trees under Rotation</h4>
-										<p>
-										
-											As shown in <a href = "Papers/021.pdf">this paper</a>, it is possible to enumerate all possible binary trees with a fixed number of leaves by starting with a tree with every branch to the left and performing one rotation at a time, eventually ending up back at the tree with every branch on the left.  This has a very interesting geometric interpretation of a <i>hamiltonian cycle on the <a href = "https://en.wikipedia.org/wiki/Associahedron">associahedron</a></i>. 
-										</p>
-
-										<p>
-											On the course web page, I show an animation that visits all possible binary trees, but there is sometimes more than one rotation in between adjacent frames
-										</p>
-										
-										<img src = "OverviewPictures/C7.gif">
-
-										<p>
-											The idea of this project is to create a similar animation that visits all possible binary trees with a fixed number of nodes, but in which .  Last spring a student implemented the algorithm on page 19 of <a href = "Papers/021.pdf">this paper</a> in python to <a href = "https://medium.com/@liuamyj/its-triangles-all-the-way-down-part-1-17f932f4c438">equivalently create triangulations of polygons</a>.  This semester, I'd like a student to re-implement this in Javascript and show the trees that are generated from the above algorithm. <b>This was just a theoretical paper, and nobody has ever done this in code, so this would be a really cool, novel project bridging math and CS!</b>
-										</p>
-
 										<h4>Convex Hulls in 3D</h4>
 										<p>
-											A <a href = "https://www.nayuki.io/page/convex-hull-algorithm">convex hull</a> is a minimum enclosing convex shape of a set of points.  It can be thought of as "shrink wrapping" a shape.  These structures are ubiquitous in geometric algorithms.  Last year, some student groups worked on an app to compute convex hulls of points in 2D (<a href = "https://ursinus-cs371-s2021.github.io/CoursePage/FinalProjects/GrahamScan/index.html">click here</a> to view their app).  This year, I'd love to see if a group of students could explore algorithms to create 3D convex hulls with a divide and conquer algorithm, as described in <a href = "https://www.nayuki.io/page/convex-hull-algorithm">these slides</a>.  Below is a picture from those slides of a convex hull of a 3D bunny
+											A <a href = "https://www.nayuki.io/page/convex-hull-algorithm">convex hull</a> is a minimum enclosing convex shape of a set of points.  It can be thought of as "shrink wrapping" a shape.  These structures are ubiquitous in geometric algorithms.  Last year, some student groups worked on an app to compute convex hulls of points in 2D (<a href = "https://ursinus-cs371-s2021.github.io/CoursePage/FinalProjects/GrahamScan/index.html">click here</a> to view their app).  This year, I'd love to see if a group of students could <b>create a web app</b> to show 3D convex hulls with a divide and conquer algorithm, as described in <a href = "https://www.nayuki.io/page/convex-hull-algorithm">these slides</a>.  Below is a picture from those slides of a convex hull of a 3D bunny
 										</p>
 										<img src = "OverviewPictures/3DConvexHull.png">
 
@@ -248,10 +228,7 @@ or video is encouraged (but not required).
 											What I'd like to see is a "sonification" of these filtrations.  Every time an edge is added, it should make one sound.  Every time a triangle is added, it should make another sound.  And every time a topological feature is created or is destroyed, other sounds should be made, with loudness proportional to how important those features were.  A student last year started this in python, but there's more to be done, and I'd like to see a Javascript version that's easier to share.  It could be really fun to refine and to be creative with this.
 										</p>
 
-
-										<HR>
-
-											<h2>Grading Rubric</h2>
+											<h3>Geometry Multimedia Grading Rubrid</h3>
 									
 											<table cellpadding = 10>
 											<tr><td><b>65%</b></td><td><u>Technical refinement:</u> 
@@ -271,7 +248,36 @@ or video is encouraged (but not required).
 											<tr><td><b>10%</b></td><td><u>Making It Your Own</u>: How much did you do to refine this project and to make it your own?  Did you put any unique twists on it that weren't suggested by the instructor?</td></tr>
 											</table>
 
+										<HR>
+											<h2><a name = "seriousgame">Option 3: Data Structures / Algorithms "Serious Game"</a></h2>
 
+											<p>
+												As yet another option for your final, you can choose to make a video game about any data structure in the course or beyond.  The best submissions here would be about a data structure that's particularly challenging to explain, and they would also integrate into the story of the game well.  This is an instance of a "<a href = "https://en.wikipedia.org/wiki/Serious_game">serious game</a>," where the purpose is to foster a deep understanding of some concept.  Ideally, the game will also be fun!  
+											</p>
+											
+											<p>
+												<a href = "https://requests.ursinus.edu/TDClient/1943/Portal/KB/ArticleDet?ID=132650">Click here</a> to read some resources by our very own <a href = "https://www.ursinus.edu/live/profiles/1785-christine-iannicelli">Christine Iannicelli</a> on game-based learning.  And <a href = "https://learn.unity.com/tutorial/your-first-game">Click here</a> to view some excellent videos from Unity on how to scope a game prototype properly in a short time frame.
+											</p>
+
+											<p>
+												Below are screenshots from an <a href = "https://rpgmaker.net/">RPGMaker</a> game by Jake Kosa and Jonas Ling in <a href = "https://ursinus-cs271-f2022.github.io/CoursePage/index.html">CS 271 Fall 2022</a> explaining the <a href = "https://gudhi.inria.fr/python/latest/alpha_complex_user.html">alpha complex</a>.  In their game, a user had to use the alpha complex to enclose a dangerous dragon in a trap.
+											</p>
+											<img src = "OverviewPictures/TheNamesTralie2.png" width="40%">
+											<img src = "OverviewPictures/TheNamesTralie.png" width="40%">
+
+											<h3>Serious Game Grading Rubric</h3>
+									
+											<table cellpadding = 10>
+											<tr><td><b>50%</b></td><td><u>Technical detail / clarity:</u> 
+												<p>
+													Did you explain all of the details of the data structure fully and correctly in a way that's self contained?  Make sure that someone who has never seen this data structure before would be able to follow from beginning to end. (As a thought experiment, would a student of this class be able to walk away at the end of your presentation knowing the steps they would need to implement the data structure?).
+												</p>
+														
+												</td></tr>
+											<tr><td><b>30%</b></td><td><u>Gameplay + Data Structure Fit</u>: How well does the gameplay mesh with the explanation of the data structure?  Ideally, there will be a natural coupling between the gameplay and the data structure so that the player can learn the algorithm simply by playing the game, but that it's not just a completely dry step through of the data structure.</td></tr>
+											<tr><td><b>10%</b></td><td><u>Technical refinement</u>: How much polish is there?  Is it properly scoped and bug free?</td></tr>
+											<tr><td><b>10%</b></td><td><u>Making It Your Own</u>: How much did you do to refine this project and to make it your own?  Did you put any unique twists on it that weren't suggested by the instructor?</td></tr>
+											</table>
 
 								</section>
 								
