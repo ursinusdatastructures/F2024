@@ -107,7 +107,7 @@ Tree Data Structures And Algorithms
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 16</li></ul>
 LECTURE
-Binary Trees: Preorder/Inorder/Postorder, Drawing Binary Trees
+Binary Trees: Preorder/Inorder/Postorder (Module), Search/Add, Drawing Binary Trees (Class)
 
 
 LECTURE

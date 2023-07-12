@@ -79,7 +79,7 @@
 											</p>
 
 											<p>
-												<a href = "https://github.com/ursinus-cs371-s2022/HW3_SeamCarving/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload <code>seams.py</code> to canvas, along with your <a href = "#artcontest">art contest</a> submission.  Also indicate the title of your art piece and your name/pseudonym to be displayed on the class web page.
+												<a href = "https://github.com/ursinus-cs271-f2023/HW3_SeamCarving/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload <code>seams.py</code> to canvas, along with your <a href = "#artcontest">art contest</a> submission.  Also indicate the title of your art piece and your name/pseudonym to be displayed on the class web page.
 											</p>
 	
 											<p>
@@ -211,7 +211,7 @@
 									</p>
 
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-										img = plt.imread("LivingRoom.jpg") # This is a 530x800x3 array
+										img = read_image("LivingRoom.jpg") # This is a 530x800x3 array
 										G = grad_energy(img)
 									</script>
 
@@ -235,7 +235,7 @@
 									</p>
 
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-										img = plt.imread("LivingRoom.jpg")
+										img = read_image("LivingRoom.jpg")
 										G = grad_energy(img)
 										seam = energy_img_seam(G)
 										plot_seam(img, seam)

@@ -82,17 +82,17 @@
 										</p>
 
 										<p>
-											<a href = "https://github.com/ursinus-cs271-f2022/HW6_TSPArt/archive/refs/heads/main.zip">Click here</a> to download the starter code.  You will have to write all of the code to do a traveling salesperson tour, but I have provided some image processing tools, as well example images.
+											<a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/archive/refs/heads/main.zip">Click here</a> to download the starter code.  You will have to write all of the code to do a traveling salesperson tour, but I have provided some image processing tools, as well example images.
 										</p>
 
 										<h3><a name = "colab">Google Colab</a></h3>
 
 										<p>
-											For those who are having trouble with <code>skimage</code> or <code>numba</code>, you can use Google colab.  This will require you to have a Google account setup.  Make a new notebook at <a href = "https://colab.research.google.com/">https://colab.research.google.com/</a>, then load in the notebook at <a href = "https://github.com/ursinus-cs271-f2022/HW6_TSPArt/blob/main/colab.ipynb">this link</a>. 
+											For those who are having trouble with <code>numba</code>, you can use Google colab.  This will require you to have a Google account setup.  Make a new notebook at <a href = "https://colab.research.google.com/">https://colab.research.google.com/</a>, then load in the notebook at <a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/blob/main/colab.ipynb">this link</a>. 
 										</p>
 										<img src = "colab.png" width="60%">
 										<p>
-											Then, if you put your images in a directory called <code>CS271_F2022/HW6/images</code>, the code should run:
+											Then, if you put your images in a directory called <code>CS271/HW6/images</code>, the code should run:
 										</p>
 
 										<img src = "colab_drive.png" width="80%">
@@ -143,10 +143,9 @@
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 										import numpy as np
 										import matplotlib.pyplot as plt
-										import skimage.io
 										from stipple import *
 										np.random.seed(0)
-										I = skimage.io.imread("images/penguins.png")
+										I = read_image("images/penguins.png")
 										# Initial stippling
 										X = voronoi_stipple(I, thresh=0.3, target_points=2000, canny_sigma=0.8)
 										# Filter out lowest 4 points by density
@@ -287,7 +286,7 @@
 
 									<p>
 										
-										You should write a helper method whose job it is to find the next two indices <code>i</code> and <code>j</code> whose edges can be swapped, which you call from within a loop while there are still indices to be swapped.   You should use <a href = "https://numba.pydata.org/">numba</a> with the decorator <code>@jit(nopython=True)</code> above your helper method so that this code runs efficiently.  As an example, I'm currently doing this in the <code><a href = "https://github.com/ursinus-cs371-s2022/HW6_TSPArt/blob/e82d3746575c278cfb9ebcc48f1b1b0ae2be4065/stipple.py#L71">get_centroids</a></code> method of my stippling code.  Otherwise, your code will run very slowly.
+										You should write a helper method whose job it is to find the next two indices <code>i</code> and <code>j</code> whose edges can be swapped, which you call from within a loop while there are still indices to be swapped.   You should use <a href = "https://numba.pydata.org/">numba</a> with the decorator <code>@jit(nopython=True)</code> above your helper method so that this code runs efficiently.  As an example, I'm currently doing this in the <code><a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/blob/9d693ee7a19a09b2237d9dd0fe0c96e1123f1a1f/stipple.py#L103">get_centroids</a></code> method of my stippling code.  Otherwise, your code will run very slowly.
 									</p>
 
 									<p>

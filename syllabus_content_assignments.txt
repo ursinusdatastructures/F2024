@@ -70,18 +70,18 @@ Lab 5 Due
 <HR><a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Favorite Movies</a> Out
 
 2023-10-11
-<a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
+<a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module (Review) Due</a> before class
 
 2023-10-18
-Radix Sort / Fisher Yates Module Due
+<a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
 
-2023-10-22
-<a href = "../Modules/TreesModule/Video1">Trees Module</a> due
-
-2023-10-24
+2023-10-23
 Last day to drop courses with a "W"
 
 2023-10-25
+<a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due before class
+
+2023-10-30
 HW4 Due
 
 2023-10-26
