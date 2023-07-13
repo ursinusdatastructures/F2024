@@ -7,3 +7,6 @@
 [submodule "Assignments/HW3_SeamCarving/HW3_SeamCarving"]
 	path = Assignments/HW3_SeamCarving/HW3_SeamCarving
 	url = https://github.com/ursinus-cs271-f2023/HW3_SeamCarving.git
+[submodule "Labs/Lab2_UnionFind/Lab2_UnionFind"]
+	path = Labs/Lab2_UnionFind/Lab2_UnionFind
+	url = https://github.com/ursinus-cs271-f2023/Lab2_UnionFind.git
