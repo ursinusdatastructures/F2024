@@ -43,7 +43,6 @@
 									<header class="main">
                                         <h2>Lab 2: Union Find (8 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
-                                        <h3>Due Monday 9/18</h3>
 									</header>
 
 									<div id="page-content">
@@ -65,7 +64,7 @@
 												<li>
 													Convert a problem into a format required by an abstract data type
 												</li>
-												<li>Implement union find with size-based merging and path compression in python</li>
+												<li>Implement union find with rank-based merging and path compression in python</li>
 												<li>
 													Experimentally measure and plot the amortized cost of operations as the input size scales
 												</li>
@@ -75,7 +74,7 @@
 										<h3><a name = "submit">What To Submit</a></h3>
 
 										<p>                                       
-                                            When you are finished, submit your files <code>unionfind.py</code> and <code>unionfindopt.py</code> to canvas, as well as your <a href = "#operations">amortized cost plot</a> and an answer to the <a href = "#question">complexity question</a> as a comment on canvas.
+                                            When you are finished, submit your files <code>unionfind.py</code>, <code>unionrank.py</code>, and <code>unionrankpc.py</code> to canvas, as well as your <a href = "#operations">amortized cost plot</a> and an answer to the <a href = "#question">complexity question</a> as a comment on canvas.
 										</p>
 
 										<h3><a name = "background">Background</a></h3>
@@ -97,10 +96,129 @@
 										</p>
 
 
+										<h3><a name = "rankbased">Rank-Based Merging (2 Points)</a></h3>
+
+										<p>
+											As we discussed in the <a href = "https://ursinus.instructure.com/courses/16205/assignments/175639">pre-lab</a>, it is possible for union find to devolve to a linked list in the worst case, making the worst case <code>find</code> operation <b>O(N)</b>.  But there's an extra step we can do to maintain a better tree when the <code>union</code> happens.  In addition to storing the parent references, we'll store something called the <code>rank</code> of each node <b>n</b>, which, for now, we can think of as the "height," or the <i>length of the longest path from any node which follows a path through our node <b>n</b></i>.  In particular, the rules for the rank are as follows:
+										</p>
+										<ul>
+											<li>
+												The rank of every node starts off as 0
+											</li>
+											<li>
+												If we do a <code>union(i, j)</code> and <code>rank(i) &gt; rank(j)</code>, then <code>i</code> becomes <code>j</code>'s parent
+											</li>
+											<li>
+												If we do a <code>union(i, j)</code> and <code>rank(i) &lt; rank(j)</code>, then <code>j</code> becomes <code>i</code>'s parent
+											</li>
+											<li>
+												If we do a <code>union(i, j)</code> and <code>rank(i) = rank(j)</code>, then <code>i</code> becomes <code>j</code>'s parent, <b>and we increment the rank of <code>i</code> by 1</b>
+											</li>
+										</ul>
+
+										<p>
+											Let's look at an example of this.  I've bolded the ranks that are currently at roots, since only the roots are involved in a union.
+										</p>
+
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "RankBasedStart.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>6</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+														<tr>
+															<td>ranks</td><td><b>3</b></td><td>0</td><td>1</td><td><b>2</b></td><td>0</td><td>0</td><td><b>2</b></td><td>2</td><td>0</td><td>1</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										
+
+										
+
+										<p>
+											Now let's suppose we call <code>union(4, 1)</code>.  This will merge the roots <b>0</b> and <b>3</b>.
+										</p>
+										<p>
+											To accomplish this, one possibility would be make 0's parent be 3, as shown below:
+										</p>
+
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "RankBased1.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td><div style="color: red;">3</div></td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>6</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<p>
+											The other option is to make 3's parent be 0, as shown below:
+										</p>		
+										
+										<table style="width:50%;">
+											<tr>
+												<td>
+													<img src = "RankBased2.svg">
+												</td>
+												
+											</tr>
+											<tr>
+												<td>
+													<table>
+														<tr>
+															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+														</tr>
+														<tr>
+															<td>parent</td><td>0</td><td>7</td><td>0</td><td><div style="color: red;">0</div></td><td>3</td><td>9</td><td>6</td><td>0</td><td>1</td><td>6</td>
+														</tr>
+														<tr>
+															<td>ranks</td><td>3</td><td>0</td><td>1</td><td>2</td><td>0</td><td>0</td><td>2</td><td>2</td><td>0</td><td>1</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<p>
+											This is definitely the better option, and <i>it's precisely what the rank-based merging algorithm suggests we do</i>!  If we look at the length from 8 to its root in the first case, it increased by 1, but in the second case, it remained the same.  In other words, the second case maintains shorter trees.
+										</p>
+										
+
+
+										<p>
+											<b>Your task: </b> Copy and paste your code from <code>union.py</code> into a file named <code>unionrank.py</code>.  Modify your <code>union</code> method in <code>unionrank.py</code> so that it implements rank-based merging.
+										</p>
+
+
 
 										<h3><a name = "pathcompression">Path Compression (2 Points)</a></h3>
 										<p>
-											One way that we can make union find much faster is if we do something called <b>path compression</b>.  At a high level, we want to try to avoid very long branches in our forest, because this will make it slower to find the root.  So what we can do is some bookkeeping to make future calls of <b>root</b> are more efficient.  It's easiest to see this with an example.  Suppose we start with the forest below:
+											There's another on-the-fly optimization we can make to the union find structure known as <b>path compression</b>.  At a high level, we want to try to avoid very long branches in our forest, because this will make it slower to find the root.  So what we can do is some bookkeeping to make future calls of <b>root</b> are more efficient.  It's easiest to see this with an example.  Suppose we start with the forest below:
 										</p>
 
 										<table style="width:50%;">
@@ -156,115 +274,12 @@
 											</tr>
 										</table>
 
-										<p>Notice how much shorter the tree is now!  This is one of the ways we get towards near constant time performance on future queries</p>
 										<p>
-											<b>Your Task: </b> Create a copy of your file <code>unionfind.py</code> called <code>unionfindopt.py</code>.  In this new file, modify your <code>root</code> method to implement path compression, and make sure your union find still works properly
+											Notice how much shorter the tree is now!  This is one of the ways we get towards near constant time performance on future queries.
 										</p>
-
-
-										<h3><a name = "sizebased">Size-Based Merging (2 Points)</a></h3>
-
 										<p>
-											There is one more optimization we can do to speed up union find.  Let's suppose we have the following forest below.  In addition to storing the parent references, we'll store how many nodes are under each node in a list called <code>weights</code>.  Actually, we only need to remember the weights of the roots for what we're about to do, so I'll omit all of the other weights
+											<b>Your Task: </b> Create a copy of your file <code>unionrank.py</code> called <code>unionrankpc.py</code>.  In this new file, modify your <code>root</code> method to implement path compression, and make sure your union find still works properly.  <b>Leave the rank code in <code>union</code> untouched</b>!  Surprisingly, even though the heights are changing, it turns out to be a good idea to follow the exact same rank algorithm in tandem with path compression.
 										</p>
-
-										<table style="width:50%;">
-											<tr>
-												<td>
-													<img src = "SizeBasedStart.svg">
-												</td>
-												
-											</tr>
-											<tr>
-												<td>
-													<table>
-														<tr>
-															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-														</tr>
-														<tr>
-															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
-														</tr>
-														<tr>
-															<td>weights</td><td>8</td><td></td><td></td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-
-										
-
-										<p>
-											Now let's suppose we call <code>union(4, 1)</code>.  This will merge the roots <b>0</b> and <b>3</b>.  One possibility would be make 0's parent be 3, as shown below:
-										</p>
-
-										<table style="width:50%;">
-											<tr>
-												<td>
-													<img src = "SizeBased1.svg">
-												</td>
-												
-											</tr>
-											<tr>
-												<td>
-													<table>
-														<tr>
-															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-														</tr>
-														<tr>
-															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
-														</tr>
-														<tr>
-															<td>weights</td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-
-										<p>
-											The other option is to make 3's parent be 0, as shown below:
-										</p>		
-										<table style="width:50%;">
-											<tr>
-												<td>
-													<img src = "SizeBased2.svg">
-												</td>
-												
-											</tr>
-											<tr>
-												<td>
-													<table>
-														<tr>
-															<td>Item</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-														</tr>
-														<tr>
-															<td>parent</td><td>0</td><td>7</td><td>0</td><td>3</td><td>3</td><td>9</td><td>1</td><td>0</td><td>1</td><td>6</td>
-														</tr>
-														<tr>
-															<td>weights</td><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-
-										<p>
-											This is definitely the better option!  The reason is that it only increases the distance of two nodes to the root: 3 and 4.  By contrast, making 0 the parent of 3 increases the distance of nodes 0, 1, 2, 5, 6, 7, 8, 9 all by 1.
-										</p>
-										
-
-
-										<p>
-											<b>Your task: </b> Modify your <code>union</code> method in <code>unionfindopt.py</code> so that it implements weight-based merging, <b>in addition to path compression</b>.  That is, keep track of the weights of root nodes, and make the parent the one with the larger size.
-										</p>
-
-										<p>
-											<b>Note that the weights of these roots will be unchanged by path compression</b>, so we can combine this trick with path compression.
-										</p>
-
-
-
 										
 
 										<h3><a name = "operations">Amortized Cost Plots (2 Points)</a></h3>
@@ -273,7 +288,7 @@
 										</p>
 										
 										<p>
-											<b>Your task:</b> Modify both of your union find classes to have two local variables:
+											<b>Your task:</b> Modify all three of your union find classes to have two local variables:
 											<ul>
 												<li>
 													<code>_operations</code>: A running count of how many times a parent arrow was followed in <code>root</code> and how many times a parent was reassigned in <code>union</code>
@@ -293,7 +308,7 @@
 										</p>
 
 										<p>
-											<b><a name = "question">Question:</a> </b> What does the amortized cost of the slow implementation appear to be in big-O notation, as a function of <b>N</b>?  What does the amortized cost of the optimized union find appear to be as a function of <b>N</b>?
+											<b><a name = "question">Question:</a> </b> What does the amortized cost of the slow implementation appear to be in big-O notation, as a function of <b>N</b>?  What does the amortized cost of the optimized union find with both rank-based merging and path compression appear to be as a function of <b>N</b>?
 										</p>
 										
 
@@ -302,10 +317,12 @@
 											Testing only once per input size is not reliable, because the operations chosen are random, and we may have gotten lucky or unlucky.  To fix this, you should run multiple different random tests for a single input size and average their results.  This will smooth things out a bit
 										</p>
 
+										<!--
 										<h3>Extra Credit (Up to +2)</h3>
 										<p>
 											Some students in the class have come up with other cool ideas for data structures for disjoint set.  Submit a separate file with an implementation of a different idea, and add a plot for it in the experiments to see how it stacks up.  We'll share these with the class when they're done.
 										</p>
+										!-->
 
 
 
