@@ -40,10 +40,13 @@ Lab 2 Due
 <a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2023-09-22
-Lab 3 Due
+<HR>Lab 3 Due
+
+2023-09-22
+Homework 2 Parts 1 and 2 Due
 
 2023-09-25
-Homework 2 Due
+Homework 2 Part 3 Due
 
 2023-09-28
 <a href = "Assignments/HW3_SeamCarving">Homework 3: Seam Carving</a> Out
@@ -94,7 +97,13 @@ Lab 6 Due
 Lab 7 Due
 
 2023-11-13
-HW5 Due
+HW5 Needleman-Wunsch Tasks Due
+
+2023-11-01
+HW5 Phylogenetic Tree Dendrogram Due
+
+2023-11-10
+HW5 Final Clustering Due
 
 2023-11-15
 <a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
@@ -103,6 +112,9 @@ HW5 Due
 Lab 8 Due
 
 2023-12-04
-HW6 Due
+HW6: 2-Approx with MST DFT Due
+
+2023-12-01
+HW6: Final Deadline
 
 2023-12-08
