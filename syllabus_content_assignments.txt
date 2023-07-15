@@ -70,7 +70,7 @@ Lab 4 Due
 Lab 5 Due
 
 2023-10-12
-<HR><a href = "Assignments/HW4_FairElections">HW4: Fair Elections of Favorite Movies</a> Out
+<HR>HW4 Out
 
 2023-10-11
 <a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module (Review) Due</a> before class
