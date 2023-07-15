@@ -1,4 +1,4 @@
-<a href = "https://ursinus.instructure.com/courses/14918/quizzes/19608">Syllabus Quiz Due</a>, <a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_5BVKrLhtgWvQpCu">Survey Due</a>, <a href = "https://ursinus.instructure.com/courses/16205/assignments/175635">Discord Post</a> Due
+<a href = "https://ursinus.instructure.com/courses/16205/quizzes/22548">Syllabus Quiz Due</a>, <a href = "https://ursinus.instructure.com/courses/16205/assignments/175635">Survey And Discord Post</a> Due
 
 2023-08-29
 <a href = "../Modules/Module1/Video1">Python Module Parts 1-2 Due</a> Due before class
