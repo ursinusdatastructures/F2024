@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 2: Union Find And Plant Cell Segmentation (36 Points)</h2>
+                                        <h2>Assignment 2: Union Find And Plant Cell Segmentation (46 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -63,8 +63,9 @@
 											<li>
 												<a href = "#programming">Programming Tasks</a>
 												<ul>
-													<li><a href = "#celllabels">Get Cell Labels</a> (18 Points)</li>
-													<li><a href = "#cellcenters">Get Cell Centers</a> (18 Points)</li>
+													<li><a href = "#ufmod">Union find modifications (10 Points)</a></li>
+													<li><a href = "#celllabels">Get Cell Labels (18 Points)</a> </li>
+													<li><a href = "#cellcenters">Get Cell Centers (18 Points)</a> </li>
 													<li><a href = "#interested">For those interested...</a></li>
 												</ul>
 											</li>
@@ -72,12 +73,12 @@
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											The purpose of this assignment is to give you practice implementing data structures and manipulating variables in python in the service of a cool application.  You will also begin to develop an experimental sense of the relative efficiency of data structures in practice.
+											The purpose of this assignment is to give you practice implementing data structures and manipulating variables in python in the service of a cool application in image processing.
 										
 										</p>
 										
 										<p>
-											<a href = "https://github.com/ursinus-cs271-f2022/HW2_PlantCellSegmentation/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload a zip file to canvas with your modified <code>cells.py</code> and all other files needed to run your code (e.g. <code>unionfindopt.py</code>).
+											<a href = "https://github.com/ursinus-cs271-f2023/HW2_PlantCellSegmentation/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  When you are finished, upload a zip file to canvas with your modified <code>cells.py</code> and all other files needed to run your code (e.g. <code>unionfindopt.py</code>).
                                         </p>
 
 										<h3><a name = "skimage">scikit-image</a></h3>
@@ -106,7 +107,7 @@
 													Translate a real world problem into a format required by an abstract data type
 												</li>
 												<li>
-													Work with lists and 2D arrays in python
+													Work with lists, dictionaries, and 2D arrays in concert in python
 												</li>
 												<li>
 													Use union find for efficient segmentation in images
@@ -165,9 +166,51 @@
                                         
 										<h2><a name = "programming">Programming Tasks</a></h2>
 										<p>
-											You will use your optimized disjoint set ADT from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a> to implement the watershed algorithm for the cells image above, and you will then use the components to mark the centers of each cell.  You will accomplish this in two tasks:
+											You will use your optimized disjoint set ADT from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a> to implement the watershed algorithm for the cells image above, and you will then use the components to mark the centers of each cell.  I've broken this down into three tasks:
 										</p>
 
+										<h3><a name = "ufmod">Union find modifications (10 Points)</a></h3>
+										<p>
+											First, we have to make our union find data structure compatible with pixel locations.  <a href = "../../../Ursinus_CS271_F2023/CoursePage/Assignments/HW2_PlantCellSegmentation/index.html#celllabels">In the past</a>, I've had students come up with a unique mapping from pixels to numbers so we don't have to change the data structure.  But there's a more elegant, less confusing, and less error prone way to do this.  Instead of using nonnegative integers to represent the objects in a disjoint set data structure, we can use <b>arbitrary hashable objects</b>.  In particular, you will use 2-element tuples <code>(i, j)</code> describing pixel locations.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Take your <code>unionrankpc.py</code> file and make the following modifications:
+										</p>
+										<ul>
+											<li>
+												Change the constructor to accept no parameters except for <code>self</code>; the disjoint set will start off empty
+											</li>
+											<li>
+												In the constructor, change the <code>parents</code> and <code>ranks</code> to be <b>empty dictionaries <code>{}</code> instead of lists</b>
+											</li>
+											<li>
+												Add a method called <code>makeset</code> that takes in a new object that will part of the set.  Set this object's rank to be 0, and set its parent to be itself
+											</li>
+										</ul>
+
+										<p>
+											Because dictionary access and assignment looking exactly like array access and assignment in python, you shouldn't have to change any of your other code.
+										</p>
+
+										<p>
+											Here's a simple example of how to use this new union find data structure on a 10x10 zero-indexed grid:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											u = UnionFind()
+											for i in range(10):
+												for j in range(10):
+													u.makeset((i, j))
+											u.union((0, 0), (0, 1))
+											u.union((0, 1), (1, 1))
+											u.union((1, 1), (1, 2))
+											print(u.find((0, 0), (1, 2))) # Should be True
+											print(u.find((0, 0), (4, 0))) # Should be False
+										]]></script> 
+
+										<HR>
 										<h3><a name = "celllabels">Get Cell Labels (18 Points)</a></h3>
 										<p>
 											In this section, you will implement the basic version of the watershed algorithm using the disjoint set ADT by creating a method <code>get_cell_labels</code> in <code>cells.py</code>.  The method should take in two parameters
@@ -183,7 +226,7 @@
 										</p>
 
 										<p>
-											To accomplish this, use your efficient union find implementation from <a href = "../../Labs/Lab2_UnionFind/">lab 2</a> to merge neighboring pixels together that are under the threshold.  Then, set the label of each pixel to be its root in union find.
+											To accomplish this, use union find to merge neighboring pixels together that are under the threshold.  Then, set the label of each pixel to be its root in union find.
 										</p>
 
 										<p>
@@ -206,116 +249,34 @@
 										<p>
 
 										</p>
+										<h4>Hints</h4>
+										<ul>
+											<li>
+												Be sure to make a set for each pixel location <code>(i, j)</code>
+											</li>
+											<li>
+												If <code>(i, j)</code> is above the threshold, union it with its neighbors that are also above the threshold.
+											</li>
+											<li>
+												When you create the labels array, you'll have to figure out a way to convert the tuple of the root of each pixel to a unique number.  The easiest way to do this is to use a dictionary, where the key is a root tuple, and the value is a label.
+											</li>
+											<li>
+												To save problems downstream, make sure the labels array uses integer types.  If you're using numpy, the easiest way to do this is to initialize it like:
 
-										<h4><a name = "celllabelshint">Hint</a></h4>
-										<p>
-											If you're totally stuck on where to get started, have a look at the hint below
-										</p>
-
-
-										<button type="button" onclick="showCellLabelsHint()">Show Cell Labels Hint</button> 
-										<button type="button" onclick="hideCellLabelsHint()">Hide Cell Labels Hint</button> 
-
-										<p></p>
-
-										<div id="CellLabelsHinttext" style="background-color: blanchedalmond; padding: 20px;">
-	
-
-											<p>
-												One of the challenges here is to transform the problem in a way that it can be used as input to our disjoint set ADT.  As we have defined it, the disjoint set ADT takes whole numbers in a range from 0 up to some number, but we actually have pixels here.  So for an image with <b>M</b> rows and <b>N</b> columns, you'll have to come up with a way of converting a pixel location <b>(y, x)</b> uniquely into a whole number between <b>0</b> and <b>M*N-1</b>. 
-											</p>
-											
-											<p>
-												For example, let's say that we had an image that had M = 6 rows and N = 5 columns.  Let's refer to the row index as <b>y</b> and the column index as <b>x</b>.  Then we might choose to number each pixel as follows:
-											</p>
-	
-											<table style="width:400px">
-												<tr>
-													<td></td>
-													<td>x = 0</td>
-													<td>x = 1</td>
-													<td>x = 2</td>
-													<td>x = 3</td>
-													<td>x = 4</td>
-												</tr>
-												<tr>
-													<td>y = 0</td>
-													<td>0</td>
-													<td>1</td>
-													<td>2</td>
-													<td>3</td>
-													<td>4</td>
-												</tr>
-												<tr>
-													<td>y = 1</td>
-													<td>5</td>
-													<td>6</td>
-													<td>7</td>
-													<td>8</td>
-													<td>9</td>
-												</tr>
-												<tr>
-													<td>y = 2</td>
-													<td>10</td>
-													<td>11</td>
-													<td>12</td>
-													<td>13</td>
-													<td>14</td>
-												</tr>
-												<tr>
-													<td>y = 3</td>
-													<td>15</td>
-													<td>16</td>
-													<td>17</td>
-													<td>18</td>
-													<td>19</td>
-												</tr>
-												<tr>
-													<td>y = 4</td>
-													<td>20</td>
-													<td>21</td>
-													<td>22</td>
-													<td>23</td>
-													<td>24</td>
-												</tr>
-												<tr>
-													<td>y = 5</td>
-													<td>25</td>
-													<td>26</td>
-													<td>27</td>
-													<td>28</td>
-													<td>29</td>
-												</tr>
-											</table>
-	
-											<p>
-												Then, let's say that we discover that pixel at location (y=1, x=2) and its neighboring pixel at (y=2, x=2) both have a brightness value over the threshold; that is
-												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-													I[1, 2] > thresh and I[2, 2] > thresh]]></script>
 												
-												Then we would union 7 and 12 in our disjoint set ADT
-											</p>
-	
-											<p>
-												Then, after we do this for all pairs of neighboring pixels that are above a threshold, we can use the <code>root</code> method to get the label of each pixel.
-											</p>
-											
-	
-										</div>
-	
-										<script>
-											let CellLabelsHint = document.getElementById("CellLabelsHinttext");
-											function showCellLabelsHint() {
-												CellLabelsHint.style.display="block";
-											}
-											function hideCellLabelsHint() {
-												CellLabelsHint.style.display = "none";
-											}
-											hideCellLabelsHint();
-										</script>
+
+												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+													labels = np.zeros(img.shape, dtype=int)
+												]]></script> 
+
+												where <code>img</code> is the original grayscale image
+											</li>
+										</ul>
+
 	
 										<p></p>
 
+										<HR>
 										<h3><a name = "cellcenters">Get Cell Centers (18 Points)</a></h3>
 										<p>
 											Now that you have all pixels belonging to each cell in one component, you will compute the center of each cell by averaging the pixel coordinates of all of the pixels that belong to that cell.
