@@ -364,7 +364,7 @@
 
 										<h4>Tips</h4>
 										<p>
-											The first thing you should do in the <code>__contains__</code>, <code>add</code>, and <code>remove</code> methods is to compute the hash code for the object that's being passed in and <code>%</code> it by the number of buckets to figure out which bucket you should start looking in.
+											The first thing you should do in the <code>__contains__</code>, <code>add</code>, and <code>remove</code> methods is to compute the hash code for the object that's being passed in and <code>%</code> it by the number of buckets to figure out which bucket you should start looking in.  <i>We will assume here that the objects passed along have implemented <code>__hash__</code>, so that calling <code>hash(obj)</code> will give the hash code.</i>  Python already has built-in hash codes for ints, strings, floats, etc.
 										</p>
 										<p>
 											If this is all working properly, then the following code:
