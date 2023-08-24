@@ -161,7 +161,7 @@ Euclidean Traveling Salesperson Problem
 LECTURE
 Dijkstra's Algorithm
 
-
+<ul><li><a href = "https://www.youtube.com/watch?v=18lQVYRJtoA">Easy Theory: Dijkstra's algorithm</a></li></ul>
 LECTURE
 <b>Lab 8: Implementing Dijkstra's Algorithm</b>
 
