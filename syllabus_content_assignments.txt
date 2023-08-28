@@ -7,6 +7,9 @@
 <a href = "../Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due before class
 
 2023-09-01
+<HR><a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_9Sws6zhwK5RR3rE">Pop stars survey for HW4</a> due
+
+2023-09-01
 <a href = "https://ursinus.instructure.com/courses/16205/quizzes/22544">Big-O Self Study Module</a> Due Before Class
 
 2023-09-06
