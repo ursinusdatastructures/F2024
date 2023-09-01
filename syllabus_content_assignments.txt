@@ -18,13 +18,13 @@ Lab 1 Due
 2023-09-04
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
-2023-09-01
+2023-09-06
 <a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2023-09-13
 Homework 1 Parts 1-2 Due
 
-2023-09-08
+2023-09-11
 Homework 1 Parts 3-5 Due
 
 2023-09-15
