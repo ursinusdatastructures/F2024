@@ -10,12 +10,15 @@
 <HR><a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_9Sws6zhwK5RR3rE">Pop stars survey for HW4</a> due
 
 2023-09-01
-<a href = "https://ursinus.instructure.com/courses/16205/quizzes/22544">Big-O Self Study Module</a> Due Before Class
-
-2023-09-06
 Lab 1 Due
 
 2023-09-04
+ADT Module Due Before Class
+
+2023-09-06
+Binary Search Debrief Module Due Before Class
+
+2023-09-08
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2023-09-06
@@ -25,7 +28,10 @@ Lab 1 Due
 Homework 1 Parts 1-2 Due
 
 2023-09-11
-Homework 1 Parts 3-5 Due
+<a href = "https://ursinus.instructure.com/courses/16205/quizzes/22544">Big-O Self Study Module</a> Due Before Class
+
+2023-09-15
+<HR>Homework 1 Parts 3-5 Due
 
 2023-09-15
 Lab 2 Due
