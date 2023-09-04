@@ -125,7 +125,7 @@ LECTURE
 LECTURE
 Tries
 
-
+<ul><li>Class exercise: autocomplete</li></ul>
 LECTURE
 Tree Rotations
 

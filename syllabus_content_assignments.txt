@@ -16,9 +16,9 @@ Lab 1 Due
 ADT Module Due Before Class
 
 2023-09-06
-Binary Search Debrief Module Due Before Class
+Binary Search Debrief, Amortized Cost Module Due
 
-2023-09-08
+2023-09-10
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2023-09-06
