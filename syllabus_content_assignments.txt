@@ -13,7 +13,7 @@
 Lab 1 Due
 
 2023-09-04
-ADT Module Due Before Class
+<a href = "../Modules/ADTModule/Video1">ADT Module</a> Due before class
 
 2023-09-06
 Binary Search Debrief, Amortized Cost Module Due
