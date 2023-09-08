@@ -16,9 +16,6 @@ Lab 1 Due
 <a href = "../Modules/ADTModule/Video1">ADT Module</a> Due before class
 
 2023-09-06
-Binary Search Debrief, Amortized Cost Module Due
-
-2023-09-10
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2023-09-06
