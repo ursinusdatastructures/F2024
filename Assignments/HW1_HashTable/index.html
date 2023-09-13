@@ -277,7 +277,7 @@
 										</p>
 										<ol>
 											<li>
-												Implement the <code>__hash__</code> method, which takes no parameters (other than <code>self</code>), and which returns the <u>day * 12 + the month</u>
+												Implement the <code>__hash__</code> method, which takes no parameters (other than <code>self</code>), and which returns the <u>month*31 + day</u>
 											</li>
 											<li>
 												Implement the <code>__eq__</code> method, which takes one parameter (in addition to <code>self</code>) which is object to which to compare it.  Return <code>True</code> if the name, month, day, and year are equal between this object and the other object, and <code>False</code> otherwise.
@@ -380,7 +380,7 @@
 										</script>
 
 										<p>
-											should print something like this:
+											should print something like this (note that the order is arbitrary):
 										</p>
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 											[80, 70, 60, 40, 30, 20, 10, 0, 91, 81, 71, 61, 51, 41, 31, 21, 11, 1, 92, 82, 72, 62, 52, 42, 32, 22, 12, 2, 93, 83, 73, 63, 53, 43, 33, 23, 13, 3, 94, 84, 74, 64, 54, 44, 34, 24, 14, 4, 95, 85, 75, 65, 55, 45, 35, 25, 15, 5, 96, 86, 76, 66, 56, 46, 36, 26, 16, 6, 97, 87, 77, 67, 57, 47, 37, 27, 17, 7, 98, 88, 78, 68, 58, 48, 38, 28, 18, 8, 99, 89, 79, 69, 59, 49, 39, 29, 19, 9]
@@ -691,7 +691,7 @@
 												<!--<li><a href = "../../../Modules/StackModule/Video">Week 4: Stacks And Queues Module</a></li>-->
 												<li><a href = "../../ClassExercises/Week3_DiscoveringUnionFind">Week 3: Discovering Disjoint Set Data Structures</a></li>
 												<li><a href = "../../../Modules/UnionFindModule/Video1">Week 3: Disjoint Sets / Union Find Pre-Lab Module</a></li>
-												<li><a href = "https://ursinus.instructure.com/courses/16205/quizzes/22544">Week 3: Big-O Self Study Quiz</a></li>
+												<li><a href = "../../../Modules/BigO/Video1">Week 3: Informal Introduction To Big-O Notation</a></li>
 												<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3/4: Asymptotics</a></li>
 												<li><a href = "../../../Modules/RecursionModule/Video2">Week 4: Recursion Module</a></li>
 												<li><a href = "../../../Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>

@@ -25,7 +25,7 @@ Lab 1 Due
 Homework 1 Parts 1-2 Due
 
 2023-09-11
-<a href = "https://ursinus.instructure.com/courses/16205/quizzes/22544">Big-O Self Study Module</a> Due Before Class
+<a href = "../Modules/BigO/Video1">Big-O Module</a> Due Before Class
 
 2023-09-15
 <HR>Homework 1 Parts 3-5 Due
