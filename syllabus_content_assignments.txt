@@ -46,21 +46,21 @@ Homework 1 Parts 3-5 Due
 <a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2023-09-22
-<HR>Lab 3 Due
-
-2023-09-22
-Homework 2 Parts 1 and 2 Due
+Lab 3 Due
 
 2023-09-25
+Homework 2 Parts 1 and 2 Due
+
+2023-09-26
 Homework 2 Part 3 Due
 
-2023-09-28
+2023-09-29
 <a href = "Assignments/HW3_SeamCarving">Homework 3: Seam Carving</a> Out
 
 2023-09-27
 Homework 3 Dynamic Programming Rules Due
 
-2023-09-29
+2023-10-01
 Homework 3 Compute Optimal Seam, Backtrace Optimal Seam Due
 
 2023-10-06
@@ -69,7 +69,7 @@ Homework 3 Final Submission
 2023-10-11
 <a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
-2023-10-01
+2023-10-02
 Lab 4 Due
 
 2023-10-04
