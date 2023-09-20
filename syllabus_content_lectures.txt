@@ -49,7 +49,7 @@ Recursion And Dynamic Programming
 LECTURE
 Complexity Hierarchies, Union Find Recursive Solution
 
-
+<ul><li><a href = "https://github.com/ursinus-cs271-f2023/CoursePage/blob/main/ClassExercises/Week4_ComplexityHierarchy/ComplexityHierarchy.ipynb">Exploring complexity hierarchies in matplotlib</a></li></ul>
 LECTURE
 <b><a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a></b>, Begin String Edit Distance
 
