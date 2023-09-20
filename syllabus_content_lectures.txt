@@ -39,7 +39,7 @@ Begin Asymptotics: Big-O, Polynomial, Exponential, Factorial
 
 <ul><li><a href = "https://www.youtube.com/watch?v=0oDAlMwTrLo">A nice youtube introduction to asymptotics</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 5.3-5.9</li><li><a href = "https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></li><li><a href = "ClassExercises/Week2_Asymptotics">Class notes on build your own definition (BYOD) and big-O exercises</a></li></ul>
 LECTURE
-Union Find Recursive Solution, Little o, Big Omega, Little Omega, Complexity Hierarchies
+Little o, Big Omega, Little Omega
 
 <ul><li><a href = "http://web.mit.edu/broder/Public/asymptotics-cheatsheet.pdf">Asymptotics Cheat Sheet</a></li></ul>
 SECTION
@@ -47,15 +47,15 @@ Recursion And Dynamic Programming
 
 
 LECTURE
-<b><a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a></b>
+Complexity Hierarchies, Union Find Recursive Solution
 
 
 LECTURE
-String Edit Distance
+<b><a href = "Labs/Lab3_Towers">Lab 3: Towers of Hanoi</a></b>, Begin String Edit Distance
 
 
 LECTURE
-Memoization, Dynamic Programming
+String Edit Distance, Memoization, Dynamic Programming
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 9, 11</li></ul>
 LECTURE
