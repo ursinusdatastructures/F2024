@@ -42,7 +42,7 @@ Homework 1 Parts 3-5 Due
 2023-09-20
 <a href = "../Modules/StackModule/Video">Stacks And Queues Module</a> Due
 
-2023-09-24
+2023-10-01
 <a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2023-09-22
