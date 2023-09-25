@@ -229,7 +229,7 @@
 											To accomplish this, you should do the following:
 											<ul>
 												<li>
-													Use union find to merge neighboring pixels together that are under the threshold
+													Use union find to merge neighboring pixels together that are <b>over the threshold</b>
 												</li>
 												<li>
 													Come up with a number for each pixel, <b>where pixels with the same roots have the same number</b>.  The easiest way to do this is to create a dictionary to translate between tuple locations of pixels <code>(i, j)</code> and the number <code>x</code>.  So you'd make the key a tuple and the value the unique number corresponding to that tuple.
