@@ -63,11 +63,11 @@ Backtracing, Longest Common Subsequence
 
 <ul><li><a href = "ClassExercises/Week5_EditBacktracing">Class Notes on Edit Distance Backtracing</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.5</li><li><a href = "https://www.ics.uci.edu/~eppstein/161/960229.html">David Eppstein notes on LCS</a></li></ul>
 LECTURE
-<b><a href = "Labs/Lab4_MakingChange">Lab 4: Making Change with Dynamic Programming</a></b>
+<strike><a href = "Labs/Lab4_MakingChange">Lab 4: Making Change with Dynamic Programming</a></strike><p>Continue backtracing</p>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 10.1 - 10.4</li></ul>
 LECTURE
-Recursively Backtracing Multiple Solutions
+Making Change, Recursively Backtracing Multiple Solutions
 
 
 LECTURE

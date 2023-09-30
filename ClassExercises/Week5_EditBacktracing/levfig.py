@@ -122,7 +122,7 @@ def LevenshteinExample(a, b, doPointers = False, doAllPointers = False):
 
 
 if __name__ == '__main__':
-    LevenshteinExample("school", "fools", doPointers=False)
+    LevenshteinExample("school", "fools", doPointers=True, doAllPointers=True)
     #s = "razmataz"
     #s2 = s[::-1]
     #LevenshteinExample(s, s2, doPointers=True)
