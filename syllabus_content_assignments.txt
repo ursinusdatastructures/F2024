@@ -60,13 +60,13 @@ Homework 3 Dynamic Programming Rules Due Before Class
 2023-10-02
 Homework 3 Compute Optimal Seam, Backtrace Optimal Seam Due
 
-2023-10-06
+2023-10-09
 Homework 3 Final Submission
 
 2023-10-11
-<HR><a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
+<a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
-2023-10-02
+2023-10-04
 Lab 5 Due
 
 2023-10-12
