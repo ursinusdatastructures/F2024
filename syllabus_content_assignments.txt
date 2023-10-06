@@ -58,12 +58,15 @@ Homework 2 Part 3 Due
 Homework 3 Dynamic Programming Rules Due Before Class
 
 2023-10-02
-Homework 3 Compute Optimal Seam, Backtrace Optimal Seam Due
+<a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
+
+2023-10-09
+<HR>Homework 3 Compute Optimal Seam, Backtrace Optimal Seam Due
 
 2023-10-09
 Homework 3 Final Submission
 
-2023-10-11
+2023-10-13
 <a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
 2023-10-04
@@ -72,10 +75,7 @@ Lab 5 Due
 2023-10-12
 <HR>HW4 Out
 
-2023-10-11
-<a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module (Review) Due</a> before class
-
-2023-10-18
+2023-10-13
 <a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
 
 2023-10-23
@@ -85,10 +85,13 @@ Last day to drop courses with a "W"
 <a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due before class
 
 2023-10-30
-HW4 Due
+<HR>HW4 Part 1 Due
 
-2023-10-26
-<a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
+2023-10-23
+HW4 Part 2 Due
+
+2023-10-27
+<HR><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
 2023-10-27
 Lab 6 Due

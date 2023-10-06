@@ -81,7 +81,7 @@ Sorting, Selection, And Shuffling
 LECTURE
 Sorting Basics: Permutations, Insertion Sort, Bubble Sort
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/BasicSortingModule/Video1">Sorting basics and theory of sorting module</a> from CS 371</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE
 <b>Lab 5: Merge Sort, Kendall Tau Examples</b>
 
