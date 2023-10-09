@@ -83,7 +83,7 @@ Sorting Basics: Permutations, Insertion Sort, Bubble Sort
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE
-<b>Lab 5: Merge Sort, Kendall Tau Examples</b>
+<b><a href = "Labs/Lab5_MergeSort">Lab 5: Merge Sort, Kendall Tau Examples</a></b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li><li><a href = "ClassExercises/Week7_KendallTau">Kendall Tau / Kemeny Optimal Class Notes</a></li></ul>
 LECTURE
