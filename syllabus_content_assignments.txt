@@ -73,9 +73,9 @@ Homework 3 Final Submission
 Lab 5 Due
 
 2023-10-12
-<HR>HW4 Out
+HW4 Out
 
-2023-10-13
+2023-10-18
 <a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
 
 2023-10-23
@@ -87,7 +87,7 @@ Last day to drop courses with a "W"
 2023-10-30
 <HR>HW4 Part 1 Due
 
-2023-10-23
+2023-10-25
 HW4 Part 2 Due
 
 2023-10-27

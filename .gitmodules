@@ -16,3 +16,6 @@
 [submodule "Labs/Lab3_Towers/Lab3_TowersOfHanoi"]
 	path = Labs/Lab3_Towers/Lab3_TowersOfHanoi
 	url = https://github.com/ursinus-cs271-f2023/Lab3_TowersOfHanoi.git
+[submodule "Assignments/HW4_FairElections/HW4_FairElections"]
+	path = Assignments/HW4_FairElections/HW4_FairElections
+	url = https://github.com/ursinus-cs271-f2023/HW4_FairElections.git

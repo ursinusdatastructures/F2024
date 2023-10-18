@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 4: Fair Elections of Foods (55 Points)</h2>
+                                        <h2>Assignment 4: Fair Elections of Pop Stars (55 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										<h3></h3>
 									</header>
@@ -53,7 +53,6 @@
 												<ul>
 													<li><a href = "#learning">Learning Objectives</a></li>
 													<li><a href = "#submit">What To Submit</a></li>
-													<li><a href = "#timeline">Suggested Timeline</a></li>
 												</ul>
 											</li>
 											<li>
@@ -84,7 +83,7 @@
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
 										<p>
-											The purpose of this assignment is to give you practice with recursion and ideas from permutation theory/sorting in a fun application to which the whole class has contributed: <b>fair elections of foods</b>.  Each member of the class ranked a subset of foods that students volunteered on discord at the beginning of the course.  In this assignment, we will define mathematically an optimal "average ranking" that incorporates everyone's choices in a fair and even way, and we will explore computational issues that arise when we attempt to create algorithms to compute this average ranking.
+											The purpose of this assignment is to give you practice with recursion and ideas from permutation theory/sorting in a fun application to which the whole class has contributed: <b>fair elections of pop stars</b>.  Each member of the class ranked a subset of pop stars at the beginning of the course.  In this assignment, we will define mathematically an optimal "average ranking" that incorporates everyone's choices in a fair and even way, and we will explore computational issues that arise when we attempt to create algorithms to compute this average ranking.
 										</p>
 
 										<p>
@@ -120,61 +119,42 @@
 
 										<p>                                  
 											Submit your file <code>ranking.py</code> to canvas
-
-										<h3><a name = "timeline">Suggested Timeline</a></h3>
-										<ul>
-											<li>
-												Finish brute force kendall-tau by Wednesday 10/19
-											</li>
-											<li>
-												Finish diameter and average rank by Friday 10/21
-											</li>
-											<li>
-												Finish brute force kemeny by Monday 10/24
-											</li>
-											<li>
-												Finish efficient Kendall-Tau by Thursday 10/27
-											</li>
-										</ul>
-
-                                        
-
 										
 										
 										<h2><a name = "programming">Programming Tasks</a></h2>
 
 										<p>
-											<a href = "https://github.com/ursinus-cs271-f2022/HW4_FairElections/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will be editing <code>ranking.py</code>.  Code has been provided for loading in the rankings and plotting a dimension reduced version of all pairwise ranking comparisons.
+											<a href = "https://github.com/ursinus-cs271-f2023/HW4_FairElections/archive/refs/heads/main.zip">Click here</a> to download the starter code for this assignment.  You will be editing <code>ranking.py</code>.  Code has been provided for loading in the rankings and plotting a dimension reduced version of all pairwise ranking comparisons.
 										</p>
 
 										<h3><a name = "ranknum">Rankings As Numbers</a></h3>
 
 										<p>	
-											To keep things simple, if we have <b>N</b> items we're ranking, we'll label them from <b>0</b> to <b>N-1</b> in some arbitrary order.  In this assignment, we'll be using the food votes that students cast, and we'll use the following labels:
+											To keep things simple, if we have <b>N</b> items we're ranking, we'll label them from <b>0</b> to <b>N-1</b> in some arbitrary order.  In this assignment, we'll be using the pop star votes that students cast, and we'll use the following labels:
 										</p>
 
 <pre>
-	0: Sushi
-	1: Tacos
-	2: Pho
-	3: Spaghetti_Meatballs
-	4: Strawberries
-	5: Dumplings
-	6: Pizza
-	7: Brownies
+	0: Taylor Swift
+	1: Drake
+	2: Dua Lipa
+	3: Miley Cyrus
+	4: Michael Jackson
+	5: Nirvana
+	6: The Beatles
+	7: Journey
 </pre>	
 										<p>
 											So, for instance, if someone gives the rankings 
 										</p>
 										<ol>
-											<li>Strawberries</li>
-											<li>Pho</li>
-											<li>Tacos</li>
-											<li>Spaghetti_Meatballs</li>
-											<li>Dumplings</li>
-											<li>Brownies</li>
-											<li>Pizza</li>
-											<li>Sushi</li>
+											<li>Michael Jackson</li>
+											<li>Dua Lipa</li>
+											<li>Drake</li>
+											<li>Miley Cyrus</li>
+											<li>Nirvana</li>
+											<li>Journey</li>
+											<li>The Beatles</li>
+											<li>Taylor Swift</li>
 										</ol>
 
 										<p>
@@ -183,28 +163,52 @@
 
 
 										<p>
-											In the starter code, you will see a method called <code>load_permutations</code> which loads the class rankings from a text file that's been provided in the starter code.  There is a list of 8 food strings.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
+											In the starter code, you will see a method called <code>load_permutations</code> which loads the class rankings from a text file that's been provided in the starter code.  
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											stars, raters = load_permutations()
+											]]>
+										</script> 
+
+										<p>
+											There is a list of 8 strings representing pop star names.  Then, the rankings of each student are represented as arrays of numbers between 0 and 7 which index this array.  All of the rankings are stored in a dictionary, where the key is the student's name as a string, and the value is such a list.  The data is shown below
 										</p>
 										
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											foods = ['Sushi', 'Tacos', 'Pho', 'Spaghetti_Meatballs', 'Strawberries', 'Dumplings', 'Pizza', 'Brownies']
-											raters = {	
-												'Ootz': [0, 2, 1, 5, 7, 6, 4, 3], 
-												'Connor': [7, 5, 3, 6, 1, 0, 2, 4], 
-												'Breeze': [5, 7, 2, 3, 4, 1, 0, 6], 
-												'Jess ': [1, 4, 6, 2, 3, 7, 5, 0], 
-												'Tom': [5, 3, 7, 6, 2, 1, 4, 0], 
-												'James': [3, 0, 1, 7, 2, 5, 4, 6], 
-												'Josh': [2, 5, 6, 7, 3, 0, 1, 4], 
-												'Abby': [0, 7, 1, 2, 6, 3, 4, 5], 
-												'sean': [2, 7, 0, 6, 4, 3, 1, 5], 
-												'Jack': [5, 3, 1, 7, 2, 0, 6, 4], 
-												'Ducks': [0, 4, 6, 1, 3, 5, 7, 2], 
-												'Jon_Berman': [0, 3, 4, 1, 7, 6, 5, 2], 
-												'Manning': [7, 6, 0, 4, 1, 2, 3, 5], 
-												'Shiba': [0, 4, 1, 2, 6, 3, 5, 7], 
-												'Jaden': [1, 4, 0, 2, 5, 6, 3, 7], 
-												'Evan_Chee': [6, 2, 0, 3, 1, 4, 7, 5]
+											stars = ['Taylor Swift', 'Drake', 'Dua Lipa', 'Miley Cyrus', 'Michael Jackson', 'Nirvana', 'The Beatles', 'Journey']
+											raters = {
+												'Hannah ':    [2, 7, 4, 0, 6, 3, 5, 1], 
+												'Anonymous1': [0, 2, 4, 5, 6, 7, 3, 1], 
+												'Emily ':     [0, 2, 4, 5, 6, 7, 3, 1], 
+												'Audrey ':    [5, 6, 7, 4, 3, 0, 2, 1], 
+												'Michael':    [2, 4, 7, 5, 1, 6, 0, 3], 
+												'Camila':     [0, 6, 5, 3, 2, 1, 4, 7], 
+												'Julian':     [4, 6, 0, 1, 5, 7, 3, 2], 
+												'Connor':     [5, 1, 7, 6, 4, 2, 3, 0], 
+												'Anonymous2': [4, 5, 0, 3, 1, 6, 2, 7], 
+												'Bev':        [6, 5, 4, 7, 1, 3, 2, 0], 
+												'Adrian':     [0, 6, 5, 4, 7, 3, 1, 2], 
+												'Zach':       [1, 5, 4, 6, 7, 2, 3, 0], 
+												'Patrick R':  [0, 3, 2, 4, 5, 7, 6, 1], 
+												'Elijah':     [4, 1, 6, 7, 5, 0, 2, 3], 
+												'Dante':      [1, 0, 2, 3, 4, 7, 5, 6], 
+												'Pedro':      [1, 6, 4, 0, 2, 5, 7, 3], 
+												'Kevin':      [4, 2, 0, 1, 6, 5, 7, 3], 
+												'Pat M':      [4, 6, 1, 0, 5, 3, 2, 7], 
+												'Tyler':      [5, 1, 7, 6, 0, 4, 2, 3], 
+												'Tre ':       [4, 0, 6, 3, 5, 1, 2, 7], 
+												'Journi':     [7, 4, 6, 5, 0, 2, 3, 1], 
+												'Tim':        [1, 4, 6, 5, 7, 2, 3, 0], 
+												'Liam ':      [6, 5, 7, 4, 0, 1, 3, 2], 
+												'Jonnie ':    [3, 7, 2, 0, 4, 6, 5, 1], 
+												'Anonymous3': [4, 1, 0, 5, 2, 7, 6, 3], 
+												'Jaiden ':    [1, 4, 6, 2, 0, 3, 5, 7], 
+												'Matt L':     [5, 4, 6, 2, 1, 7, 0, 3], 
+												'Anonymous4': [4, 6, 0, 1, 3, 5, 7, 2], 
+												'Brady':      [7, 5, 6, 1, 4, 0, 2, 3], 
+												'Levi':       [6, 4, 5, 7, 0, 1, 3, 2], 
+												'Pat T':      [0, 3, 2, 5, 6, 4, 7, 1]
 											}]]>
 										</script> 
 
@@ -230,7 +234,7 @@
 
 											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 												plt.figure(figsize=(8, 8))
-												foods, raters = load_permutations()
+												stars, raters = load_permutations()
 												plot_mds_distances(raters, 1)
 												plt.show()]]>
 											</script> 
@@ -243,7 +247,7 @@
 										</p>
 
 										<p>
-											You can study this plot to choose your next partner with whom to setup a dinner CS 271 work session, or perhaps with whom to setup a catering business!
+											You can study this plot to choose a companion for your next trip to a live concert!  Or perhaps an assignment buddy with the same playlist going in the background...
 										</p>
 
 										
@@ -270,7 +274,7 @@
 										</p>
 
 										<p>
-											<h4>Your Task</h4> Write a method that takes in the rankings dictionary, and which prints out the two people who achieve the diameter, along with their rankings and the Kendall-Tau distance between them.  For <b>M</b> people who rated and <b>N</b> foods, your method should run in <b>O(M<SUP>2</SUP> N<SUP>2</SUP>)</b> time. 
+											<h4>Your Task</h4> Write a method <code>get_diameter</code> that takes in the rankings dictionary, and which prints out the two people who achieve the diameter, along with their rankings and the Kendall-Tau distance between them.  For <b>M</b> people who rated and <b>N</b> pop stars, your method should run in <b>O(M<SUP>2</SUP> N<SUP>2</SUP>)</b> time. 
 										</p>
 
 										<p>
@@ -318,13 +322,13 @@
 
 										<h4>Your Task</h4>
 										<p> 
-											Create a method <code>get_average_rankings</code> that accepts the parameters <code>foods</code> and <code>raters</code> and which prints out the foods in the order of their average aggregated rankings.  For <b>N</b> choices and <b>M</b> rankings, your method should run in <b>O(MN)</b> time.  You may use a python or numpy sorting method to help with this if you'd like.
+											Create a method <code>get_average_rankings</code> that accepts the parameters <code>stars</code> and <code>raters</code> and which prints out the pop stars in the order of their average aggregated rankings.  For <b>N</b> choices and <b>M</b> rankings, your method should run in <b>O(MN)</b> time.  You may use a python or numpy sorting method to help with this if you'd like.
 										</p>
 
 
 										<h3><a name = "permutations">Brute Force Kemeny Optimal Ranking (15 Points)</a></h3>
 										<p>
-											The above answer seemed to match peoples' preferences, but what about the Kemeny Optimal rank? (<a href = "../../ClassExercises/Week7_KendallTau/index.html#bgkemeny">click here</a> to review notes on this).  Unfortunately, there is no known way to compute this efficiently.  But we can create a brute force scheme to recursively examine every permutation and find the one which minimizes the sum of the Kendall-Tau distances to <b>all</b> rankings.  In this case, this is doable, because we only have 8 alternatives, and <b>8! = 40320</b>, so we can just crunch through this number of possibilities (though many more foods than this would be intractable). 
+											The above answer seemed to match peoples' preferences, but what about the Kemeny Optimal rank? (<a href = "../../ClassExercises/Week7_KendallTau/index.html#bgkemeny">click here</a> to review notes on this).  Unfortunately, there is no known way to compute this efficiently.  But we can create a brute force scheme to recursively examine every permutation and find the one which minimizes the sum of the Kendall-Tau distances to <b>all</b> rankings.  In this case, this is doable, because we only have 8 alternatives, and <b>8! = 40320</b>, so we can just crunch through this number of possibilities (though many more pop stars than this would be intractable). 
 										</p>
 
 										<h4>Your Task</h4>

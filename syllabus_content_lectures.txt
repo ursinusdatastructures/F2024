@@ -91,6 +91,10 @@ Quick Sort, Stability of Sorts
 
 <ul><li><a href = "https://github.com/ursinus-cs271-f2022/CoursePage/blob/main/ClassExercises/Week7_QuickSort/quicksort.py">Quick sort class code</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.2</li><li><a href = "https://dlang.org/blog/2020/05/14/lomutos-comeback/">Lomuto's Comeback</a></li></ul>
 LECTURE
+Linear Time Selection
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li><li><a href = "https://rcoh.me/posts/linear-time-median-finding/">Russel Cohen's Notes on Linear Time Median Finding</a></li></ul>
+LECTURE
 &Omega;(NlogN) Barrier for Comparison-Based Sorts, Counting Sort, Begin Radix Sort
 
 <ul><li><a href = "ClassExercises/Week8_RadixSort">Radix Sort Notes</a></li><li><a href = "https://www.youtube.com/watch?v=pJ1IQD5rv4o">Algorithms with Attitude Video on Counting Sort, Radix Sort, And Bucket Sort</a></li></ul>
@@ -98,10 +102,6 @@ LECTURE
 Finish Radix Sort, Fisher-Yates Shuffling
 
 <ul><li><a href = "https://github.com/ursinus-cs271-f2022/CoursePage/blob/main/ClassExercises/Week8_RadixSort/radixsort.py">Radix sort class code</a></li></ul>
-LECTURE
-Linear Time Selection
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 14</li><li><a href = "https://rcoh.me/posts/linear-time-median-finding/">Russel Cohen's Notes on Linear Time Median Finding</a></li></ul>
 SECTION
 Tree Data Structures And Algorithms
 
