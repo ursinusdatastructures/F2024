@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 4: Fair Elections of Pop Stars (55 Points)</h2>
+                                        <h2>Assignment 4: Fair Elections of Pop Stars (60 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										<h3></h3>
 									</header>
@@ -75,6 +75,9 @@
 													</li>
 													<li>
 														<a href = "#efficientkt">Efficient Kendall-Tau (15 Points)</a>
+													</li>
+													<li>
+														<a href = "#coversongs">Comparing Cover Songs by Rankings (5 Points)</a>
 													</li>
 												</ul>
 											</li>
@@ -255,22 +258,22 @@
 										<h3><a name = "diameter">Diameter (7 Points)</a></h3>
 
 										<p>
-											As hinted by the MDS example above, the The Kendall-Tau distance is truly a distance, in the sense that it is a <a href = "https://en.wikipedia.org/wiki/Metric_space#Definition">metric space</a>.  Even though we can't perfectly visualize it spatially without error, we can still reason geometrically about it with numerics.  For instance, we can search for the two rankings which are closest to each other in this space.  In this case, those would be 
+											As hinted by the MDS example above, the The Kendall-Tau distance is truly a distance, in the sense that it is a <a href = "https://en.wikipedia.org/wiki/Metric_space#Definition">metric space</a>.  Even though we can't perfectly visualize it spatially without error, we can still reason geometrically about it with numerics.  For instance, we can search for the pairs of rankings that are close to each other in this space.  Other than Emily and Anonymous1, who are identical, the closest raters are Zach and Tim, Julian and Anonymous4, and Liam and Levi, all of whom are at a distance of 2 from each other.  For example, Zach and Tim are
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											"Connor": [7, 5, 3, 6, 1, 0, 2, 4]
-											"Tom" : [5, 3, 7, 6, 2, 1, 4, 0]
+											"Zach": [1, 5, 4, 6, 7, 2, 3, 0]
+											"Tim" : [1, 4, 6, 5, 7, 2, 3, 0]
 										</script> 
 
-										who are at a distance of 5 from each other; they agree except for the the pairs <code>(7, 5), (7, 3), (2, 1), (0, 2), (0, 4)</code>. 
+										They agree except for the the pairs <code>(4, 5)</code> and <code>(5, 6)</code>. 
 
 										<p>
-											Actually, we see here some of the distortion that's introduced in the MDS plot above, because, for instance, Connor and Tom appear to be further apart than Connor and Breeze, but the latter two are actually 10 apart.
+											Actually, we see here some of the distortion that's introduced in the MDS plot above, because, for instance, Zach and Tim appear closer together than Julian/Anonymous4 and Liam/Levi do, even though they are each at a distance of 2 from each other.
 										</p>
 
 										<p>
-											Aside from closest rankings, we can also define the opposite notion of the two ratings that are furthest apart from each other, which we refer to as the "diameter."  
+											Aside from closest rankings, we can also define the opposite notion of the two ratings that are furthest apart from each other, which we refer to as the <b>diameter</b>.
 										</p>
 
 										<p>
@@ -278,7 +281,15 @@
 										</p>
 
 										<p>
-											If this worked properly, you should see that Tom and Shiba L are the most different, with 26 pairwise disagreements (in fact, they are nearly exact reverses of each other except for two pairs: (5, 3) and (3, 7)!).  
+											If this worked properly, you should see that Audrey and Dante are the most different, with 26 pairwise disagreements.  
+										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											"Audrey ": [5, 6, 7, 4, 3, 0, 2, 1]
+											"Dante" :  [1, 0, 2, 3, 4, 7, 5, 6]
+										</script> 
+											
+											
+											In fact, they are nearly exact reverses of each other except for two pairs: (5, 6) and (2, 0)!  In other words, the only two things they agree on are that Nirvana is preferable The Beatles, and that Taylor Swift is preferable to Dua Lipa.  They disagree on all other 26 head to head votes.
 										</p>
 
 										<p>
@@ -292,32 +303,32 @@
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											Sushi (0): 3.8
-											Dumplings (1): 4.1
-											Brownies (2): 4.3
-											Pizza (3): 4.6
-											Pho (4): 5.2
-											Spaghetti_Meatballs (5): 5.1
-											Strawberries (6): 4.7
-											Tacos (7): 4.3
+											Taylor Swift (0): 4.2
+											Drake (1): 4.7
+											Dua Lipa (2): 5.3
+											Miley Cyrus (3): 6.1
+											Michael Jackson (4): 3.0
+											Nirvana (5): 3.9
+											The Beatles (6): 3.7
+											Journey (7): 5.1
 										</script> 
 
 										which leads to these results in the election if we sort in ascending order of average place number
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											1 : Sushi
-											2 : Dumplings
-											3 : Brownies
-											4 : Tacos
-											5 : Pizza
-											6 : Strawberries
-											7 : Spaghetti_Meatballs
-											8 : Pho
+											1 : Michael Jackson
+											2 : The Beatles
+											3 : Nirvana
+											4 : Taylor Swift
+											5 : Drake
+											6 : Journey
+											7 : Dua Lipa
+											8 : Miley Cyrus
 
 										</script> 
 
 										<p>
-											Expressed as a list, this corresponds to the permutation <code>[0, 1, 2, 7, 3, 6, 5, 4]</code>
+											Expressed as a list, this corresponds to the permutation <code>[4, 6, 5, 0, 1, 7, 2, 3]</code>
 										</p>
 
 										<h4>Your Task</h4>
@@ -340,7 +351,7 @@
 											If this works correctly, you should get the following permutation as the one that minimizes the sum of Kendall-Tau distances:
 										</p>
 										<p>
-											<code>[0, 1, 7, 2, 6, 3, 4, 5]</code>
+											<code>[4, 6, 0, 5, 1, 2, 7, 3]</code>
 										</p>
 
 										<p>
@@ -355,27 +366,27 @@
 											<tr>
 												<td>
 													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-														1 : Sushi
-														2 : Dumplings
-														3 : Brownies
-														4 : Tacos
-														5 : Pizza
-														6 : Strawberries
-														7 : Spaghetti_Meatballs
-														8 : Pho
-
+														1 : Michael Jackson
+														2 : The Beatles
+														3 : Nirvana
+														4 : Taylor Swift
+														5 : Drake
+														6 : Journey
+														7 : Dua Lipa
+														8 : Miley Cyrus
 													</script> 
 												</td>
 												<td>
 													<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-														1 : Sushi
-														2 : Dumplings
-														3 : Tacos
-														4 : Brownies
-														5 : Strawberries
-														6 : Pizza
-														7 : Pho
-														8 : Spaghetti_Meatballs														
+														1 : Michael Jackson
+														2 : The Beatles
+														3 : Taylor Swift
+														4 : Nirvana
+														5 : Drake
+														6 : Dua Lipa
+														7 : Journey
+														8 : Miley Cyrus
+												
 													</script> 
 												</td>
 											</tr>
@@ -386,35 +397,24 @@
 										
 
 										<p>
-											Interestingly, the trends are the same, but if we swap brownies and tacos, strawberries and pizza, and pho and Spaghetti_Meatballs, we get more agreements overall.
-											<ol>
-												
-											</ol>
-											It's encouraging that they are so similar, but how do we know that the Kemeny optimal one is better?  Well, if we examine the sum of the Kendall-Tau distances of the average ranking to all rankings, we see that it is <b>195</b>.  But the Kemeny optimal one has a sum of Kendall-Tau distances of <b>187</b>.  Therefore, though it is very close, the <b>Kemeny optimal rank has eight fewer disagreements with everyone in the class than the average ranking</b>.  And that's all there is to it!
+											Interestingly, the trends are the same, but if we swap Taylor Swift and Nirvana and Journey and Dua Lipa, we get more agreements overall.  Specifically, if we sum the Kendall-Tau distances of the average ranking to all rankings, we get <b>303</b> diagreements with the class as a whole.  But the Kemeny optimal one has only <b>299</b> disagreements.  Therefore, though it is very close, the <b>Kemeny optimal rank has four fewer disagreements with everyone in the class than the average ranking</b>.  And that's all there is to it!
 										</p>
 
 
 										<h3><a name = "efficientkt">Efficient Kendall-Tau (15 Points)</a></h3>
 
 										<p>
-											The implementation of brute force Kemeny Optimal ranking using your <b>O(N<SUP>2</SUP>)</b> code for Kendall-Tau probably took a few minutes to complete.  It's worthwhile to speed up the individual Kendall-Tau distance computations since we have to do so many of them.  In fact, it's possible to compute the Kendall-Tau distance in <b>O(N log N)</b> time using merge sort.  Review the technique <a href = "../../ClassExercises/Week7_KendallTau/index.html#efficient">here</a> for how to do this.
+											We've been rolling with the <b>O(N<SUP>2</SUP>)</b> algorithm so far, but it's possible to compute the Kendall-Tau distance in <b>O(N log N)</b> time using merge sort.  Review the technique <a href = "../../ClassExercises/Week7_KendallTau/index.html#efficient">here</a> for how to do this.
 										</p>
 
 										<p>
-											<b>Your task: </b> Implement a method <code>kendall_tau_fast</code> which computes the Kendall-Tau distance between two rankings in <b>O(N log N)</b> time.  Then, replace the calls to Kendall-Tau in your Kemeny Optimal code with this method.  To quantify the performance increase, time your Kemeny Optimal code with the brute force method, and compare that to Kemeny Optimal with your faster merge sort-based method.  You can use the snippet below to help you time the code:
+											<b>Your task: </b> Implement a method <code>kendall_tau_fast</code> which computes the Kendall-Tau distance between two rankings in <b>O(N log N)</b> time.  
 										</p>
 
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											import time
-											tic = time.time()
-
-											# Run code
-
-											toc = time.time()
-											print("Elapsed Time: {:.3f}".format(toc-tic))
-
-										</script>
-
+										<h3><a name = "coversongs">Comparing Cover Songs by Rankings (5 Points)</a></h3>
+										<p>
+											Coming soon...
+										</p>
 
                                 </div>
 						</div>
@@ -473,7 +473,7 @@
 													</li>
 												</ul>!-->
 												</li>
-												<!--<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Foods</a></li>!-->
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Pop Stars</a></li>
 												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
 												<li><a href = "../../Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
 													<!--

@@ -111,6 +111,10 @@ Binary Trees: Preorder/Inorder/Postorder (Module), Search/Add, Drawing Binary Tr
 
 
 LECTURE
+Tries
+
+<ul><li>Class exercise: autocomplete</li></ul> 
+LECTURE
 Minimum Spanning Trees, Kruskal's Algorithm
 
 <ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Dr. Tralie's notes on making mazes with MSTs</a></li><li><a href = "ClassExercises/Week9_Phylogenetic">Notes on phylogenetic trees and single linkage clustering</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
@@ -122,10 +126,6 @@ LECTURE
 <b><a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a></b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
-LECTURE
-Tries
-
-<ul><li>Class exercise: autocomplete</li></ul> 
 LECTURE
 Tree Rotations
 

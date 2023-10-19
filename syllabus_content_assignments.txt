@@ -73,7 +73,7 @@ Homework 3 Final Submission
 Lab 5 Due
 
 2023-10-12
-HW4 Out
+<a href = "Assignments/HW4_FairElections/index.html">Homework 4: Fair Elections of Pop Stars</a> Out
 
 2023-10-18
 <a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
@@ -84,16 +84,16 @@ Last day to drop courses with a "W"
 2023-10-25
 <a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due before class
 
-2023-10-30
+2023-10-27
 <HR>HW4 Part 1 Due
 
 2023-10-25
 HW4 Part 2 Due
 
-2023-10-27
+2023-10-30
 <HR><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
-2023-10-27
+2023-10-30
 Lab 6 Due
 
 2023-11-06
