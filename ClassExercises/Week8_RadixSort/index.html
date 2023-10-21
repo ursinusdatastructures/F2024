@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 271: Data Structures And Algorithms, Fall 2023</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 271: Data Structures And Algorithms, Fall 2023</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h2>Week 8: Radix Sort</h2>
+										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+									
+
+                                        <h2>Overview / Logistics</h2>
+										
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/SZt6TWHyO7k?si=vPcCkplOy6txN81y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+										<p>
+											We saw in class (<a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video4">click here</a> for a video) that the lower bound for any possible sort that's based on comparisons is <b>&Omega;(N log(N))</b>.  So if we have any hope of beating this, we have to think of a completely different strategy.  We'll start with a simple example first known as "counting sort"
+										</p>
+
+										<HR>
+										<h2>Counting Sort</h2>
+										<p>
+											What we can do is have a bunch of "bins" or "buckets," ordered in sequence in an array, where there's a bin for each possible value in our list.  We can then loop through the bins from left to right and extract the elements in order.  The code below shows this
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											def countsort(arr):
+												"""
+												Sort an array using count sort, assuming, for simplicity,
+												that arr contains only nonnegative integers
+
+												Parameters
+												----------
+												arr: list
+													List of elements to sort
+												"""
+												if len(arr) > 0:
+													## Step 1: Find the maximum element of the array
+													max_elem = arr[0]
+													for i in range(1, len(arr)):
+														if arr[i] > max_elem:
+															max_elem = arr[i]
+													
+													## Step 2: Create an array of length max_elem+1 and 
+													## store the counts at each element
+													counts = [0]*(max_elem+1)
+													for x in arr:
+														counts[x] += 1
+
+													## Step 3: Loop through the counts array and put elements
+													## at their appropriate place 
+													idx = 0
+													for x, count in enumerate(counts):
+														for k in range(count):
+															arr[idx] = x
+															idx += 1]]></script> 
+										<p>
+											<h3>Question</h3> What is the time and space complexity of the above algorithm?
+										</p>
+
+										<HR>
+										<h2>Radix Sort</h2>
+
+										<p>
+											Depending on the maximum element, counting sort can be pretty inefficient.  But there's a way to use it as a subroutine in a more efficient sort.  If we're careful on how we implement counting sort, it can be done so that it's stable.  What we can do, then, is apply counting sort <b>one digit at a time</b>, from the right most digit left.  This is known as <b>Least Significant Digit Radix Sort</b>.  The table below shows this.
+										</p>
+
+										<table><tr><td>Original Order</td><td>684</td><td>559</td><td>629</td><td>192</td><td>835</td><td>763</td><td>707</td><td>359</td><td>9</td><td>723</td><td>277</td><td>754</td><td>804</td><td>599</td><td>70</td><td>472</td><td>600</td><td>396</td><td>314</td><td>705</td></tr><tr><td>1s Place</td><td>7<b>0</b></td><td>60<b>0</b></td><td>19<b>2</b></td><td>47<b>2</b></td><td>76<b>3</b></td><td>72<b>3</b></td><td>68<b>4</b></td><td>75<b>4</b></td><td>80<b>4</b></td><td>31<b>4</b></td><td>83<b>5</b></td><td>70<b>5</b></td><td>39<b>6</b></td><td>70<b>7</b></td><td>27<b>7</b></td><td>55<b>9</b></td><td>62<b>9</b></td><td>35<b>9</b></td><td><b>9</b></td><td>59<b>9</b></td></tr><tr><td>10s Place</td><td>6<b>0</b>0</td><td>8<b>0</b>4</td><td>7<b>0</b>5</td><td>7<b>0</b>7</td><td>9</td><td>3<b>1</b>4</td><td>7<b>2</b>3</td><td>6<b>2</b>9</td><td>8<b>3</b>5</td><td>7<b>5</b>4</td><td>5<b>5</b>9</td><td>3<b>5</b>9</td><td>7<b>6</b>3</td><td><b>7</b>0</td><td>4<b>7</b>2</td><td>2<b>7</b>7</td><td>6<b>8</b>4</td><td>1<b>9</b>2</td><td>3<b>9</b>6</td><td>5<b>9</b>9</td></tr><tr><td>100s Place</td><td>9</td><td>70</td><td><b>1</b>92</td><td><b>2</b>77</td><td><b>3</b>14</td><td><b>3</b>59</td><td><b>3</b>96</td><td><b>4</b>72</td><td><b>5</b>59</td><td><b>5</b>99</td><td><b>6</b>00</td><td><b>6</b>29</td><td><b>6</b>84</td><td><b>7</b>05</td><td><b>7</b>07</td><td><b>7</b>23</td><td><b>7</b>54</td><td><b>7</b>63</td><td><b>8</b>04</td><td><b>8</b>35</td></tr></table>
+
+										<HR>
+										<h2>Code from Class</h2>
+
+										<iframe src = "ClassCode.html" width="100%" height="3000"></iframe>
+
+
+
+
+                                    </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a></li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a> <a href = "https://www.online-python.com/">Online-Python</a><a href = "https://colab.research.google.com/">Google Colab</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_HashTable/index.html">Assignment 1: Hash Maps And Tweets</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3: Seam Carving</a>
+												<!--<ul>
+													<li>
+														<a href = "../../Assignments/HW3_SeamCarving/ArtContest/index.html">Art Contest</a>
+													</li>
+												</ul>!-->
+												</li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Pop Stars</a></li>
+												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+												<li><a href = "../../Assignments/HW6_TSPArt/index.html">Assignment 6: Traveling Salesperson Art</a>
+													<!--
+													<ul>
+														<li>
+															<a href = "../../Assignments/HW6_TSPArt/ArtContest/index.html">Art Contest</a>
+														</li>
+													</ul>
+													-->
+												</li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_BinarySearch/index.html">Lab 1: Binary Search</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_MakingChange/index.html">Lab 4: Making Change with Dynamic Programming</a></li>
+												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Kendall-Tau Comprehension</a></li>
+												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
+												<li><a href = "../../Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Class Exercises / Notes</span>
+											<ul>
+												<li>
+													<a href = "../../../Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												
+												<li><a href = "../../ClassExercises/Week1_Exponents">Week 1: Intro To Exponents / Exponential Time Algorithms</a></li></li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week1_Loops">Week 1: Loops in Python</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "../../../Modules/ADTModule/Video1">Week 2: ADT Module</a></li>
+												<li><a href = "../../ClassExercises/Week2_LinkedList">Week 2: Doubly Linked Lists</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<!--<li><a href = "../../../Modules/StackModule/Video">Week 4: Stacks And Queues Module</a></li>-->
+												<li><a href = "../../ClassExercises/Week3_DiscoveringUnionFind">Week 3: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "../../../Modules/UnionFindModule/Video1">Week 3: Disjoint Sets / Union Find Pre-Lab Module</a></li>
+												<li><a href = "../../../Modules/BigO/Video1">Week 3: Informal Introduction To Big-O Notation</a></li>
+												<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3/4: Asymptotics</a></li>
+												<li><a href = "https://github.com/ursinus-cs271-f2023/CoursePage/blob/main/ClassExercises/Week4_ComplexityHierarchy/ComplexityHierarchy.ipynb">Exploring complexity hierarchies in matplotlib</a></li>
+												<li><a href = "../../../Modules/RecursionModule/Video2">Week 4: Recursion Module</a></li>
+												<li><a href = "../../../Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance Backtracing</a></li>
+												<li><a href = "../../../Modules/LCSModule/Video1">Week 5: Longest Common Subsequence Module</a></li>
+												<li><a href = "../../../Modules/BasicSortingModule/Video1">Week 6: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week7_KendallTau">Week 7: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week8_RadixSort">Week 8: Counting Sort + Radix Sort</a></li>
+												<li><a href = "../../../Modules/TreesModule/Video1">Week 9: Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 9: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week9_Phylogenetic">Week 9: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												<li>
+													<a href = "../../../Modules/TreeRotations/Video">Week 11: Tree Rotations Exercise</a>
+												</li>
+												<!--
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												
+												
+												
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
+												</li>
+												-->
+											</ul>
+										</li>
+										<!--
+										<li>
+											<span class="opener">Optional Spring 2021 Modules</span>
+											<ul>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
+												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Final Assessment</span>
+											<ul>
+												<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+												<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+												<li><a href = "../../final.html#seriousgame">Data Structure "Serious Game"</a></li>
+											</ul>
+										</li>
+									</ul>
+								-->
+								</nav>
+								
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
+</html>
