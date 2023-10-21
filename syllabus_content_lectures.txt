@@ -119,7 +119,7 @@ Minimum Spanning Trees, Kruskal's Algorithm
 
 <ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Dr. Tralie's notes on making mazes with MSTs</a></li><li><a href = "ClassExercises/Week9_Phylogenetic">Notes on phylogenetic trees and single linkage clustering</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
 LECTURE
-Dendrograms And Single Linkage Clustering, Binary search trees: Search, Addition
+Dendrograms And Single Linkage Clustering
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
 LECTURE
