@@ -81,19 +81,19 @@ Lab 5 Due
 2023-10-23
 Last day to drop courses with a "W"
 
-2023-10-25
+2023-11-21
 <a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due before class
 
-2023-10-27
-<HR>HW4 Part 1 Due
+2023-10-30
+HW4 Part 1 Due
 
 2023-10-25
 HW4 Part 2 Due
 
-2023-10-30
+2023-11-01
 <HR><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
-2023-10-30
+2023-11-01
 Lab 6 Due
 
 2023-11-06
@@ -102,14 +102,14 @@ Lab 7 Due
 2023-11-13
 HW5 Needleman-Wunsch Tasks Due
 
-2023-11-01
+2023-11-06
 HW5 Phylogenetic Tree Dendrogram Due
 
-2023-11-10
+2023-11-15
 HW5 Final Clustering Due
 
-2023-11-15
-<a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
+2023-11-20
+<HR><a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
 
 2023-11-20
 Lab 8 Due

@@ -107,13 +107,17 @@ Tree Data Structures And Algorithms
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 16</li></ul>
 LECTURE
-Binary Trees: Preorder/Inorder/Postorder (Module), Search/Add, Drawing Binary Trees (Class)
+Binary Trees: Preorder/Inorder/Postorder (Module), Contains/Add (Class)
 
 
 LECTURE
-Tries
+Drawing Binary Trees, Begin Tree Removal
 
-<ul><li>Class exercise: autocomplete</li></ul> 
+
+LECTURE
+<b><a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a></b>
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
 Minimum Spanning Trees, Kruskal's Algorithm
 
@@ -122,10 +126,6 @@ LECTURE
 Dendrograms And Single Linkage Clustering
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
-LECTURE
-<b><a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a></b>
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
 Tree Rotations
 
@@ -142,6 +142,10 @@ LECTURE
 Continue Priority Queues
 
 
+LECTURE
+Tries, Huffman Trees
+
+<ul><li>Class exercise: autocomplete</li></ul> 
 SECTION
 Graph Data Structures And Algorithms
 
