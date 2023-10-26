@@ -413,8 +413,89 @@
 
 										<h3><a name = "coversongs">Comparing Cover Songs by Rankings (5 Points)</a></h3>
 										<p>
-											Coming soon...
+											We will now explore an application that requires an efficient implementation of Kendall-Tau to work.  A "cover song" or "version" of a tune is a different rendition of that tune, often performed by a different group.  The version can use different instruments, change the tempo, changing the key, go a-capella, go acoustic, change the language, change the genre, add and delete sections, etc.  But something about the tune makes it still a version of the original. 
 										</p>
+										<p>
+											A particularly interesting computational challenge is to automatically determine whether two tunes are versions of each other using code that processes digital audio.  <a href = "https://arxiv.org/pdf/1707.04680">I contributed</a> to the state of the art of this problem, which made up about 1/3 of my Ph.D. thesis back in 2017.  <a href = "https://docs.google.com/presentation/d/1h2g-Jks5jbwQ5w25N79j8o43QxCaluRPuMZo1_TxQkQ/edit?usp=drive_link">Click here</a> to see some slides I made recently on this topic for <a href = "https://www.ursinus.edu/live/profiles/3124-rosa-abrahams">Dr. Abrahams's</a> "What Is Music" class, and <a href = "https://www.covers1000.net/demo.html">click here</a> to view an interactive web demo I made on my research.
+										</p>
+
+										<p>
+											In this task, I've gathered 32 different tunes: 4 groups of 8 versions from each of Michael Jackson's "Bad", Taylor Swift's "Shake It Off", The Beatles's "Let It Be", and Nirvana's "Smells Like Teen Spirit".  For each tune, I've computed the similarity of that tune to each of 15,000 tunes in the "<a href = "https://github.com/MTG/da-tacos">datacos training set</a>" using <a href = "https://academiccommons.columbia.edu/doi/10.7916/D8TH8WXJ/download">2D Fourier Magnitude shingles</a> on <a href = "https://github.com/bmcfee/crema/">CREMA</a> pitch features.  In a nutshell, the features will be similar between two versions if those versions share similar note patterns, up to a key change and tempo change.
+										</p>
+
+										<p>
+											What I did next was, for each tune, sort the 15,000 tunes in the database in decreasing order of similarity.  This gives me a ranking of the songs in the database.  Then, if we compare two different tunes by the Kendall-Tau distance between their rankings, we can get a measurement of similarity between those tunes, <i>even if we have no idea what the tunes actually are in the database</i>!
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Given the 15,000 length rankings of the 32 tunes in the database, compute a 32x32 matrix <code>D</code>, where <code>D[i, j]</code> is the Kendall-Tau distance between the rankings of tune <code>i</code> and tune <code>j</code>.  To get the rankings, you can use the following code to load <a href = "HW4_FairElections/tunes.json">tunes.json</a>:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											import json
+											tunes = json.load(open("tunes.json", encoding="utf8"))
+										</script>
+
+										<p>
+											Each element of the <code>tunes</code> list consists of a dictionary with 4 keys:
+											<ul>
+												<li><code>name</code>: The title of the tune</li>
+												<li><code>version</code>: The title of the version</li>
+												<li><code>url</code>: A URL to find it on youtube</li>
+												<li>
+													<code>rankings</code>: A permutation of similarities to tunes in the <a href = "https://github.com/MTG/da-tacos">datacos training set</a>.  These are the permutations you'll be comparing with the Kendall-Tau distance
+												</li>
+											</ul>
+										</p>
+
+										<p>
+											The name/version/url are just for fun; the rankings are what you need here.
+										</p>
+										<p>
+											If this is working properly, you should see that tunes that are versions of each other should have much smaller Kendall-Tau distances than tunes that aren't.  Here's a method that you can use to plot the Kendall-Tau distances and verify this:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											def plot_tune_similarities(tunes, D):
+												"""
+												Parameters
+												----------
+												tunes: list of N dictionary items
+													Tunes loaded in from the JSON file
+												D: ndarray(N, N)
+													An NxN matrix with the Kendall-Tau distances between
+													all pairs of tunes
+												"""
+												pix = np.arange(len(tunes))
+												J, I = np.meshgrid(pix, pix)
+												J = J.flatten()
+												I = I.flatten()
+												sz = np.max(D)-D
+												sz /= np.max(sz)
+												sz = sz**1.5
+												sz = 40*sz/np.max(sz)
+											
+												plt.figure(figsize=(12, 10))
+												plt.scatter(J, I, s=sz, c=D, cmap='magma')
+												plt.gca().invert_yaxis()
+												plt.xticks(np.arange(D.shape[0]), [t["name"] + " " + t["version"] for t in tunes], rotation=90)
+												plt.yticks(np.arange(D.shape[0]), [t["name"] + " " + t["version"] for t in tunes])
+												plt.colorbar()
+												plt.gca().set_facecolor((0.9, 0.9, 0.9))
+										</script>
+
+										<p>
+											And here's what the results should look like if this is working properly:
+										</p>
+
+										<img src = "CoverResults.svg" width="80%">
+
+										<p>
+											The size and color of the dots indicate how similar two pairs are; larger and darker dots indicate higher similarity (lower Kendall-Tau distance).
+										</p>
+
+
 
                                 </div>
 						</div>
