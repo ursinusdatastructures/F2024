@@ -119,14 +119,6 @@ LECTURE
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
-Minimum Spanning Trees, Kruskal's Algorithm
-
-<ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Dr. Tralie's notes on making mazes with MSTs</a></li><li><a href = "ClassExercises/Week9_Phylogenetic">Notes on phylogenetic trees and single linkage clustering</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
-LECTURE
-Dendrograms And Single Linkage Clustering
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
-LECTURE
 Tree Rotations
 
 <ul><li><a href = "https://ursinus-cs271-f2022.github.io/Modules/TreeRotations/Video">Class Exercise on Tree Rotations</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
@@ -134,6 +126,14 @@ LECTURE
 <b><a href = "Labs/Lab7_AVL">Lab 7: AVL Trees</a></b> (Balanced Binary Search Trees)
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
+LECTURE
+Minimum Spanning Trees, Kruskal's Algorithm
+
+<ul><li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Dr. Tralie's video notes on Kruskal's algorithm</a></li><li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video4.html">Dr. Tralie's notes on making mazes with MSTs</a></li><li><a href = "ClassExercises/Week9_Phylogenetic">Notes on phylogenetic trees and single linkage clustering</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 22.7</li></ul>
+LECTURE
+Dendrograms And Single Linkage Clustering
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
 LECTURE
 Priority Queues / Binary Heaps
 
@@ -143,7 +143,7 @@ Continue Priority Queues
 
 
 LECTURE
-Tries, Huffman Trees
+Tries, Huffman Trees (Time Permitting)
 
 <ul><li>Class exercise: autocomplete</li></ul> 
 SECTION

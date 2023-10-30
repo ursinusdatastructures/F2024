@@ -99,13 +99,13 @@ Lab 6 Due
 2023-11-03
 Lab 7 Due
 
-2023-11-13
+2023-11-10
 HW5 Needleman-Wunsch Tasks Due
 
 2023-11-06
-<HR><a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due
+<a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due
 
-2023-11-06
+2023-11-07
 HW5 Phylogenetic Tree Dendrogram Due
 
 2023-11-15
