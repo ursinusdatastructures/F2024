@@ -123,9 +123,17 @@ Tree Rotations
 
 <ul><li><a href = "../Modules/TreeRotations/Video">Class Exercise on Tree Rotations</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
 LECTURE
-<b><a href = "Labs/Lab7_AVL">Lab 7: AVL Trees</a></b> (Balanced Binary Search Trees)
+Introducing self-balancing binary trees, AVL Trees
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
+LECTURE
+<b><a href = "Labs/Lab7_AVL">Lab 7: AVL Trees</a></b>
+
+
+LECTURE
+Priority Queues / Binary Heaps
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
 LECTURE
 Minimum Spanning Trees, Kruskal's Algorithm
 
@@ -135,17 +143,9 @@ Dendrograms And Single Linkage Clustering
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
 LECTURE
-Priority Queues / Binary Heaps
+Tries
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
-LECTURE
-Continue Priority Queues
-
-
-LECTURE
-Tries, Huffman Trees (Time Permitting)
-
-<ul><li>Class exercise: autocomplete</li></ul> 
+<ul><li>Class exercise: autocomplete</li></ul>
 SECTION
 Graph Data Structures And Algorithms
 
