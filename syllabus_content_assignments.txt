@@ -106,6 +106,9 @@ HW5 Needleman-Wunsch Tasks Due
 <a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due
 
 2023-11-09
+<a href = "../Modules/Graphs/Video1">Graphs Module</a> Due
+
+2023-11-16
 HW5 Phylogenetic Tree Dendrogram Due
 
 2023-11-17
