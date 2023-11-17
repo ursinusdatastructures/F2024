@@ -157,7 +157,7 @@ Graph Data Structures
 LECTURE
 Breadth-First Search, Depth-First Search
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.1-21.3</li><li><a href = "https://ursinus-cs477-f2023.github.io/CoursePage/ClassExercises/Week2_BasicSearch/">CS 477 notes on BFS/DFS</a></li><li><a href = "https://xkcd.com/2407/">Depth, Breadth, Bread, brepth, deadth</a></li></ul>
 LECTURE
 Euclidean Traveling Salesperson Problem
 

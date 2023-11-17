@@ -109,10 +109,7 @@ HW5 Needleman-Wunsch Tasks Due
 <a href = "../Modules/Graphs/Video1">Graphs Module</a> Due
 
 2023-11-16
-HW5 Phylogenetic Tree Dendrogram Due
-
-2023-11-17
-HW5 Final Clustering Due
+HW5 Dendrogram And Clustering Due
 
 2023-11-27
 <HR><a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
