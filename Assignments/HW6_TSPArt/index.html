@@ -197,7 +197,7 @@
 
 									<h3><a name = "mstdfs">A 2-Approximation with MST DFS (15 Points)</a></h3>
 									<p>
-										As we noted in class, it is possible to come up with a 2-approximation of the TSP by doing a depth first traversal of the minimum spanning tree of the points in 2D. As an example, here's what you should get on the penguins: 
+										As we noted <a href = "../../../Modules/BFSDFSTSP/Video3">in a module</a>, it is possible to come up with a 2-approximation of the TSP by doing a depth first traversal of the minimum spanning tree of the points in 2D. As an example, here's what you should get on the penguins: 
 									</p>
 
 									
@@ -214,10 +214,10 @@
 									<P>
 										Create a method that takes in a stipple pattern as a matrix <code>X</code> (as shown above), and which returns a <code>tour</code> of <code>X</code> which is a 2-approximation of the best possible tour.  You should 
 										<ol>
-											<li>Compute the Delaunay triangulation of the points in <b>X</b> to narrow down the edge set <b>E</b></li>
+											<li>Compute the Delaunay triangulation of the points in <b>X</b> to narrow down the edge set <b>E</b>.  Refer to the <a href = "../../../Modules/BFSDFSTSP/Video4">video here</a> on how to do this in python.</li>
 											<Li>Compute the MST of the graph <b>(X, E)</b> and store the resulting graph in an <a href = "../../../Modules/Graphs/Video2">adjacency data structure</a></Li>
 											<li>
-												Run depth-first search on the graph from step 2, and fill in the tour by recording the order that the nodes are visited.
+												Run <a href = "../../../Modules/BFSDFSTSP/Video1">depth-first search</a> on the graph from step 2, and fill in the tour by recording the order in which the nodes are visited.
 											</li>
 										</ol>
 									</P>
@@ -256,6 +256,10 @@
 									</p>
 
 									<img src = "penguins2opt.gif">
+
+									<p>
+										For more information, <a href = "../../../Modules/BFSDFSTSP/Video5">click here</a> to view a video I have about this
+									</p>
 
 									<h4>Your Task</h4>
 									<p>
