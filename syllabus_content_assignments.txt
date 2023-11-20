@@ -82,6 +82,9 @@ Lab 5 Due
 Last day to drop courses with a "W"
 
 2023-11-21
+<a href = "../Modules/BFSDFSTSP/Video1">BFS/DFS/TSP</a> module due
+
+2023-11-21
 HW4 Part 1 Due
 
 2023-10-25
