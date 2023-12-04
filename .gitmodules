@@ -22,3 +22,6 @@
 [submodule "ClassExercises/Week12_Autocomplete/Week12_Autocomplete"]
 	path = ClassExercises/Week12_Autocomplete/Week12_Autocomplete
 	url = https://github.com/ursinus-cs271-f2023/Week12_Autocomplete.git
+[submodule "Labs/Lab8_Dijkstra/Lab8_Dijkstra"]
+	path = Labs/Lab8_Dijkstra/Lab8_Dijkstra
+	url = https://github.com/ursinus-cs271-f2023/Lab8_Dijkstra.git

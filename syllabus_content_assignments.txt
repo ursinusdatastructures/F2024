@@ -114,16 +114,16 @@ HW5 Needleman-Wunsch Tasks Due
 2023-11-16
 HW5 Dendrogram And Clustering Due
 
-2023-11-27
+2023-11-29
 <HR><a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
 
-2023-11-27
+2023-11-29
 Lab 8 Due
 
 2023-12-04
-HW6: 2-Approx with MST DFS Due
+<HR>HW6: 2-Approx with MST DFS Due
 
-2023-12-01
+2023-12-04
 HW6: Final Deadline
 
 2023-12-08
