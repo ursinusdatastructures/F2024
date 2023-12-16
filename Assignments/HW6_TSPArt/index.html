@@ -86,22 +86,6 @@
 										<p>
 											<a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/archive/refs/heads/main.zip">Click here</a> to download the starter code.  You will have to write all of the code to do a traveling salesperson tour, but I have provided some image processing tools, as well example images.
 										</p>
-
-										<h3><a name = "colab">Google Colab</a></h3>
-
-										<p>
-											For those who are having trouble with <code>numba</code>, you can use Google colab.  This will require you to have a Google account setup.  Make a new notebook at <a href = "https://colab.research.google.com/">https://colab.research.google.com/</a>, then load in the notebook at <a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/blob/main/colab.ipynb">this link</a>. 
-										</p>
-										<img src = "colab.png" width="60%">
-										<p>
-											Then, if you put your images in a directory called <code>CS271/HW6/images</code>, the code should run:
-										</p>
-
-										<img src = "colab_drive.png" width="80%">
-
-										<P>
-											(Of course, you can change the directory paths if you want to, but that's what I did in the above example)
-										</P>
 										
 
                                         <p>
@@ -145,16 +129,17 @@
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 										import numpy as np
 										import matplotlib.pyplot as plt
-										from stipple import *
 										np.random.seed(0)
 										I = read_image("images/penguins.png")
 										# Initial stippling
-										X = voronoi_stipple(I, thresh=0.3, target_points=2000, canny_sigma=0.8)
+										X = voronoi_stipple(I, thresh=0.2, target_points=2000, grad_sigma=0.8, edge_thresh=0.6)
 										# Filter out lowest 4 points by density
 										X = density_filter(X, (X.shape[0]-4)/X.shape[0]) 
+										print(X.shape)
 										plt.figure(figsize=(10, 10))
 										plt.scatter(X[:, 0], X[:, 1], 2)
-										plt.savefig("penguins_stipple.svg", bbox_inches='tight')
+										plt.axis("off")
+										plt.show()
 									</script> 
 
 									<p>
@@ -176,6 +161,8 @@
 										plt.plot(X[tour, 0], X[tour, 1], c='k')
 										plt.scatter(X[tour, 0], X[tour, 1], s=15, c=np.arange(len(tour)), cmap='magma_r')
 										plt.gca().set_facecolor((0.8, 0.8, 0.8))
+										plt.xticks([])
+										plt.yticks([])
 									</script> 
 
 									<p>
@@ -185,7 +172,7 @@
 									<img src = "penguins_tsp.svg" width="50%">
 
 									<p>
-										If we use more points, we get an even prettier image, at the expense of more computation time:
+										If we use 10,000 points instead of 2000, we get an even prettier image, at the expense of more computation time:
 									</p>
 
 									<img src = "penguins_tsp_10000.svg" width="50%">
@@ -210,6 +197,10 @@
 										This is not bad for how quick the algorithm is!  However, it's clearly not perfect, and in particular, we can see some places where the tour crosses over itself, which is a telltale sign that this is not optimal, because an optimal solution will have no crossings.  We will exploit this in the next section to improve this solution.
 									</p>
 
+									<p>
+										<b>NOTE: </b> Your stipple/MST tour might look slightly different due to randomness of the stipple
+									</p>
+
 									<h4>
 										Your Task
 									</h4>
@@ -225,6 +216,13 @@
 									</P>
 
 									<h3><a name = "twoopt">An Improvement with The 2-Opt Heuristic (15 Points)</a></h3>
+
+									<ul>
+										<li>
+											For a video explanation of the algorithm below, <a href = "../../../Modules/BFSDFSTSP/Video5">click here</a> to view a video I have about this
+										</li>
+									</ul>
+
 									<p>
 										One observation we can make to improve our initial guess of a tour is that an optimal solution will never contain a crossing because of the <a href = "https://en.wikipedia.org/wiki/Triangle_inequality">triangle inequality</a>.  This is most easily seen visually.  The picture below shows how a crossing occurs between the edges between <code>i</code> and <code>i+1</code> and <code>j</code> and <code>j+1</code>
 									</p>
@@ -253,15 +251,15 @@
 
 									</p>
 
+									
+
 									<p>
 										If we repeatedly do this in the penguin example, we see that we improve from the initial MST-based tour which has length <b>29020.836</b>, to one which has a length of <b>22838.024</b>, which is quite a big improvement!  More importantly for our artistic application, this final tour has no crossings.  The animation below shows this process step by step
 									</p>
 
 									<img src = "penguins2opt.gif">
 
-									<p>
-										For more information, <a href = "../../../Modules/BFSDFSTSP/Video5">click here</a> to view a video I have about this
-									</p>
+									
 
 									<h4>Your Task</h4>
 									<p>
@@ -293,12 +291,44 @@
 
 									<p>
 										
-										You should write a helper method whose job it is to find the next two indices <code>i</code> and <code>j</code> whose edges can be swapped, which you call from within a loop while there are still indices to be swapped.   You should use <a href = "https://numba.pydata.org/">numba</a> with the decorator <code>@jit(nopython=True)</code> above your helper method so that this code runs efficiently.  As an example, I'm currently doing this in the <code><a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/blob/9d693ee7a19a09b2237d9dd0fe0c96e1123f1a1f/stipple.py#L103">get_centroids</a></code> method of my stippling code.  Otherwise, your code will run very slowly.
+										You should write a helper method whose job it is to find the next two indices <code>i</code> and <code>j</code> whose edges can be swapped, which you call from within a loop while there are still indices to be swapped.
 									</p>
 
 									<p>
 										Another suggestion for speed is to pick up your search at the index <code>i</code> that you swapped last time, and then loop around if necessary.
 									</p>
+
+
+									<h4><a name = "numba">A Note on Nested Loop Speed And Numba</a></h4>
+
+									<p>
+										You should implement this in pure python/numpy first, but the nested loops you have will be slow in pure python.  <b>You should start by testing this on a stipple with only 100-200 points</b>.  But to scale this up for the art contest, you should consider using <a href = "https://numba.pydata.org/">numba</a> with the decorator <code>@jit(nopython=True)</code> above your helper method so that this code runs efficiently.  For example, I used this in an older version of <code><a href = "https://github.com/ursinus-cs271-f2023/HW6_TSPArt/blob/9d693ee7a19a09b2237d9dd0fe0c96e1123f1a1f/stipple.py#L103">get_centroids</a></code>, a helper method in <code>stipple.py</code> to speed up a doubly nested loop I had.
+									</p>
+
+									<p>
+										On the penguin example with a 2000 point stipple, using numba was the difference between a 5 second runtime and 2 minute runtime on my
+									</p>
+
+									<p>
+										If you are having trouble installing or running <code>numba</code> on your own machine, you can use Google colab to run your code on the cloud.  This will require you to have a Google account setup.  Make a new notebook at <a href = "https://colab.research.google.com/">https://colab.research.google.com/</a>.  Then, if you copy and paste the code from <code>stipple.py</code> into your colab notebook and you put your images in a directory called <code>CS271/HW6/images</code>, as shown in the image below:
+									</p>
+
+									<img src = "colab_drive.png" width="80%">
+
+									<p>
+										then the following code should run:
+									</p>
+									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+										from google.colab import drive 
+										drive.mount("/content/drive")
+										I = read_image("/content/drive/MyDrive/CS271/HW6/images/penguins.png")
+									</script> 
+
+
+
+									<P>
+										(Of course, you can change the directory paths if you want to, but that's what I did in the above example)
+									</P>
 
 
 									<h3><a name = "artcontest">Mandatory Art Contest (5 Points)</a></h3>
@@ -312,7 +342,7 @@
 											The parameter <code>thresh</code> to stipple is a variable between 0 and 1 that determines the grayscale level above which to exclude samples.  So make this closer to 0 if you only want to include darker parts of the image.
 										</li>
 										<li>
-											If you want edges to show up more strongly, play around with the <code>canny_sigma</code> parameter
+											If you want to play with how line drawings for the edges show up, try adjusting the <code>grad_sigma</code> and <code>edge_thresh</code> parameters.  A higher <code>grad_sigma</code> will smooth the edges more, and a lower <code>edge_thresh</code> will include more edges.
 										</li>
 										<li>
 											Usually using more points will lead to a prettier drawing, but it will take longer
