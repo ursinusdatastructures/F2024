@@ -116,7 +116,7 @@
 									<HR>
 									<h2><a name = "background">Background: Traveling Salesperson Art</a></h2>
 									<p>
-										There's a neat paper by Craig S. Kaplan and Robert Bosch on using the Traveling Salesperson Problem (TSP) to create art (<a href = "TSPArt.pdf">Click here</a> to read the paper).  The first step is to use something called "Voronoi Stippling" (see paper <a href = "Secord_VoronoiStippling.pdf">here</a> by Adrian Secord) to turn an image into a dot pattern.  For instance, let's say we started with the following image of Emperor penguins, courtesy of <a href = "https://flickr.com/photos/cmichel67/11278870305">Christopher Michel</a>
+										There's a neat paper by Craig S. Kaplan and Robert Bosch on using the Traveling Salesperson Problem (TSP) to create art (<a href = "https://archive.bridgesmathart.org/2005/bridges2005-301.pdf">Click here</a> to read the paper).  The first step is to use something called "Voronoi Stippling" (see paper <a href = "http://www.visgraf.impa.br/courses/npr07/materials/1%20pontos/p37-secord.pdf">here</a> by Adrian Secord) to turn an image into a dot pattern.  For instance, let's say we started with the following image of Emperor penguins, courtesy of <a href = "https://flickr.com/photos/cmichel67/11278870305">Christopher Michel</a>
 									</p>
 
 									<img src = "HW6_TSPArt/images/penguins.png" width="50%">
@@ -152,7 +152,7 @@
 									</p>
 
 									<p>
-										The <a href = "TSPArt.pdf">traveling salesperson art</a> paper goes one step further, though.  If we then treat each point as a "city," we can then search for a Traveling salesperson tour (i.e. a permutation of the dots that minimizes the length of the distances between adjacent dots, and between the first and the last dot).  Let's suppose we indexed such a permutation with an array <code>tour</code> of indices, and then we ran the following code:
+										The <a href = "https://archive.bridgesmathart.org/2005/bridges2005-301.pdf">traveling salesperson art</a> paper goes one step further, though.  If we then treat each point as a "city," we can then search for a Traveling salesperson tour (i.e. a permutation of the dots that minimizes the length of the distances between adjacent dots, and between the first and the last dot).  Let's suppose we indexed such a permutation with an array <code>tour</code> of indices, and then we ran the following code:
 									</p>
 
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
