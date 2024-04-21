@@ -1,129 +1,129 @@
 <a href = "https://ursinus.instructure.com/courses/16205/quizzes/22548">Syllabus Quiz Due</a>, <a href = "https://ursinus.instructure.com/courses/16205/assignments/175635">Survey And Discord Post</a> Due
 
-2023-08-29
+2024-08-27
 <a href = "../Modules/Module1/Video1">Python Module Parts 1-2 Due</a> Due before class
 
-2023-08-30
+2024-08-28
 <a href = "../Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due before class
 
-2023-09-01
+2024-08-30
 <HR><a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_9Sws6zhwK5RR3rE">Pop stars survey for HW4</a> due
 
-2023-09-01
+2024-08-30
 Lab 1 Due
 
-2023-09-04
+2024-09-02
 <a href = "../Modules/ADTModule/Video1">ADT Module</a> Due before class
 
-2023-09-06
+2024-09-04
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
-2023-09-06
+2024-09-04
 <a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
-2023-09-13
+2024-09-11
 Homework 1 Parts 1-2 Due
 
-2023-09-11
+2024-09-09
 <a href = "../Modules/BigO/Video1">Big-O Module</a> Due Before Class
 
-2023-09-15
+2024-09-13
 Homework 1 Parts 3-5 Due
 
-2023-09-18
+2024-09-16
 <HR>Lab 2 Due
 
-2023-09-18
+2024-09-16
 <HR><a href = "Assignments/HW2_PlantCellSegmentation">Homework 2: Plant Cell Segmentation</a> Out
 
-2023-09-18
+2024-09-16
 <a href = "../Modules/RecursionModule/Video2">Recursion Module</a> due before class
 
-2023-09-20
+2024-09-18
 <a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
-2023-09-22
+2024-09-20
 Lab 3 Due
 
-2023-09-25
+2024-09-23
 Homework 2 Parts 1 and 2 Due
 
-2023-09-26
+2024-09-24
 Homework 2 Part 3 Due
 
-2023-09-29
+2024-09-27
 <a href = "Assignments/HW3_SeamCarving">Homework 3: Seam Carving</a> Out
 
-2023-09-27
+2024-09-25
 Homework 3 Dynamic Programming Rules Due Before Class
 
-2023-10-02
+2024-09-30
 <a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
 
-2023-10-09
+2024-10-07
 <HR>Homework 3 Compute Optimal Seam, Backtrace Optimal Seam Due
 
-2023-10-09
+2024-10-07
 Homework 3 Final Submission
 
-2023-10-13
+2024-10-11
 <a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
-2023-10-04
+2024-10-02
 Lab 5 Due
 
-2023-10-12
+2024-10-10
 <a href = "Assignments/HW4_FairElections/index.html">Homework 4: Fair Elections of Pop Stars</a> Out
 
-2023-10-18
+2024-10-16
 <a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
 
-2023-10-23
+2024-10-21
 Last day to drop courses with a "W"
 
-2023-11-21
+2024-11-19
 <a href = "../Modules/BFSDFSTSP/Video1">BFS/DFS/TSP</a> module due
 
-2023-11-21
+2024-11-19
 HW4 Part 1 Due
 
-2023-10-25
+2024-10-23
 HW4 Part 2 Due
 
-2023-11-01
+2024-10-30
 <HR><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
-2023-11-01
+2024-10-30
 Lab 6 Due
 
-2023-11-03
+2024-11-01
 <HR><a href = "../Modules/RadixFisherYates/Video2">Fisher-Yates Module Due</a>
 
-2023-11-03
+2024-11-01
 Lab 7 Due
 
-2023-11-10
+2024-11-08
 HW5 Needleman-Wunsch Tasks Due
 
-2023-11-08
+2024-11-06
 <a href = "../Modules/SpanningTrees/Video1">Spanning Trees</a> module due
 
-2023-11-09
+2024-11-07
 <a href = "../Modules/Graphs/Video1">Graphs Module</a> Due
 
-2023-11-16
+2024-11-14
 HW5 Dendrogram And Clustering Due
 
-2023-11-29
+2024-11-27
 <HR><a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
 
-2023-11-29
+2024-11-27
 Lab 8 Due
 
-2023-12-04
+2024-12-02
 <HR>HW6: 2-Approx with MST DFS Due
 
-2023-12-04
+2024-12-02
 HW6: Final Deadline
 
-2023-12-08
+2024-12-06

@@ -1,6 +1,6 @@
 import datetime
 
-delta = datetime.date(2023, 8, 28) - datetime.date(2022, 8, 29)
+delta = datetime.date(2024, 8, 26) - datetime.date(2023, 8, 28)
 print(delta)
 
 fin = open("syllabus_content_assignments.txt")
