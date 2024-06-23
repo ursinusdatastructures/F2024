@@ -15,10 +15,10 @@ Lab 1 Due
 2024-09-03
 <a href = "../Modules/ADTModule/Video1">ADTs And The Set ADT Module</a> Due before class
 
-2024-09-04
+2024-09-02
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
-2024-09-04
+2024-09-02
 <a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2024-09-11
