@@ -41,152 +41,59 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Lab 6: Tree Key Removal</h2>
-										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
+                                        <h2>Lab 7: Dijkstra's Algorithm</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
-									
-
-                                        <h2>Overview / Logistics</h2>
-										<p>
-											The purpose of this lab is to get practice with recursion in the service of tree algorithms.  In particular, students will explore two different algorithms for removing keys in trees: one simple algorithm which is <b>O(N)</b> in the worst case, and another algorithm that is <b>O(logN)</b> if the tree is <b>balanced</b>.
-										</p>
-
-										<p>
-											<a href = "https://github.com/ursinus-cs271-f2023/Lab6_TreeRemoval/archive/refs/heads/main.zip">Click here</a> to download the starter notebook for this lab.  If you are using Google colab, the notebook is hosted at <a href = "https://github.com/ursinus-cs271-f2023/Lab6_TreeRemoval">https://github.com/ursinus-cs271-f2023/Lab6_TreeRemoval</a>.  Either way, you will need to use jupyter to create the tree plots to check your work.
-										</p>
-
-										<p>
-											When you are finished, upload your <code>Trees.ipynb</code> notebook to canvas.
-										</p>
-
-										<h2>Background: A Slow Remove</h2>
-										<p>
-											One naive algorithm to remove nodes from a tree is to take out a node and add all of its children to the tree again from scratch.  For example, let's suppose we started with the following tree, which is what's constructed in the lab by default:
-										</p>
-
-										<img src = "StartTree.svg">
-
-										<p>
-											And let's suppose we wanted to remove 11 from the subtree.  Then we would set 16's left child to be <code>None</code>, and then we would add keys 12, 13, 14, and 15 back to the tree.  Below is an animation of doing this and adding them back in the shuffled order 14, 13, 12, 15, to keep the tree balanced (you can use <code><a href = "https://numpy.org/doc/stable/reference/random/generated/numpy.random.shuffle.html">np.random.shuffle</a></code> to accomplish this)
-										</p>
-
-										<img src = "NaiveRemoval.gif">
-
-										<p>
-											In class, I'll show you how to add a method <code>remove_naive</code> to the <code>BinaryTree</code> class to kick off the recursion, as well as a corresponding recursive helper method <code>remove_naive</code> to the <code>TreeNode</code> class, that implement this technique together.  The methods will do the following:
-											<ol>
-												<li>Find the node to remove, if it exists in the tree</li>
-												<li>Set a reference to that node in its parent to be <code>None</code></li>
-												<li>
-													Recursively fill in a list with all of the nodes in that node's left and right subtrees (there can be <b>O(N)</b> of these if the node is high enough up in the tree, which is what makes this slow)
-												</li>
-												<li>
-													Shuffle the nodes in that subtree, and add their keys one by one back to the tree
-												</li>
-											</ol>
-										</p>
-
-										<p>
-											One of the things that makes removal tricky is we remove a node by setting its parent to no longer refer to it.  But we don't have references to parents in the data structure we've setup; only references to left and right children.  Rather than adding parent references and complicating our data structure, we can use recursion to reassign child references.  The pattern is to have the recursive remove method return a node reference, and then use the pattern 
-										</p>
 										
-										<p>
-											<code>self.root = self.root.remove(key, ...)</code>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+										
+										
+
+                                        <p>
+                                            <h3><a name = "learning">Learning Objectives</a></h3>
+                                            <ul>
+
+                                            </ul>
+                                        </p>
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                       
+                                            
 										</p>
 
-										<p>
-											<code>self.left = self.left.remove(key, ...)</code>
-										</p>
-										<p>
-											<code>self.right = self.right.remove(key, ...)</code>
-										</p>
-
-										<p>
-											In the <code>remove_naive</code> algorithm, if we end up at the node we want to remove, we return <code>None</code>.  Otherwise, we return that node.
-										</p>
-
-										<HR>
-										<h2>Your Task: A Faster Remove</h2>
-
-										<p>
-											Your task in this lab will be to implement a cleverer way to remove a node that will take <b>O(logN)</b> time if the tree is balanced, rather than <b>O(N)</b> time.  We have three cases to consider
-										</p>
-
-										<ol>
-											<li>
-												<p>
-													The key we want to remove is in a leaf node.  In this case, all we have to do is reassign its parent's reference to it to be <code>None</code>
-												</p>
-											</li>
-											<li>
-												<p>
-													The key we want to remove has only one child.  In this case, we set the key's parent to refer to that child.  For example, if we remove node 11 in the tree below, then 16's left child changes from 11 to 14
-												</p>
-
-												<table>
-													<tr>
-														<td><img src = "StartTree.svg"></td>
-														<td><img src = "OneChild.svg"></td>
-													</tr>
-												</table>
-											</li>
-											<li>
-												The trickiest case to consider is the case where we have to remove a node <code>x</code> that has two children.  What we can do is the following:
-												<ol>
-													<li>Find the node in the left subtree with the greatest key.  Call this node <code>y</code></li>
-													<li>
-														Set <code>x</code>'s key to be <code>y</code>'s key.  This guarantees that every child in <code>x</code>'s subtree still respects the binary tree order, except for <code>y</code>
-													</li> 
-													<li>
-														Because <code>y</code> is the greatest node, we can guarantee that <code>y</code> has either only one child or none, so we can remove it via the first two cases.
-													</li>
-												</ol>
-												<p>
-													For example, if we remove node with the key 7 in the tree we start with, we identify 6 greatest value in the left subtree that we can swap in, and then we remove that 6
-												</p>
-												<table>
-													<tr>
-														<td>
-															<img src = "TwoChildren_0.svg">
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<img src = "TwoChildren_1.svg">
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<img src = "TwoChildren_2.svg">
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<img src = "TwoChildren_3.svg">
-														</td>
-													</tr>
-												</table>
-											</li>
-										</ol>
-
+										<h3><a name = "background">Background</a></h3>
 
 										
 
-                                    </div>
+										<h3><a name = "add"><code>add_first</code></a></h3>
+
+										<p>
+											<b>Your Task: </b> 
+										</p>
+
+
+
+
+
+                                    
+                                </div>
 						</div>
 					</div>
 
 					<!--LaTeX in Javascript!-->
-					<script src="../../../../../jsMath/easy/load.js"></script>
+					<script src="../../../../jsMath/easy/load.js"></script>
 					<!--Syntax highlighting in Javascript!-->
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
-					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
-					<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
-					<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
 					<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!-- Sidebar -->
@@ -248,10 +155,10 @@
 												<li><a href = "../../Labs/Lab1_LinkedLists/index.html">Lab 1: Linked Lists</a></li>
 												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
 												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
-												<li><a href = "../../Labs/Lab4_MakingChange/index.html">Lab 4: Making Change with Dynamic Programming</a></li>
-												<li><a href = "../../Labs/Lab5_MergeSort/index.html">Lab 5: Merge Sort And Kendall-Tau Comprehension</a></li>
-												<li><a href = "../../Labs/Lab6_TreeRemoval/index.html">Lab 6: Tree Node Removal</a></li>
-												<li><a href = "../../Labs/Lab7_AVL/index.html">Lab 7: AVL Trees</a></li>
+												<li><a href = "../../Labs/Lab4_MergeSort/index.html">Lab 4: Merge Sort And Kendall-Tau Comprehension</a></li>
+												<li><a href = "../../Labs/Lab5_TreeRemoval/index.html">Lab 5: Tree Node Removal</a></li>
+												<li><a href = "../../Labs/Lab6_AVL/index.html">Lab 6: AVL Trees</a></li>
+												<li><a href = "../../Labs/Lab7_Dijkstra/index.html">Lab 7: Dijkstra's Algorithm</a></li>
 											</ul>
 										</li>
                                         <li>
@@ -372,4 +279,3 @@
 			<script src="../../assets/js/main.js"></script>
 <!-- End Scripts -->
 	</body>
-</html>

@@ -1,0 +1,33 @@
+[submodule "Assignments/HW1_HashTable/HW1_HashTable"]
+	path = Assignments/HW1_HashTable/HW1_HashTable
+	url = https://github.com/ursinusdatastructures/HW1_HashTable.git
+[submodule "Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation"]
+	path = Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation
+	url = https://github.com/ursinusdatastructures/HW2_PlantCellSegmentation.git
+[submodule "Assignments/HW3_SeamCarving/HW3_SeamCarving"]
+	path = Assignments/HW3_SeamCarving/HW3_SeamCarving
+	url = https://github.com/ursinusdatastructures/HW3_SeamCarving.git
+[submodule "Assignments/HW4_FairElections/HW4_FairElections"]
+	path = Assignments/HW4_FairElections/HW4_FairElections
+	url = https://github.com/ursinusdatastructures/HW4_FairElections.git
+[submodule "Assignments/HW6_TSPArt/HW6_TSPArt"]
+	path = Assignments/HW6_TSPArt/HW6_TSPArt
+	url = https://github.com/ursinusdatastructures/HW6_TSPArt.git
+[submodule "Labs/Lab2_UnionFind/Lab2_UnionFind"]
+	path = Labs/Lab2_UnionFind/Lab2_UnionFind
+	url = https://github.com/ursinusdatastructures/Lab2_UnionFind.git
+[submodule "Labs/Lab3_Towers/Lab3_TowersOfHanoi"]
+	path = Labs/Lab3_Towers/Lab3_TowersOfHanoi
+	url = https://github.com/ursinus-cs271-f2023/Lab3_TowersOfHanoi.git
+[submodule "Labs/Lab4_MergeSort/Lab4_MergeSort"]
+	path = Labs/Lab4_MergeSort/Lab4_MergeSort
+	url = https://github.com/ursinusdatastructures/Lab4_MergeSort.git
+[submodule "Labs/Lab5_TreeRemoval/Lab5_TreeRemoval"]
+	path = Labs/Lab5_TreeRemoval/Lab5_TreeRemoval
+	url = https://github.com/ursinusdatastructures/Lab5_TreeRemoval.git
+[submodule "Labs/Lab6_AVL/Lab6_AVL"]
+	path = Labs/Lab6_AVL/Lab6_AVL
+	url = https://github.com/ursinusdatastructures/Lab6_AVL.git
+[submodule "Labs/Lab7_Dijkstra/Lab7_Dijkstra"]
+	path = Labs/Lab7_Dijkstra/Lab7_Dijkstra
+	url = https://github.com/ursinusdatastructures/Lab7_Dijkstra.git

@@ -41,115 +41,172 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h2>Week 7: Greedy Time Warping Pitfalls</h2>
+										<h2>Lab 6: AVL Trees</h2>
 										<h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
+									
+
+                                        <h2>Overview / Logistics</h2>
 										<p>
-											This is a brief note on the pitfalls of using a "greedy" approach for certain discrete optimization problems.  By greedy, I mean an algorithm that makes the best <b>local choice</b> as it's constructing a solution incrementally.  Unlike dynamic programming algorithms, which find the best <b>global solution</b> <i>even if some individual moves are expensive</i>, greedy solutions just follow the best step right in front of their nose.  We saw <a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video3">last week</a> that a greedy solution for making change sometimes leads to a bad global solution by boxing us into some bad choices later, and a similar thing happens with greedy approaches to time warping.  We will see later in the course that some greedy algorithms work, but we have to take care to prove that they yield optimal solutions.  So let's first examine a counter-example to the idea that a greedy solution will work for time warping.
+											We've seen that in a naive implementation of binary trees, we can get very long branches that devolve to linked lists.  This will happen, for example, if we add a bunch of numbers in sorted order.  But we've also seen in class that it's possible to rebalance trees using <b>Tree rotations</b>, while preserving the order of the nodes in an inorder traversal.  In this lab, we will explore a "self-balancing" data structure known as an <b>AVL tree</b> which performs tree rotations on the fly in <b>O(logN)</b> time to keep the tree balanced; that is, the tree will always have a height within a constant factor of <b>log(N)</b> after an add/delete operation, which means that it will only take <b>O(log(N))</b> time to do future searches.  The animation below shows a working implementation of an AVL tree.
+										</p>
+
+										<img src = "Example.gif" width="100%">
+
+										<p>
+											<a href = "https://github.com/ursinus-cs271-f2023/Lab7_AVL/archive/refs/heads/main.zip">Click here</a> to download the starter notebook for this lab.  If you are using Google colab, the notebook is hosted at <a href = "https://github.com/ursinus-cs271-f2023/Lab7_AVL">https://github.com/ursinus-cs271-f2023/Lab7_AVL</a>.  Either way, you will need to use jupyter to create the tree plots to check your work.
 										</p>
 
 										<p>
-											Below is some code to implement greedy time warping
+											<b>Your task:</b> Update the <code>add</code> method to rebalance the tree to an AVL tree if it becomes unbalanced.  The <code>remove</code> method is very similar, so we'll just focus on <code>add</code> in this lab.
 										</p>
-
-										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											def distance(u, v):
-												"""
-												Compute the Euclidean distance between two points
-												in d dimensions
-												
-												Parameters
-												----------
-												u: ndarray(d)
-													First point
-												v: ndarray(d)
-													Second point
-												
-												Return
-												------
-												float: The distance between the two points
-												"""
-												u = np.array(u)
-												v = np.array(v)
-												return np.sqrt(np.sum((u-v)**2))
-
-
-											def dtw_greedy(X, Y):
-												"""
-												Perform a greedy version of time warping between two time-ordered
-												point clouds
-												
-												Parameters
-												----------
-												X: ndarray(M, d)
-													First point cloud with M points in d dimensions
-												Y: ndarray(N, d)
-													Second point cloud with N points in d dimensions
-												
-												Return
-												------
-												path: Warping path list
-												"""
-												M = len(X)
-												N = len(Y)
-												path = [[0, 0]]
-												cost = 0
-												finished = False
-												while not finished:
-													[i, j] = path[-1]
-													minDist = np.inf
-													i2 = i
-													j2 = j
-													# Pick the best next valid move in a warping path
-													# out of [i+1, j], [i, j+1], or [i+1, j+1]
-													if i+1 < M:
-														d = distance(X[i+1], Y[j])
-														if d < minDist:
-															minDist = d
-															i2 = i+1
-															j2 = j
-													if j+1 < N:
-														d = distance(X[i], Y[j+1])
-														if d < minDist:
-															minDist = d
-															i2 = i
-															j2 = j+1
-													if i+1 < M and j+1 < N:
-														d = distance(X[i+1], Y[j+1])
-														if d < minDist:
-															minDist = d
-															i2 = i+1
-															j2 = j+1
-													i = i2
-													j = j2
-													path.append([i, j])
-													cost += minDist
-													if i == M-1 and j == N-1:
-														finished = True
-												return path, cost
-											
-										]]></script> 
 
 										<p>
-											Notice how this code is only <b>O(M+N)</b> instead of the <b>O(MN)</b> dynamic time warping algorithm with nested loops.  That's great, right?!  But uh oh, below is an example where this fails miserably:
+											Be sure that your <code>add</code> method runs in <b>O(log(N))</b> time!  As part of this, you should be careful to <b>update your heights in constant time</b>.
 										</p>
-
-										<img src = "Greedy.gif">
 
 										<p>
-											Actually, it starts out OK, but it makes some good local choices in the lower left that force it into a really bad position later on.  By contrast, as shown below, the optimal <b>dynamic</b> time warping solution takes a small hit by making a worse choice in the lower left, but it's able to keep on better track globally:
+											When you are finished, upload your <code>Trees.ipynb</code> notebook to canvas.
 										</p>
 
-										<img src = "Optimal.gif">
+										<HR>
 
-										<p>
-											Below is the moment where the optimal dynamic programming solution takes a hit locally to lead to a much better path globally:
-										</p>
+										<h2>Background</h2>
+											<p>
+												Recall that the two possible <b>tree rotations</b> are defined as follows:
+											</p>
 
-										<img src = "GreedyHit.png">
+											<img src = "Rotate.svg" width="100%">
 
+											<p>
+												Note how since the roots change, we return the new root so that we can recursively re-assign children just like we did when removing nodes in the <a href = "../Lab6_TreeRemoval/">last lab</a>.
+											</p>
+
+											<p>
+												An <b>AVL Tree</b> is a tree that, at every node, has a height discrepancy of at most 1 between the left subtree and the right subtree.  If a child is null, we assume that its height is <b>-1</b>, and this definition carries through.
+											</p>
+
+											<p>
+												If we start with an AVL tree and add a new node to it, it may become unbalanced.  The following pseudocode below shows how to rebalance an AVL tree along the path from where the node was added back up to the root
+											</p>
+
+											<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+												add(node)
+													root = node
+
+													recursively add as normal, but change to do re-assignments of children (e.g. self.left = self.left.add(key))
+
+													update_height(root)
+
+													if h(right) = h(left) - 2
+														if h(left.right) > h(left.left)
+															left = rotate_ccw(left)
+														root = rotate_cw(node)
+
+													else if h(left) = h(right) - 2
+														if h(right.right) < h(right.left)
+															right = rotate_cw(right)
+														root = rotate_ccw(node)
+
+													return root
+												]]></script>
+
+											<p>
+												Below are a few examples of this algorithm in action
+											</p>
+
+											<HR>
+											<h3>Example 1</h3>
+
+											<p>
+												Let's suppose we started with this tree
+											</p>
+
+											<img src = "Example1/1.svg">
+
+											<p>
+												And we then added a <b>11</b> to it, yielding this tree initially
+											</p>
+
+											<img src = "Example1/2.svg">
+
+											<p>
+												(Note that we haven't updated the height of the parent of 13 yet, so it is not correct).  At this point, we find an imbalance at 13.  By the algorithm above, we rotate clockwise about 13, and we reach a balanced tree
+											</p>
+
+											<img src = "Example1/3.svg">
+
+											<HR>
+											<h3>
+												Example 2
+											</h3>
+
+											<p>
+												Let's suppose we started with this tree
+											</p>
+
+											<img src = "Example2/1.svg">
+
+											<p>
+												And we then added a <b>4</b> to it, yielding this tree initially
+											</p>
+
+											<img src = "Example2/2.svg">
+
+											<p>
+												When we go back up to node 3, we will find it's unbalanced to the right.  We actually have to do two rotations to rebalance node 3.  First, we do clockwise rotation about node 6
+											</p>
+
+											<img src = "Example2/3.svg">
+
+											<p>
+												Then we do a counter-clockwise rotation about node 3
+											</p>
+
+											<img src = "Example2/4.svg">
+
+											<p>
+												At this point, we see no further discrepancies on the way back to the root, so the tree is AVL
+											</p>
+
+											<HR>
+											<h3>
+												Example 3
+											</h3>
+
+											<p>
+												Let's do one more example that shows the power of this algorithm as we recursively walk up the tree.  Let's suppose we start with the following tree:
+											</p>
+
+											<img src = "Example3/1.svg">
+
+											<p>
+												And let's suppose we add a 12 to it.  As we walk back up recursively to node 13, we change a few of the heights:
+											</p>
+
+											<img src = "Example3/2.svg">
+
+											<p>
+												Actually, it doesn't seem like we've violated the AVL property yet!  Let's walk up one more and update the height of node 16.
+											</p>
+
+											<img src = "Example3/3.svg">
+
+											<p>
+												We're still good with the AVL property here!  However, if we walk up one more node to the root at 10, we see there's a problem.  The left subtree has a height of 1, while the right subtree has a height of 3.  This triggers two rotations.  First, we do a clockwise rotation about node 16 since we find 16's right subtree height is less than 16's left subtree height:
+											</p>
+
+											<img src = "Example3/4.svg">
+
+											<p>
+												From here, we do a counter-clockwise rotation about 10 to yield a tree which is finally AVL:
+											</p>
+
+											<img src = "Example3/5.svg">
+
+										
 
                                     </div>
 						</div>
