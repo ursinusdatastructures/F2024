@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Lab 1: Linked Lists</h2>
+                                        <h2>Lab 1: Linked Lists (4 Points)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -49,49 +49,138 @@
 										
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
+
+										<p>
+											The purpose of this lab is to get you used to programming with objects in python in the service of one of the most important data structures of all time: <b>a linked list</b>.  A linked list has many uses, but at the end of the lab, students will use the linked list they made to implement the stack ADT
+										</p>
 										
 										
 
                                         <p>
                                             <h3><a name = "learning">Learning Objectives</a></h3>
                                             <ul>
-
+												<li>Use python OOP to implement a data structure</li>
+												<li>Implement linked list operations</li>
+												<li>Practice telling the difference between an abstract data type (ADT) and a data structure</li>
                                             </ul>
                                         </p>
 
 										<h3><a name = "submit">What To Submit</a></h3>
 
 										<p>                                       
-                                            
+                                            When you are finished, submit <code>linkedlist.py</code> to canvas
 										</p>
 
-										<h3><a name = "background">Background</a></h3>
+										<h2><a name = "background">Programming Tasks</a></h2>
+										<p>
+											<a href = "https://github.com/ursinusdatastructures/Lab1_LinkedList/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.
+										</p>
+
+										<p>
+											Traversing a linked list is just a matter of chasing some arrows, starting at the head (though we have to be careful maintaining these arrows properly).  In the worst case, the element we want to find/remove/change is at the end, or it isn't there at all, in which case we have to walk through all <b>N</b> link nodes.  
+										</p>
+
+										<p>
+											I've provided implementations of <code>pop_front</code> to remove the first node and return its object, as well as <code>__str__</code> to traverse the list and turn it into a string.  
+										</p>
 
 										
 
-										<h3><a name = "add"><code>add_first</code></a></h3>
+										<h3>Task 1: <a name = "contains"><code>__contains__</code></a></h3>
 
 										<p>
-											<b>Your Task: </b> 
+											<b>Your Task: </b> Fill in the <code>__contains__</code> method that returns <code>True</code> if a particular object is in at least one of the nodes, or <code>False</code> otherwise.  We'll do this one together as a class
+										</p>
+
+										<HR>
+
+
+										<h3>Task 2: <a name = "pusn_front"><code>push_front</code></a></h3>
+
+										<p>
+											<b>Your Task: </b> Fill in a method that adds a <code>LinkedNode</code> object to the front of the list that wraps around the data we're trying to add.  To do this, we just make the element we want to add the new head
+										</p>
+
+										<img src = "LLAdd.svg" width="50%">
+										
+										<p>
+											Specifically, after making a new linked node called <code>new</code>, the steps are
+										</p>
+										<ol>
+											<li>
+												<code>new.next = head</code>
+											</li>
+											<li>
+												<code>
+													head = new
+												</code>
+											</li>
+										</ol>
+
+										<p>
+											<b>NOTE: </b> A common pitfall here is to do these two steps in the opposite order, but this ends up creating an infinite loop from the head to itself, disconnecting the rest of the list!
+										</p>
+
+										<img src = "LLAddPitfall.svg" width="50%">
+
+
+										<HR>
+
+										<h3>Task 3: <a name = "add"><code>remove</code></a></h3>
+
+										<p>
+											<b>Your Task: </b> Fill in a method to remove the first node that contains a particular object, or do nothing if none of the nodes contain that object.  
+										</p>
+										
+										<p>
+
+											This is a little bit trickier, but the basics are the same.  We have to find the element and then reassign pointers to circumvent the element we're trying to remove (assuming there's a garbag collector around to clean up the orphaned node).  Let's assume that it's actually there (otherwise, we just get to the end and don't do anything).  Let's also assume that it's somewhere in the middle (I've handled the case where it's at the beginning using <code>pop_front()</code>, which I've already provided).  Then the picture below depics what has to happen: find the node right before the node we want to remove, and then set its pointer to jump past:
+
+
+											
+										</p>
+
+										<img src = "LLRem.svg" width="90%">
+
+										<p>
+											If all of the methods in your <code>linkedlist</code> class work properly and you run the main in <code>linkedlist.py</code>, you should get the following outputs indicated in comments below:
 										</p>
 
 
-										<h3><a name = "add"><code>remove_first</code></a></h3>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											L = LinkedList()
+											L.push_front("Theo")
+											L.push_front("Elsie")
+											L.push_front("Darcy")
+											print("Pop front:", L.pop_front()) # Print "Pop front: Darcy"
+											L.push_front("Layla")
+											L.push_front("Artemis")
+											L.push_front("Apollo")
+											print("List:", L) # Print "List: Apollo ==> Artemis ==> Layla ==> Elsie ==> Theo ==> "
+											L.remove("Layla")
+											print("List:", L) # Print "List: Apollo ==> Artemis ==> Elsie ==> Theo ==> "
+											print("Theo" in L) # Print "True"
+											print("Layla" in L) # Print "False"
+										</script>
+
+
+
+										<HR>
+
+										<h3>Task 4: <a name = "stack"><code>Stack</code> ADT</a></h3>
 
 										<p>
-											<b>Your Task: </b> 
+											A stack abstract data type is a so-called "last in first out" collection, where the last thing that we <code>push</code> (add) onto the top of the stack is the first thing that we <code>pop</code> (remove) from the top of the stack.  The picture below shows an example:
 										</p>
 
-										<h3><a name = "to_list"><code>to_list</code></a></h3>
+										<img src = "StackConcept.svg" width="60%">
 
 										<p>
-											<b>Your Task: </b> 
+											A linked list turns out to be an excellent data structure to use to implement a stack.
 										</p>
 
-										<h3><a name = "stack">Stack ADT</a></h3>
-
 										<p>
-											<b>Your Task: </b> 
+											<b>Your Task: </b> Fill in the <code>push</code> and <code>pop</code> methods in <code>stack.py</code> to push and pop from the stack, using the <code>list</code> LinkedList object that belongs to the <code>Stack</code> class.  If you do this properly, you should have to write very little code!  You can use all of the hard work that we've already done in the <code>LinkedList</code> class 
 										</p>
 
 

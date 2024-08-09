@@ -31,3 +31,6 @@
 [submodule "Labs/Lab7_Dijkstra/Lab7_Dijkstra"]
 	path = Labs/Lab7_Dijkstra/Lab7_Dijkstra
 	url = https://github.com/ursinusdatastructures/Lab7_Dijkstra.git
+[submodule "Labs/Lab1_LinkedLists/Lab1_LinkedList"]
+	path = Labs/Lab1_LinkedLists/Lab1_LinkedList
+	url = https://github.com/ursinusdatastructures/Lab1_LinkedList.git
