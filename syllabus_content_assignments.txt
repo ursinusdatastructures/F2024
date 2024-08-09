@@ -19,6 +19,9 @@ Lab 1 Due
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2024-09-02
+Binary Search Module Due
+
+2024-09-06
 <a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
 
 2024-09-11
@@ -70,7 +73,7 @@ Homework 3 Final Submission
 <a href = "../Modules/LCSModule/Video1">Longest Common Subsequence Module</a> Due
 
 2024-10-02
-Lab 5 Due
+Lab 4 Due
 
 2024-10-10
 <a href = "Assignments/HW4_FairElections/index.html">Homework 4: Fair Elections of Pop Stars</a> Out
@@ -94,13 +97,13 @@ HW4 Part 2 Due
 <HR><a href = "Assignments/HW5_PhylogeneticTrees">HW5: Phylogenetic Trees</a> out
 
 2024-10-30
-Lab 6 Due
+Lab 5 Due
 
 2024-11-01
 <HR><a href = "../Modules/RadixFisherYates/Video2">Fisher-Yates Module Due</a>
 
 2024-11-01
-Lab 7 Due
+Lab 6 Due
 
 2024-11-08
 HW5 Needleman-Wunsch Tasks Due
@@ -118,7 +121,7 @@ HW5 Dendrogram And Clustering Due
 <HR><a href = "Assignments/HW6_TSPArt">HW6: Traveling Salesperson Art</a> Out
 
 2024-11-27
-Lab 8 Due
+Lab 7 Due
 
 2024-12-02
 <HR>HW6: 2-Approx with MST DFS Due

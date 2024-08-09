@@ -83,7 +83,7 @@ Sorting Basics: Permutations, Insertion Sort, Bubble Sort
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 12</li></ul>
 LECTURE
-<b><a href = "Labs/Lab5_MergeSort">Lab 5: Merge Sort, Kendall Tau Examples</a></b>
+<b><a href = "Labs/Lab4_MergeSort">Lab 4: Merge Sort, Kendall Tau Examples</a></b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 13.1</li><li><a href = "ClassExercises/Week7_KendallTau">Kendall Tau / Kemeny Optimal Class Notes</a></li></ul>
 LECTURE
@@ -115,7 +115,7 @@ Drawing Binary Trees, Begin Tree Removal
 
 
 LECTURE
-<b><a href = "Labs/Lab6_TreeRemoval">Lab 6: Binary Search Tree Removal</a></b>
+<b><a href = "Labs/Lab6_TreeRemoval">Lab 5: Binary Search Tree Removal</a></b>
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
@@ -127,7 +127,7 @@ Introducing self-balancing binary trees, AVL Trees
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
 LECTURE
-<b><a href = "Labs/Lab7_AVL">Lab 7: AVL Trees</a></b>
+<b><a href = "Labs/Lab7_AVL">Lab 6: AVL Trees</a></b>
 
 <ul><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
 LECTURE
@@ -167,7 +167,7 @@ Dijkstra's Algorithm
 
 <ul><li><a href = "https://www.youtube.com/watch?v=18lQVYRJtoA">Easy Theory: Dijkstra's algorithm</a></li></ul>
 LECTURE
-<b>Lab 8: Implementing Dijkstra's Algorithm</b>
+<b>Lab 7: Implementing Dijkstra's Algorithm</b>
 
 
 LECTURE
