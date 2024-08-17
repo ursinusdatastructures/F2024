@@ -1,6 +1,3 @@
-[submodule "Assignments/HW1_HashTable/HW1_HashTable"]
-	path = Assignments/HW1_HashTable/HW1_HashTable
-	url = https://github.com/ursinusdatastructures/HW1_HashTable.git
 [submodule "Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation"]
 	path = Assignments/HW2_PlantCellSegmentation/HW2_PlantCellSegmentation
 	url = https://github.com/ursinusdatastructures/HW2_PlantCellSegmentation.git
