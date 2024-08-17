@@ -31,3 +31,6 @@
 [submodule "Labs/Lab1_LinkedLists/Lab1_LinkedList"]
 	path = Labs/Lab1_LinkedLists/Lab1_LinkedList
 	url = https://github.com/ursinusdatastructures/Lab1_LinkedList.git
+[submodule "Assignments/HW1_HashTable/HW1_HashTable"]
+	path = Assignments/HW1_HashTable/HW1_HashTable
+	url = https://github.com/ursinusdatastructures/HW1_HashTable.git

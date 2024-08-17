@@ -79,7 +79,7 @@
 														<a href = "#rebalancing">Part 4: Rebalancing (10 Points)</a>
 													</li>
 													<li>
-														<a href = "#tweets">Part 5: Tweet Wrangling (15 Points)</a>
+														<a href = "#tweets">Part 5: Russian Troll Tweet Wrangling (15 Points)</a>
 													</li>
 												</ul>
 											</li>
@@ -508,15 +508,15 @@
 										</script>
 
 									<HR>
-										<h3><a name = "tweets">Part 5: Tweet Wrangling (15 Points)</a></h3>
+										<h3><a name = "tweets">Part 5: Russian Troll Tweet Wrangling (15 Points)</a></h3>
 
 										<p>
-											Now that you have an industrial strength hash map implementation, it's time to use it in an application.  Provided with the starter code are all of Donald Trump's tweets up to 2021.  You can load them as follows:
+											Now that you have an industrial strength hash map implementation, it's time to stress test it with an application that's super relevant to the 2024 election cycle.  I have provided a file <code>tweets.json</code> with all of the "Left Troll" and "Right Troll" tweets <a href = "https://github.com/fivethirtyeight/russian-troll-tweets/">Russian Troll Tweet Dataset</a> archived by FiveThirtyEight (you can read more about it <a href = "https://fivethirtyeight.com/features/why-were-sharing-3-million-russian-troll-tweets/">here</a>).  This is 476,215 tweets total.  To load it, use this code:
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 											import json
-											tweets = json.load(open("tweets_01-08-2021.json", encoding="utf8"))
+											tweets = json.load(open("tweets.json", encoding="utf8"))
 										</script>
 
 										<p>
@@ -524,48 +524,55 @@
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											{'id': 98454970654916600,
-											'text': 'Republicans and Democrats have both created our economic problems.',
-											'isRetweet': 'f',
-											'isDeleted': 'f',
-											'device': 'TweetDeck',
-											'favorites': 49,
-											'retweets': 255,
-											'date': '2011-08-02 18:07:48',
-											'isFlagged': 'f'}
+											{'author': '10_GOP',
+											'date': '10/1/2017 19:58',
+											'text': '"We have a sitting Democrat US Senator on trial for corruption and you\'ve barely heard a peep from the mainstream media." ~ @nedryun https://t.co/gh6g0D1oiC',
+											'type': 'RightTroll'}
 										</script>
 
 										<h4>Your Task</h4>
 										<p>
-											In this exercise, your goal will be to use the <code>HashMap</code> class you made to print out the top 200 words that Trump used across all his tweets.  This will be a stress test for your implementation, as there are over 100k unique words that pop up throughout all of his tweets.  To loop through all of the words, use the following code
+											At the bottom of your <code>hash.py</code> file, use the <code>HashMap</code> class you made to print out the top 200 <b>trigrams</b> that the left trolls and the right trolls use.  A trigram is a tuple of 3 contiguous words in a sentence.  For instance, the sentence "CS 271 is my favorite class" has the trigrams
+										</p>
+										<ul>
+											<li>
+												<code>("CS", "271", "is")</code>
+											</li>
+											<li>
+												<code>("271", "is", "my")</code>
+											</li>
+											<li>
+												<code>("is", "my", "favorite")</code>
+											</li>
+											<li>
+												<code>("my", "favorite", "class")</code>
+											</li>
+										</ul>
+										<p>
+											Finding all trigrams across all tweets will be a stress test for your implementation, as there are over 2 million unique right trigrams and over 600k unique left trigrams.  To get the best results, we'll need to do a basic version "text normalization" to deal with punctuation and capitalization
 										</p>
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											for t in tweets:
-												text = t['text']
-												for w in text.split():
-													w = w.lower() # Convert to lowercase
-													## Fill in some code
+											tweet = tweets[0] # Pull out a tweet 
+											allowed = set([chr(ord('a')+i) for i in range(26)] + list(range(10)) + [" ", "/", "#", "@"])
+											text = tweet["text"].replace("&amp;", "") # Replace HTML ampersand
+											text = "".join([c for c in text.lower() if c in allowed]) # Only use allowed characters
+											words = [w.lower() for w in text.split()] # Split into words
 										</script>
-
 										<p>
-											If you've done this correctly, here are the first 120 you should see:
+											In this example, this gives us 
 										</p>
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											['we', 'have', 'a', 'sitting', 'democrat', 'us', 'senator', 'on', 'trial', 'for', 'corruption', 'and', 'youve', 'barely', 'heard', 'a', 'peep', 'from', 'the', 'mainstream', 'media', '@nedryun', 'https//tco/ghgdoic']
+										</script>
 										
 
-										<table><tr><td>
-											1 : the <BR>2 : to <BR>3 : and <BR>4 : a <BR>5 : of <BR>6 : is <BR>7 : in <BR>8 : for <BR>9 : i <BR>10 : rt <BR>11 : on <BR>12 : you <BR>13 : @realdonaldtrump <BR>14 : will <BR>15 : be <BR>16 : are <BR>17 : that <BR>18 : great <BR>19 : with <BR>20 : we <BR></td><td>
-											21 : our <BR>22 : have <BR>23 : it <BR>24 : at <BR>25 : this <BR>26 : he <BR>27 : they <BR>28 : trump <BR>29 : was <BR>30 : my <BR>31 : &amp, <BR>32 : has <BR>33 : not <BR>34 : by <BR>35 : all <BR>36 : thank <BR>37 : president <BR>38 : just <BR>39 : - <BR>40 : your <BR></td><td>
-											41 : as <BR>42 : so <BR>43 : from <BR>44 : very <BR>45 : who <BR>46 : people <BR>47 : his <BR>48 : no <BR>49 : but <BR>50 : do <BR>51 : what <BR>52 : new <BR>53 : would <BR>54 : about <BR>55 : if <BR>56 : get <BR>57 : an <BR>58 : more <BR>59 : out <BR>60 : should <BR></td><td>
-											61 : like <BR>62 : now <BR>63 : their <BR>64 : big <BR>65 : than <BR>66 : can <BR>67 : or <BR>68 : never <BR>69 : make <BR>70 : been <BR>71 : one <BR>72 : up <BR>73 : me <BR>74 : when <BR>75 : america <BR>76 : many <BR>77 : good <BR>78 : only <BR>79 : going <BR>80 : how <BR></td><td>
-											81 : time <BR>82 : democrats <BR>83 : want <BR>84 : obama <BR>85 : american <BR>86 : donald <BR>87 : there <BR>88 : news <BR>89 : country <BR>90 : vote <BR>91 : much <BR>92 : over <BR>93 : even <BR>94 : why <BR>95 : were <BR>96 : &amp; <BR>97 : back <BR>98 : must <BR>99 : see <BR>100 : us <BR></td><td>
-											101 : fake <BR>102 : am <BR>103 : need <BR>104 : being <BR>105 : had <BR>106 : @realdonaldtrump: <BR>107 : u.s. <BR>108 : love <BR>109 : best <BR>110 : last <BR>111 : because <BR>112 : think <BR>113 : really <BR>114 : she <BR>115 : run <BR>116 : doing <BR>117 : go <BR>118 : did <BR>119 : after <BR>120 : yo!</td></tr></table>                                                    
-									<h4>Hints</h4>
+										<h4>Hints</h4>
 										<p>
 											The following algorithm will do this task efficiently:
 											<ol>
 												<li>
 													<p>
-														Create a <code>HashMap</code> object where the key is a word and the associated value is the number of times that word appears across all tweets
+														Create a <code>HashMap</code> object where the key is a <b>tuple</b> of 3 strings for the trigram, and the associated value is the number of times that trigram appears across all tweets
 													</p>
 												</li>
 												<li>
@@ -588,9 +595,74 @@
 												</li>
 											</ol>
 											</p>
+
+											<p>
+												<b>NOTE: </b> If you haven't done rebalancing correctly, this code will take an <b>extremely long time</b>.  If you've done it correctly, the left trolls should take under 20 seconds, and the right trolls should take under a minute.  If your code is taking a really long time, swap in a dictionary <code>{}</code> for your <code>HashMap</code> object just to test your logic on this part.  Then, once it works with the regular dictionary, go and debug your rebalancing.
+											</p>
+
+
+										<h4>Results</h4>
+											<p>
+												<b><span style="color:red;">Content Warning</span></b>: The results contain highly emotionally charged phrases dealing with issues of race, gender, immigration status, and political violence.
+											</p>
+
+										<p>
+											If you've done this correctly, here are the first 200 you should see for <code>type</code> <code>LeftTroll</code> (NOTE: trigrams that have the same number of counts are in an arbitrary order)
+										</p>
+
+										<button type="button" onclick="showLeftTroll()">Show LeftTroll results</button> 
+										<button type="button" onclick="hideLeftTroll()">Hide LeftTroll Results</button> 
+
+										<div id="leftTrollText">
+										<table><tr><td>1: ('black', 'lives', 'matter')  (310)<BR>2: ('the', 'first', 'black')  (305)<BR>3: ('one', 'of', 'the')  (257)<BR>4: ('bishop', 'ew', 'jackson')  (234)<BR>5: ('ew', 'jackson', 'calls')  (234)<BR>6: ('podcast', 'bishop', 'ew')  (234)<BR>7: ('jackson', 'calls', '#blacklivesmatter')  (234)<BR>8: ('audio', 'podcast', 'bishop')  (234)<BR>9: ('now', 'audio', 'podcast')  (234)<BR>10: ('newsone', 'now', 'audio')  (234)<BR>11: ('#blacklivesmatter', 'is', 'movement')  (221)<BR>12: ('calls', '#blacklivesmatter', 'is')  (221)<BR>13: ('a', 'black', 'man')  (216)<BR>14: ('is', 'movement', 'disgraceful')  (210)<BR>15: ('martin', 'luther', 'king')  (197)<BR>16: ('on', 'this', 'day')  (187)<BR>17: ('the', 'united', 'states')  (178)<BR>18: ('the', 'truth', 'about')  (177)<BR>19: ('we', 'need', 'to')  (172)<BR>20: ('to', 'be', 'a')  (162)<BR>21: ('this', 'is', 'the')  (153)<BR>22: ('killed', 'by', 'police')  (151)<BR>23: ('of', 'the', 'black')  (150)<BR>24: ('the', 'black', 'panther')  (148)<BR>25: ('in', 'the', 'us')  (148)<BR>26: ('we', 'have', 'to')  (143)<BR>27: ('black', 'panther', 'party')  (141)<BR>28: ('this', 'is', 'a')  (135)<BR>29: ('this', 'day', 'in')  (133)<BR>30: ('this', 'is', 'what')  (131)<BR>31: ('i', 'ask', 'you')  (129)<BR>32: ('luther', 'king', 'jr')  (129)<BR>33: ('is', 'going', 'to')  (126)<BR>34: ('is', 'not', 'a')  (125)<BR>35: ('became', 'the', 'first')  (122)<BR>36: ('in', 'the', 'world')  (122)<BR>37: ('to', 'a', '@youtube')  (118)<BR>38: ('a', '@youtube', 'playlist')  (118)<BR>39: ('i', 'added', 'a')  (118)<BR>40: ('video', 'to', 'a')  (118)<BR>41: ('a', 'video', 'to')  (118)<BR>42: ('added', 'a', 'video')  (118)<BR>43: ('the', 'white', 'house')  (116)<BR>44: ('there', 'is', 'no')  (112)<BR>45: ('first', 'african', 'american')  (111)<BR>46: ('the', 'first', 'african')  (111)<BR>47: ('you', 'a', 'question')  (110)<BR>48: ('ask', 'you', 'a')  (110)<BR>49: ('a', 'lot', 'of')  (109)<BR>50: ('in', 'american', 'falls')  (108)<BR></td><td>51: ('you', 'want', 'to')  (108)<BR>52: ('was', 'the', 'first')  (107)<BR>53: ('in', 'front', 'of')  (106)<BR>54: ('a', 'black', 'woman')  (105)<BR>55: ('is', 'the', 'first')  (103)<BR>56: ('black', 'people', 'are')  (103)<BR>57: ('rest', 'in', 'peace')  (101)<BR>58: ('of', 'the', 'year')  (101)<BR>59: ('first', 'black', 'woman')  (100)<BR>60: ('you', 'have', 'to')  (99)<BR>61: ('this', 'is', 'why')  (97)<BR>62: ('did', 'you', 'know')  (97)<BR>63: ('what', 'do', 'you')  (96)<BR>64: ('if', 'you', 'are')  (96)<BR>65: ('black', 'woman', 'to')  (95)<BR>66: ('this', 'is', 'how')  (93)<BR>67: ('the', 'first', 'africanamerican')  (92)<BR>68: ('the', 'black', 'panthers')  (90)<BR>69: ('in', 'the', 'united')  (90)<BR>70: ('i', 'want', 'to')  (89)<BR>71: ('to', 'have', 'a')  (89)<BR>72: ('every', 'download', 'for')  (89)<BR>73: ('get', 'for', 'every')  (89)<BR>74: ('shot', 'and', 'killed')  (89)<BR>75: ('for', 'every', 'download')  (89)<BR>76: ('#blackowned', '#buyblack', '#blacktwitter')  (89)<BR>77: ('download', 'for', 'every')  (89)<BR>78: ('for', 'every', 'biz')  (89)<BR>79: ('the', '#blacklivesmatter', 'movement')  (86)<BR>80: ('#blacklivesmatter', '#justiceformariowoods', '#mariowoods')  (85)<BR>81: ('#justiceformariowoods', '#mariowoods', '#sanfrancisco')  (85)<BR>82: ('#mariowoods', '#sanfrancisco', '#sanfranciscoshooting')  (85)<BR>83: ('#sanfrancisco', '#sanfranciscoshooting', '#sfpd')  (84)<BR>84: ('for', 'no', 'reason')  (84)<BR>85: ('repeatedly', 'interrupted', 'by')  (84)<BR>86: ('dont', 'want', 'to')  (83)<BR>87: ('to', 'go', 'to')  (83)<BR>88: ('anniversary', 'of', 'the')  (83)<BR>89: ('th', 'anniversary', 'of')  (83)<BR>90: ('if', 'you', 'want')  (81)<BR>91: ('in', 'police', 'custody')  (80)<BR>92: ('the', 'fact', 'that')  (80)<BR>93: ('may', 'i', 'ask')  (80)<BR>94: ('share', 'this', 'flyer')  (79)<BR>95: ('we', 'will', 'never')  (78)<BR>96: ('#breakingnews', '#blacklivesmatter', '#justiceformariowoods')  (77)<BR>97: ('thank', 'you', 'for')  (77)<BR>98: ('the', 'super', 'bowl')  (76)<BR>99: ('of', 'black', 'people')  (74)<BR>100: ('the', 'th', 'anniversary')  (74)<BR></td><td>101: ('will', 'never', 'forget')  (74)<BR>102: ('interrupted', 'by', 'protesters')  (74)<BR>103: ('in', 'case', 'you')  (73)<BR>104: ('#sanfranciscoshooting', '#sfpd', '#bayview')  (73)<BR>105: ('the', 'first', 'time')  (73)<BR>106: ('believe', 'in', 'love')  (71)<BR>107: ('for', 'black', 'people')  (71)<BR>108: ('word', 'of', 'truth')  (71)<BR>109: ('a', 'word', 'of')  (71)<BR>110: ('black', 'women', 'who')  (70)<BR>111: ('the', 'right', 'to')  (70)<BR>112: ('you', 'have', 'a')  (70)<BR>113: ('you', 'know', 'that')  (70)<BR>114: ('of', 'the', 'most')  (69)<BR>115: ('#phosphorusdisaster', 'in', 'american')  (68)<BR>116: ('i', 'dont', 'know')  (68)<BR>117: ('in', 'the', 's')  (68)<BR>118: ('want', 'to', 'be')  (68)<BR>119: ('if', 'you', 'dont')  (68)<BR>120: ('to', 'be', 'the')  (67)<BR>121: ('black', 'women', 'are')  (67)<BR>122: ('is', 'the', 'only')  (67)<BR>123: ('dont', 'have', 'to')  (67)<BR>124: ('do', 'you', 'think')  (67)<BR>125: ('all', 'lives', 'matter')  (66)<BR>126: ('who', 'died', 'in')  (65)<BR>127: ('is', 'the', 'most')  (65)<BR>128: ('shot', 'by', 'police')  (65)<BR>129: ('#servicessale', 'download', 'app')  (65)<BR>130: ('app', 'for', 'details')  (65)<BR>131: ('#blacktwitter', '#servicessale', 'download')  (65)<BR>132: ('download', 'app', 'for')  (65)<BR>133: ('click', 'here', 'for')  (64)<BR>134: ('there', 'is', 'a')  (64)<BR>135: ('we', 'are', 'not')  (63)<BR>136: ('trump', 'repeatedly', 'interrupted')  (63)<BR>137: ('flyer', 'and', 'join')  (63)<BR>138: ('is', 'like', 'a')  (63)<BR>139: ('years', 'in', 'prison')  (63)<BR>140: ('for', 'the', 'first')  (63)<BR>141: ('traumatic', 'stress', 'disorder')  (63)<BR>142: ('protesters', 'shouting', '#blacklivesmatter')  (63)<BR>143: ('by', 'protesters', 'shouting')  (63)<BR>144: ('how', 'racism', 'causes')  (62)<BR>145: ('racism', 'causes', 'post')  (62)<BR>146: ('part', 'of', 'the')  (62)<BR>147: ('in', 'order', 'to')  (62)<BR>148: ('died', 'in', 'police')  (62)<BR>149: ('do', 'you', 'have')  (62)<BR>150: ('#health', '#racism', '#wellness')  (62)<BR></td><td>151: ('stress', 'disorder', 'ptsd')  (62)<BR>152: ('post', 'traumatic', 'stress')  (62)<BR>153: ('its', 'time', 'to')  (62)<BR>154: ('#racism', '#wellness', '#blacklivesmatter')  (62)<BR>155: ('causes', 'post', 'traumatic')  (62)<BR>156: ('he', 'is', 'a')  (61)<BR>157: ('is', 'one', 'of')  (61)<BR>158: ('out', 'of', 'the')  (61)<BR>159: ('my', 'name', 'is')  (61)<BR>160: ('celebrate', 'the', 'th')  (61)<BR>161: ('in', 'the', 'back')  (61)<BR>162: ('people', 'like', 'this')  (61)<BR>163: ('join', 'us', 'to')  (61)<BR>164: ('the', 'only', 'way')  (61)<BR>165: ('and', 'join', 'our')  (61)<BR>166: ('brothers', 'and', 'sisters')  (61)<BR>167: ('i', 'cant', 'believe')  (60)<BR>168: ('you', 'need', 'to')  (60)<BR>169: ('is', 'the', 'best')  (60)<BR>170: ('of', 'police', 'brutality')  (60)<BR>171: ('get', 'away', 'with')  (60)<BR>172: ('#blacklivesmatter', '#blacklivesmatter', '#blacklivesmatter')  (60)<BR>173: ('black', 'history', 'month')  (60)<BR>174: ('to', 'celebrate', 'the')  (60)<BR>175: ('judge', 'rips', 'media')  (59)<BR>176: ('unarmed', 'black', 'man')  (59)<BR>177: ('a', 'time', 'to')  (59)<BR>178: ('a', 'part', 'of')  (59)<BR>179: ('can', 'i', 'ask')  (58)<BR>180: ('this', 'is', 'so')  (58)<BR>181: ('the', 'age', 'of')  (58)<BR>182: ('the', 'halftime', 'show')  (58)<BR>183: ('to', 'become', 'a')  (58)<BR>184: ('have', 'to', 'be')  (58)<BR>185: ('trump', 'is', 'a')  (58)<BR>186: ('were', 'killed', 'by')  (58)<BR>187: ('go', 'back', 'to')  (57)<BR>188: ('more', 'likely', 'to')  (57)<BR>189: ('name', 'is', 'ghani')  (57)<BR>190: ('us', 'to', 'celebrate')  (57)<BR>191: ('every', 'time', 'i')  (57)<BR>192: ('the', 'death', 'of')  (57)<BR>193: ('fatal', 'shooting', 'of')  (56)<BR>194: ('happy', 'birthday', 'to')  (56)<BR>195: ('black', 'on', 'black')  (56)<BR>196: ('people', 'of', 'color')  (56)<BR>197: ('of', 'the', 'united')  (55)<BR>198: ('women', 'got', 'natural')  (55)<BR>199: ('you', 'dont', 'have')  (55)<BR>200: ('these', 'women', 'got')  (55)<BR></td></tr></table>
+										</div>
+										
+										
+										<script>
+											let left = document.getElementById("leftTrollText");
+											function showLeftTroll() {
+												left.style.display="block";
+											}
+											function hideLeftTroll() {
+												left.style.display = "none";
+											}
+											hideLeftTroll();
+										</script>
+										<p></p>
+
+										<p>
+											And here are the top 200 you should see for <code>type</code> <code>RightTroll</code>
+										</p>
+											
+
+										<button type="button" onclick="showRightTroll()">Show RightTroll results</button> 
+										<button type="button" onclick="hideRightTroll()">Hide RightTroll Results</button> 
+
+
+										<div id="rightTrollText">
+<table><tr><td>1: ('cnn', 'is', '#fakenews')  (3299)<BR>2: ('#fakenews', 'cnn', 'is')  (2762)<BR>3: ('is', '#fakenews', 'cnn')  (2759)<BR>4: ('our', 'patriot', 'army')  (1561)<BR>5: ('https//tco/mfbjijyl', 'rewind', '/')  (1489)<BR>6: ('the', 'white', 'house')  (1444)<BR>7: ('enlist', 'in', 'the')  (1361)<BR>8: ('patriot', 'army', 'at')  (1352)<BR>9: ('the', '#usfa', 'at')  (1256)<BR>10: ('rtamerica', 'to', '#maga')  (1208)<BR>11: ('enlist', 'in', 'our')  (1208)<BR>12: ('rt', 'rtamerica', 'to')  (1208)<BR>13: ('retweet', 'rt', 'rtamerica')  (1196)<BR>14: ('in', 'the', '#usfa')  (1187)<BR>15: ('in', 'our', 'patriot')  (1132)<BR>16: ('enlist', 'with', 'us')  (920)<BR>17: ('with', 'us', 'at')  (906)<BR>18: ('via', 'the', 'foxnews')  (889)<BR>19: ('the', 'foxnews', 'app')  (856)<BR>20: ('this', 'is', 'the')  (759)<BR>21: ('we', 'need', 'to')  (680)<BR>22: ('supporters', 'react', 'to')  (650)<BR>23: ('@cnn', '@cnni', '@cnnpolitics')  (648)<BR>24: ('@wolfblitzer', '@jaketapper', '@theleadcnn')  (648)<BR>25: ('@cnni', '@cnnpolitics', '@cnnsitroom')  (648)<BR>26: ('@theleadcnn', '@brianstelter', '@ananavarro')  (648)<BR>27: ('@brianstelter', '@ananavarro', '@donlemon')  (648)<BR>28: ('@cnnpolitics', '@cnnsitroom', '@wolfblitzer')  (648)<BR>29: ('@cnnsitroom', '@wolfblitzer', '@jaketapper')  (648)<BR>30: ('@vanjones', '@andersoncooper', '@ac')  (648)<BR>31: ('@ananavarro', '@donlemon', '@vanjones')  (648)<BR>32: ('@donlemon', '@vanjones', '@andersoncooper')  (648)<BR>33: ('@jaketapper', '@theleadcnn', '@brianstelter')  (648)<BR>34: ('the', 'truth', 'about')  (642)<BR>35: ('trump', 'supporters', 'react')  (635)<BR>36: ('rt', 'if', 'you')  (631)<BR>37: ('black', 'lives', 'matter')  (629)<BR>38: ('one', 'of', 'the')  (607)<BR>39: ('you', 'wont', 'believe')  (583)<BR>40: ('kim', 'jong', 'un')  (571)<BR>41: ('the', 'united', 'states')  (570)<BR>42: ('there', 'is', 'no')  (549)<BR>43: ('the', 'american', 'people')  (537)<BR>44: ('is', '#fakenews', '#fakenews')  (533)<BR>45: ('fire', 'and', 'fury')  (526)<BR>46: ('to', 'be', 'a')  (517)<BR>47: ('you', 'need', 'to')  (509)<BR>48: ('is', 'going', 'to')  (507)<BR>49: ('its', 'time', 'to')  (494)<BR>50: ('president', 'trump', 'just')  (493)<BR></td><td>51: ('a', 'white', 'supremacist')  (487)<BR>52: ('america', 'great', 'again')  (485)<BR>53: ('a', 'lot', 'of')  (483)<BR>54: ('this', 'is', 'what')  (481)<BR>55: ('you', 'are', 'a')  (466)<BR>56: ('the', 'end', 'of')  (464)<BR>57: ('you', 'know', 'that')  (463)<BR>58: ('bostick', 'is', '#fakenews')  (456)<BR>59: ('dani', 'bostick', 'is')  (456)<BR>60: ('make', 'america', 'great')  (453)<BR>61: ('this', 'is', 'a')  (449)<BR>62: ('#trumptrain', '#maga', '#potus')  (449)<BR>63: ('look', 'what', 'he')  (440)<BR>64: ('stand', 'up', 'for')  (439)<BR>65: ('#fakenews', '#fakenews', '#maga')  (439)<BR>66: ('what', 'he', 'said')  (438)<BR>67: ('san', 'juan', 'mayor')  (433)<BR>68: ('retweet', 'if', 'you')  (433)<BR>69: ('#usfa', 'at', 'https//tco/mjnlcxvf')  (431)<BR>70: ('do', 'you', 'think')  (429)<BR>71: ('fake', 'news', 'media')  (422)<BR>72: ('black', 'trump', 'supporter')  (416)<BR>73: ('we', 'do', 'on')  (415)<BR>74: ('remember', 'we', 'do')  (415)<BR>75: ('diamond', 'and', 'silk')  (410)<BR>76: ('out', 'of', 'the')  (408)<BR>77: ('in', 'the', 'world')  (407)<BR>78: ('you', 'are', 'not')  (407)<BR>79: ('you', 'want', 'to')  (406)<BR>80: ('on', 'north', 'korea')  (405)<BR>81: ('breaking', 'north', 'korea')  (403)<BR>82: ('thank', 'you', 'for')  (391)<BR>83: ('need', 'to', 'know')  (386)<BR>84: ('to', 'stand', 'for')  (385)<BR>85: ('for', 'trumps', 'assassination')  (383)<BR>86: ('who', 'called', 'for')  (381)<BR>87: ('called', 'for', 'trumps')  (379)<BR>88: ('if', 'you', 'think')  (376)<BR>89: ('to', 'impeach', 'trump')  (372)<BR>90: ('in', 'the', 'us')  (371)<BR>91: ('for', 'the', 'anthem')  (371)<BR>92: ('dont', 'want', 'to')  (367)<BR>93: ('army', 'at', 'https//tco/mjnlcxvf')  (367)<BR>94: ('i', 'want', 'to')  (365)<BR>95: ('this', 'is', 'why')  (364)<BR>96: ('well', 'well', 'well')  (363)<BR>97: ('is', 'not', 'a')  (363)<BR>98: ('is', 'going', 'viral')  (359)<BR>99: ('we', 'have', 'to')  (357)<BR>100: ('look', 'who', 'is')  (355)<BR></td><td>101: ('president', 'trump', 'is')  (354)<BR>102: ('traitor', 'john', 'mccain')  (343)<BR>103: ('@andersoncooper', '@ac', '@jimacosta')  (342)<BR>104: ('@ac', '@jimacosta', 'cnn')  (342)<BR>105: ('@jimacosta', 'cnn', 'is')  (342)<BR>106: ('is', '#fakenews', 'dani')  (342)<BR>107: ('#fakenews', 'dani', 'bostick')  (342)<BR>108: ('with', 'north', 'korea')  (341)<BR>109: ('remember', 'this', 'on')  (337)<BR>110: ('#draintheswamp', '#trumptrain', '#maga')  (333)<BR>111: ('needs', 'to', 'be')  (333)<BR>112: ('if', 'you', 'dont')  (332)<BR>113: ('this', 'is', 'how')  (331)<BR>114: ('refugees', 'are', 'terrorists')  (330)<BR>115: ('take', 'a', 'knee')  (327)<BR>116: ('if', 'you', 'want')  (327)<BR>117: ('if', 'you', 'agree')  (323)<BR>118: ('#top', 'rt', 'terrebehlog')  (319)<BR>119: ('you', 'have', 'to')  (313)<BR>120: ('not', 'going', 'to')  (312)<BR>121: ('the', 'charlottesville', 'tragedy')  (308)<BR>122: ('do', 'on', '//')  (306)<BR>123: ('to', 'do', 'with')  (301)<BR>124: ('there', 'is', 'a')  (297)<BR>125: ('voted', 'for', 'trump')  (297)<BR>126: ('trump', 'condemns', 'all')  (296)<BR>127: ('we', 'have', 'a')  (294)<BR>128: ('what', 'do', 'you')  (293)<BR>129: ('us', 'at', 'https//tco/mjnlcxvf')  (293)<BR>130: ('get', 'rid', 'of')  (291)<BR>131: ('donald', 'trump', 'is')  (291)<BR>132: ('new', 'poll', 'shows')  (290)<BR>133: ('join', 'our', 'patriot')  (287)<BR>134: ('new', 'york', 'times')  (286)<BR>135: ('blaming', 'both', 'sides')  (286)<BR>136: ('the', 'deep', 'state')  (286)<BR>137: ('and', 'its', 'bad')  (285)<BR>138: ('i', 'voted', 'for')  (284)<BR>139: ('senator', 'who', 'called')  (283)<BR>140: ('want', 'you', 'to')  (282)<BR>141: ('stand', 'for', 'the')  (282)<BR>142: ('https//tco/mfbjijhbv', 'rewind', '/')  (280)<BR>143: ('will', 'make', 'you')  (280)<BR>144: ('are', 'trying', 'to')  (279)<BR>145: ('in', 'the', 'white')  (278)<BR>146: ('trump', 'is', 'a')  (272)<BR>147: ('we', 'are', 'not')  (272)<BR>148: ('to', 'attack', 'trump')  (271)<BR>149: ('our', 'patriots', 'at')  (269)<BR>150: ('trump', 'effect', 'us')  (269)<BR></td><td>151: ('the', 'left', 'is')  (269)<BR>152: ('we', 'the', 'people')  (267)<BR>153: ('are', 'going', 'to')  (265)<BR>154: ('traitor', 'jeff', 'flake')  (265)<BR>155: ('are', 'not', 'a')  (263)<BR>156: ('breaking', 'president', 'trump')  (261)<BR>157: ('you', 'are', 'an')  (257)<BR>158: ('americans', 'agree', 'with')  (257)<BR>159: ('is', 'trying', 'to')  (256)<BR>160: ('is', 'the', 'most')  (254)<BR>161: ('this', 'on', '//')  (252)<BR>162: ('your', 'enlistment', 'at')  (251)<BR>163: ('up', 'for', 'america')  (251)<BR>164: ('need', 'to', 'be')  (249)<BR>165: ('look', 'how', 'much')  (249)<BR>166: ('poll', 'of', 'gop')  (248)<BR>167: ('breaking', 'look', 'who')  (247)<BR>168: ('marist', 'poll', 'of')  (247)<BR>169: ('if', 'you', 'are')  (245)<BR>170: ('it', 'was', 'a')  (244)<BR>171: ('agree', 'with', 'trump')  (244)<BR>172: ('at', 'https//tco/mjnlcxvf', 'stand')  (242)<BR>173: ('what', 'happens', 'when')  (241)<BR>174: ('us', 'freedom', 'army')  (241)<BR>175: ('i', 'dont', 'think')  (240)<BR>176: ('to', 'north', 'korea')  (237)<BR>177: ('are', 'a', 'racist')  (237)<BR>178: ('the', 'right', 'to')  (236)<BR>179: ('#trumptrain', '#maga', 'potus')  (235)<BR>180: ('senator', 'you', 'are')  (235)<BR>181: ('trump', 'is', 'racist')  (234)<BR>182: ('#pjnet', '#tcot', '#ccot')  (234)<BR>183: ('#gopdebate', 'you', 'know')  (233)<BR>184: ('a', 'native', 'american')  (233)<BR>185: ('bad', 'news', 'for')  (232)<BR>186: ('religion', 'of', 'peace')  (230)<BR>187: ('pocahontas', 'you', 'are')  (229)<BR>188: ('racist', 'fraud', 'you')  (229)<BR>189: ('an', 'awful', 'senator')  (229)<BR>190: ('hey', 'pocahontas', 'you')  (229)<BR>191: ('fraud', 'you', 'are')  (229)<BR>192: ('awful', 'senator', 'you')  (229)<BR>193: ('a', 'racist', 'fraud')  (229)<BR>194: ('are', 'an', 'awful')  (229)<BR>195: ('not', 'a', 'native')  (229)<BR>196: ('and', 'fury', 'comments')  (228)<BR>197: ('in', 'front', 'of')  (227)<BR>198: ('is', 'the', 'best')  (225)<BR>199: ('called', 'trump', 'a')  (224)<BR>200: ('i', 'dont', 'want')  (224)<BR></tr></table>
+										</div>
+											
+											
+											<script>
+												let right = document.getElementById("rightTrollText");
+												function showRightTroll() {
+													right.style.display="block";
+												}
+												function hideRightTroll() {
+													right.style.display = "none";
+												}
+												hideRightTroll();
+											</script>
+											<p></p>
+
+									
 										<h4>P.S.</h4>
 										<p>
 											Hopefully now it makes sense why they're called "hash tags"!
+										</p>
+										<p>
+											Also, if you're curious, <a href = "https://www.nltk.org/howto/stem.html">click here</a> to see more advanced preprocessing you can do to normalize the text.
 										</p>
                                 </div>
 						</div>
