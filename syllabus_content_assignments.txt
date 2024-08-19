@@ -7,7 +7,7 @@
 <a href = "../Modules/Module1/Video1">Python Module Parts 3-6 Due</a> Due before class
 
 2024-08-30
-<HR><a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_9Sws6zhwK5RR3rE">Pop stars survey for HW4</a> due
+<HR><a href = "https://ursinus.co1.qualtrics.com/jfe/form/SV_6G7fkB2ELkSSe58">Pop stars survey for HW4</a> due
 
 2024-08-30
 Lab 1 Due

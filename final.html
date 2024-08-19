@@ -95,7 +95,12 @@ or video is encouraged (but not required).
 
 										<h3>Web Applets</h3>
 										<p>
-											For those who want to make an applet, I'd highly recommend making a web demo using Javascript.  For those who have not used Javascript, it is basically like Java meets Python, so it shouldn't take too long to learn. Here are a few examples from recent conferences
+											For those who want to make an applet, I'd highly recommend making a web demo using Javascript.  For those who have not used Javascript, it is basically like Java meets Python, so it shouldn't take too long to learn.  <a href = "https://associahedron.github.io/viz/">Click here</a> to view an example by me, Kacey La (CS 271 Fall 2022), and Jose Arbelo (CS 371 Spring 2022) that we just presented <a href = "https://socg24.athenarc.gr/media.html">SOCG 2024 last summer</a>.  Kacey and I also made a video about this here:											
+										</p>
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/9WsISXfgwRg?si=tk1LsVSTaeuf5C54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+										<p>
+											Here are a few more examples from recent conferences
 										</p>
 										<ul>
 											<li><a href = "https://spiroplots.itch.io/spiroplots?secret=sAEpIumYquB8FNA3pkfdpdgQo">Spiroplot app</a></li>
@@ -107,6 +112,9 @@ or video is encouraged (but not required).
 											<li><a href = "http://computational-geometry.org/SoCG-videos/socg16video/compugeom.github.io-master/">Interactive Geometric Algorithm Visualization in A Browser</a></li>
 											<li><a href = "https://www.cs.helsinki.fi/group/compgeom/qvm/">Quickest Visibility Map Visualization</a></li>
 										</ul>
+
+										
+
 										<h3>Ideas of Topics</h3>
 										<p>
 											Anything that combines skills from this class with geometry is fair game, but below are a few topics that would be great for this project
@@ -130,11 +138,6 @@ or video is encouraged (but not required).
 											</tr>
 										</Table>
 										
-										<h4>Convex Hulls in 3D</h4>
-										<p>
-											A <a href = "https://www.nayuki.io/page/convex-hull-algorithm">convex hull</a> is a minimum enclosing convex shape of a set of points.  It can be thought of as "shrink wrapping" a shape.  These structures are ubiquitous in geometric algorithms.  Last year, some student groups worked on an app to compute convex hulls of points in 2D (<a href = "https://ursinus-cs371-s2021.github.io/CoursePage/FinalProjects/GrahamScan/index.html">click here</a> to view their app).  This year, I'd love to see if a group of students could <b>create a web app</b> to show 3D convex hulls with a divide and conquer algorithm, as described in <a href = "https://www.nayuki.io/page/convex-hull-algorithm">these slides</a>.  Below is a picture from those slides of a convex hull of a 3D bunny
-										</p>
-										<img src = "OverviewPictures/3DConvexHull.png">
 
 										<h4>Dynamic Time Warping / Discrete Fréchet Distance</h4>
 										<p>
@@ -194,40 +197,6 @@ or video is encouraged (but not required).
 
 										
 
-										<h4>Sonification of Alpha Filtrations</h4>
-										<p>
-											3D range scanners take a 3D picture of an environment and return a bunch of point samples in 3D space.  But what they're really sampling is some surface.  One way to turn these points into a surface is by connecting them with triangles into a so-called <a href = "https://en.wikipedia.org/wiki/Triangle_mesh">triangle mesh</a>.  There is an elegant geometric construction known as <a href = "https://en.wikipedia.org/wiki/Alpha_shape">alpha shapes</a> which can be used to figure out which triangles (or line segments in 2D) to introduce to connect points.
-										</p>
-
-										<Table>
-											<tr>
-												<td>
-													<img src = "OverviewPictures/Alpha.png">
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Picture courtesy of Teichmann and Capps
-												</td>
-											</tr>
-										</Table>
-
-										<p>
-											One parameter that's open in alpha shapes, though, is the radius to use.  As can be seen in the picture above, radii that are too small don't cover all of the points, while radii that are too large obscure details.  There is a whole field known as <a href = "https://en.wikipedia.org/wiki/Topological_data_analysis">topological data analysis</a> devoted to finding the correct scale of algorithms like alpha shapes by devising something called a "filtration," which tries radii over many scales and finds which ones lead to the creation and collapse of "topological features" (loops, voids, tunnels, etc).  Below is an animation I made of an alpha filtration on a circle and on a snowman using code at <a href = "https://github.com/ctralie/AlphaAnim">https://github.com/ctralie/AlphaAnim</a>
-										</p>
-
-										<p>
-											<img src = "https://raw.githubusercontent.com/ctralie/AlphaAnim/main/noisycircle.gif" width=700>
-										</p>
-
-										<p>
-											<img src = "https://raw.githubusercontent.com/ctralie/AlphaAnim/main/snowman.gif" width=700>
-										</p>
-
-										<p>
-											What I'd like to see is a "sonification" of these filtrations.  Every time an edge is added, it should make one sound.  Every time a triangle is added, it should make another sound.  And every time a topological feature is created or is destroyed, other sounds should be made, with loudness proportional to how important those features were.  A student last year started this in python, but there's more to be done, and I'd like to see a Javascript version that's easier to share.  It could be really fun to refine and to be creative with this.
-										</p>
-
 											<h3>Geometry Multimedia Grading Rubrid</h3>
 									
 											<table cellpadding = 10>
@@ -248,36 +217,6 @@ or video is encouraged (but not required).
 											<tr><td><b>10%</b></td><td><u>Making It Your Own</u>: How much did you do to refine this project and to make it your own?  Did you put any unique twists on it that weren't suggested by the instructor?</td></tr>
 											</table>
 
-										<HR>
-											<h2><a name = "seriousgame">Option 3: Data Structure "Serious Game"</a></h2>
-
-											<p>
-												As yet another option for your final, you can choose to make a video game about any data structure in the course or beyond.  The best submissions here would be about a data structure that's particularly challenging to explain, and they would also integrate into the story of the game well.  This is an instance of a "<a href = "https://en.wikipedia.org/wiki/Serious_game">serious game</a>," where the purpose is to foster a deep understanding of some concept.  Ideally, the game will also be fun!  
-											</p>
-											
-											<p>
-												<a href = "https://requests.ursinus.edu/TDClient/1943/Portal/KB/ArticleDet?ID=132650">Click here</a> to read some resources by our very own <a href = "https://www.ursinus.edu/live/profiles/1785-christine-iannicelli">Christine Iannicelli</a> on game-based learning.  And <a href = "https://learn.unity.com/tutorial/your-first-game">Click here</a> to view some excellent videos from Unity on how to scope a game prototype properly in a short time frame.
-											</p>
-
-											<p>
-												Below are screenshots from an <a href = "https://rpgmaker.net/">RPGMaker</a> game by Jake Kosa and Jonas Ling in <a href = "https://ursinus-cs271-f2022.github.io/CoursePage/index.html">CS 271 Fall 2022</a> explaining the <a href = "https://gudhi.inria.fr/python/latest/alpha_complex_user.html">alpha complex</a>.  In their game, a user had to use the alpha complex to enclose a dangerous dragon in a trap.
-											</p>
-											<img src = "OverviewPictures/TheNamesTralie2.png" width="40%">
-											<img src = "OverviewPictures/TheNamesTralie.png" width="40%">
-
-											<h3>Serious Game Grading Rubric</h3>
-									
-											<table cellpadding = 10>
-											<tr><td><b>50%</b></td><td><u>Technical detail / clarity:</u> 
-												<p>
-													Did you explain all of the details of the data structure fully and correctly in a way that's self contained?  Make sure that someone who has never seen this data structure before would be able to follow from beginning to end. (As a thought experiment, would a student of this class be able to walk away at the end of your presentation knowing the steps they would need to implement the data structure?).
-												</p>
-														
-												</td></tr>
-											<tr><td><b>30%</b></td><td><u>Gameplay + Data Structure Fit</u>: How well does the gameplay mesh with the explanation of the data structure?  Ideally, there will be a natural coupling between the gameplay and the data structure so that the player can learn the data structure simply by playing the game, but it shouldn't just be a completely dry step through of the data structure.</td></tr>
-											<tr><td><b>10%</b></td><td><u>Technical refinement</u>: How much polish is there?  Is it properly scoped and bug free?</td></tr>
-											<tr><td><b>10%</b></td><td><u>Making It Your Own</u>: How much did you do to refine this project and to make it your own?  Did you put any unique twists on it that weren't suggested by the instructor?</td></tr>
-											</table>
 
 								</section>
 								
@@ -417,40 +356,11 @@ or video is encouraged (but not required).
 												-->
 											</ul>
 										</li>
-										<!--
-										<li>
-											<span class="opener">Optional Spring 2021 Modules</span>
-											<ul>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module0/Part1">Module 0: Warmup</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module1/Video1">Module 1: Python Basics</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module2/Video1">Module 2: Numpy, Matplotlib, Python Classes</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module3/Video1.html">Module 3: Disjoint Set Data Structures</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module4/Video1.html">Module 4: Analytical Time Complexity And Big O</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module5/Video0.html">Module 5: Little-o And Python Linked Lists</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module6/Video1">Module 6: The List Data Structure And Amortized Cost</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module7/Video1">Module 7: Amortized Cost Proof, Binary Search</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module8/Exercise0">Module 8: Binary Search Implementation, Sets/Maps</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module9/Exercise0">Module 9: Sierpinski Triangle, Stacks/Queues Review, Towers of Hanoi</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module10/Video0">Module 10: Proofs by Induction, Memoization, String Edit Distance</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module11/Video0">Module 11: String Edit Distance Backtracing Solutions, Making Change</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module13/Video1">Module 13: Longest Common Subsequence</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module14/Video1">Module 14: Intro To Sorting</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module15/Video0">Module 15: Recursive Sorts And Sorting Theory</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module16/Video1">Module 16: Radix Sort, Fisher-Yates Shuffling</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module17/Video1">Module 17: Intro To Binary Trees, Preorder/Inorder/Postorder</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module18/Video1">Module 18: Binary Search Trees: Contains/Addition/Removal</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module19/Video1">Module 19: Huffman Trees</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module20/Video1">Module 20: Heaps And Dijkstra's</a></li>
-												<li><a href = "https://ursinus-cs371-s2021.github.io/Modules/Module21/Video1.html">Module 21: Minimum Spanning Trees</a></li>
-											</ul>
-										</li>
-								-->
 								<li>
 									<span class="opener">Final Assessment</span>
 									<ul>
 										<li><a href = "final.html#codinginterview">Mock Coding Interview</a></li>
 										<li><a href = "final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
-										<li><a href = "final.html#seriousgame">Data Structure "Serious Game"</a></li>
 									</ul>
 								</li>
 								</ul>

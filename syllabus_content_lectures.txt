@@ -5,7 +5,7 @@ Intro To Python, Abstract Data Types, And Complexity
 LECTURE
 Course Intro, Exponential Functions, Subset Sum
 
-<ul><li><a href = "https://docs.google.com/presentation/d/11gfhZQKk0HcFMAhKKnvh9uZ6My-pBeX_dzHJKDLBYPY/edit?usp=sharing">Slides from today</a></li><li><a href = "https://nedbatchelder.com/text/names1.html">Nitty gritty details of python variables vs C variables</a></li><li><a href = "ClassExercises/Week1_Exponents">Notes on exponents and exponential time algorithms</a></li></ul>
+<ul><li><a href = "https://docs.google.com/presentation/d/1AX39cHnDHVLoMl1Zitdk_ow5SMDfxBZte_yNu_k3bv8/edit?usp=sharing">Slides from today</a></li><li><a href = "https://nedbatchelder.com/text/names1.html">Nitty gritty details of python variables vs C variables</a></li><li><a href = "ClassExercises/Week1_Exponents">Notes on exponents and exponential time algorithms</a></li></ul>
 LECTURE
 Python basics, loops/methods in python (Self Study)<p>Logs, Binary Search</p>
 
