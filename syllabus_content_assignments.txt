@@ -19,7 +19,7 @@ Lab 1 Due
 <HR><a href = "Assignments/HW1_HashTable">Homework 1: Hash Maps And Tweets</a> Out
 
 2024-09-02
-Binary Search Module Due
+<a href = "../Modules/BinarySearch/Video1">Binary Search / ArrayList</a> Module Due
 
 2024-09-06
 <a href = "../Modules/UnionFindModule/Video1">Disjoint Set / Union Find Module</a> Due Before Class
