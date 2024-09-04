@@ -89,7 +89,7 @@
 										<h3>Task 1: <a name = "contains"><code>__contains__</code></a></h3>
 
 										<p>
-											<b>Your Task: </b> Fill in the <code>__contains__</code> method that returns <code>True</code> if a particular object is in at least one of the nodes, or <code>False</code> otherwise.  We'll do this one together as a class
+											<b>Your Task: </b> Fill in the <code>__contains__</code> method that returns <code>True</code> if a particular object is in at least one of the nodes, or <code>False</code> otherwise. 
 										</p>
 
 										<HR>
@@ -134,11 +134,11 @@
 										
 										<p>
 
-											This is a little bit trickier, but the basics are the same.  We have to find the element and then reassign pointers to circumvent the element we're trying to remove (assuming there's a garbag collector around to clean up the orphaned node).  Let's assume that it's actually there (otherwise, we just get to the end and don't do anything).  Let's also assume that it's somewhere in the middle (I've handled the case where it's at the beginning using <code>pop_front()</code>, which I've already provided).  Then the picture below depics what has to happen: find the node right before the node we want to remove, and then set its pointer to jump past:
+											This is a little bit trickier, but the basics are the same.  We have to find the element and then reassign pointers to circumvent the element we're trying to remove (assuming there's a garbag collector around to clean up the orphaned node).  Let's assume that it's actually there (otherwise, we just get to the end and don't do anything).  Let's also assume that it's not at the beginning (I've handled the case where it's at the beginning using <code>pop_front()</code>, which I've already provided).  Then the picture below depics what has to happen: find the node right before the node we want to remove, and then set its pointer to jump past:
 
 
 											
-										</p>
+										</p>class
 
 										<img src = "LLRem.svg" width="90%">
 
