@@ -37,3 +37,6 @@
 [submodule "ClassExercises/SoftwareTest"]
 	path = ClassExercises/SoftwareTest
 	url = https://github.com/ursinusdatastructures/SoftwareTest.git
+[submodule "ClassExercises/Week3_DiscoveringUnionFind/Week3_UnionFind"]
+	path = ClassExercises/Week3_DiscoveringUnionFind/Week3_UnionFind
+	url = https://github.com/ursinusdatastructures/Week3_UnionFind.git
