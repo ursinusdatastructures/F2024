@@ -209,7 +209,7 @@
 											from wizard import *
 											s = set([])
 											for i in range(5):
-												w = Wizard("Severus Snape", 5, 26, 1962)
+												w = Wizard("Severus Snape", 2, 21, 1963)
 												s.add(w)
 											print(s)
 										</script>
@@ -218,7 +218,7 @@
 											but then this prints out 
 										</p>
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											{Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962, Severus Snape: 5/26/1962}
+											{Severus Snape: 2/21/1963, Severus Snape: 2/21/1963, Severus Snape: 2/21/1963, Severus Snape: 2/21/1963, Severus Snape: 2/21/1963}
 										</script>
 
 										<p>
@@ -227,7 +227,7 @@
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 											for i in range(5):
-												w = Wizard("Severus Snape", 5, 26, 1962)
+												w = Wizard("Severus Snape", 2, 21, 1963)
 												print(w, hash(w))
 										</script>
 
@@ -236,11 +236,11 @@
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											Severus Snape: 5/26/1962 8785000196787
-											Severus Snape: 5/26/1962 8785000196994
-											Severus Snape: 5/26/1962 8785000196787
-											Severus Snape: 5/26/1962 8785000196994
-											Severus Snape: 5/26/1962 8785000196787																					
+											Severus Snape: 2/21/1963 8785000196787
+											Severus Snape: 2/21/1963 8785000196994
+											Severus Snape: 2/21/1963 8785000196787
+											Severus Snape: 2/21/1963 8785000196994
+											Severus Snape: 2/21/1963 8785000196787																					
 										</script>
 
 										<p>
@@ -249,7 +249,7 @@
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 											for i in range(5):
-												w = Wizard("Severus Snape", 5, 26, 1962)
+												w = Wizard("Severus Snape", 2, 21, 1963)
 												print(w, hash(w), id(w), id(w)//16)
 										</script>
 
@@ -257,11 +257,11 @@
 											which yields the following
 										</p>
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
-											Severus Snape: 5/26/1962 8785000196229 140560003139664 8785000196229
-											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
-											Severus Snape: 5/26/1962 8785000196229 140560003139664 8785000196229
-											Severus Snape: 5/26/1962 8785000196838 140560003149408 8785000196838
+											Severus Snape: 2/21/1963 8785000196838 140560003149408 8785000196838
+											Severus Snape: 2/21/1963 8785000196229 140560003139664 8785000196229
+											Severus Snape: 2/21/1963 8785000196838 140560003149408 8785000196838
+											Severus Snape: 2/21/1963 8785000196229 140560003139664 8785000196229
+											Severus Snape: 2/21/1963 8785000196838 140560003149408 8785000196838
 										</script>
 
 										<p>
@@ -285,12 +285,12 @@
 										</ol>
 
 										<p>
-											If this works properly, the hash codes for all of the Snape wizards above should be 317, and when you run 
+											If this works properly, the hash codes for all of the Snape wizards above should be 83, and when you run 
 										</p>
 
 										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
-											s1 = Wizard("Severus Snape", 5, 26, 1962)
-											s2 = Wizard("Severus Snape", 5, 26, 1962)
+											s1 = Wizard("Severus Snape", 2, 21, 1963)
+											s2 = Wizard("Severus Snape", 2, 21, 1963)
 											print(s1 == s2)
 										</script>
 
@@ -320,8 +320,8 @@
 												<b>(4 Points)</b> <code>__contains__</code>: A method that takes one parameter, the <code>key</code>, and which returns <code>True</code> if the key is in the linked list and <code>False</code> otherwise.  When you've finished implementing this method, then saying
 												<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 													s = HashSet(100)
-													s.add(Wizard("Severus Snape", 5, 26, 1962))
-													query = Wizard("Severus Snape", 5, 26, 1962)
+													s.add(Wizard("Severus Snape", 2, 21, 1963))
+													query = Wizard("Severus Snape", 2, 21, 1963)
 													print(query in s)		
 												</script>
 												<p>
@@ -395,7 +395,7 @@
 
 									<script type="syntaxhighlighter" class="brush: py"><![CDATA[
 										m = {}
-										m["Severus Snape"] = Wizard("Severus Snape", 5, 26, 1962) # Add a key/value pair (__setitem__)
+										m["Severus Snape"] = Wizard("Severus Snape", 2, 21, 1963) # Add a key/value pair (__setitem__)
 										m["Ginny Weasley"] = Wizard("Ginny Weasley", 2, 17, 1991)
 										m["Draco Malfoy"]  = Wizard("Draco Malfoy",  9, 22, 1989)
 										print(m["Ginny Weasley"]) # Look something up by a key (__getitem__)
