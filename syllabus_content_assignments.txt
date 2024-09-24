@@ -46,19 +46,19 @@ Homework 1 Parts 3-5 Due
 <a href = "../Modules/EditDistanceModule/Video1">Edit Distance Module</a> due before class
 
 2024-09-20
-Lab 3 Due
-
-2024-09-23
-Homework 2 Parts 1 and 2 Due
-
-2024-09-24
-Homework 2 Part 3 Due
-
-2024-09-27
-<a href = "Assignments/HW3_SeamCarving">Homework 3: Seam Carving</a> Out
+Lab 3 Due<HR>
 
 2024-09-25
-Homework 3 Dynamic Programming Rules Due Before Class
+Homework 2 Parts 1 and 2 Due
+
+2024-09-25
+Homework 2 Part 3 Due
+
+2024-09-28
+<a href = "Assignments/HW3_SeamCarving">Homework 3: Seam Carving</a> Out
+
+2024-09-27
+Homework 3 Dynamic Programming Rules Due
 
 2024-09-30
 <a href = "../Modules/BasicSortingModule/Video1">Sorting Basics Module Due</a> before class
