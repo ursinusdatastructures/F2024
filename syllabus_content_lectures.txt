@@ -73,7 +73,7 @@ Making Change, Recursively Backtracing Multiple Solutions
 LECTURE
 Knapsack Problem
 
-<ul><li><a href = "https://github.com/ursinus-cs271-f2022/CoursePage/blob/main/ClassExercises/Week6_Knapsack/knapsack.py">Class solution to the knapsack problem</li></ul>
+<!--<ul><li><a href = "https://github.com/ursinus-cs271-f2022/CoursePage/blob/main/ClassExercises/Week6_Knapsack/knapsack.py">Class solution to the knapsack problem</li></ul>!-->
 SECTION
 Sorting, Selection, And Shuffling
 
