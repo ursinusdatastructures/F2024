@@ -227,6 +227,23 @@
 										<b>NOTE: </b> The minimum cost seam can end anywhere on the bottom row, so you'll need to check all columns at the bottom row
 									</p>
 
+									<h4>Hints/Suggestions</h4>
+									<p>
+										Before you backtrace the optimal seam, you should plot your <code>C</code> matrix to make sure it looks right:
+										
+
+										<script type="syntaxhighlighter" class="brush: py"><![CDATA[
+											plt.imshow(C, cmap='magma')
+											plt.colorbar()
+										</script>
+										
+										
+										It should look like this:
+									</p>
+									<p>
+										<img src = "C.png">
+									</p>
+
 									
 									<h2><a name = "seamcost">Backtrace Optimal Seam (10 Points)</a></h2>
 

@@ -72,11 +72,27 @@ def knapsack(capacity, weights, values):
 
 
 def knapsack_test():
+    import numpy as np
     # Test suggested at https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
-    capacity = 50
-    weights = [10, 20, 30]
-    values = [60, 100, 120]
-    value, optimal_items = knapsack(capacity, weights, values)
-    print(value, optimal_items)
+    N = 10
+    for i in range(10):
+        np.random.seed(i)
+        capacity = np.random.randint(100)
+        weights = np.random.randint(1, 10, N)
+        values = np.random.randint(1, 100, N)
+        value, optimal_items = knapsack(capacity, weights, values)
+        print("\n\n")
+        print("Capacity", capacity)
+        print("weights", weights)
+        print("values", values)
+        print("Final value", value)
+        print("Optimal items: ", optimal_items)
+
+
+    #capacity = 50
+    #weights = [10, 20, 30]
+    #values = [60, 100, 120]
+    #value, optimal_items = knapsack(capacity, weights, values)
+    #print(value, optimal_items)
 
 knapsack_test()
