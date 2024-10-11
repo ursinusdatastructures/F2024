@@ -40,3 +40,6 @@
 [submodule "ClassExercises/Week3_DiscoveringUnionFind/Week3_UnionFind"]
 	path = ClassExercises/Week3_DiscoveringUnionFind/Week3_UnionFind
 	url = https://github.com/ursinusdatastructures/Week3_UnionFind.git
+[submodule "Assignments/HW3_SeamCarving/SeamCarving_Colab"]
+	path = Assignments/HW3_SeamCarving/SeamCarving_Colab
+	url = https://github.com/ursinusdatastructures/SeamCarving_Colab.git
