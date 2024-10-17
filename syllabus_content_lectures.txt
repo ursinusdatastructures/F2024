@@ -119,18 +119,6 @@ LECTURE
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.4</li></ul>
 LECTURE
-Tree Rotations
-
-<ul><li><a href = "../Modules/TreeRotations/Video">Class Exercise on Tree Rotations</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
-LECTURE
-Introducing self-balancing binary trees, AVL Trees
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
-LECTURE
-<b><a href = "Labs/Lab6_AVL">Lab 6: AVL Trees</a></b>
-
-<ul><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
-LECTURE
 Priority Queues / Binary Heaps
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
@@ -142,6 +130,18 @@ LECTURE
 Dendrograms And Single Linkage Clustering
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 17.1 - 17.3</li></ul>
+LECTURE
+Tree Rotations
+
+<ul><li><a href = "../Modules/TreeRotations/Video">Class Exercise on Tree Rotations</a></li><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.1</li></ul>
+LECTURE
+Introducing self-balancing binary trees, AVL Trees
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
+LECTURE
+<b><a href = "Labs/Lab6_AVL">Lab 6: AVL Trees</a></b>
+
+<ul><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
 LECTURE
 Tries
 
