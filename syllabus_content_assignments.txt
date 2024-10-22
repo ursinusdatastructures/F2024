@@ -91,6 +91,9 @@ Last day to drop courses with a "W"
 HW4 Part 1 Due
 
 2024-10-23
+<a href = "../Modules/RadixFisherYates/Video2">Fisher-Yates Module Due</a>
+
+2024-10-25
 HW4 Part 2 Due
 
 2024-10-30
@@ -98,9 +101,6 @@ HW4 Part 2 Due
 
 2024-10-30
 Lab 5 Due
-
-2024-11-01
-<HR><a href = "../Modules/RadixFisherYates/Video2">Fisher-Yates Module Due</a>
 
 2024-11-01
 Lab 6 Due
