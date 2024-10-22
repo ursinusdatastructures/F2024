@@ -81,14 +81,14 @@ Lab 4 Due
 2024-10-11
 <a href = "../Modules/TreesModule/Video1">Trees Module</a> due before class
 
-2024-10-21
+2024-10-23
 Last day to drop courses with a "W"
 
 2024-11-19
 <a href = "../Modules/BFSDFSTSP/Video1">BFS/DFS/TSP</a> module due before class
 
 2024-11-20
-HW4 Part 1 Due
+<HR>HW4 Part 1 Due
 
 2024-10-23
 <a href = "../Modules/RadixFisherYates/Video2">Fisher-Yates Module Due</a>
