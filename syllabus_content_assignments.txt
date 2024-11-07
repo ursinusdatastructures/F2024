@@ -85,9 +85,9 @@ Lab 4 Due
 Last day to drop courses with a "W"
 
 2024-11-19
-<a href = "../Modules/BFSDFSTSP/Video1">BFS/DFS/TSP</a> module due before class
+<a href = "../Modules/BFSDFSTSP/Video1">BFS/DFS/TSP</a> module due 
 
-2024-11-20
+2024-11-15
 <HR>HW4 Part 1 Due
 
 2024-10-23
@@ -114,8 +114,8 @@ HW5 Needleman-Wunsch Tasks Due
 2024-11-08
 <a href = "../Modules/Graphs/Video1">Graphs Module</a> Due
 
-2024-11-15
-<HR>HW5 Dendrogram Due
+2024-11-13
+HW5 Dendrogram Due
 
 2024-11-20
 HW5 Clustering Due

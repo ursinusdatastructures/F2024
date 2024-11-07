@@ -142,10 +142,6 @@ LECTURE
 <b><a href = "Labs/Lab6_AVL">Lab 6: AVL Trees</a></b>
 
 <ul><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
-LECTURE
-Priority Queues / Binary Heaps, Tries
-
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li><li>Class exercise: autocomplete</li></ul>
 SECTION
 Graph Data Structures And Algorithms
 
@@ -162,6 +158,10 @@ LECTURE
 Euclidean Traveling Salesperson Problem
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul>
+LECTURE
+Priority Queues / Binary Heaps
+
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
 LECTURE
 Dijkstra's Algorithm
 
