@@ -137,11 +137,11 @@ Tree Rotations
 LECTURE
 Introducing self-balancing binary trees, AVL Trees
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 18.2-18.4</li><li><a href = "../Modules/AVLTrees/Video1">AVL Trees Notes</a></li><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
 LECTURE
 <b><a href = "Labs/Lab6_AVL">Lab 6: AVL Trees</a></b>
 
-<ul><li><a href = "https://scratch.mit.edu/projects/941014627">AVL Adventure</a> by Emily Musgrove and Hannah Jeffers</li></ul>
+
 SECTION
 Graph Data Structures And Algorithms
 
