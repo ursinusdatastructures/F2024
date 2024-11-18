@@ -43,3 +43,6 @@
 [submodule "Assignments/HW3_SeamCarving/SeamCarving_Colab"]
 	path = Assignments/HW3_SeamCarving/SeamCarving_Colab
 	url = https://github.com/ursinusdatastructures/SeamCarving_Colab.git
+[submodule "ClassExercises/Week13_8Puzzle/Week13_8Puzzle"]
+	path = ClassExercises/Week13_8Puzzle/Week13_8Puzzle
+	url = https://github.com/ursinusdatastructures/Week13_8Puzzle.git
