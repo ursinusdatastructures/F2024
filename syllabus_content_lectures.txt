@@ -159,6 +159,10 @@ Euclidean Traveling Salesperson Problem
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 21.4 - 21.6</li></ul>
 LECTURE
+8-Puzzle: An Application of Breadth-First Search
+
+
+LECTURE
 Priority Queues / Binary Heaps
 
 <ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
@@ -168,10 +172,6 @@ Dijkstra's Algorithm
 <ul><li><a href = "https://www.youtube.com/watch?v=18lQVYRJtoA">Easy Theory: Dijkstra's algorithm</a></li></ul>
 LECTURE
 <b>Lab 7: Implementing Dijkstra's Algorithm</b>
-
-
-LECTURE
-Finish Dijkstra's
 
 
 LECTURE
