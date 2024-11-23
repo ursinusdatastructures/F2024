@@ -161,11 +161,11 @@ Euclidean Traveling Salesperson Problem
 LECTURE
 8-Puzzle: An Application of Breadth-First Search
 
-
+<ul><li><a href = "ClassExercises/Week13_8Puzzle/index.html">Class Exercise on 8-Puzzle</a></li></ul>
 LECTURE
 Priority Queues / Binary Heaps
 
-<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li></ul>
+<ul><li><a href = "https://donsheehy.github.io/datastructures/fullbook.pdf">Sheehy</a> Ch. 19</li><li><a href = "https://www.cs.usfca.edu/~galles/visualization/Heap.html">Min Heap Visualization Applet</a></li></ul>
 LECTURE
 Dijkstra's Algorithm
 
