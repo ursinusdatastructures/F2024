@@ -130,3 +130,6 @@ Lab 7 Due
 HW6 Due
 
 2024-12-09
+<a href = "../Modules/Heap/Video1">Heap Module</a> Due
+
+2024-12-01
