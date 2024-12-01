@@ -47,32 +47,122 @@
 
 									<div id="page-content">
 										
+										<img src = "Lab7_Dijkstra/teaser.png" width="80%">
 
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											<a href = "https://github.com/ursinusdatastructures/Lab7_Dijkstra/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.  You'll be editing <code>graph.py</code>
+										</p>
 										
+										<p>
+											In this lab, will implement a very important graph algorithm known as <b>Dijkstra's algorithm</b>, which is used to efficiently find the shortest path from a particular node <code>start</code> in a graph to all other nodes in the graph.  Dijkstra's algorithm can be seen as a generalization of <a href = "../../../Modules/BFSDFSTSP/Video1">breadth-first search</a> (BFS), where we replace the ordinary first-in-first-out (FIFO) queue that BFS uses with a <b><a href = "../../../Modules/Heap/Video1">min priority queue</a></b>, where nodes with the min priority number come out first, regardless of when they were added to the queue.  The <b>priority</b> of a node is what we currently believe to be the shortest distance from <code>start</code> to that node, though we may find shorter paths as we're going along.
+										</p>
+
+										<p>
+											Once you've gotten to work, you'll be able to find the shortest path that an ant would take to get from the tip of a thumb to the tip of the index finger, as shown in the teaser picture above.
+										</p>
 										
+
+
 
                                         <p>
                                             <h3><a name = "learning">Learning Objectives</a></h3>
                                             <ul>
-
+												<li>Implement Dijkstra's algorithm</li>
+												<li>Use the priority queue ADT in an application</li>
                                             </ul>
                                         </p>
 
 										<h3><a name = "submit">What To Submit</a></h3>
 
 										<p>                                       
-                                            
+                                            When you are finished, submit <code>graph.py</code> to canvas.  Also write on canvas a response to the <a href = "#complexity">time complexity question</a>.
 										</p>
 
-										<h3><a name = "background">Background</a></h3>
+										<HR>
+										<h2><a name = "background">Background</a></h2>
 
 										
+										<p>
+											Dijkstra's algorithm is a mix of greedy and dynamic programming paradigms.  It's greedy with the min priority queue that always takes out the closest vertex on the frontier first, but it uses dynamic programming to remember the shortest paths it's aware of to particular nodes.  Below is the pseudocode for the algorithm<SUP>(<a href = "#ucs">*</a>)</SUP>.  This should look quite familiar if you remember how BFS works
+										</p>
+										
 
-										<h3><a name = "add"><code>add_first</code></a></h3>
+<pre>
+<code>
+add start to the frontier with priority 0
+
+while len(frontier) > 0
+	Take off the element *v* with the shortest distance *dist*
+
+	Record the shortest distance of v as dist
+
+	For each neighbor n of v in the graph
+		Let d' = d + w
+		if n has not been visited
+			if n is not on the frontier # Case 1
+				add n to the frontier with priority d'
+			else if d' is less than the priority of n on the frontier # Case 2
+				update the priority of n to be d'
+</code>
+</pre>
+										<a name = "ucs">(*)</a>
+										<p>
+											Technically, we are using a better version of the algorithm known as <b>uniform cost search</b>, which adds nodes on the fly as they're visited, rather than adding all nodes to the queue with priority infinity to begin with, as Dijkstra originally did.  
+										</p>
 
 										<p>
-											<b>Your Task: </b> 
+											Below is an example of this algorithm in action on a small graph.  Let's suppose we start at node <b>a</b>.  We first add <b>a</b> to the priority queue with priority 0
+										</p>
+
+										<img src = "Ex1.svg" width="20%">
+
+										<p>
+											Next, we commence the main loop.  At this point, we remove the smallest item on the queue (<b>a</b>), we record its distance as <b>0</b>, and then we add its two neighbors onto the queue with distances 0 + their edge length (case 1 in the pseudocode above):
+										</p>
+
+										<img src = "Ex2.svg" width="20%">
+
+										<p>
+											Next, we remove the element with the smallest priority (b, 1), and record b's distance as 1.  At this point, <i>we update the priority of <b>c</b> to be <b>1+2</b></i>, since that is less than the current priority 4.  In other words, we've found a shorter path from the start node <b>a</b> to <b>c</b> than the path we were originally aware of:
+										</p>
+
+										<img src = "Ex3.svg" width="20%">
+
+										<p>
+											Next, we take off the only element that's on the queue, c, and record its distance as 3.  Finally, we add on its only neighbor that hasn't been visited, <b>d</b>, with a priority of 3+2
+										</p>
+
+										<img src = "Ex4.svg">
+
+										<HR>
+										<h2>Lab Tasks</h2>
+										<p>
+											<a href = "https://github.com/ursinusdatastructures/Lab7_Dijkstra/archive/refs/heads/main.zip">Click here</a> to download the starter code for this lab.  You'll be editing <code>graph.py</code>, and you can test your code by running <code>simple.py</code> and <code>hand.py</code>
+										</p>
+
+										<h3><a name = "explore"><code>explore</code> (2 Points)</a></h3>
+
+										<p>
+											<b>Your Task:</b> Fill in the method <code>explore</code> which, given the label for a vertex in the graph, computes the shortest path from that vertex to all other vertices in the graph using Dijkstra's algorithm.  At the end of the method, return those distances as a dictionary, as explained in the method docstring.
+										</p>
+										<p>
+											If this is working properly, you should see the following when you run <code>hand.py</code>:
+										</p>
+										<img src = "hand_distonly.png" width="30%">
+
+										<h3><a name = "backtrace"><code>backtrace</code> (2 Points)</a></h3>
+										<p>
+											In addition to computing the distance of the shortest paths from a starting vertex to all other vertices, it may be useful to return the sequence of edges along a path that achieves that distance.  We can accomplish this using the same trick we used in other dynamic programming algorithms like edit distance; when you push or update a priority of a vertex <b>n</b> on the queue from a vertex <b>v</b>, store in <b>n</b> that <b>v</b> was its previous vertex.  Then, trace back through these previous references until you return to the start node 
+										</p>
+										<p>
+											<b>Your Task: </b> Modify your the code in your <code>explore</code> method to store references to previous nodes.  Then, implement the <code>backtrace</code> method to return the sequence of vertices along the path from the starting node to some other node in the graph.  If this is working properly, you should see the following when you run <code>hand.py</code>:
+										</p>
+										<img src = "antpath.png" width="30%">
+
+										<h3><a name = "complexity">Complexity Analysis (1 Points)</a></h3>
+										<p>
+											Given a graph with <b>V</b> nodes and <b>E</b> edges, what is the worst-case time complexity of Dijkstra's algorithm, as described above?  Provide a brief explanation as to why, citing the complexity of operations in the data structures that are used.
 										</p>
 
 
