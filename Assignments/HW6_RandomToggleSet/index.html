@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 271: Data Structures And Algorithms, Fall 2024</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 271: Data Structures And Algorithms, Fall 2024</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Assignment 6: Random Toggle Set</h2>
+                                        <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
+										
+									</header>
+
+									<div id="page-content">
+										<ul>
+											<li>
+												<a href = "#overview">Overview/Logistics</a>
+												<ul>
+													<li><a href = "#learning">Learning Objectives</a></li>
+													<li><a href = "#submit">What To Submit</a></li>
+												</ul>
+											</li>
+											
+											
+										</ul>
+
+                                        <h2><a name = "overview">Overview / Logistics</a></h2>
+
+										<h3><a name = "learning">Learning Objectives</a></h3>
+												
+										<ul>
+											<li>Design a data structure from scratch to efficiently realize an ADT</li>
+											<li>Analyze the time complexity of a data structure</li>
+											<li>Design tests to convince yourself of correctness</li>
+										</ul>
+
+										<h3><a name = "background">Background</a></h3>
+
+										<p>
+											In this assignment, you will implement a data structure to realize a "RandomToggleSet" ADT.  I had to solve this problem myself last summer when I was implementing <a href = "https://www.ctralie.com/TheConcatenator/supplementary/">The Concatenator</a>.  We want to maintain a set of objects and to choose random items from this set, but we want to "toggle" (enable/disable) certain elements from being chosen. Specifically, this ADT has three methods:
+										</p>
+
+										<ul>
+											<li>
+												<code>add(element)</code>: A void method that adds an element, toggling it to <code>True</code>.  If the element is already in the set, don't add it twice, but toggle it to <code>True</code> if it isn't already.
+											</li>
+											<li>
+												<code>toggle(element)</code>:  A void method that toggles whether an element can be selected or not.  Specifically, if the element is in the set and is <code>False</code>, change it to <code>True</code>.  If the element is in the set and is <code>True</code>, change it to <code>False</code>
+											</li>
+											<li>
+												<code>sample()</code>: Select and return an element <b>uniformly at random</b> from among the elements that are set to <code>True</code>.
+											</li>
+										</ul>
+
+										<p>
+											You can assume that all of the elements are hashable if that helps.  As an example, suppose we made the following method calls:
+										</p>
+										<ul>
+											<li>myset.add("c")</li>
+											<li>myset.add("s")</li>
+											<li>myset.toggle("c")</li>
+											<li>myset.add(2)</li>
+											<li>myset.add(7)</li>
+											<li>myset.toggle(7)</li>
+											<li>myset.add(7)</li>
+											<li>myset.add(1)</li>
+											<li>myset.toggle(2)</li>
+										</ul>
+										<p>
+											Then the following picture shows a depiction of what's in the set, where <span style="color:green;">green</span> indicates that this element is available to be selected and <span style="color:red;">red</span> indicates this item is not available to be selected (note that the items are in no particular order, and you don't have to maintain them in any particular order in your data structure)
+										</p>
+										<img src = "CS271.svg" width="25%">
+										<p>
+											Then, let's suppose we called <code>sample</code> 100 times.  Here's an example of what we might see:
+										</p>
+
+										<p>
+											7 7 1 1 s 7 s 1 s s 7 s s s s s 7 1 s 7 7 s 7 s s s 7 s s 7 7 7 1 7 s s 7 1 1 s 7 1 1 7 7 s 1 1 s 7 7 7 7 1 1 1 s 7 1 7 7 s 1 7 s s s 7 1 1 1 7 1 s 7 1 s 1 s s s 1 s 1 7 s 1 1 1 7 1 7 7 7 7 s 1 7 s s
+										</p>
+
+										<p>
+											Any sequence including s, 7, and 1 is possible, but if this is working properly, there's a much higher chance that they will be evenly distributed.  In this example, we've drawn <code>s</code> 36 times, <code>7</code> 35 times, and <code>1</code> 29 times.
+										</p>
+
+
+
+
+										<h3><a name = "submit">What To Submit</a></h3>
+
+										<p>                                 	
+
+										</p>
+
+										<h3></h3>
+
+                                        <p>
+											You can use any of the code from prior assignments, modules, or class exercises.
+										</p>
+									
+											
+
+
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul> 
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+												<ul>
+													<li><a href = "../../index.html#debugging">Debugging Principles</a>
+												</ul>
+												
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+												<ul>
+													<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+												</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a> <a href = "https://www.online-python.com/">Online-Python</a><a href = "https://colab.research.google.com/">Google Colab</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+                                        <li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW1_HashTable/index.html">Assignment 1: Hash Maps And Tweets</a></li>
+												<li><a href = "../../Assignments/HW2_PlantCellSegmentation/index.html">Assignment 2: Plant Cell Segmentation</a></li>
+												<li><a href = "../../Assignments/HW3_SeamCarving/index.html">Assignment 3: Seam Carving</a>
+												<!--<ul>
+													<li>
+														<a href = "../../Assignments/HW3_SeamCarving/ArtContest/index.html">Art Contest</a>
+													</li>
+												</ul>!-->
+												</li>
+												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Pop Stars</a></li>
+												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li><a href = "../../Labs/Lab1_LinkedLists/index.html">Lab 1: Linked Lists</a></li>
+												<li><a href = "../../Labs/Lab2_UnionFind/index.html">Lab 2: Union Find</a></li>
+												<li><a href = "../../Labs/Lab3_Towers/index.html">Lab 3: Towers of Hanoi</a></li>
+												<li><a href = "../../Labs/Lab4_MergeSort/index.html">Lab 4: Merge Sort And Kendall-Tau Comprehension</a></li>
+												<li><a href = "../../Labs/Lab5_TreeRemoval/index.html">Lab 5: Tree Node Removal</a></li>
+												<li><a href = "../../Labs/Lab6_AVL/index.html">Lab 6: AVL Trees</a></li>
+												<li><a href = "../../Labs/Lab7_Dijkstra/index.html">Lab 7: Dijkstra's Algorithm</a></li>
+											</ul>
+										</li>
+                                        <li>
+											<span class="opener">Modules / Class Notes</span>
+											<ul>
+												<li>
+													<a href = "../../../Modules/Module1/Video1">Week 1: Python Self Study Modules</a>
+												</li>
+												<li><a href = "../../ClassExercises/Week1_Exponents">Week 1: Intro To Exponents / Exponential Time Algorithms</a></li>
+												<li><a href = "../../ClassExercises/Week1_Loops">Week 1: Loops in Python</a></li>
+												<li><a href = "../../ClassExercises/Week1_CSLog">Week 1: A CS Definition of The Log Function</a></li>
+												<li><a href = "../../ClassExercises/Week1_BinarySearch">Week 1: Binary Search</a></li>
+												<li><a href = "../../ClassExercises/Week2_Sorting">Week 2: Black Box Sorting in Python</a></li>
+												<li><a href = "../../../Modules/ADTModule/Video1">Week 2: ADT Module</a></li>
+												<li><a href = "../../ClassExercises/Week2_LinkedList">Week 2: Doubly Linked Lists</a></li>
+												<li><a href = "../../ClassExercises/Week2_Needle">Week 2: Needle in A Haystack / Intro To Hashing</a></li>
+												<li><a href = "../../ClassExercises/AlgorithmsDemos/Hashing/Hashing.html">Week 2: Harry Potter Hashing</a></li>
+												<li><a href = "../../../Modules/BinarySearch/Video1">Week 2: Binary Search / ArrayList Module</a></li>
+												<!--<li><a href = "../../../Modules/StackModule/Video">Week 4: Stacks And Queues Module</a></li>-->
+												<li><a href = "../../ClassExercises/Week3_DiscoveringUnionFind">Week 3: Discovering Disjoint Set Data Structures</a></li>
+												<li><a href = "../../../Modules/UnionFindModule/Video1">Week 3: Disjoint Sets / Union Find Pre-Lab Module</a></li>
+												<li><a href = "../../../Modules/BigO/Video1">Week 3: Informal Introduction To Big-O Notation</a></li>
+												<li><a href = "../../ClassExercises/Week3_Asymptotics">Week 3/4: Asymptotics</a></li>
+												<li><a href = "https://github.com/ursinus-cs271-f2023/CoursePage/blob/main/ClassExercises/Week4_ComplexityHierarchy/ComplexityHierarchy.ipynb">Exploring complexity hierarchies in matplotlib</a></li>
+												<li><a href = "../../../Modules/RecursionModule/Video2">Week 4: Recursion Module</a></li>
+												<li><a href = "../../../Modules/EditDistanceModule/Video1">Week 4: Edit Distance Module</a></li>
+												<li><a href = "../../ClassExercises/Week5_EditBacktracing">Week 5: Edit Distance Backtracing</a></li>
+												<li><a href = "../../../Modules/LCSModule/Video1">Week 5: Longest Common Subsequence Module</a></li>
+												<li><a href = "../../../Modules/BasicSortingModule/Video1">Week 6: Sorting Basics Module</a></li>
+												<li><a href = "../../ClassExercises/Week7_KendallTau">Week 7: The Kendall Tau Distance between Two Rankings</a></li>
+												<li><a href = "../../ClassExercises/Week8_RadixSort">Week 8: Counting Sort + Radix Sort</a></li>
+												<li><a href = "../../../Modules/TreesModule/Video1">Week 9: Trees Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/KruskalNotes/Video1">Week 9: Minimum Spanning Trees And Kruskal's Algorithm</a></li>
+												<li><a href = "../../ClassExercises/Week9_Phylogenetic">Week 9: Phyolgenetic Trees, Needleman-Wunsch, And Single-Linkage Clustering</a></li>
+												<li>
+													<a href = "../../../Modules/TreeRotations/Video">Week 11: Tree Rotations Exercise</a>
+												</li>
+												<li>
+													<a href = "../../../Modules/AVLTrees/Video1">Week 11: AVL Trees Notes</a>
+												</li>
+												<li>
+													<a href = "../../../Modules/Graphs/Video1">Week 12: Introduction To Graph Data Structures Module</a>
+												</li>
+												<li>
+													<a href = "../../../Modules/BFSDFSTSP/Video1">Week 12: BFS/DFS And Traveling Salesperson Module</a>
+												</li>
+												<li>
+													<a href = "../../ClassExercises/Week13_8Puzzle/index.html">Week 13: 8-Puzzle BFS Exercise</a>
+												</li>
+												<li>
+													<a href = "../../../Modules/Heap/Video1">Week 14: Binary Heap Module</a>
+												</li>
+												<!--
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/MakingChange/Video0">Week 6: Backtracing / Making Change</a></li>
+												<li><a href = "../../ClassExercises/Week7_GreedyDTW">Week 7: Greedy Time Warping Pitfalls</a></li>
+												
+												
+												
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/RadixFisherYates/Video1">Week 9: Radix Sort / Fisher Yates Module</a></li>
+												<li><a href = "https://ursinus-cs371-s2022.github.io/Modules/TreesModule/Video1">Week 10: Binary Trees Module</a></li>
+												
+												<li>
+													<a href = "https://ursinus-cs371-s2022.github.io/Modules/HuffmanTrees/Video1">Week 12/13: Huffman Trees Module</a>
+												</li>
+												-->
+											</ul>
+										</li>
+								<li>
+									<span class="opener">Final Assessment</span>
+									<ul>
+										<li><a href = "../../final.html#codinginterview">Mock Coding Interview</a></li>
+										<li><a href = "../../final.html#multimediaexpo">Geometric Algorithm Multimedia Expo</a></li>
+									</ul>
+								</li>
+								<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+								</ul>
+								</nav>
+								
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
