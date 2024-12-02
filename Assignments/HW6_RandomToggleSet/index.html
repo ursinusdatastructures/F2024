@@ -41,25 +41,16 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Assignment 6: Random Toggle Set</h2>
+                                        <h2>Assignment 6: Random Toggle Set (36 Points, Individual)</h2>
                                         <h3><a href = "http://www.ctralie.com">Chris Tralie</a>
 										
 									</header>
 
 									<div id="page-content">
-										<ul>
-											<li>
-												<a href = "#overview">Overview/Logistics</a>
-												<ul>
-													<li><a href = "#learning">Learning Objectives</a></li>
-													<li><a href = "#submit">What To Submit</a></li>
-												</ul>
-											</li>
-											
-											
-										</ul>
-
                                         <h2><a name = "overview">Overview / Logistics</a></h2>
+										<p>
+											This is an <a href = "../../index.html#collaboration">individual assignment</a>, so you may not speak with anyone else in the class as you work through this.
+										</p>
 
 										<h3><a name = "learning">Learning Objectives</a></h3>
 												
@@ -80,7 +71,7 @@
 												<code>add(element)</code>: A void method that adds an element, toggling it to <code>True</code>.  If the element is already in the set, don't add it twice, but toggle it to <code>True</code> if it isn't already.
 											</li>
 											<li>
-												<code>toggle(element)</code>:  A void method that toggles whether an element can be selected or not.  Specifically, if the element is in the set and is <code>False</code>, change it to <code>True</code>.  If the element is in the set and is <code>True</code>, change it to <code>False</code>
+												<code>toggle(element)</code>:  A void method that toggles whether an element can be selected or not.  Specifically, if the element is in the set and is <code>False</code>, change it to <code>True</code>.  If the element is in the set and is <code>True</code>, change it to <code>False</code>.  If the element is not in the set, you should throw an exception.
 											</li>
 											<li>
 												<code>sample()</code>: Select and return an element <b>uniformly at random</b> from among the elements that are set to <code>True</code>.
@@ -120,16 +111,36 @@
 
 
 
-										<h3><a name = "submit">What To Submit</a></h3>
+										<h3><a name = "rubric">Getting Started/Rubric</a></h3>
 
 										<p>                                 	
-
+											<a href = "https://github.com/ursinusdatastructures/F2024/blob/main/Assignments/HW6_RandomToggleSet/randomtoggleset.py">Click here</a> to view a skeleton of the ADT that you can start with.  To complete this, feel free to use any of the code from prior assignments, modules, or class exercises.  But take some time to plan things out and to bounce several ideas around before you start coding.  It's okay if your first ideas aren't the most efficient as you get a sense for the problem, but you should keep trying to improve the runtime as much as you can before you start coding.
+										</p>
+										<p>
+											Below is how points will be allocated on this assignment:
 										</p>
 
-										<h3></h3>
+										<h3>Correctness of Implementation (15 Points)</h3>
+										<p>
+											The data structure you create correctly implements the ADT to the specification above
+										</p>
+										
+										<h3>Efficiency (10 Points)</h3>
+										<p>
+											The data structure you create implements all operations efficiently.  Note that it is possible to implement all three operations in <b>O(1)</b> amortized time with the right data structure, but you will get a lot of partial credit for other reasonably efficient implementations (e.g. <b>O(log(N))</b> for certain operations).
+										</p>
 
+										<h3>Formal Analysis of Runtime (6 Points)</h3>
+										<p>
+											Explain what the worst case runtime of each method is, using big-O notation.  Provide a brief explanation as to why.  Even if your data structure isn't as efficient as it could be, you will get full credit for correctly analyzing it.
+										</p>
+										<p>
+											<b>NOTE:</b> If you used a hash table (including use of python's <code>set</code> and dictionary classes), you can assume the worst case time of its operations is <b>O(1)</b> (even though it is technically <b>O(N)</b>)
+										</p>
+
+										<h3>Testing (5 Points)</h3>
                                         <p>
-											You can use any of the code from prior assignments, modules, or class exercises.
+											Write a brief test to demonstrate that your data structure is working properly.  It should be more interesting and comprehensive than the example I gave above.
 										</p>
 									
 											
@@ -198,6 +209,7 @@
 												</li>
 												<li><a href = "../../Assignments/HW4_FairElections/index.html">Assignment 4: Fair Elections of Pop Stars</a></li>
 												<li><a href = "../../Assignments/HW5_PhylogeneticTrees/index.html">Assignment 5: Phyolgenetic Trees</a></li>
+												<li><a href = "../../Assignments/HW6_RandomToggleSet/index.html">Assignment 6: Random Toggle Set</a></li>
 											</ul>
 										</li>
 										<li>

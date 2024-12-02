@@ -22,7 +22,7 @@ class RandomToggleSet:
         Toggle whether an element can be selected or not. Specifically, 
         if the element is in the set and is False, change it to True. 
         If the element is in the set and is True, change it to False
-
+        If the element is not in the set, you should throw an exception
         Parameters
         ----------
         element: object (hashable)
@@ -39,3 +39,4 @@ class RandomToggleSet:
         object: Some object in the set that's set to True
         """
         return None ## TODO: This is a dummy value
+    

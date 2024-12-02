@@ -124,12 +124,9 @@ HW5 Clustering Due
 Lab 7 Due
 
 2024-12-06
-<HR>HW6: Random Toggle Queue (Individual) Out
+<HR><a href = "Assignments/HW6_RandomToggleSet">HW6: Random Toggle Set (Individual)</a> Out
 
 2024-12-02
-HW6 Due
-
-2024-12-09
 <a href = "../Modules/Heap/Video1">Heap Module</a> Due
 
 2024-12-01
