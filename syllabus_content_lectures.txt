@@ -101,7 +101,7 @@ LECTURE
 LECTURE
 Finish Radix Sort, Fisher-Yates Shuffling
 
-
+<ul><li><a href = "https://www.youtube.com/watch?v=Dd3P-SUeKrI&t=60s">My video on Fisher-Yates</a></li><li><a href = "http://datagenetics.com/blog/november42014/index.html">Why bad shuffling is bad</a></li></ul>
 SECTION
 Tree Data Structures And Algorithms
 
